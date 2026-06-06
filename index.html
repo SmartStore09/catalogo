@@ -19,6 +19,26 @@ body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--t1);he
 .topbar-local{font-size:8px;font-weight:700;color:var(--g3);letter-spacing:1px}
 .topbar-wa{display:flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;background:var(--wa-dk);color:#fff;text-decoration:none}
 .topbar-wa-iza{background:linear-gradient(135deg,#9D174D,#EC4899)}
+.search-bar{flex-shrink:0;display:flex;align-items:center;gap:8px;padding:0 13px 8px}
+.search-input{flex:1;background:#1E1E1E;border:1px solid #333;border-radius:20px;padding:7px 14px 7px 36px;font-size:11px;color:#F2F2F2;font-family:'Montserrat',sans-serif;outline:none;transition:border .2s}
+.search-input:focus{border-color:#C9A84C}
+.search-input::placeholder{color:#555}
+.search-wrap{position:relative;flex:1}
+.search-icon{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:#666;pointer-events:none}
+.search-clear{position:absolute;right:11px;top:50%;transform:translateY(-50%);color:#666;cursor:pointer;display:none;background:none;border:none;font-size:14px;padding:0;line-height:1}
+.search-clear.show{display:block}
+.search-results{position:absolute;top:0;left:0;right:0;bottom:0;z-index:30;background:#080808;overflow-y:auto;display:none;padding:12px}
+.search-results.open{display:block}
+.sr-title{font-size:9px;font-weight:800;letter-spacing:2px;color:#666;text-transform:uppercase;margin-bottom:10px;padding:0 2px}
+.sr-item{display:flex;align-items:center;gap:12px;padding:10px 12px;background:#0F0F0F;border:1px solid #1E1E1E;border-radius:10px;margin-bottom:7px;cursor:pointer;transition:border .2s}
+.sr-item:active{border-color:#C9A84C}
+.sr-img{width:44px;height:44px;object-fit:contain;border-radius:6px;background:#141414;flex-shrink:0;font-size:22px;display:flex;align-items:center;justify-content:center}
+.sr-info{flex:1;min-width:0}
+.sr-name{font-size:11px;font-weight:800;color:#F2F2F2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sr-cat{font-size:8px;color:#666;letter-spacing:1px;text-transform:uppercase;margin-top:2px}
+.sr-price{font-family:'Bebas Neue',sans-serif;font-size:16px;color:#C9A84C;flex-shrink:0}
+.sr-code{font-size:7px;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.2);border-radius:3px;padding:1px 5px;color:#C9A84C;font-weight:700;letter-spacing:1px;margin-top:3px;display:inline-block}
+.sr-empty{text-align:center;padding:40px 20px;color:#444;font-size:12px}
 .cat-tabs{flex-shrink:0;display:flex;gap:5px;padding:0 13px 9px;overflow-x:auto;scrollbar-width:none}
 .cat-tabs::-webkit-scrollbar{display:none}
 .cat-tab{padding:5px 12px;border-radius:20px;font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;white-space:nowrap;cursor:pointer;transition:all .2s;border:1px solid var(--b2);background:transparent;color:var(--t3);font-family:'Montserrat',sans-serif}
@@ -217,7 +237,15 @@ body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--t1);he
   </div>
 </div>
 
+<div class="search-bar">
+  <div class="search-wrap">
+    <span class="search-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></span>
+    <input class="search-input" id="searchInput" type="text" placeholder="Buscar produto ou código..." oninput="doSearch(this.value)" autocomplete="off">
+    <button class="search-clear" id="searchClear" onclick="clearSearch()">✕</button>
+  </div>
+</div>
 <div class="cat-tabs" id="catTabs"></div>
+<div class="search-results" id="searchResults"></div>
 <div class="cards-viewport" id="viewport">
   <div class="swipe-hint" id="swipeHint">← Deslize para navegar →</div>
 </div>
@@ -497,6 +525,58 @@ document.addEventListener("keydown",function(e){
   if(e.key==="Escape")closeAbout();
 });
 render();
+
+function doSearch(q){
+  var clr=document.getElementById('searchClear');
+  var res=document.getElementById('searchResults');
+  q=q.trim().toLowerCase();
+  clr.className=q.length>0?'search-clear show':'search-clear';
+  if(!q){res.className='search-results';return;}
+  res.className='search-results open';
+  var matches=PRODUCTS.filter(function(p){
+    return (p.name&&p.name.toLowerCase().includes(q))||
+           (p.code&&p.code.toLowerCase().includes(q))||
+           (p.specs&&p.specs.toLowerCase().includes(q))||
+           (p.badge&&p.badge.toLowerCase().includes(q));
+  });
+  if(matches.length===0){
+    res.innerHTML='<div class="sr-empty">🔍<br><br>Nenhum produto encontrado para<br><strong style="color:#C9A84C">'+q+'</strong></div>';
+    return;
+  }
+  var catNames={1:"📱 iPhones",2:"🛒 Acessórios",3:"🔧 Assistência",4:"💄 Beleza",5:"📚 Educação",6:"🎁 Presentes"};
+  var h='<div class="sr-title">'+matches.length+' resultado'+(matches.length>1?'s':'')+'</div>';
+  matches.forEach(function(p){
+    var imgH=p.img?'<img src="'+p.img+'" style="width:44px;height:44px;object-fit:contain;border-radius:6px;background:#141414">':'<div style="width:44px;height:44px;background:#141414;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:22px">'+(p.icon||'📦')+'</div>';
+    var priceH=p.price?'R$ '+p.price:'Consulte';
+    var codeH=p.code?'<span class="sr-code">'+p.code+'</span>':'';
+    h+='<div class="sr-item" onclick="goToProduct('+p.id+')">'+imgH+'<div class="sr-info"><div class="sr-name">'+p.name+'</div>'+codeH+'<div class="sr-cat">'+(catNames[p.cat]||'')+'</div></div><div class="sr-price">'+priceH+'</div></div>';
+  });
+  res.innerHTML=h;
+}
+
+function clearSearch(){
+  var inp=document.getElementById('searchInput');
+  inp.value='';
+  doSearch('');
+  inp.focus();
+}
+
+function goToProduct(id){
+  clearSearch();
+  var idx=PRODUCTS.findIndex(function(p){return p.id===id;});
+  if(idx<0)return;
+  var p=PRODUCTS[idx];
+  currentCat=p.cat;
+  filtered=PRODUCTS.filter(function(x){return x.cat===currentCat;});
+  currentIdx=filtered.findIndex(function(x){return x.id===id;});
+  document.getElementById('screen-cover').classList.add('hidden');
+  document.querySelectorAll('.cat-tab').forEach(function(t){t.classList.remove('active');});
+  var tab=document.querySelector('.cat-tab[data-cat="'+currentCat+'"]');
+  if(tab)tab.classList.add('active');
+  renderCards();
+  updateNav();
+  updateBnav(false);
+}
 
 </script>
 </body>
