@@ -19,6 +19,11 @@ body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--t1);he
 .topbar-local{font-size:8px;font-weight:700;color:var(--g3);letter-spacing:1px}
 .topbar-wa{display:flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;background:var(--wa-dk);color:#fff;text-decoration:none}
 .topbar-wa-iza{background:linear-gradient(135deg,#9D174D,#EC4899)}
+.brand-filter{flex-shrink:0;border-bottom:1px solid #1E1E1E;margin-bottom:0}
+.brand-tabs{display:flex;gap:5px;padding:4px 13px 8px;overflow-x:auto;scrollbar-width:none}
+.brand-tabs::-webkit-scrollbar{display:none}
+.brand-tab{padding:4px 12px;border-radius:16px;font-size:8px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;white-space:nowrap;cursor:pointer;border:1px solid #333;background:transparent;color:#555;font-family:'Montserrat',sans-serif;transition:all .2s}
+.brand-tab.active{background:linear-gradient(135deg,#0EA5E9,#0369A1);color:#fff;border-color:transparent}
 .search-bar{flex-shrink:0;display:flex;align-items:center;gap:8px;padding:0 13px 8px}
 .search-input{flex:1;background:#1E1E1E;border:1px solid #333;border-radius:20px;padding:7px 14px 7px 36px;font-size:11px;color:#F2F2F2;font-family:'Montserrat',sans-serif;outline:none;transition:border .2s}
 .search-input:focus{border-color:#C9A84C}
@@ -48,6 +53,7 @@ body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--t1);he
 .cat-tab.beauty.active{background:linear-gradient(135deg,#EC4899,#9D174D);color:#fff}
 .cat-tab.edu.active{background:linear-gradient(135deg,#7C3AED,#3B0764);color:#fff}
 .cat-tab.gift.active{background:linear-gradient(135deg,#DC2626,#7F1D1D);color:#fff}
+.cat-tab.pecas.active{background:linear-gradient(135deg,#0EA5E9,#0369A1);color:#fff}
 .cards-viewport{flex:1;position:relative;overflow:hidden;touch-action:pan-y}
 .card{position:absolute;inset:0;display:flex;flex-direction:column;background:var(--bg);transition:transform .36s cubic-bezier(.4,0,.2,1),opacity .36s;will-change:transform;touch-action:none;overflow:hidden}
 .card.active{transform:translateX(0);opacity:1;z-index:10;pointer-events:auto}
@@ -78,6 +84,7 @@ body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--t1);he
 .lightbox.open img{transform:scale(1)}
 .lightbox-close{position:absolute;top:16px;right:16px;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.12);border:none;color:#fff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center}
 .badge-gift{background:rgba(220,38,38,.15);color:#FCA5A5;border:1px solid rgba(220,38,38,.3)}
+.badge-pecas{background:rgba(14,165,233,.15);color:#7DD3FC;border:1px solid rgba(14,165,233,.3)}
 .stock-ok{padding:3px 8px;border-radius:4px;font-size:7px;font-weight:800;letter-spacing:1px;background:rgba(34,197,94,.1);color:var(--green);border:1px solid rgba(34,197,94,.2)}
 .stock-last{padding:3px 8px;border-radius:4px;font-size:7px;font-weight:800;letter-spacing:1px;background:rgba(234,179,8,.1);color:var(--yellow-lt);border:1px solid rgba(234,179,8,.25)}
 .card-sheet{flex:1;background:var(--s1);border-top-left-radius:20px;border-top-right-radius:20px;margin-top:-20px;z-index:3;display:flex;flex-direction:column;padding:14px 16px 0;overflow:hidden}
@@ -128,6 +135,7 @@ body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--t1);he
 .cover-cat-chip.beauty{border-color:rgba(236,72,153,.25);background:rgba(236,72,153,.06);color:#F9A8D4}
 .cover-cat-chip.edu{border-color:rgba(124,58,237,.25);background:rgba(124,58,237,.06);color:#C4B5FD}
 .cover-cat-chip.gift{border-color:rgba(220,38,38,.25);background:rgba(220,38,38,.06);color:#FCA5A5}
+.cover-cat-chip.pecas{border-color:rgba(14,165,233,.25);background:rgba(14,165,233,.06);color:#7DD3FC}
 .cover-qr{width:100%;max-width:240px;background:rgba(201,168,76,.05);border:1px solid rgba(201,168,76,.14);border-radius:14px;padding:13px;display:flex;flex-direction:column;align-items:center;gap:7px;margin-bottom:13px}
 .cover-qr-title{font-size:9px;font-weight:800;letter-spacing:2px;color:var(--g2);text-transform:uppercase}
 .cover-qr-img{width:88px;height:88px;border-radius:7px;display:block}
@@ -177,6 +185,7 @@ body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--t1);he
     <div class="cover-cat-chip acess" onclick="goToCat(2)">🛒 Acessórios</div>
     <div class="cover-cat-chip beauty" onclick="goToCat(4)">💄 Beleza</div>
     <div class="cover-cat-chip edu" onclick="goToCat(5)">📚 Educação</div>
+    <div class="cover-cat-chip pecas" onclick="goToCat(7)">🔩 Peças</div>
     <div class="cover-cat-chip gift" onclick="goToCat(6)">🎁 Presentes</div>
   </div>
   <div class="cover-qr">
@@ -254,6 +263,9 @@ body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--t1);he
   </div>
 </div>
 <div class="cat-tabs" id="catTabs"></div>
+<div class="brand-filter" id="brandFilter" style="display:none">
+  <div class="brand-tabs" id="brandTabs"></div>
+</div>
 <div class="search-results" id="searchResults"></div>
 <div class="cards-viewport" id="viewport">
   <div class="swipe-hint" id="swipeHint">← Deslize para navegar →</div>
@@ -325,7 +337,8 @@ const CATS = [
   {id:2, name:"🛒 Acessórios",  cls:"acess"},
   {id:4, name:"💄 Beleza",      cls:"beauty"},
   {id:5, name:"📚 Educação",    cls:"edu"},
-  {id:6, name:"🎁 Presentes",   cls:"gift"}
+  {id:6, name:"🎁 Presentes",   cls:"gift"},
+  {id:7, name:"🔩 Peças",       cls:"pecas"}
 ];
 
 const PRODUCTS = [
@@ -411,13 +424,80 @@ const PRODUCTS = [
   {id:64,cat:6,code:"PR-005",name:"Colar Relicário Personalizado",specs:"Coração abre e fecha · Foto interna · Banhado a ouro",price:"200,00",from:0,badge:"SEMIJÓIA",bc:"bgift",stock:"ok",img:IMGS.pr_relicario,obs:"💛 Relicário em coração com foto personalizada no interior. Semijóia banhada a ouro com corrente veneziana."},
   {id:65,cat:6,code:"PR-006",name:"Pulseira Infantil Personalizada",specs:"Nome gravado · Pingente menina · Banhada a ouro",price:"125,00",from:0,badge:"SEMIJÓIA",bc:"bgift",stock:"ok",img:IMGS.pr_pulseira,obs:"💛 Pulseira infantil com nome gravado e pingente de menina. Semijóia banhada a ouro com caixinha de presente."},
   {id:66,cat:6,code:"PR-007",name:"Colar Nome Personalizado",specs:"Nome + coração gravados · Medalha · Banhado a ouro",price:"160,00",from:0,badge:"SEMIJÓIA",bc:"bgift",stock:"ok",img:IMGS.pr_colar2,obs:"💛 Colar semijóia com nome e coração gravados a laser. Banhado a ouro com caixinha. Encomende pelo WhatsApp."},
+    // ── PEÇAS E FRONTAIS ─────────────────────────────────────────
+  // MOTOROLA
+  {id:100,cat:7,code:"709",  marca:"Motorola",name:"Frontal Moto G8 Power",    specs:"Com aro Nacional",                        price:"",badge:"MOTOROLA",bc:"bpecas",stock:"ok",img:null,icon:"📱",il:"FRONTAL"},
+  {id:101,cat:7,code:"1963", marca:"Motorola",name:"Frontal Moto G14 / G54",   specs:"Sem aro",                                  price:"",badge:"MOTOROLA",bc:"bpecas",stock:"ok",img:null,icon:"📱",il:"FRONTAL"},
+  {id:102,cat:7,code:"644",  marca:"Motorola",name:"Frontal Moto E7 / E7 Power",specs:"Sem aro",                                 price:"",badge:"MOTOROLA",bc:"bpecas",stock:"ok",img:null,icon:"📱",il:"FRONTAL"},
+  {id:103,cat:7,code:"649",  marca:"Motorola",name:"Frontal Moto G9 Play / E7 Plus",specs:"Sem aro",                            price:"",badge:"MOTOROLA",bc:"bpecas",stock:"ok",img:null,icon:"📱",il:"FRONTAL"},
+  // INFINIX
+  {id:110,cat:7,code:"1595", marca:"Infinix", name:"Frontal Infinix HOT 10S",  specs:"Sem aro",                                  price:"",badge:"INFINIX", bc:"bpecas",stock:"ok",img:null,icon:"📱",il:"FRONTAL"},
+  {id:111,cat:7,code:"1265", marca:"Infinix", name:"Frontal Infinix Hot 11S",  specs:"Sem aro",                                  price:"",badge:"INFINIX", bc:"bpecas",stock:"ok",img:null,icon:"📱",il:"FRONTAL"},
+  {id:112,cat:7,code:"982",  marca:"Infinix", name:"Frontal Infinix Smart 6",  specs:"Nacional · Sem aro",                       price:"",badge:"INFINIX", bc:"bpecas",stock:"ok",img:null,icon:"📱",il:"FRONTAL"},
+  {id:113,cat:7,code:"3144", marca:"Infinix", name:"Frontal Infinix Smart 7 / Intel A70",specs:"Sem aro",                       price:"",badge:"INFINIX", bc:"bpecas",stock:"ok",img:null,icon:"📱",il:"FRONTAL"},
+  {id:114,cat:7,code:"1264", marca:"Infinix", name:"Frontal Infinix HOT 11",   specs:"Sem aro",                                  price:"",badge:"INFINIX", bc:"bpecas",stock:"ok",img:null,icon:"📱",il:"FRONTAL"},
+  {id:115,cat:7,code:"6180", marca:"Infinix", name:"Frontal Infinix HOT 50i / Smart 9",specs:"Sem aro",                         price:"",badge:"INFINIX", bc:"bpecas",stock:"ok",img:null,icon:"📱",il:"FRONTAL"},
+  // REALME
+  {id:120,cat:7,code:"1081", marca:"Realme",  name:"Frontal Realme C55 / 11X / 11",specs:"Sem aro · NN",                        price:"",badge:"REALME",  bc:"bpecas",stock:"ok",img:null,icon:"📱",il:"FRONTAL"},
+  {id:121,cat:7,code:"5355", marca:"Realme",  name:"Frontal Realme C61 / C63 / Note60x",specs:"NN",                             price:"",badge:"REALME",  bc:"bpecas",stock:"ok",img:null,icon:"📱",il:"FRONTAL"},
+  {id:122,cat:7,code:"1886", marca:"Realme",  name:"Frontal Realme C11",       specs:"NN · Sem aro",                             price:"",badge:"REALME",  bc:"bpecas",stock:"ok",img:null,icon:"📱",il:"FRONTAL"},
+  // REDMI
+  {id:130,cat:7,code:"3039", marca:"Redmi",   name:"Frontal Redmi Note 11 / 11S / 12S / M4 Pro",specs:"",                       price:"",badge:"REDMI",   bc:"bpecas",stock:"ok",img:null,icon:"📱",il:"FRONTAL"},
+  {id:131,cat:7,code:"1982", marca:"Redmi",   name:"Frontal Redmi Note 10 / 10S / 11 / 11S",specs:"Super Led NN · Sem aro",     price:"",badge:"REDMI",   bc:"bpecas",stock:"ok",img:null,icon:"📱",il:"FRONTAL"},
+  {id:132,cat:7,code:"1924", marca:"Redmi",   name:"Frontal Redmi Note 8",     specs:"NN · Sem aro",                             price:"",badge:"REDMI",   bc:"bpecas",stock:"ok",img:null,icon:"📱",il:"FRONTAL"},
+  {id:133,cat:7,code:"2264", marca:"Redmi",   name:"Frontal Redmi 13C / POCO C65",specs:"NN",                                   price:"",badge:"REDMI",   bc:"bpecas",stock:"ok",img:null,icon:"📱",il:"FRONTAL"},
+  {id:134,cat:7,code:"1910", marca:"Redmi",   name:"Frontal Redmi 12 / 13",    specs:"Wekeep",                                   price:"",badge:"REDMI",   bc:"bpecas",stock:"ok",img:null,icon:"📱",il:"FRONTAL"},
+  {id:135,cat:7,code:"1124", marca:"Redmi",   name:"Frontal Redmi 12C",        specs:"Sem aro · NN",                             price:"",badge:"REDMI",   bc:"bpecas",stock:"ok",img:null,icon:"📱",il:"FRONTAL"},
+  {id:136,cat:7,code:"RD12M",marca:"Redmi",   name:"Frontal Redmi 12 Mecânica",specs:"",                                        price:"",badge:"REDMI",   bc:"bpecas",stock:"ok",img:null,icon:"📱",il:"FRONTAL"},
+  // SAMSUNG
+  {id:140,cat:7,code:"SAM-A02",  marca:"Samsung", name:"Frontal Samsung A02 / A12 / M12",          specs:"",price:"",badge:"SAMSUNG",bc:"bpecas",stock:"ok",img:null,icon:"📱",il:"FRONTAL"},
+  {id:141,cat:7,code:"SAM-A02S", marca:"Samsung", name:"Frontal Samsung A02S / A03 / A03 Core / A03S",specs:"",price:"",badge:"SAMSUNG",bc:"bpecas",stock:"ok",img:null,icon:"📱",il:"FRONTAL"},
+  {id:142,cat:7,code:"SAM-A04",  marca:"Samsung", name:"Frontal Samsung A04 / A04S / A04E",        specs:"",price:"",badge:"SAMSUNG",bc:"bpecas",stock:"ok",img:null,icon:"📱",il:"FRONTAL"},
+  {id:143,cat:7,code:"SAM-A05",  marca:"Samsung", name:"Frontal Samsung A05 (SM-A055)",             specs:"",price:"",badge:"SAMSUNG",bc:"bpecas",stock:"ok",img:null,icon:"📱",il:"FRONTAL"},
+  {id:144,cat:7,code:"SAM-A06",  marca:"Samsung", name:"Frontal Samsung A06",                       specs:"",price:"",badge:"SAMSUNG",bc:"bpecas",stock:"ok",img:null,icon:"📱",il:"FRONTAL"},
+  {id:145,cat:7,code:"SAM-A07",  marca:"Samsung", name:"Frontal Samsung A07",                       specs:"",price:"",badge:"SAMSUNG",bc:"bpecas",stock:"ok",img:null,icon:"📱",il:"FRONTAL"},
+  {id:146,cat:7,code:"SAM-A10",  marca:"Samsung", name:"Frontal Samsung A10",                       specs:"",price:"",badge:"SAMSUNG",bc:"bpecas",stock:"ok",img:null,icon:"📱",il:"FRONTAL"},
+  {id:147,cat:7,code:"SAM-A10S", marca:"Samsung", name:"Frontal Samsung A10S",                      specs:"",price:"",badge:"SAMSUNG",bc:"bpecas",stock:"ok",img:null,icon:"📱",il:"FRONTAL"},
+  {id:148,cat:7,code:"SAM-A11",  marca:"Samsung", name:"Frontal Samsung A11",                       specs:"A115",price:"",badge:"SAMSUNG",bc:"bpecas",stock:"ok",img:null,icon:"📱",il:"FRONTAL"},
+  {id:149,cat:7,code:"SAM-A12",  marca:"Samsung", name:"Frontal Samsung A12 / A02 / M12",           specs:"",price:"",badge:"SAMSUNG",bc:"bpecas",stock:"ok",img:null,icon:"📱",il:"FRONTAL"},
+  {id:150,cat:7,code:"SAM-A13",  marca:"Samsung", name:"Frontal Samsung A13 4G / M13 / A23 / M23 / M33 5G",specs:"",price:"",badge:"SAMSUNG",bc:"bpecas",stock:"ok",img:null,icon:"📱",il:"FRONTAL"},
+  {id:151,cat:7,code:"SAM-A13-5G",marca:"Samsung",name:"Frontal Samsung A13 5G / A04S",             specs:"",price:"",badge:"SAMSUNG",bc:"bpecas",stock:"ok",img:null,icon:"📱",il:"FRONTAL"},
+  {id:152,cat:7,code:"SAM-A14-4G",marca:"Samsung",name:"Frontal Samsung A14 4G",                    specs:"",price:"",badge:"SAMSUNG",bc:"bpecas",stock:"ok",img:null,icon:"📱",il:"FRONTAL"},
+  {id:153,cat:7,code:"SAM-A14-5G",marca:"Samsung",name:"Frontal Samsung A14 5G / M14 5G",           specs:"",price:"",badge:"SAMSUNG",bc:"bpecas",stock:"ok",img:null,icon:"📱",il:"FRONTAL"},
+  {id:154,cat:7,code:"SAM-A15",  marca:"Samsung", name:"Frontal Samsung A15 4G / A15 5G",           specs:"",price:"",badge:"SAMSUNG",bc:"bpecas",stock:"ok",img:null,icon:"📱",il:"FRONTAL"},
+  {id:155,cat:7,code:"SAM-A16",  marca:"Samsung", name:"Frontal Samsung A16 4G / A16 5G",           specs:"",price:"",badge:"SAMSUNG",bc:"bpecas",stock:"ok",img:null,icon:"📱",il:"FRONTAL"},
+  {id:156,cat:7,code:"SAM-A17",  marca:"Samsung", name:"Frontal Samsung A17 4G/5G",                 specs:"Sem aro",price:"",badge:"SAMSUNG",bc:"bpecas",stock:"ok",img:null,icon:"📱",il:"FRONTAL"},
+  {id:157,cat:7,code:"SAM-A20",  marca:"Samsung", name:"Frontal Samsung A20",                       specs:"",price:"",badge:"SAMSUNG",bc:"bpecas",stock:"ok",img:null,icon:"📱",il:"FRONTAL"},
+  {id:158,cat:7,code:"SAM-A21",  marca:"Samsung", name:"Frontal Samsung A21 4G",                    specs:"",price:"",badge:"SAMSUNG",bc:"bpecas",stock:"ok",img:null,icon:"📱",il:"FRONTAL"},
+  {id:159,cat:7,code:"SAM-A21S", marca:"Samsung", name:"Frontal Samsung A21S 4G",                   specs:"",price:"",badge:"SAMSUNG",bc:"bpecas",stock:"ok",img:null,icon:"📱",il:"FRONTAL"},
+  {id:160,cat:7,code:"SAM-A22-4G",marca:"Samsung",name:"Frontal Samsung A22 4G / F22 / M22",        specs:"",price:"",badge:"SAMSUNG",bc:"bpecas",stock:"ok",img:null,icon:"📱",il:"FRONTAL"},
+  {id:161,cat:7,code:"SAM-A22-5G",marca:"Samsung",name:"Frontal Samsung A22 5G",                    specs:"",price:"",badge:"SAMSUNG",bc:"bpecas",stock:"ok",img:null,icon:"📱",il:"FRONTAL"},
+  {id:162,cat:7,code:"SAM-A23-4G",marca:"Samsung",name:"Frontal Samsung A23 4G / A13 / M13 / M33",  specs:"",price:"",badge:"SAMSUNG",bc:"bpecas",stock:"ok",img:null,icon:"📱",il:"FRONTAL"},
+  {id:163,cat:7,code:"SAM-A23-5G",marca:"Samsung",name:"Frontal Samsung A23 5G",                    specs:"",price:"",badge:"SAMSUNG",bc:"bpecas",stock:"ok",img:null,icon:"📱",il:"FRONTAL"},
+  {id:164,cat:7,code:"SAM-A24-4G",marca:"Samsung",name:"Frontal Samsung A24 4G",                    specs:"",price:"",badge:"SAMSUNG",bc:"bpecas",stock:"ok",img:null,icon:"📱",il:"FRONTAL"},
+  {id:165,cat:7,code:"SAM-A25",  marca:"Samsung", name:"Frontal Samsung A25 4G/5G / A24 / M34",     specs:"",price:"",badge:"SAMSUNG",bc:"bpecas",stock:"ok",img:null,icon:"📱",il:"FRONTAL"},
+  {id:166,cat:7,code:"SAM-A26-4G",marca:"Samsung",name:"Frontal Samsung A26 4G / A16 4G/5G",        specs:"",price:"",badge:"SAMSUNG",bc:"bpecas",stock:"ok",img:null,icon:"📱",il:"FRONTAL"},
+  {id:167,cat:7,code:"SAM-A26-5G",marca:"Samsung",name:"Frontal Samsung A26 5G",                    specs:"",price:"",badge:"SAMSUNG",bc:"bpecas",stock:"ok",img:null,icon:"📱",il:"FRONTAL"},
+  {id:168,cat:7,code:"SAM-A30",  marca:"Samsung", name:"Frontal Samsung A30 / A30S / A50 / A50S",   specs:"",price:"",badge:"SAMSUNG",bc:"bpecas",stock:"ok",img:null,icon:"📱",il:"FRONTAL"},
+  // APPLE
+  {id:170,cat:7,code:"IP7P-NN",   marca:"Apple",name:"Frontal iPhone 7 Plus",    specs:"Branco e Preto · NN",price:"",badge:"APPLE",bc:"bpecas",stock:"ok",img:null,icon:"📱",il:"FRONTAL"},
+  {id:171,cat:7,code:"IP8P-NN",   marca:"Apple",name:"Frontal iPhone 8 Plus",    specs:"Branco e Preto · NN",price:"",badge:"APPLE",bc:"bpecas",stock:"ok",img:null,icon:"📱",il:"FRONTAL"},
+  {id:172,cat:7,code:"IPXR-WEFIX",marca:"Apple",name:"Frontal iPhone XR",        specs:"Wefix",              price:"",badge:"APPLE",bc:"bpecas",stock:"ok",img:null,icon:"📱",il:"FRONTAL"},
+  {id:173,cat:7,code:"IP11",      marca:"Apple",name:"Frontal iPhone 11",         specs:"",                  price:"",badge:"APPLE",bc:"bpecas",stock:"ok",img:null,icon:"📱",il:"FRONTAL"},
+  {id:174,cat:7,code:"IP11PRO",   marca:"Apple",name:"Frontal iPhone 11 Pro",     specs:"",                  price:"",badge:"APPLE",bc:"bpecas",stock:"ok",img:null,icon:"📱",il:"FRONTAL"},
+  {id:175,cat:7,code:"IP12-12PRO",marca:"Apple",name:"Frontal iPhone 12 / 12 Pro",specs:"",                  price:"",badge:"APPLE",bc:"bpecas",stock:"ok",img:null,icon:"📱",il:"FRONTAL"},
+  {id:176,cat:7,code:"IP13",      marca:"Apple",name:"Frontal iPhone 13",         specs:"",                  price:"",badge:"APPLE",bc:"bpecas",stock:"ok",img:null,icon:"📱",il:"FRONTAL"},
+  {id:177,cat:7,code:"IP-TAMPA",  marca:"Apple",name:"Tampa Traseira iPhone",     specs:"Toda linha · Diversas cores",price:"",badge:"APPLE",bc:"bpecas",stock:"ok",img:null,icon:"🔧",il:"PEÇA"},
+  // SMARTPHONES
+  {id:180,cat:7,code:"INF-SMART9",marca:"Smartphones",name:"Infinix Smart 9",    specs:"Smartphone Novo · Lacrado",price:"",badge:"SMARTPHONE",bc:"bpecas",stock:"ok",img:null,icon:"📦",il:"APARELHO"},
+  {id:181,cat:7,code:"MOTO-G15",  marca:"Smartphones",name:"Moto G15 128GB",     specs:"Smartphone Novo · Lacrado",price:"",badge:"SMARTPHONE",bc:"bpecas",stock:"ok",img:null,icon:"📦",il:"APARELHO"},
   {id:50,cat:5,code:"ED-001",name:"Quiz Interativo Digital",specs:"Geografia · Física · Matemática · Biologia · 6º ao 9º ano",price:"",badge:"EDUCAÇÃO",bc:"bedu",stock:"ok",img:null,icon:"📊",il:"QUIZZES",obs:"✅ Atividades digitais interativas com feedback por questão, embaralhamento e resultado final. Ideal para sala de aula e reforço."},
   {id:51,cat:5,code:"ED-002",name:"Atividade Avaliativa",specs:"Questões subjetivas e objetivas · Todas as disciplinas",price:"",badge:"EDUCAÇÃO",bc:"bedu",stock:"ok",img:null,icon:"📝",il:"ATIVIDADES",obs:"✅ Atividades prontas em PDF e Word para impressão. Personalizadas por turma e conteúdo."},
   {id:52,cat:5,code:"ED-003",name:"Aula Particular / Reforço",specs:"Física · Matemática · 6º ao 3º ano do Ensino Médio",price:"",badge:"EDUCAÇÃO",bc:"bedu",stock:"ok",img:null,icon:"🎓",il:"REFORÇO",obs:"✅ Aulas presenciais ou online. Prof. Jânio Joaquim — Especialista em Física e Matemática. Marque seu horário pelo WhatsApp."},
   {id:53,cat:5,code:"ED-004",name:"Material de Estudo",specs:"Apostilas · Resumos · Mapas mentais · Por disciplina",price:"",badge:"EDUCAÇÃO",bc:"bedu",stock:"ok",img:null,icon:"📖",il:"MATERIAL",obs:"✅ Material didático organizado por conteúdo e série. Consulte disponibilidade pelo WhatsApp."}
 ];
 
-const BC = {by:"badge-yellow",bg:"badge-green",bgo:"badge-gold",bgr:"badge-green",bb:"badge-blue",bn:"badge-none",bpink:"badge-pink",bedu:"badge-edu",bgift:"badge-gift"};
+const BC = {by:"badge-yellow",bg:"badge-green",bgo:"badge-gold",bgr:"badge-green",bb:"badge-blue",bn:"badge-none",bpink:"badge-pink",bedu:"badge-edu",bgift:"badge-gift",bpecas:"badge-pecas"};
 let activeCat=3,curIdx=0,cards=[],isDrag=false,startX=0,diffX=0,isAnim=false;
 
 const WA_SVG='<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.875-1.426A9.956 9.956 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18a7.99 7.99 0 01-4.073-1.115l-.292-.174-3.018.882.84-3.063-.19-.298A8 8 0 1112 20z"/></svg>';
@@ -480,7 +560,7 @@ function buildCard(p){
     prH=deH+paH+'<div class="price-pix-row"><span class="pix-chip">PIX</span>'+frH+'<span class="price-val">R$ '+p.price+'</span></div>'+diH+exH;
   }
   var obH=p.obs?'<div class="card-obs">'+p.obs+'</div>':"";
-  var waL=p.cat===3?"Solicitar Orçamento":p.cat===2?"Consultar Disponibilidade":p.cat===4?"Consultar Produto":p.cat===5?"Saber Mais":p.cat===6?"Encomendar Presente":"Comprar via WhatsApp";
+  var waL=p.cat===3?"Solicitar Orçamento":p.cat===2?"Consultar Disponibilidade":p.cat===4?"Consultar Produto":p.cat===5?"Saber Mais":p.cat===6?"Encomendar Presente":p.cat===7?"Solicitar Preço":"Comprar via WhatsApp";
   var codeH=p.code?'<div class="card-code"><span class="code-label">Cód.</span> <span class="code-val">'+p.code+'</span></div>':"";
   el.innerHTML='<div class="card-img-area">'+imgH+'<div class="card-badges"><div class="badge '+bClass+'">'+p.badge+'</div>'+stH+'</div></div><div class="card-sheet"><div class="sheet-handle"></div>'+codeH+'<div class="card-name">'+p.name+'</div><div class="card-specs">'+p.specs+'</div>'+obH+'<div class="price-block">'+prH+'</div><div class="wa-row"><a class="card-wa wa-janio" href="'+waLink(p.name,p.code,WA_JANIO)+'" target="_blank" rel="noopener">'+WA_SVG+' Jânio</a><a class="card-wa wa-iza" href="'+waLink(p.name,p.code,WA_IZA)+'" target="_blank" rel="noopener">'+WA_SVG+' Iza</a></div></div>';
   return el;
@@ -534,6 +614,56 @@ document.addEventListener("keydown",function(e){
   if(e.key==="Escape")closeAbout();
 });
 render();
+
+// ── FILTRO DE MARCAS ─────────────────────────────────────────
+var currentBrand = "Todos";
+var BRANDS_CAT7 = ["Todos","Samsung","Apple","Motorola","Redmi","Infinix","Realme","Smartphones"];
+
+function buildBrandTabs(){
+  var bf=document.getElementById('brandFilter');
+  var bt=document.getElementById('brandTabs');
+  if(currentCat===7){
+    bf.style.display='block';
+    bt.innerHTML=BRANDS_CAT7.map(function(b){
+      var lbl=b==='Todos'?'🔩 Todos':b;
+      var active=b===currentBrand?' active':'';
+      return '<button class="brand-tab'+active+'" data-brand="'+b+'">'+lbl+'</button>';
+    }).join('');
+    bt.querySelectorAll('.brand-tab').forEach(function(btn){
+      btn.addEventListener('click',function(){setBrand(this.getAttribute('data-brand'));});
+    });
+  } else {
+    bf.style.display='none';
+    currentBrand='Todos';
+  }
+}
+
+function setBrand(b){
+  currentBrand=b;
+  filtered=PRODUCTS.filter(function(p){
+    if(p.cat!==7) return false;
+    return b==='Todos'||p.marca===b;
+  });
+  currentIdx=0;
+  buildBrandTabs();
+  renderCards();
+  updateNav();
+}
+
+// ── Sobrescrever goToCat para suportar filtro de marca ────────
+var _origGoToCat=goToCat;
+goToCat=function(cat){
+  currentBrand='Todos';
+  _origGoToCat(cat);
+  buildBrandTabs();
+};
+
+// ── Sobrescrever showCatalog para reiniciar marca ─────────────
+var _origShowCatalog=showCatalog;
+showCatalog=function(){
+  _origShowCatalog();
+  buildBrandTabs();
+};
 
 // Delegação de click para lightbox nas imagens dos cards
 document.getElementById('viewport').addEventListener('click', function(e){
