@@ -250,6 +250,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Montserrat',sans-serif;m
     <div class="nav-tab"        id="tab-educacao"   onclick="goTab('educacao')">📚 Educação</div>
     <div class="nav-tab"        id="tab-presentes"  onclick="goTab('presentes')">🎁 Presentes</div>
     <div class="nav-tab"        id="tab-pecas"      onclick="goTab('pecas')">🔩 Peças</div>
+    <div class="nav-tab"        id="tab-componentes" onclick="goTab('componentes')">⚙️ Componentes</div>
   </div>
 
   <!-- SEARCH -->
@@ -291,7 +292,30 @@ body{background:var(--bg);color:var(--txt);font-family:'Montserrat',sans-serif;m
     <div class="products-wrap"><div class="prod-cards" id="cards-presentes"></div></div>
   </div>
 
-  <!-- ── Peças ── -->
+  <!-- ── Componentes ── -->
+  <div id="cat-componentes" class="cat-sec">
+    <div class="brand-wrap" id="bfilter-comp">
+      <button class="brand-btn active" onclick="filterComp(this,'todas')">Todas</button>
+      <button class="brand-btn" onclick="filterComp(this,'Samsung')">Samsung</button>
+      <button class="brand-btn" onclick="filterComp(this,'Motorola')">Motorola</button>
+      <button class="brand-btn" onclick="filterComp(this,'Xiaomi')">Xiaomi</button>
+      <button class="brand-btn" onclick="filterComp(this,'Redmi')">Redmi</button>
+      <button class="brand-btn" onclick="filterComp(this,'Realme')">Realme</button>
+    </div>
+    <div class="brand-wrap" id="tipo-filter" style="padding-top:0;">
+      <button class="brand-btn active" onclick="filterTipo(this,'todas')">Todos tipos</button>
+      <button class="brand-btn" onclick="filterTipo(this,'PLACA CARGA')">⚡ Placa Carga</button>
+      <button class="brand-btn" onclick="filterTipo(this,'TAMPA')">🔲 Tampa</button>
+      <button class="brand-btn" onclick="filterTipo(this,'CONECTOR')">🔗 Conector</button>
+      <button class="brand-btn" onclick="filterTipo(this,'FLEX POWER')">🔌 Flex</button>
+      <button class="brand-btn" onclick="filterTipo(this,'LENTE CAM')">📷 Lente</button>
+      <button class="brand-btn" onclick="filterTipo(this,'BOTÃO')">🔘 Botão</button>
+      <button class="brand-btn" onclick="filterTipo(this,'CAMPAINHA')">🔊 Campainha</button>
+    </div>
+    <div class="products-wrap"><div class="prod-cards" id="cards-componentes"></div></div>
+  </div>
+
+    <!-- ── Peças ── -->
   <div id="cat-pecas" class="cat-sec">
     <div class="brand-wrap" id="bfilter">
       <button class="brand-btn active" onclick="filterBrand(this,'todas')">Todas</button>
@@ -605,6 +629,72 @@ const P = [
   // Smartphones completos
   {id:160,cat:'pecas',marca:'Infinix',code:'SM-IF-SMART9',name:'Smartphone Infinix Smart 9',specs:'6.78" · 128GB · 4GB RAM · Dual SIM',price:'',from:0,badge:'SMARTPHONE',bc:'bpecas',stock:'ok',icon:'📱'},
   {id:161,cat:'pecas',marca:'Motorola',code:'SM-MT-G15',name:'Smartphone Moto G15',specs:'6.7" · 128GB · 4GB RAM · Android 14',price:'',from:0,badge:'SMARTPHONE',bc:'bpecas',stock:'ok',icon:'📱'},
+  // Componentes (placas, tampas, flex, lentes, conectores, botões, campainhas)
+  {id:300,cat:'componentes',marca:'Samsung',code:'COMP-22',name:'Placa de Carga Samsung A12/AAA',specs:'A12 · M12 · AAA',price:'25,95',from:0,badge:'PLACA CARGA',bc:'bb',stock:'ok',icon:'⚡'},
+  {id:301,cat:'componentes',marca:'Samsung',code:'COMP-35',name:'Placa de Carga Samsung A20S/M12',specs:'A20S · M12 · AAA',price:'26,15',from:0,badge:'PLACA CARGA',bc:'bb',stock:'ok',icon:'⚡'},
+  {id:302,cat:'componentes',marca:'Samsung',code:'COMP-54',name:'Placa de Carga Samsung A03S AAA',specs:'A03S · AAA',price:'23,95',from:0,badge:'PLACA CARGA',bc:'bb',stock:'ok',icon:'⚡'},
+  {id:303,cat:'componentes',marca:'Samsung',code:'COMP-117',name:'Placa de Carga Samsung A22 4G',specs:'A22 4G',price:'25,10',from:0,badge:'PLACA CARGA',bc:'bb',stock:'ok',icon:'⚡'},
+  {id:304,cat:'componentes',marca:'Samsung',code:'COMP-119',name:'Placa de Carga Samsung A02S',specs:'A02S',price:'29,55',from:0,badge:'PLACA CARGA',bc:'bb',stock:'ok',icon:'⚡'},
+  {id:305,cat:'componentes',marca:'Samsung',code:'COMP-2208',name:'Placa de Carga Samsung A10S M16',specs:'A10S · Versão M16',price:'23,15',from:0,badge:'PLACA CARGA',bc:'bb',stock:'ok',icon:'⚡'},
+  {id:306,cat:'componentes',marca:'Samsung',code:'COMP-3266',name:'Placa de Carga Samsung A10S M15',specs:'A10S · Versão M15 AAA',price:'21,40',from:0,badge:'PLACA CARGA',bc:'bb',stock:'ok',icon:'⚡'},
+  {id:307,cat:'componentes',marca:'Samsung',code:'COMP-3329',name:'Placa de Carga Samsung A03 Core AAA',specs:'A03 Core · AAA',price:'25,90',from:0,badge:'PLACA CARGA',bc:'bb',stock:'ok',icon:'⚡'},
+  {id:308,cat:'componentes',marca:'Samsung',code:'COMP-7436',name:'Placa de Carga Samsung A13 4G AAA',specs:'A13 4G · AAA',price:'25,30',from:0,badge:'PLACA CARGA',bc:'bb',stock:'ok',icon:'⚡'},
+  {id:309,cat:'componentes',marca:'Samsung',code:'COMP-13854',name:'Placa de Carga Samsung A23 4G Original',specs:'A23 4G · Original 1:1',price:'95,80',from:0,badge:'PLACA CARGA',bc:'bb',stock:'ok',icon:'⚡'},
+  {id:310,cat:'componentes',marca:'Samsung',code:'COMP-13863',name:'Placa de Carga Samsung A14 4G AAA',specs:'A14 4G · AAA',price:'24,45',from:0,badge:'PLACA CARGA',bc:'bb',stock:'ok',icon:'⚡'},
+  {id:311,cat:'componentes',marca:'Motorola',code:'COMP-47',name:'Placa de Carga Moto G9 Play',specs:'Moto G9 Play',price:'36,25',from:0,badge:'PLACA CARGA',bc:'bb',stock:'ok',icon:'⚡'},
+  {id:312,cat:'componentes',marca:'Motorola',code:'COMP-10780',name:'Placa de Carga Moto E22',specs:'Moto E22',price:'52,15',from:0,badge:'PLACA CARGA',bc:'bb',stock:'ok',icon:'⚡'},
+  {id:313,cat:'componentes',marca:'Motorola',code:'COMP-10781',name:'Placa de Carga Moto G22',specs:'Moto G22',price:'46,75',from:0,badge:'PLACA CARGA',bc:'bb',stock:'ok',icon:'⚡'},
+  {id:314,cat:'componentes',marca:'Motorola',code:'COMP-11289',name:'Placa de Carga Moto G31',specs:'Moto G31 · Mín 2 pcs',price:'43,00',from:0,badge:'PLACA CARGA',bc:'bb',stock:'ok',icon:'⚡'},
+  {id:315,cat:'componentes',marca:'Xiaomi',code:'COMP-7435',name:'Placa de Carga Xiaomi Note 11 4G',specs:'Note 11 4G · M4 Pro · Note 12 · Note 12S',price:'30,30',from:0,badge:'PLACA CARGA',bc:'bb',stock:'ok',icon:'⚡'},
+  {id:316,cat:'componentes',marca:'Xiaomi',code:'COMP-12848',name:'Placa de Carga Xiaomi Redmi 9A AAA',specs:'Redmi 9A · AAA',price:'27,30',from:0,badge:'PLACA CARGA',bc:'bb',stock:'ok',icon:'⚡'},
+  {id:317,cat:'componentes',marca:'Xiaomi',code:'COMP-13861',name:'Placa de Carga Xiaomi Note 12 4G AAA',specs:'Note 12 4G · AAA',price:'27,90',from:0,badge:'PLACA CARGA',bc:'bb',stock:'ok',icon:'⚡'},
+  {id:318,cat:'componentes',marca:'Realme',code:'COMP-11481',name:'Placa de Carga Realme C11/C12/C15',specs:'C11 · C12 · C15 2020 · Mín 2 pcs',price:'29,80',from:0,badge:'PLACA CARGA',bc:'bb',stock:'ok',icon:'⚡'},
+  {id:320,cat:'componentes',marca:'Samsung',code:'COMP-325',name:'Flex Power Samsung A10/M10',specs:'A10 · M10',price:'20,00',from:0,badge:'FLEX POWER',bc:'bgreen',stock:'ok',icon:'🔌'},
+  {id:321,cat:'componentes',marca:'Samsung',code:'COMP-366',name:'Flex Power Samsung A02/A32/M32',specs:'A02 · A32 4G · M32',price:'20,00',from:0,badge:'FLEX POWER',bc:'bgreen',stock:'ok',icon:'🔌'},
+  {id:322,cat:'componentes',marca:'Xiaomi',code:'COMP-11281',name:'Flex Power Xiaomi Note 11 4G/11S/M4 Pro',specs:'Note 11 4G · Note 11S · M4 Pro 4G',price:'20,00',from:0,badge:'FLEX POWER',bc:'bgreen',stock:'ok',icon:'🔌'},
+  {id:323,cat:'componentes',marca:'Xiaomi',code:'COMP-11283',name:'Flex Power Xiaomi Note 12 4G',specs:'Note 12 4G',price:'20,00',from:0,badge:'FLEX POWER',bc:'bgreen',stock:'ok',icon:'🔌'},
+  {id:330,cat:'componentes',marca:'Samsung',code:'COMP-412',name:'Lente Câmera Samsung A20S',specs:'A20S · Vidro da câmera',price:'20,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:331,cat:'componentes',marca:'Samsung',code:'COMP-442',name:'Lente Câmera Samsung A10S',specs:'A10S · Vidro da câmera',price:'20,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:332,cat:'componentes',marca:'Samsung',code:'COMP-478',name:'Lente Câmera Samsung A22',specs:'A22 · Vidro da câmera',price:'20,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:333,cat:'componentes',marca:'Samsung',code:'COMP-521',name:'Lente Câmera Samsung A32',specs:'A32 · Vidro da câmera',price:'20,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:334,cat:'componentes',marca:'Redmi',code:'COMP-3275',name:'Lente Câmera Redmi Note 11 4G',specs:'Note 11 4G · Vidro da câmera',price:'20,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:340,cat:'componentes',marca:'Motorola',code:'COMP-1478',name:'Conector Solto G4/G4 Plus',specs:'G4 · G4 Plus · Mín 10 pcs',price:'20,00',from:0,badge:'CONECTOR',bc:'bpecas',stock:'ok',icon:'🔗'},
+  {id:341,cat:'componentes',marca:'Motorola',code:'COMP-1486',name:'Conector Solto G7/G7 Plus',specs:'G7 · G7 Plus · Mín 5 pcs',price:'20,00',from:0,badge:'CONECTOR',bc:'bpecas',stock:'ok',icon:'🔗'},
+  {id:342,cat:'componentes',marca:'Outros',code:'COMP-1490',name:'Conector Solto Tablet DL',specs:'Tablet DL · Mín 10 pcs',price:'20,00',from:0,badge:'CONECTOR',bc:'bpecas',stock:'ok',icon:'🔗'},
+  {id:343,cat:'componentes',marca:'Samsung',code:'COMP-1500',name:'Conector Solto J5/J7/J4',specs:'J5 · J5Pro · J5Prime · J7 · J7Pro · J4 · Mín 10 pcs',price:'20,00',from:0,badge:'CONECTOR',bc:'bpecas',stock:'ok',icon:'🔗'},
+  {id:344,cat:'componentes',marca:'Outros',code:'COMP-1507',name:'Conector Solto K4 2017',specs:'K4 2017 · Mín 10 pcs',price:'20,00',from:0,badge:'CONECTOR',bc:'bpecas',stock:'ok',icon:'🔗'},
+  {id:345,cat:'componentes',marca:'Samsung',code:'COMP-1513',name:'Conector Solto J2 Prime/G530/J7 Neo',specs:'J2 Prime · G530 · G531 · J2 · J5/J7 Metal · J7 Neo · Mín 10 pcs',price:'20,00',from:0,badge:'CONECTOR',bc:'bpecas',stock:'ok',icon:'🔗'},
+  {id:346,cat:'componentes',marca:'Motorola',code:'COMP-1521',name:'Conector Solto G5S',specs:'G5S · Mín 10 pcs',price:'20,00',from:0,badge:'CONECTOR',bc:'bpecas',stock:'ok',icon:'🔗'},
+  {id:347,cat:'componentes',marca:'Outros',code:'COMP-1523',name:'Conector Solto K11/K11 Plus',specs:'K11 · K11 Plus · Mín 10 pcs',price:'20,00',from:0,badge:'CONECTOR',bc:'bpecas',stock:'ok',icon:'🔗'},
+  {id:348,cat:'componentes',marca:'Samsung',code:'COMP-1526',name:'Conector Solto A20/A30/M10',specs:'A20 · A30 · M10 · Mín 5 pcs',price:'20,00',from:0,badge:'CONECTOR',bc:'bpecas',stock:'ok',icon:'🔗'},
+  {id:349,cat:'componentes',marca:'Samsung',code:'COMP-8686',name:'Conector Solto A10S',specs:'A10S · A partir de 5 pcs',price:'20,00',from:0,badge:'CONECTOR',bc:'bpecas',stock:'ok',icon:'🔗'},
+  {id:360,cat:'componentes',marca:'Samsung',code:'COMP-3306',name:'Tampa Samsung A32 4G Azul',specs:'A32 4G · Azul · Mín 2 pcs',price:'48,50',from:0,badge:'TAMPA',bc:'by',stock:'ok',icon:'🔲'},
+  {id:361,cat:'componentes',marca:'Samsung',code:'COMP-4327',name:'Tampa Samsung A02 Vermelha',specs:'A02 · Vermelha',price:'48,50',from:0,badge:'TAMPA',bc:'by',stock:'ok',icon:'🔲'},
+  {id:362,cat:'componentes',marca:'Samsung',code:'COMP-8531',name:'Tampa Samsung A03 Core Preto',specs:'A03 Core · Preto',price:'48,25',from:0,badge:'TAMPA',bc:'by',stock:'ok',icon:'🔲'},
+  {id:363,cat:'componentes',marca:'Samsung',code:'COMP-10754',name:'Tampa Samsung A02 Azul',specs:'A02 · Azul · Mín 2 pcs',price:'49,75',from:0,badge:'TAMPA',bc:'by',stock:'ok',icon:'🔲'},
+  {id:364,cat:'componentes',marca:'Samsung',code:'COMP-10782',name:'Tampa Samsung A03 Core Vermelho',specs:'A03 Core · Vermelho · Mín 2 pcs',price:'54,60',from:0,badge:'TAMPA',bc:'by',stock:'ok',icon:'🔲'},
+  {id:365,cat:'componentes',marca:'Samsung',code:'COMP-8714',name:'Tampa Samsung A13 Branco',specs:'A13 · Branco',price:'47,45',from:0,badge:'TAMPA',bc:'by',stock:'ok',icon:'🔲'},
+  {id:366,cat:'componentes',marca:'Samsung',code:'COMP-8715',name:'Tampa Samsung A13 Preto',specs:'A13 · Preto · Mín 2 pcs',price:'42,70',from:0,badge:'TAMPA',bc:'by',stock:'ok',icon:'🔲'},
+  {id:367,cat:'componentes',marca:'Samsung',code:'COMP-11495',name:'Tampa Samsung A13 Azul',specs:'A13 · Azul',price:'30,50',from:0,badge:'TAMPA',bc:'by',stock:'ok',icon:'🔲'},
+  {id:368,cat:'componentes',marca:'Samsung',code:'COMP-10713',name:'Tampa Samsung A23 Branca',specs:'A23 · Branca',price:'32,65',from:0,badge:'TAMPA',bc:'by',stock:'ok',icon:'🔲'},
+  {id:369,cat:'componentes',marca:'Samsung',code:'COMP-10714',name:'Tampa Samsung A23 Preta',specs:'A23 · Preta',price:'32,65',from:0,badge:'TAMPA',bc:'by',stock:'ok',icon:'🔲'},
+  {id:370,cat:'componentes',marca:'Samsung',code:'COMP-12451',name:'Tampa Samsung A23 4G Azul',specs:'A23 4G · Azul',price:'37,25',from:0,badge:'TAMPA',bc:'by',stock:'ok',icon:'🔲'},
+  {id:371,cat:'componentes',marca:'Samsung',code:'COMP-13900',name:'Tampa Samsung A02 Cinza com Lente',specs:'A02 · Cinza · Com lente inclusa',price:'49,75',from:0,badge:'TAMPA',bc:'by',stock:'ok',icon:'🔲'},
+  {id:372,cat:'componentes',marca:'Samsung',code:'COMP-11062',name:'Tampa Samsung A14 5G Preto',specs:'A14 5G · Preto',price:'59,90',from:0,badge:'TAMPA',bc:'by',stock:'ok',icon:'🔲'},
+  {id:373,cat:'componentes',marca:'Samsung',code:'COMP-11063',name:'Tampa Samsung A14 5G Verde',specs:'A14 5G · Verde',price:'57,55',from:0,badge:'TAMPA',bc:'by',stock:'ok',icon:'🔲'},
+  {id:374,cat:'componentes',marca:'Samsung',code:'COMP-11064',name:'Tampa Samsung A14 5G Cinza',specs:'A14 5G · Cinza',price:'59,90',from:0,badge:'TAMPA',bc:'by',stock:'ok',icon:'🔲'},
+  {id:375,cat:'componentes',marca:'Redmi',code:'COMP-11635',name:'Tampa Redmi Note 12 4G Verde',specs:'Note 12 4G · Verde',price:'46,40',from:0,badge:'TAMPA',bc:'by',stock:'ok',icon:'🔲'},
+  {id:376,cat:'componentes',marca:'Xiaomi',code:'COMP-11679',name:'Tampa Xiaomi Redmi Note 12 4G Preta',specs:'Note 12 4G · Preta',price:'52,15',from:0,badge:'TAMPA',bc:'by',stock:'ok',icon:'🔲'},
+  {id:377,cat:'componentes',marca:'Redmi',code:'COMP-11843',name:'Tampa Redmi Note 11G Branco',specs:'Note 11G · Branco',price:'54,45',from:0,badge:'TAMPA',bc:'by',stock:'ok',icon:'🔲'},
+  {id:380,cat:'componentes',marca:'Samsung',code:'COMP-10978',name:'Botão Carcaça Samsung A10/M10',specs:'A10 · M10',price:'20,00',from:0,badge:'BOTÃO',bc:'bedu',stock:'ok',icon:'🔘'},
+  {id:381,cat:'componentes',marca:'Redmi',code:'COMP-10997',name:'Botão Carcaça Redmi Note 11',specs:'Note 11',price:'20,00',from:0,badge:'BOTÃO',bc:'bedu',stock:'ok',icon:'🔘'},
+  {id:382,cat:'componentes',marca:'Samsung',code:'COMP-13869',name:'Botão Carcaça Samsung A23',specs:'A23',price:'20,00',from:0,badge:'BOTÃO',bc:'bedu',stock:'ok',icon:'🔘'},
+  {id:383,cat:'componentes',marca:'Samsung',code:'COMP-13871',name:'Botão Carcaça Samsung A02',specs:'A02',price:'20,00',from:0,badge:'BOTÃO',bc:'bedu',stock:'ok',icon:'🔘'},
+  {id:384,cat:'componentes',marca:'Samsung',code:'COMP-14663',name:'Botão Carcaça Samsung A22 4G',specs:'A22 4G',price:'20,00',from:0,badge:'BOTÃO',bc:'bedu',stock:'ok',icon:'🔘'},
+  {id:385,cat:'componentes',marca:'Samsung',code:'COMP-14666',name:'Botão Carcaça Samsung A325',specs:'A325',price:'20,00',from:0,badge:'BOTÃO',bc:'bedu',stock:'ok',icon:'🔘'},
+  {id:386,cat:'componentes',marca:'Redmi',code:'COMP-14735',name:'Botão Carcaça Redmi Note 12 4G',specs:'Note 12 4G',price:'20,00',from:0,badge:'BOTÃO',bc:'bedu',stock:'ok',icon:'🔘'},
+  {id:390,cat:'componentes',marca:'Samsung',code:'COMP-5385',name:'Campainha/Alto Falante A02S/A03S',specs:'A02S · A03S · Mín 5 pcs',price:'20,00',from:0,badge:'CAMPAINHA',bc:'bgift',stock:'ok',icon:'🔊'},
+  {id:391,cat:'componentes',marca:'Samsung',code:'COMP-8423',name:'Campainha/Alto Falante Samsung',specs:'A12 · A10 · A20 · A02 · A14 4G · A22 4G · A32 · A21S · Mín 2 pcs',price:'22,55',from:0,badge:'CAMPAINHA',bc:'bgift',stock:'ok',icon:'🔊'},
   // Novos produtos com fotos
   {id:200,cat:'pecas',marca:'Samsung',code:'PC-SA-A02S',name:'Frontal Samsung A02S/A03/A03S',specs:'LCD + Touch · OEM · A02S · A03 · A03 Core · A03S',price:'120,00',from:0,badge:'SAMSUNG',bc:'bpecas',stock:'ok',icon:'🔩'},
   {id:201,cat:'pecas',marca:'Samsung',code:'PC-SA-A04',name:'Frontal Samsung A04/A04S/A04E',specs:'LCD + Touch · OEM · A04 · A04S · A04E',price:'120,00',from:0,badge:'SAMSUNG',bc:'bpecas',stock:'ok',icon:'🔩'},
@@ -695,6 +785,24 @@ function goTab(tab){
 
 // ── BRAND FILTER ──
 let curBrand='todas';
+function filterComp(btn,brand){
+  document.querySelectorAll('#bfilter-comp .brand-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('#cards-componentes .prod-card').forEach(c=>{
+    const m=c.dataset.marca.toLowerCase();
+    c.style.display=(brand==='todas'||m===brand.toLowerCase())?'':'none';
+  });
+}
+let _curTipo='todas';
+function filterTipo(btn,tipo){
+  _curTipo=tipo;
+  document.querySelectorAll('#tipo-filter .brand-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('#cards-componentes .prod-card').forEach(c=>{
+    const b=c.dataset.badge||'';
+    c.style.display=(tipo==='todas'||b===tipo)?'':'none';
+  });
+}
 function filterBrand(btn,brand){
   curBrand=brand;
   document.querySelectorAll('#bfilter .brand-btn').forEach(b=>b.classList.remove('active'));
@@ -707,7 +815,7 @@ function filterBrand(btn,brand){
 // ── SEARCH ──
 function doSearch(){
   // Ensure all cats rendered before searching
-  ['iphones','android','acessorios','beleza','educacao','presentes','pecas'].forEach(renderCat);
+  ['iphones','android','acessorios','beleza','educacao','presentes','pecas','componentes'].forEach(renderCat);
   const q=document.getElementById('srch').value.toLowerCase().trim();
   document.querySelectorAll('.prod-card').forEach(c=>{
     if(!q){c.style.display='';return;}
