@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Smart Store 09 — Vitrine Interna</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{--gold:#C9A84C;--bg:#080808;--s1:#0F0F0F;--s2:#141414;--green:#22C55E;}
+body{background:var(--bg);font-family:'Montserrat',sans-serif;height:100vh;display:flex;flex-direction:column;overflow:hidden;}
+
+/* ── HEADER ── */
+.kiosk-header{background:linear-gradient(135deg,#0a0a00,#1a1200,#0a0a00);border-bottom:2px solid var(--gold);padding:0 16px;height:56px;display:flex;align-items:center;gap:12px;flex-shrink:0;position:relative;}
+.kiosk-header::after{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(201,168,76,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,.03) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;}
+.kiosk-logo{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--gold);letter-spacing:3px;flex-shrink:0;text-shadow:0 0 20px rgba(201,168,76,.4);}
+.kiosk-badge{font-size:.55rem;background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.3);border-radius:20px;padding:3px 10px;color:var(--gold);font-weight:700;letter-spacing:1px;text-transform:uppercase;flex-shrink:0;}
+
+/* ── URL BAR ── */
+.url-bar{flex:1;display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.05);border:1px solid rgba(201,168,76,.2);border-radius:10px;padding:6px 12px;min-width:0;}
+.url-bar input{flex:1;background:none;border:none;color:#e0e0e0;font-family:'Montserrat',sans-serif;font-size:.75rem;outline:none;min-width:0;}
+.url-bar input::placeholder{color:#555;}
+.url-go{background:var(--gold);border:none;border-radius:7px;padding:4px 12px;color:#000;font-weight:700;font-size:.7rem;cursor:pointer;flex-shrink:0;font-family:'Montserrat',sans-serif;}
+.url-go:hover{background:#e8c76a;}
+
+/* ── QUICK BRANDS ── */
+.brands-bar{background:#0a0a0a;border-bottom:1px solid #1a1a1a;padding:0 12px;height:44px;display:flex;align-items:center;gap:8px;overflow-x:auto;scrollbar-width:none;flex-shrink:0;}
+.brands-bar::-webkit-scrollbar{display:none;}
+.brand-quick{flex-shrink:0;display:flex;align-items:center;gap:6px;background:var(--s2);border:1px solid #222;border-radius:20px;padding:5px 14px;cursor:pointer;font-size:.68rem;font-weight:700;color:#bbb;transition:all .15s;white-space:nowrap;}
+.brand-quick:hover{border-color:rgba(201,168,76,.4);color:var(--gold);}
+.brand-quick.active{background:rgba(201,168,76,.12);border-color:rgba(201,168,76,.4);color:var(--gold);}
+.brand-sep{color:#222;font-size:.8rem;flex-shrink:0;}
+
+/* ── IFRAME ── */
+.iframe-wrap{flex:1;position:relative;overflow:hidden;}
+#site-frame{width:100%;height:100%;border:none;display:block;}
+
+/* ── OVERLAY WATERMARK ── */
+.overlay-badge{position:absolute;bottom:12px;right:12px;background:rgba(8,8,8,.85);border:1px solid rgba(201,168,76,.35);border-radius:12px;padding:6px 14px;display:flex;align-items:center;gap:8px;backdrop-filter:blur(8px);pointer-events:none;z-index:10;}
+.overlay-badge-logo{font-family:'Bebas Neue',sans-serif;font-size:.95rem;color:var(--gold);letter-spacing:2px;}
+.overlay-badge-txt{font-size:.58rem;color:#aaa;font-weight:600;}
+
+/* ── LOADING ── */
+.loading-screen{position:absolute;inset:0;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;z-index:5;transition:opacity .3s;}
+.loading-screen.hide{opacity:0;pointer-events:none;}
+.loading-logo{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:var(--gold);letter-spacing:4px;text-shadow:0 0 30px rgba(201,168,76,.5);}
+.loading-sub{font-size:.68rem;color:#555;letter-spacing:2px;text-transform:uppercase;}
+.loading-bar{width:180px;height:2px;background:#1a1a1a;border-radius:2px;overflow:hidden;}
+.loading-fill{height:100%;background:linear-gradient(90deg,transparent,var(--gold),transparent);animation:loadAnim 1.2s infinite;}
+@keyframes loadAnim{0%{transform:translateX(-100%);}100%{transform:translateX(200%);}}
+
+/* ── BLOQUEIO ── */
+.blocked-screen{position:absolute;inset:0;background:var(--bg);display:none;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:32px;z-index:6;}
+.blocked-icon{font-size:3rem;}
+.blocked-title{font-size:1rem;font-weight:700;color:#fff;text-align:center;}
+.blocked-sub{font-size:.76rem;color:#666;text-align:center;line-height:1.6;max-width:360px;}
+.blocked-btn{background:var(--gold);color:#000;border:none;border-radius:12px;padding:12px 24px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.8rem;cursor:pointer;text-decoration:none;display:inline-block;}
+</style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<div class="kiosk-header">
+  <div class="kiosk-logo">SMART STORE 09</div>
+  <div class="kiosk-badge">📍 Paraibano-MA</div>
+  <div class="url-bar">
+    <span style="color:#555;font-size:.75rem;">🔗</span>
+    <input type="text" id="url-input" placeholder="Cole o link do produto aqui..." value="">
+    <button class="url-go" onclick="loadUrl()">IR</button>
+  </div>
+</div>
+
+<!-- ── QUICK BRANDS ── -->
+<div class="brands-bar">
+  <button class="brand-quick" onclick="loadBrand('boticario')">🌿 O Boticário</button>
+  <div class="brand-sep">|</div>
+  <button class="brand-quick" onclick="loadBrand('marykay')">💄 Mary Kay</button>
+  <div class="brand-sep">|</div>
+  <button class="brand-quick" onclick="loadBrand('magalu')">🛒 Magazine Você</button>
+  <div class="brand-sep">|</div>
+  <button class="brand-quick" onclick="loadBrand('natura')">🌸 Natura</button>
+  <div class="brand-sep">|</div>
+  <button class="brand-quick" onclick="loadBrand('catalogo')">📱 Catálogo Smart Store</button>
+</div>
+
+<!-- ── IFRAME AREA ── -->
+<div class="iframe-wrap">
+
+  <!-- Loading -->
+  <div class="loading-screen" id="loading">
+    <div class="loading-logo">SMART STORE 09</div>
+    <div class="loading-sub">Carregando produto...</div>
+    <div class="loading-bar"><div class="loading-fill"></div></div>
+  </div>
+
+  <!-- Bloqueio -->
+  <div class="blocked-screen" id="blocked">
+    <div class="blocked-icon">🔒</div>
+    <div class="blocked-title">Este site não pode ser exibido aqui</div>
+    <div class="blocked-sub">Alguns sites bloqueiam exibição interna por segurança. Clique abaixo para abrir em nova aba e mostrar ao cliente.</div>
+    <a id="blocked-link" href="#" target="_blank" class="blocked-btn">Abrir em nova aba →</a>
+  </div>
+
+  <!-- Watermark -->
+  <div class="overlay-badge">
+    <div class="overlay-badge-logo">SMART STORE 09</div>
+    <div class="overlay-badge-txt">Apresentado por<br><strong style="color:var(--gold)">Jânio · Iza</strong></div>
+  </div>
+
+  <iframe id="site-frame" src="" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-top-navigation" onload="frameLoaded()" onerror="frameError()"></iframe>
+</div>
+
+<script>
+const BRANDS = {
+  boticario: 'https://minhaloja.boticario.com.br',
+  marykay:   'https://www.marykay.com.br',
+  magalu:    'https://www.magazinevoce.com.br/magazinesmartstore09/',
+  natura:    'https://www.natura.com.br',
+  catalogo:  'https://smartstore09.github.io/catalogo/'
+};
+
+let currentUrl = '';
+let loadTimer = null;
+
+function setActive(brand) {
+  document.querySelectorAll('.brand-quick').forEach(b => b.classList.remove('active'));
+  event?.target?.classList.add('active');
+}
+
+function loadBrand(brand) {
+  document.querySelectorAll('.brand-quick').forEach(b => b.classList.remove('active'));
+  const btns = document.querySelectorAll('.brand-quick');
+  const idx = ['boticario','marykay','magalu','natura','catalogo'].indexOf(brand);
+  if(idx >= 0) btns[idx].classList.add('active');
+  const url = BRANDS[brand];
+  document.getElementById('url-input').value = url;
+  loadFrame(url);
+}
+
+function loadUrl() {
+  let url = document.getElementById('url-input').value.trim();
+  if (!url) return;
+  if (!url.startsWith('http')) url = 'https://' + url;
+  document.getElementById('url-input').value = url;
+  loadFrame(url);
+}
+
+function loadFrame(url) {
+  currentUrl = url;
+  const frame = document.getElementById('site-frame');
+  const loading = document.getElementById('loading');
+  const blocked = document.getElementById('blocked');
+
+  // Reset state
+  blocked.style.display = 'none';
+  loading.classList.remove('hide');
+
+  // Set iframe src
+  frame.src = url;
+
+  // Timeout fallback — se demorar >8s, provavelmente bloqueado
+  clearTimeout(loadTimer);
+  loadTimer = setTimeout(() => {
+    try {
+      // Testa se consegue acessar o conteúdo (vai dar erro se bloqueado por X-Frame)
+      const doc = frame.contentDocument || frame.contentWindow?.document;
+      if (!doc || doc.URL === 'about:blank') showBlocked(url);
+    } catch(e) {
+      showBlocked(url);
+    }
+  }, 8000);
+}
+
+function frameLoaded() {
+  clearTimeout(loadTimer);
+  const frame = document.getElementById('site-frame');
+  try {
+    const doc = frame.contentDocument || frame.contentWindow?.document;
+    // Se o documento é acessível e não está em branco, carregou OK
+    if (doc && doc.URL !== 'about:blank' && doc.URL !== '') {
+      document.getElementById('loading').classList.add('hide');
+      document.getElementById('blocked').style.display = 'none';
+      return;
+    }
+  } catch(e) {
+    // Cross-origin mas carregou (isso é normal e OK — conteúdo visível)
+    document.getElementById('loading').classList.add('hide');
+    document.getElementById('blocked').style.display = 'none';
+    return;
+  }
+  // Se chegou aqui sem conteúdo válido
+  if (currentUrl) showBlocked(currentUrl);
+}
+
+function frameError() {
+  clearTimeout(loadTimer);
+  showBlocked(currentUrl);
+}
+
+function showBlocked(url) {
+  document.getElementById('loading').classList.add('hide');
+  const blocked = document.getElementById('blocked');
+  blocked.style.display = 'flex';
+  document.getElementById('blocked-link').href = url;
+}
+
+// Enter no input → carregar
+document.getElementById('url-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') loadUrl();
+});
+
+// Começar com catálogo próprio
+window.onload = () => {
+  loadBrand('catalogo');
+  document.querySelectorAll('.brand-quick')[4].classList.add('active');
+};
+</script>
+</body>
+</html>
