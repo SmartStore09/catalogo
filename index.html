@@ -228,6 +228,24 @@ body{background:var(--bg);color:var(--txt);font-family:'Montserrat',sans-serif;m
 .cidade-tag{background:var(--s2);border:1px solid #1e1e1e;border-radius:20px;padding:6px 14px;font-size:.69rem;color:#ccc;font-weight:600;}
 .cidade-tag.principal{background:rgba(201,168,76,.15);border-color:rgba(201,168,76,.3);color:var(--gold);}
 
+/* ── VITRINE MAGALU ── */
+.magalu-header{background:linear-gradient(135deg,#0a0a2e,#00185a,#0a0a2e);padding:18px 16px 14px;border-bottom:1px solid rgba(0,120,255,.2);}
+.magalu-logo-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.magalu-logo-badge{background:#0086ff;border-radius:10px;padding:5px 12px;font-size:.75rem;font-weight:800;color:#fff;letter-spacing:.5px;}
+.magalu-tag{font-size:.62rem;background:rgba(0,134,255,.15);border:1px solid rgba(0,134,255,.3);border-radius:10px;padding:3px 10px;color:#60a5fa;font-weight:600;}
+.magalu-desc{font-size:.68rem;color:#888;margin-bottom:12px;line-height:1.5;}
+.magalu-cats{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:14px;}
+.magalu-cat{display:flex;align-items:center;gap:10px;background:#0f1a2e;border:1px solid rgba(0,120,255,.2);border-radius:14px;padding:12px 13px;text-decoration:none;transition:border-color .2s;}
+.magalu-cat:active{border-color:#0086ff;}
+.magalu-cat-icon{font-size:1.5rem;flex-shrink:0;}
+.magalu-cat-body{flex:1;}
+.magalu-cat-name{font-size:.76rem;font-weight:700;color:#fff;margin-bottom:2px;}
+.magalu-cat-sub{font-size:.62rem;color:#6b9de8;}
+.magalu-btn-full{display:flex;align-items:center;justify-content:center;gap:8px;background:#0086ff;color:#fff;border:none;border-radius:12px;padding:14px 16px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.82rem;cursor:pointer;text-decoration:none;width:100%;box-shadow:0 4px 20px rgba(0,134,255,.3);transition:transform .12s;}
+.magalu-btn-full:active{transform:scale(.97);}
+.magalu-notice{display:flex;align-items:flex-start;gap:8px;background:rgba(0,134,255,.07);border:1px solid rgba(0,134,255,.15);border-radius:10px;padding:10px 12px;margin-top:10px;}
+.magalu-notice-txt{font-size:.63rem;color:#6b9de8;line-height:1.5;}
+
 /* ── SERVIÇOS IZA (BELEZA) ── */
 .iza-banner{background:linear-gradient(135deg,#1a0010,#2d0020,#1a0010);border-bottom:1px solid rgba(236,72,153,.25);padding:20px 16px 14px;}
 .iza-banner-top{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
@@ -368,6 +386,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Montserrat',sans-serif;m
       <button class="cat-btn" onclick="goTab('educacao')"><span class="cat-btn-icon">📚</span><span class="cat-btn-label">Educação</span></button>
       <button class="cat-btn" onclick="goTab('pecas')"><span class="cat-btn-icon">🔩</span><span class="cat-btn-label">Peças</span></button>
       <button class="cat-btn" onclick="goTab('componentes')"><span class="cat-btn-icon">⚙️</span><span class="cat-btn-label">Componentes</span></button>
+      <button class="cat-btn" onclick="goTab('magalu')" style="border-color:rgba(0,134,255,.3);"><span class="cat-btn-icon">🛒</span><span class="cat-btn-label" style="color:#60a5fa;">Vitrine Magalu</span></button>
     </div>
   </div>
 
@@ -494,6 +513,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Montserrat',sans-serif;m
     <div class="nav-tab"        id="tab-presentes"  onclick="goTab('presentes')">🎁 Presentes</div>
     <div class="nav-tab"        id="tab-pecas"      onclick="goTab('pecas')">🔩 Peças</div>
     <div class="nav-tab"        id="tab-componentes" onclick="goTab('componentes')">⚙️ Componentes</div>
+    <div class="nav-tab"        id="tab-magalu"      onclick="goTab('magalu')">🛒 Vitrine Magalu</div>
   </div>
 
   <!-- SEARCH -->
@@ -612,6 +632,85 @@ body{background:var(--bg);color:var(--txt);font-family:'Montserrat',sans-serif;m
       <button class="brand-btn" onclick="filterBrand(this,'Realme')">Realme</button>
     </div>
     <div class="products-wrap"><div class="prod-cards" id="cards-pecas"></div></div>
+  </div>
+
+  <!-- ── Vitrine Magalu ── -->
+  <div id="cat-magalu" class="cat-sec">
+    <div class="magalu-header">
+      <div class="magalu-logo-row">
+        <div class="magalu-logo-badge">🛒 Influenciador Magalu</div>
+        <div class="magalu-tag">Smartstore09</div>
+      </div>
+      <div class="magalu-desc">Produtos Magalu curados pela Smart Store 09. Você compra direto no site da Magalu com toda a segurança — frete, nota fiscal e garantia da Magalu. Nós indicamos os melhores.</div>
+
+      <div class="magalu-cats">
+        <a class="magalu-cat" href="https://www.magazinevoce.com.br/magazinesmartstore09/busca/smartphone+samsung/" target="_blank">
+          <div class="magalu-cat-icon">📱</div>
+          <div class="magalu-cat-body">
+            <div class="magalu-cat-name">Samsung Galaxy</div>
+            <div class="magalu-cat-sub">A15 · A35 · A55 · S25</div>
+          </div>
+        </a>
+        <a class="magalu-cat" href="https://www.magazinevoce.com.br/magazinesmartstore09/busca/iphone/" target="_blank">
+          <div class="magalu-cat-icon">🍎</div>
+          <div class="magalu-cat-body">
+            <div class="magalu-cat-name">iPhone</div>
+            <div class="magalu-cat-sub">15 · 16 · Pro · SE</div>
+          </div>
+        </a>
+        <a class="magalu-cat" href="https://www.magazinevoce.com.br/magazinesmartstore09/busca/motorola+moto+g/" target="_blank">
+          <div class="magalu-cat-icon">📲</div>
+          <div class="magalu-cat-body">
+            <div class="magalu-cat-name">Motorola Moto G</div>
+            <div class="magalu-cat-sub">G35 · G55 · G85 · Edge</div>
+          </div>
+        </a>
+        <a class="magalu-cat" href="https://www.magazinevoce.com.br/magazinesmartstore09/busca/fone+bluetooth+ouvido/" target="_blank">
+          <div class="magalu-cat-icon">🎧</div>
+          <div class="magalu-cat-body">
+            <div class="magalu-cat-name">Fones Bluetooth</div>
+            <div class="magalu-cat-sub">JBL · Samsung · Xiaomi</div>
+          </div>
+        </a>
+        <a class="magalu-cat" href="https://www.magazinevoce.com.br/magazinesmartstore09/busca/smartwatch/" target="_blank">
+          <div class="magalu-cat-icon">⌚</div>
+          <div class="magalu-cat-body">
+            <div class="magalu-cat-name">Smartwatch</div>
+            <div class="magalu-cat-sub">Galaxy Watch · Apple Watch</div>
+          </div>
+        </a>
+        <a class="magalu-cat" href="https://www.magazinevoce.com.br/magazinesmartstore09/busca/capa+capinha+celular/" target="_blank">
+          <div class="magalu-cat-icon">🛡️</div>
+          <div class="magalu-cat-body">
+            <div class="magalu-cat-name">Capas e Películas</div>
+            <div class="magalu-cat-sub">Samsung · iPhone · Universal</div>
+          </div>
+        </a>
+        <a class="magalu-cat" href="https://www.magazinevoce.com.br/magazinesmartstore09/busca/carregador+celular+rapido/" target="_blank">
+          <div class="magalu-cat-icon">⚡</div>
+          <div class="magalu-cat-body">
+            <div class="magalu-cat-name">Carregadores</div>
+            <div class="magalu-cat-sub">Turbo · Wireless · Cabo USB-C</div>
+          </div>
+        </a>
+        <a class="magalu-cat" href="https://www.magazinevoce.com.br/magazinesmartstore09/busca/tablet+android/" target="_blank">
+          <div class="magalu-cat-icon">📟</div>
+          <div class="magalu-cat-body">
+            <div class="magalu-cat-name">Tablets</div>
+            <div class="magalu-cat-sub">Samsung Tab · Multilaser</div>
+          </div>
+        </a>
+      </div>
+
+      <a class="magalu-btn-full" href="https://www.magazinevoce.com.br/magazinesmartstore09/" target="_blank">
+        🛒 Ver toda a loja Smart Store 09 na Magalu
+      </a>
+
+      <div class="magalu-notice">
+        <span style="font-size:1rem;">ℹ️</span>
+        <span class="magalu-notice-txt">Ao clicar você será redirecionado para o site oficial da Magazine Luiza. Compra, pagamento e entrega são 100% responsabilidade da Magalu. A Smart Store 09 é parceira oficial do programa Influenciador Magalu.</span>
+      </div>
+    </div>
   </div>
 
   <div class="spacer"></div>
@@ -1109,151 +1208,4 @@ function doSearch(){
   const q=document.getElementById('srch').value.toLowerCase().trim();
   document.querySelectorAll('.prod-card').forEach(c=>{
     if(!q){c.style.display='';return;}
-    const m=c.dataset.name.includes(q)||c.dataset.code.includes(q)||c.dataset.marca.includes(q)||c.dataset.badge.includes(q);
-    c.style.display=m?'':'none';
-  });
-}
-
-
-// ── MODAL ──
-const _pmap = {};
-function _buildPmap(){ P.forEach(p => _pmap[p.id] = p); }
-
-function openModal(id){
-  if(!Object.keys(_pmap).length) _buildPmap();
-  const p = _pmap[id]; if(!p) return;
-  const modal = document.getElementById('prodModal');
-
-  // Image
-  const imgEl = document.getElementById('mImg');
-  const imgUrl = CODE_IMG[p.code];
-  imgEl.innerHTML = imgUrl
-    ? `<img src="${imgUrl}" alt="${p.name}" style="width:100%;height:100%;object-fit:contain;padding:12px;">`
-    : `<span style="font-size:4rem">${p.icon}</span>`;
-
-  // Info
-  const badge = p.badge || '';
-  const bc = p.bc || 'by';
-  document.getElementById('mBadge').textContent = badge;
-  document.getElementById('mBadge').className = 'modal-badge ' + bc;
-  document.getElementById('mName').textContent = p.name;
-  const marca = p.marca ? p.marca + ' · ' : '';
-  document.getElementById('mCode').textContent = marca + p.code;
-  document.getElementById('mSpecs').textContent = p.specs || '';
-
-  // Price
-  const priceEl = document.getElementById('mPrice');
-  const fromEl = document.getElementById('mFromLabel');
-  if(p.price){
-    priceEl.textContent = 'R$ ' + p.price;
-    fromEl.textContent = p.from ? 'A partir de' : '';
-  } else {
-    priceEl.textContent = 'Consultar';
-    priceEl.style.fontSize = '1.1rem';
-    fromEl.textContent = '';
-  }
-
-  // Stock
-  const stockEl = document.getElementById('mStock');
-  stockEl.textContent = p.stock === 'last' ? '⚠ Último' : '✓ Disponível';
-  stockEl.className = 'modal-stock ' + (p.stock === 'last' ? 'last' : 'ok');
-
-  // WA links
-  const msgJ = `Olá! Vi ${p.name} (${p.code}) no catálogo da Smart Store 09 e gostaria de mais informações.`;
-  document.getElementById('mWaJ').href = wa(WA_J, msgJ);
-  document.getElementById('mWaI').href = wa(WA_I, msgJ);
-
-  // Open
-  modal.classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeModal(e){
-  if(e && e.target !== document.getElementById('prodModal')) return;
-  document.getElementById('prodModal').classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-// Swipe down to close modal
-let _touchY = 0;
-document.getElementById('modalSheet').addEventListener('touchstart', e => { _touchY = e.touches[0].clientY; });
-document.getElementById('modalSheet').addEventListener('touchend', e => {
-  if(e.changedTouches[0].clientY - _touchY > 80) closeModal({target: document.getElementById('prodModal')});
-});
-
-// ── INIT ──
-renderAll();
-
-// ── DESTAQUES NA HOME ──
-function renderDestaques() {
-  const featured = [
-    // iPhones
-    ...P.filter(p => p.cat === 'iphones').slice(0, 2),
-    // Assistência — troca tela
-    ...P.filter(p => p.code === 'SS-001'),
-    // Samsung frontal popular
-    ...P.filter(p => p.code === 'PC-SA-A20'),
-    // Acessório popular
-    ...P.filter(p => p.code === 'AC-005'),
-    // Beleza popular
-    ...P.filter(p => p.code === '75.792'),
-  ];
-  const container = document.getElementById('destaques-scroll');
-  if (!container) return;
-  container.innerHTML = featured.map(p => {
-    const imgUrl = CODE_IMG[p.code];
-    const imgHtml = imgUrl
-      ? `<img src="${imgUrl}" alt="${p.name}" loading="lazy">`
-      : `<span style="font-size:2.5rem">${p.icon}</span>`;
-    const priceHtml = p.price
-      ? `<div class="dest-price">${p.from ? 'A partir de ' : ''}R$ ${p.price}</div>`
-      : `<div class="dest-price" style="font-size:.7rem;color:var(--muted)">Consultar</div>`;
-    const msg = `Olá! Vi ${p.name} (${p.code}) no catálogo da Smart Store 09 e quero saber mais!`;
-    return `<div class="dest-card" onclick="openModal(${p.id})">
-      <div class="dest-img">${imgHtml}</div>
-      <div class="dest-info">
-        <div class="dest-badge ${p.bc}">${p.badge || p.cat}</div>
-        <div class="dest-name">${p.name}</div>
-        ${priceHtml}
-        <a class="dest-wa" href="${wa(WA_J, msg)}" target="_blank" onclick="event.stopPropagation()">
-          💬 Quero esse
-        </a>
-      </div>
-    </div>`;
-  }).join('');
-}
-renderDestaques();
-
-</script>
-
-<!-- ── MODAL PRODUTO ── -->
-<div class="modal-overlay" id="prodModal" onclick="closeModal(event)">
-  <div class="modal-sheet" id="modalSheet">
-    <div class="modal-drag"></div>
-    <button class="modal-close" onclick="closeModal()">✕</button>
-    <div class="modal-img" id="mImg"></div>
-    <div class="modal-body">
-      <div id="mBadge" class="modal-badge"></div>
-      <div class="modal-name" id="mName"></div>
-      <div class="modal-code" id="mCode"></div>
-      <div class="modal-specs" id="mSpecs"></div>
-      <div class="modal-price-row">
-        <span class="modal-price-label" id="mFromLabel"></span>
-        <span class="modal-price" id="mPrice"></span>
-        <span class="modal-stock" id="mStock"></span>
-      </div>
-    </div>
-    <div class="modal-btns">
-      <a class="modal-wa janio" id="mWaJ" href="#" target="_blank">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.523 5.854L.057 23.43a.5.5 0 00.612.612l5.576-1.466A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.806 9.806 0 01-5.034-1.387l-.36-.214-3.732.982.998-3.647-.236-.375A9.818 9.818 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
-        Falar com Jânio
-      </a>
-      <a class="modal-wa iza" id="mWaI" href="#" target="_blank">
-        💄 Falar com Iza
-      </a>
-    </div>
-  </div>
-</div>
-
-</body>
-</html>
+    const m=c.dataset.name.incl
