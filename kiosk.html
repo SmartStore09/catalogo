@@ -121,11 +121,7 @@ const BRANDS = {
 
 let currentUrl = '';
 let loadTimer = null;
-
-function setActive(brand) {
-  document.querySelectorAll('.brand-quick').forEach(b => b.classList.remove('active'));
-  event?.target?.classList.add('active');
-}
+let loadStartTime = 0;
 
 function loadBrand(brand) {
   document.querySelectorAll('.brand-quick').forEach(b => b.classList.remove('active'));
@@ -147,49 +143,48 @@ function loadUrl() {
 
 function loadFrame(url) {
   currentUrl = url;
+  loadStartTime = Date.now();
   const frame = document.getElementById('site-frame');
   const loading = document.getElementById('loading');
   const blocked = document.getElementById('blocked');
 
-  // Reset state
   blocked.style.display = 'none';
   loading.classList.remove('hide');
-
-  // Set iframe src
   frame.src = url;
 
-  // Timeout fallback — se demorar >8s, provavelmente bloqueado
+  // Timeout de segurança — 4s
   clearTimeout(loadTimer);
-  loadTimer = setTimeout(() => {
-    try {
-      // Testa se consegue acessar o conteúdo (vai dar erro se bloqueado por X-Frame)
-      const doc = frame.contentDocument || frame.contentWindow?.document;
-      if (!doc || doc.URL === 'about:blank') showBlocked(url);
-    } catch(e) {
-      showBlocked(url);
-    }
-  }, 8000);
+  loadTimer = setTimeout(() => showBlocked(url), 4000);
 }
 
 function frameLoaded() {
-  clearTimeout(loadTimer);
+  const elapsed = Date.now() - loadStartTime;
   const frame = document.getElementById('site-frame');
+
   try {
     const doc = frame.contentDocument || frame.contentWindow?.document;
-    // Se o documento é acessível e não está em branco, carregou OK
-    if (doc && doc.URL !== 'about:blank' && doc.URL !== '') {
+    // Mesmo-domínio e tem conteúdo real
+    if (doc && doc.URL && doc.URL !== 'about:blank' && doc.URL !== '') {
+      clearTimeout(loadTimer);
       document.getElementById('loading').classList.add('hide');
       document.getElementById('blocked').style.display = 'none';
       return;
     }
+    // Sem conteúdo — mostra bloqueio
+    clearTimeout(loadTimer);
+    showBlocked(currentUrl);
   } catch(e) {
-    // Cross-origin mas carregou (isso é normal e OK — conteúdo visível)
+    // Cross-origin: pode ser site real OU página de erro do browser
+    // Se carregou em < 900ms quase certamente é erro de conexão/bloqueio
+    if (elapsed < 900) {
+      // Deixa o timeout de 4s decidir (não limpa)
+      return;
+    }
+    // Demorou — é um site real carregando (cross-origin normal)
+    clearTimeout(loadTimer);
     document.getElementById('loading').classList.add('hide');
     document.getElementById('blocked').style.display = 'none';
-    return;
   }
-  // Se chegou aqui sem conteúdo válido
-  if (currentUrl) showBlocked(currentUrl);
 }
 
 function frameError() {
@@ -216,3 +211,5 @@ window.onload = () => {
 };
 </script>
 </body>
+</html>
+                                                                                                                                              
