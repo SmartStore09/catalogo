@@ -1208,4 +1208,90 @@ function doSearch(){
   const q=document.getElementById('srch').value.toLowerCase().trim();
   document.querySelectorAll('.prod-card').forEach(c=>{
     if(!q){c.style.display='';return;}
-    const m=c.dataset.name.incl
+    const m=c.dataset.name.includes(q)||c.dataset.code.includes(q)||(c.dataset.marca||'').includes(q)||(c.dataset.badge||'').includes(q);
+    c.style.display=m?'':'none';
+  });
+  // Show/hide empty states per cat-sec
+  document.querySelectorAll('.cat-sec.active').forEach(sec=>{
+    const cards=sec.querySelectorAll('.prod-card');
+    const visible=[...cards].some(c=>c.style.display!=='none');
+    let empty=sec.querySelector('.empty-state');
+    if(empty) empty.style.display=visible||!q?'none':'';
+  });
+}
+
+// ── MODAL ──
+function openModal(id){
+  const p=P.find(x=>x.id===id);
+  if(!p)return;
+  const ov=document.getElementById('modal-ov');
+  const imgEl=document.getElementById('m-img');
+  const src=CODE_IMG[p.code];
+  imgEl.innerHTML=src?`<img src="${src}" alt="${p.name}">`:`<span>${p.icon}</span>`;
+  document.getElementById('m-badge').className=`modal-badge ${p.bc}`;
+  document.getElementById('m-badge').textContent=p.badge||'';
+  document.getElementById('m-name').textContent=p.name;
+  document.getElementById('m-code').textContent=`${p.code}${p.marca?' · '+p.marca:''}`;
+  document.getElementById('m-specs').textContent=p.specs;
+  const priceEl=document.getElementById('m-price');
+  if(p.price){
+    priceEl.innerHTML=`${p.from?'A partir de ':''}R$ ${p.price}`;
+    priceEl.style.fontSize='1.6rem';
+  } else {
+    priceEl.textContent='Consultar preço';
+    priceEl.style.fontSize='1rem';
+  }
+  const stockEl=document.getElementById('m-stock');
+  stockEl.textContent=p.stock==='last'?'⚠ Último':'✓ Disponível';
+  stockEl.className='modal-stock '+(p.stock==='last'?'last':'ok');
+  const msgJ=`Olá! Vi ${p.name} (${p.code}) no catálogo da Smart Store 09 e gostaria de mais informações.`;
+  const msgI=msgJ;
+  document.getElementById('mWaJ').href=wa(WA_J,msgJ);
+  document.getElementById('mWaI').href=wa(WA_I,msgI);
+  ov.classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeModal(){
+  document.getElementById('modal-ov').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+// ── INIT ──
+window.addEventListener('DOMContentLoaded',()=>{
+  renderAll();
+  document.getElementById('modal-ov').addEventListener('click',function(e){
+    if(e.target===this)closeModal();
+  });
+});
+</script>
+
+<!-- ── MODAL PRODUTO ── -->
+<div class="modal-overlay" id="modal-ov">
+  <div class="modal-sheet">
+    <div class="modal-drag"></div>
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-img" id="m-img"></div>
+    <div class="modal-body">
+      <div id="m-badge" class="modal-badge"></div>
+      <div class="modal-name" id="m-name"></div>
+      <div class="modal-code" id="m-code"></div>
+      <div class="modal-specs" id="m-specs"></div>
+      <div class="modal-price-row">
+        <div class="modal-price" id="m-price"></div>
+        <div id="m-stock" class="modal-stock ok"></div>
+      </div>
+    </div>
+    <div class="modal-btns">
+      <a class="modal-wa janio" id="mWaJ" href="#" target="_blank">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.523 5.854L.057 23.43a.5.5 0 00.612.612l5.576-1.466A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.806 9.806 0 01-5.034-1.387l-.36-.214-3.732.982.998-3.647-.236-.375A9.818 9.818 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+        💬 Falar com Jânio
+      </a>
+      <a class="modal-wa iza" id="mWaI" href="#" target="_blank">
+        💄 Falar com Iza
+      </a>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
