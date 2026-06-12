@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+<title>Smart Store 09 — Painel de Revendedores</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#C9A84C;--gold-s:rgba(201,168,76,.12);--gold-b:rgba(201,168,76,.2);
+  --bg:#040404;--s1:#090909;--s2:#0f0f0f;--s3:#141414;
+  --border:rgba(255,255,255,.07);--border2:rgba(255,255,255,.12);
+  --text:#f0f0f0;--muted:#777;--dim:#2e2e2e;
+  --green:#22c55e;--green-s:rgba(34,197,94,.1);--green-b:rgba(34,197,94,.2);
+  --red:#ef4444;--red-s:rgba(239,68,68,.1);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{min-height:100vh;background:var(--bg);color:var(--text);font-family:'Montserrat',sans-serif;}
+body{max-width:480px;margin:0 auto;padding:0 0 80px;}
+
+/* ── LOCK SCREEN ── */
+.lock{position:fixed;inset:0;background:var(--bg);z-index:1000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;padding:32px;}
+.lock.hidden{display:none;}
+.lock-logo{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:#fff;letter-spacing:5px;}
+.lock-tag{font-size:.48rem;color:var(--gold);letter-spacing:3px;font-weight:700;text-transform:uppercase;margin-top:-14px;}
+.lock-desc{font-size:.72rem;color:var(--muted);text-align:center;margin-top:4px;}
+.lock-input{
+  width:100%;background:var(--s2);border:1px solid var(--border2);
+  border-radius:12px;padding:14px 16px;
+  font-family:'Montserrat',sans-serif;font-size:1.1rem;
+  color:var(--text);text-align:center;letter-spacing:6px;outline:none;
+  transition:border-color .2s;
+}
+.lock-input:focus{border-color:var(--gold-b);}
+.lock-btn{
+  width:100%;background:var(--gold);border:none;border-radius:12px;
+  padding:14px;font-family:'Montserrat',sans-serif;
+  font-weight:800;font-size:.85rem;letter-spacing:1px;
+  color:#000;cursor:pointer;transition:opacity .15s;
+}
+.lock-btn:hover{opacity:.85;}
+.lock-error{font-size:.7rem;color:var(--red);display:none;}
+
+/* ── HEADER ── */
+.header{background:var(--s1);border-bottom:1px solid var(--border);padding:0 18px;height:58px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:100;}
+.h-logo{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:#fff;letter-spacing:4px;}
+.h-tag{font-size:.42rem;color:var(--gold);letter-spacing:2.5px;font-weight:700;text-transform:uppercase;}
+.h-sep{width:1px;height:22px;background:var(--border);flex-shrink:0;}
+.h-title{font-size:.75rem;font-weight:600;color:var(--muted);}
+.h-dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 6px rgba(34,197,94,.5);margin-left:auto;flex-shrink:0;}
+
+/* ── MAIN ── */
+main{padding:20px 18px;}
+
+/* ── FORM CARD ── */
+.form-card{background:var(--s1);border:1px solid var(--border);border-radius:16px;padding:18px;margin-bottom:24px;}
+.form-title{font-size:.72rem;font-weight:700;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;}
+
+.field{margin-bottom:13px;}
+.field label{font-size:.65rem;color:var(--muted);font-weight:600;letter-spacing:.5px;display:block;margin-bottom:5px;text-transform:uppercase;}
+.field input,.field select{
+  width:100%;background:var(--s2);
+  border:1px solid var(--border);border-radius:9px;
+  padding:11px 13px;font-family:'Montserrat',sans-serif;
+  font-size:.78rem;color:var(--text);outline:none;
+  transition:border-color .2s;
+}
+.field input:focus,.field select:focus{border-color:var(--gold-b);}
+.field input::placeholder{color:var(--dim);}
+.field-hint{font-size:.6rem;color:var(--muted);margin-top:4px;opacity:.7;}
+
+.slug-preview{
+  font-size:.62rem;color:var(--muted);margin-top:5px;
+  background:var(--s3);border-radius:7px;padding:6px 10px;
+  word-break:break-all;line-height:1.5;
+}
+.slug-preview span{color:var(--gold);}
+
+.btn-add{
+  width:100%;background:var(--gold);border:none;border-radius:11px;
+  padding:13px;font-family:'Montserrat',sans-serif;font-weight:800;
+  font-size:.78rem;letter-spacing:.5px;color:#000;cursor:pointer;
+  margin-top:4px;transition:opacity .15s,transform .1s;
+  display:flex;align-items:center;justify-content:center;gap:7px;
+}
+.btn-add:hover{opacity:.85;}
+.btn-add:active{transform:scale(.98);}
+
+/* ── LISTA ── */
+.list-title{font-size:.65rem;font-weight:700;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.list-count{background:var(--s2);border:1px solid var(--border);border-radius:20px;padding:2px 9px;font-size:.6rem;color:var(--gold);}
+
+.rev-card{
+  background:var(--s1);border:1px solid var(--border);
+  border-radius:14px;padding:14px 15px;margin-bottom:10px;
+  transition:border-color .2s;
+}
+.rev-card:hover{border-color:var(--border2);}
+.rev-top{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.rev-avatar{
+  width:36px;height:36px;border-radius:50%;
+  background:var(--gold-s);border:1px solid var(--gold-b);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.85rem;font-weight:800;color:var(--gold);
+  flex-shrink:0;
+}
+.rev-info{flex:1;min-width:0;}
+.rev-name{font-size:.82rem;font-weight:700;color:var(--text);margin-bottom:1px;}
+.rev-meta{font-size:.6rem;color:var(--muted);display:flex;gap:8px;flex-wrap:wrap;}
+.rev-slug{background:var(--s3);border-radius:4px;padding:1px 6px;font-family:monospace;font-size:.6rem;color:var(--muted);}
+.rev-note{font-size:.63rem;color:var(--gold);background:var(--gold-s);border-radius:5px;padding:1px 7px;}
+
+.rev-link-box{
+  background:var(--s3);border:1px solid var(--border);
+  border-radius:8px;padding:8px 11px;
+  display:flex;align-items:center;gap:8px;
+  margin-bottom:10px;
+}
+.rev-link-url{
+  flex:1;font-size:.58rem;color:var(--muted);
+  word-break:break-all;line-height:1.4;
+  font-family:monospace;
+}
+.btn-copy{
+  background:transparent;border:1px solid var(--border2);border-radius:7px;
+  padding:5px 11px;font-family:'Montserrat',sans-serif;
+  font-size:.6rem;font-weight:700;color:var(--muted);cursor:pointer;
+  flex-shrink:0;transition:all .15s;white-space:nowrap;
+}
+.btn-copy:hover{border-color:var(--gold-b);color:var(--gold);}
+.btn-copy.copied{border-color:var(--green-b);color:var(--green);background:var(--green-s);}
+
+.rev-actions{display:flex;gap:7px;}
+.btn-share{
+  flex:1;background:var(--green-s);border:1px solid var(--green-b);
+  border-radius:9px;padding:8px 0;
+  font-family:'Montserrat',sans-serif;font-size:.67rem;font-weight:700;
+  color:var(--green);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:5px;
+  text-decoration:none;transition:opacity .15s;
+}
+.btn-share:hover{opacity:.82;}
+.btn-del{
+  background:var(--red-s);border:1px solid rgba(239,68,68,.2);
+  border-radius:9px;padding:8px 14px;
+  font-family:'Montserrat',sans-serif;font-size:.67rem;font-weight:700;
+  color:var(--red);cursor:pointer;transition:opacity .15s;
+}
+.btn-del:hover{opacity:.82;}
+
+/* ── EMPTY ── */
+.empty{text-align:center;padding:40px 20px;color:var(--muted);font-size:.75rem;line-height:1.7;}
+.empty-icon{font-size:2rem;margin-bottom:12px;display:block;opacity:.4;}
+
+/* ── TOAST ── */
+.toast{
+  position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);
+  background:#222;border:1px solid var(--border2);border-radius:12px;
+  padding:10px 20px;font-size:.72rem;font-weight:600;color:var(--text);
+  white-space:nowrap;z-index:999;opacity:0;
+  transition:transform .3s ease,opacity .3s ease;pointer-events:none;
+}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1;}
+</style>
+</head>
+<body>
+
+<!-- ── TELA DE BLOQUEIO ── -->
+<div class="lock" id="lock-screen">
+  <div>
+    <div class="lock-logo">SMART STORE 09</div>
+    <div class="lock-tag">Painel Exclusivo</div>
+  </div>
+  <div class="lock-desc">Área restrita. Digite o PIN de acesso.</div>
+  <input type="password" class="lock-input" id="pin-input"
+    maxlength="6" placeholder="• • • • • •"
+    inputmode="numeric" autocomplete="off">
+  <div class="lock-error" id="pin-error">PIN incorreto. Tente novamente.</div>
+  <button class="lock-btn" onclick="verificarPin()">Entrar</button>
+</div>
+
+<!-- ── CONTEÚDO PRINCIPAL ── -->
+<div id="app" style="display:none;">
+
+  <!-- Header -->
+  <header class="header">
+    <div>
+      <div class="h-logo">SS09</div>
+      <div class="h-tag">Painel</div>
+    </div>
+    <div class="h-sep"></div>
+    <div class="h-title">Revendedores</div>
+    <div class="h-dot"></div>
+  </header>
+
+  <main>
+
+    <!-- Formulário de cadastro -->
+    <div class="form-card">
+      <div class="form-title">Novo Revendedor</div>
+
+      <div class="field">
+        <label>Nome completo</label>
+        <input type="text" id="f-nome" placeholder="Ex: Maria das Graças"
+          oninput="atualizarSlug()" autocomplete="off">
+      </div>
+
+      <div class="field">
+        <label>Apelido / identificador</label>
+        <input type="text" id="f-slug" placeholder="Ex: maria"
+          oninput="slugManual()" autocomplete="off">
+        <div class="field-hint">Sem espaços ou acentos. Vai aparecer na URL.</div>
+        <div class="slug-preview" id="slug-preview" style="display:none">
+          Link: <span id="slug-url"></span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Observação (opcional)</label>
+        <input type="text" id="f-obs" placeholder="Ex: 10% comissão, prima da Iza..."
+          autocomplete="off">
+      </div>
+
+      <button class="btn-add" onclick="cadastrar()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2.5"
+          stroke-linecap="round" stroke-linejoin="round">
+          <line x1="12" y1="5" x2="12" y2="19"/>
+          <line x1="5" y1="12" x2="19" y2="12"/>
+        </svg>
+        Cadastrar Revendedor
+      </button>
+    </div>
+
+    <!-- Lista de revendedores -->
+    <div class="list-title">
+      Ativos
+      <span class="list-count" id="lista-count">0</span>
+    </div>
+    <div id="lista"></div>
+
+  </main>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+const PIN_CORRETO = 'ss09';
+const BASE_URL    = 'https://smartstore09.github.io/catalogo/?rev=';
+const WA_JANIO    = '5589988098980';
+const STORAGE_KEY = 'ss09_revendedores';
+
+/* ────────────────── LOCK ────────────────── */
+function verificarPin() {
+  const v = document.getElementById('pin-input').value.trim();
+  if (v === PIN_CORRETO) {
+    document.getElementById('lock-screen').classList.add('hidden');
+    document.getElementById('app').style.display = 'block';
+    renderLista();
+  } else {
+    const err = document.getElementById('pin-error');
+    err.style.display = 'block';
+    document.getElementById('pin-input').value = '';
+    document.getElementById('pin-input').focus();
+    setTimeout(() => { err.style.display = 'none'; }, 2800);
+  }
+}
+document.getElementById('pin-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') verificarPin();
+});
+
+/* ────────────────── STORAGE ────────────────── */
+function carregar()  { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); }
+function salvar(arr) { localStorage.setItem(STORAGE_KEY, JSON.stringify(arr)); }
+
+/* ────────────────── SLUG ────────────────── */
+function toSlug(s) {
+  return s.toLowerCase()
+    .normalize('NFD').replace(/[̀-ͯ]/g, '')
+    .replace(/[^a-z0-9\s-]/g, '')
+    .trim().replace(/\s+/g, '-');
+}
+function atualizarSlug() {
+  const nome = document.getElementById('f-nome').value;
+  const slug = toSlug(nome);
+  const el   = document.getElementById('f-slug');
+  if (!el.dataset.manual) el.value = slug;
+  mostrarPreview(el.value || slug);
+}
+function slugManual() {
+  const el = document.getElementById('f-slug');
+  el.dataset.manual = '1';
+  el.value = toSlug(el.value);
+  mostrarPreview(el.value);
+}
+function mostrarPreview(slug) {
+  const box = document.getElementById('slug-preview');
+  const url = document.getElementById('slug-url');
+  if (slug) {
+    box.style.display = 'block';
+    url.textContent   = BASE_URL + slug;
+  } else {
+    box.style.display = 'none';
+  }
+}
+
+/* ────────────────── CADASTRAR ────────────────── */
+function cadastrar() {
+  const nome = document.getElementById('f-nome').value.trim();
+  const slug = document.getElementById('f-slug').value.trim();
+  const obs  = document.getElementById('f-obs').value.trim();
+
+  if (!nome) { toast('Informe o nome do revendedor.'); return; }
+  if (!slug) { toast('Informe o apelido/identificador.'); return; }
+
+  const lista = carregar();
+  if (lista.find(r => r.slug === slug)) {
+    toast('Esse apelido já está em uso. Escolha outro.'); return;
+  }
+
+  lista.push({
+    id:   Date.now(),
+    nome,
+    slug,
+    obs,
+    ativo: true,
+    cadastro: new Date().toLocaleDateString('pt-BR')
+  });
+  salvar(lista);
+  renderLista();
+
+  // Limpar form
+  ['f-nome','f-slug','f-obs'].forEach(id => {
+    const el = document.getElementById(id);
+    el.value = '';
+    delete el.dataset.manual;
+  });
+  document.getElementById('slug-preview').style.display = 'none';
+  toast('✓ Revendedor cadastrado!');
+}
+
+/* ────────────────── REMOVER ────────────────── */
+function remover(id) {
+  if (!confirm('Remover este revendedor?')) return;
+  const lista = carregar().filter(r => r.id !== id);
+  salvar(lista);
+  renderLista();
+  toast('Revendedor removido.');
+}
+
+/* ────────────────── COPIAR LINK ────────────────── */
+async function copiarLink(slug, btnEl) {
+  const url = BASE_URL + slug;
+  try {
+    await navigator.clipboard.writeText(url);
+  } catch(e) {
+    const ta = document.createElement('textarea');
+    ta.value = url; document.body.appendChild(ta);
+    ta.select(); document.execCommand('copy');
+    document.body.removeChild(ta);
+  }
+  btnEl.textContent = '✓ Copiado';
+  btnEl.classList.add('copied');
+  setTimeout(() => {
+    btnEl.textContent = 'Copiar';
+    btnEl.classList.remove('copied');
+  }, 2000);
+}
+
+/* ────────────────── RENDER ────────────────── */
+function renderLista() {
+  const lista   = carregar();
+  const el      = document.getElementById('lista');
+  const countEl = document.getElementById('lista-count');
+  countEl.textContent = lista.length;
+
+  if (!lista.length) {
+    el.innerHTML = `<div class="empty">
+      <span class="empty-icon">🤝</span>
+      Nenhum revendedor cadastrado ainda.<br>
+      Adicione o primeiro usando o formulário acima.
+    </div>`;
+    return;
+  }
+
+  el.innerHTML = lista.map(r => {
+    const url       = BASE_URL + r.slug;
+    const inicial   = r.nome.charAt(0).toUpperCase();
+    const waMensagem = encodeURIComponent(
+      `Olá! Aqui está o seu link de vitrine Smart Store 09:\n\n${url}\n\nCompartilhe com seus clientes e qualquer venda indicada por você será registrada!\n\n_Smart Store 09 — Paraibano, MA_`
+    );
+    const waLink = `https://wa.me/${WA_JANIO}?text=${waMensagem}`;
+
+    return `<div class="rev-card">
+      <div class="rev-top">
+        <div class="rev-avatar">${inicial}</div>
+        <div class="rev-info">
+          <div class="rev-name">${r.nome}</div>
+          <div class="rev-meta">
+            <span class="rev-slug">${r.slug}</span>
+            ${r.obs ? `<span class="rev-note">${r.obs}</span>` : ''}
+            <span>desde ${r.cadastro}</span>
+          </div>
+        </div>
+      </div>
+      <div class="rev-link-box">
+        <div class="rev-link-url">${url}</div>
+        <button class="btn-copy" onclick="copiarLink('${r.slug}', this)">Copiar</button>
+      </div>
+      <div class="rev-actions">
+        <a class="btn-share" href="${waLink}" target="_blank">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.523 5.854L.057 23.43a.5.5 0 00.612.612l5.576-1.466A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.806 9.806 0 01-5.034-1.387l-.36-.214-3.732.982.998-3.647-.236-.375A9.818 9.818 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/>
+          </svg>
+          Enviar link por WA
+        </a>
+        <button class="btn-del" onclick="remover(${r.id})">Remover</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+/* ────────────────── TOAST ────────────────── */
+function toast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), 2600);
+}
+</script>
+</body>
+</html>

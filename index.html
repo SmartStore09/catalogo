@@ -286,9 +286,25 @@ body{background:var(--bg);color:var(--txt);font-family:'Montserrat',sans-serif;m
 .footer-item strong{color:#ccc;}
 .footer-bottom{border-top:1px solid #1e1e1e;padding-top:12px;text-align:center;font-size:.6rem;color:#555;}
 .footer-cities{font-size:.62rem;color:#555;text-align:center;margin-top:6px;line-height:1.5;}
+
+/* ── REVENDEDOR JÚNIOR BANNER ── */
+.rev-banner{display:none;background:rgba(201,168,76,.07);border-bottom:1px solid rgba(201,168,76,.18);padding:9px 16px;text-align:center;position:sticky;top:0;z-index:200;}
+.rev-banner.ativo{display:block;}
+.rev-banner-txt{font-size:.64rem;color:var(--gold);font-weight:600;letter-spacing:.3px;display:flex;align-items:center;justify-content:center;gap:5px;}
+.rev-banner-name{font-weight:800;color:#fff;}
 </style>
 </head>
 <body>
+
+<!-- ── REVENDEDOR JÚNIOR BANNER ── -->
+<div class="rev-banner" id="rev-banner" aria-live="polite">
+  <div class="rev-banner-txt">
+    <span>🤝</span>
+    <span>Vitrine de <span class="rev-banner-name" id="rev-nome"></span></span>
+    <span style="opacity:.45">·</span>
+    <span style="opacity:.7">Smart Store 09</span>
+  </div>
+</div>
 
 <!-- ══ BOTTOM NAV ══ -->
 <nav class="bnav" id="bnav">
@@ -947,6 +963,14 @@ const WA_J = '5589988098980';
 const WA_I = '5599984458625';
 const wa = (p,m) => `https://wa.me/${p}?text=${encodeURIComponent(m)}`;
 
+// ── REVENDEDOR JÚNIOR ──
+const REV_SLUG = new URLSearchParams(location.search).get('rev') || '';
+const REV_NAME = REV_SLUG
+  ? decodeURIComponent(REV_SLUG.replace(/-/g,' ')).replace(/\b\w/g, c => c.toUpperCase())
+  : '';
+const revRef = REV_NAME ? `\n\n🤝 Indicado por: ${REV_NAME}` : '';
+
+
 // ── PRODUCTS ──
 const P = [
   // iPhones
@@ -1133,7 +1157,7 @@ function mkCard(p){
     : `<span class="stock-ok">✓ Disponível</span>`;
   const marca = p.marca||'';
   const codeInfo = marca ? `${p.code} · ${marca}` : p.code;
-  const msgJ = `Olá! Vi ${p.name} (${p.code}) no catálogo da Smart Store 09 e gostaria de mais informações.`;
+  const msgJ = `Olá! Vi ${p.name} (${p.code}) no catálogo da Smart Store 09 e gostaria de mais informações.${revRef}`;
   const msgI = msgJ;
   const waIcon = `<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.523 5.854L.057 23.43a.5.5 0 00.612.612l5.576-1.466A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.806 9.806 0 01-5.034-1.387l-.36-.214-3.732.982.998-3.647-.236-.375A9.818 9.818 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>`;
   return `<div class="prod-card" onclick="openModal(${p.id})" data-cat="${p.cat}" data-marca="${marca.toLowerCase()}" data-name="${p.name.toLowerCase()}" data-code="${p.code.toLowerCase()}" data-badge="${(p.badge||'').toLowerCase()}">
@@ -1261,7 +1285,7 @@ function openModal(id){
   const stockEl=document.getElementById('m-stock');
   stockEl.textContent=p.stock==='last'?'⚠ Último':'✓ Disponível';
   stockEl.className='modal-stock '+(p.stock==='last'?'last':'ok');
-  const msgJ=`Olá! Vi ${p.name} (${p.code}) no catálogo da Smart Store 09 e gostaria de mais informações.`;
+  const msgJ=`Olá! Vi ${p.name} (${p.code}) no catálogo da Smart Store 09 e gostaria de mais informações.${revRef}`;
   const msgI=msgJ;
   document.getElementById('mWaJ').href=wa(WA_J,msgJ);
   document.getElementById('mWaI').href=wa(WA_I,msgI);
@@ -1276,6 +1300,11 @@ function closeModal(){
 // ── INIT ──
 window.addEventListener('DOMContentLoaded',()=>{
   renderAll();
+  // Ativar banner de revendedor
+  if (REV_NAME) {
+    document.getElementById('rev-nome').textContent = REV_NAME;
+    document.getElementById('rev-banner').classList.add('ativo');
+  }
   document.getElementById('modal-ov').addEventListener('click',function(e){
     if(e.target===this)closeModal();
   });
