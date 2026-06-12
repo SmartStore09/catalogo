@@ -3,300 +3,405 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Smart Store 09 — Vitrine Interna</title>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Bebas+Neue&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<title>Smart Store 09 — Vitrine</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Bebas+Neue&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box;margin:0;padding:0;}
-:root{
-  --gold:#C9A84C;
-  --gold-dim:rgba(201,168,76,.14);
-  --gold-line:rgba(201,168,76,.1);
-  --bg:#060606;
-  --surface:#0d0d0d;
-  --text:#f0f0f0;
-  --text-dim:#666;
-}
-body{background:var(--bg);font-family:'Inter',sans-serif;height:100vh;display:flex;flex-direction:column;overflow:hidden;}
+/* ═══════════════════════════════════════════════
+   SMART STORE 09 · KIOSK V4 · DESIGN PREMIUM
+   ═══════════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* ── HEADER ── */
-.kiosk-header{
-  background:var(--bg);
-  border-bottom:1px solid #111;
-  padding:0 20px;
-  height:60px;
-  display:flex;
-  align-items:center;
-  gap:16px;
-  flex-shrink:0;
-}
-.brand-identity{display:flex;flex-direction:column;gap:2px;flex-shrink:0;}
-.kiosk-logo{
-  font-family:'Bebas Neue',sans-serif;
-  font-size:1.45rem;
-  color:#fff;
-  letter-spacing:5px;
-  line-height:1;
-}
-.kiosk-tagline{
-  font-size:.48rem;
-  color:var(--gold);
-  letter-spacing:2.5px;
-  font-weight:700;
-  text-transform:uppercase;
-  font-family:'Montserrat',sans-serif;
-}
-.h-divider{width:1px;height:26px;background:#1a1a1a;flex-shrink:0;}
-
-/* ── URL BAR ── */
-.url-bar{
-  flex:1;
-  display:flex;
-  align-items:center;
-  gap:8px;
-  background:var(--surface);
-  border:1px solid #181818;
-  border-radius:8px;
-  padding:7px 12px;
-  min-width:0;
-  transition:border-color .2s;
-}
-.url-bar:focus-within{border-color:rgba(201,168,76,.25);}
-.url-icon{color:#333;font-size:.72rem;flex-shrink:0;}
-.url-bar input{
-  flex:1;background:none;border:none;
-  color:#aaa;font-family:'Inter',sans-serif;font-size:.72rem;outline:none;min-width:0;
-}
-.url-bar input:focus{color:#e0e0e0;}
-.url-bar input::placeholder{color:#2e2e2e;}
-.url-go{
-  background:var(--gold);border:none;border-radius:6px;
-  padding:4px 14px;color:#000;font-weight:700;font-size:.67rem;
-  cursor:pointer;flex-shrink:0;font-family:'Montserrat',sans-serif;
-  letter-spacing:.5px;transition:opacity .15s;
-}
-.url-go:hover{opacity:.82;}
-
-/* ── QUICK BRANDS ── */
-.brands-bar{
-  background:var(--surface);
-  border-bottom:1px solid #0e0e0e;
-  padding:0 14px;height:41px;
-  display:flex;align-items:center;gap:2px;
-  overflow-x:auto;scrollbar-width:none;flex-shrink:0;
-}
-.brands-bar::-webkit-scrollbar{display:none;}
-.brand-quick{
-  flex-shrink:0;display:flex;align-items:center;gap:5px;
-  background:transparent;border:none;border-radius:6px;
-  padding:5px 14px;cursor:pointer;font-size:.66rem;font-weight:500;
-  color:var(--text-dim);transition:background .15s,color .15s;
-  white-space:nowrap;font-family:'Inter',sans-serif;letter-spacing:.1px;
-}
-.brand-quick:hover{background:#151515;color:#bbb;}
-.brand-quick.active{background:var(--gold-dim);color:var(--gold);font-weight:600;}
-
-/* ── IFRAME ── */
-.iframe-wrap{flex:1;position:relative;overflow:hidden;}
-#site-frame{width:100%;height:100%;border:none;display:block;}
-
-/* ── WATERMARK ── */
-.overlay-badge{
-  position:absolute;bottom:14px;right:14px;
-  background:rgba(6,6,6,.92);
-  border:1px solid var(--gold-line);
-  border-radius:10px;padding:7px 14px;
-  display:flex;align-items:center;gap:10px;
-  backdrop-filter:blur(14px);
-  pointer-events:none;z-index:10;
-}
-.overlay-logo{
-  font-family:'Bebas Neue',sans-serif;font-size:.9rem;
-  color:#fff;letter-spacing:3px;
-}
-.overlay-dot{width:2px;height:2px;border-radius:50%;background:var(--gold);opacity:.5;}
-.overlay-txt{font-size:.5rem;color:#555;font-weight:500;line-height:1.5;}
-.overlay-txt strong{color:var(--gold);}
-
-/* ── LOADING ── */
-.loading-screen{
-  position:absolute;inset:0;background:var(--bg);
-  display:flex;flex-direction:column;align-items:center;
-  justify-content:center;gap:18px;z-index:5;transition:opacity .4s;
-}
-.loading-screen.hide{opacity:0;pointer-events:none;}
-.loading-logo{font-family:'Bebas Neue',sans-serif;font-size:1.9rem;color:#fff;letter-spacing:6px;}
-.loading-sub{font-size:.47rem;color:var(--gold);letter-spacing:3px;text-transform:uppercase;font-weight:700;margin-top:-14px;font-family:'Montserrat',sans-serif;}
-.loading-bar{width:100px;height:1px;background:#181818;border-radius:1px;overflow:hidden;}
-.loading-fill{height:100%;background:linear-gradient(90deg,transparent,var(--gold),transparent);animation:shine 1.4s ease-in-out infinite;}
-@keyframes shine{0%{transform:translateX(-100%);}100%{transform:translateX(250%);}}
-
-/* ── BLOCKED ── */
-.blocked-screen{
-  position:absolute;inset:0;background:var(--bg);
-  display:none;flex-direction:column;align-items:center;
-  justify-content:center;gap:12px;padding:40px;z-index:6;
-}
-.blocked-icon{
-  width:50px;height:50px;border-radius:50%;
-  background:#0e0e0e;border:1px solid #1e1e1e;
-  display:flex;align-items:center;justify-content:center;font-size:1.3rem;
-}
-.blocked-title{
-  font-size:.85rem;font-weight:600;color:var(--text);
-  text-align:center;font-family:'Montserrat',sans-serif;
-}
-.blocked-sub{
-  font-size:.68rem;color:var(--text-dim);text-align:center;
-  line-height:1.7;max-width:300px;
-}
-.blocked-btn{
-  background:var(--gold);color:#000;border:none;border-radius:8px;
-  padding:11px 28px;font-family:'Montserrat',sans-serif;font-weight:700;
-  font-size:.73rem;cursor:pointer;text-decoration:none;display:inline-block;
-  letter-spacing:.5px;margin-top:6px;transition:opacity .15s;
-}
-.blocked-btn:hover{opacity:.82;}
-</style>
-</head>
-<body>
-
-<!-- ── HEADER ── -->
-<div class="kiosk-header">
-  <div class="brand-identity">
-    <div class="kiosk-logo">SMART STORE 09</div>
-    <div class="kiosk-tagline">Beleza · Tecnologia · Presentes</div>
-  </div>
-  <div class="h-divider"></div>
-  <div class="url-bar">
-    <span class="url-icon">🔗</span>
-    <input type="text" id="url-input" placeholder="Cole o link do produto aqui...">
-    <button class="url-go" onclick="loadUrl()">IR</button>
-  </div>
-</div>
-
-<!-- ── QUICK BRANDS ── -->
-<div class="brands-bar">
-  <button class="brand-quick" onclick="loadBrand('boticario')">🌿 O Boticário</button>
-  <button class="brand-quick" onclick="loadBrand('marykay')">💄 Mary Kay</button>
-  <button class="brand-quick" onclick="loadBrand('magalu')">🛒 Magazine Você</button>
-  <button class="brand-quick" onclick="loadBrand('natura')">🌸 Natura</button>
-  <button class="brand-quick" onclick="loadBrand('catalogo')">📱 Catálogo Smart Store</button>
-</div>
-
-<!-- ── IFRAME AREA ── -->
-<div class="iframe-wrap">
-
-  <div class="loading-screen" id="loading">
-    <div class="loading-logo">SMART STORE 09</div>
-    <div class="loading-sub">Paraibano · MA</div>
-    <div class="loading-bar"><div class="loading-fill"></div></div>
-  </div>
-
-  <div class="blocked-screen" id="blocked">
-    <div class="blocked-icon">🔒</div>
-    <div class="blocked-title">Este site não abre aqui</div>
-    <div class="blocked-sub">O site bloqueou exibição em vitrine por segurança.<br>Abra em nova aba para mostrar ao cliente.</div>
-    <a id="blocked-link" href="#" target="_blank" class="blocked-btn">Abrir em nova aba →</a>
-  </div>
-
-  <div class="overlay-badge">
-    <div class="overlay-logo">SS09</div>
-    <div class="overlay-dot"></div>
-    <div class="overlay-txt">Apresentado por<br><strong>Jânio · Iza</strong></div>
-  </div>
-
-  <iframe id="site-frame" src=""
-    sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-top-navigation"
-    onload="frameLoaded()"
-    onerror="frameError()">
-  </iframe>
-</div>
-
-<script>
-const BRANDS = {
-  boticario: 'https://minhaloja.boticario.com.br',
-  marykay:   'https://mk.marykayintouch.com.br/s/',
-  magalu:    'https://www.magazinevoce.com.br/magazinesmartstore09/',
-  natura:    'https://www.natura.com.br',
-  catalogo:  'https://smartstore09.github.io/catalogo/'
-};
-
-let currentUrl = '';
-let loadTimer = null;
-let loadStartTime = 0;
-
-function loadBrand(brand) {
-  document.querySelectorAll('.brand-quick').forEach(b => b.classList.remove('active'));
-  const btns = document.querySelectorAll('.brand-quick');
-  const idx = ['boticario','marykay','magalu','natura','catalogo'].indexOf(brand);
-  if(idx >= 0) btns[idx].classList.add('active');
-  const url = BRANDS[brand];
-  document.getElementById('url-input').value = url;
-  loadFrame(url);
+:root {
+  --gold:      #C9A84C;
+  --gold-soft: rgba(201,168,76,.12);
+  --gold-line: rgba(201,168,76,.14);
+  --bg:        #040404;
+  --s1:        #090909;
+  --s2:        #0f0f0f;
+  --border:    rgba(255,255,255,.055);
+  --text:      #f2f2f2;
+  --muted:     #6b6b6b;
+  --dim:       #2e2e2e;
 }
 
-function loadUrl() {
-  let url = document.getElementById('url-input').value.trim();
-  if (!url) return;
-  if (!url.startsWith('http')) url = 'https://' + url;
-  document.getElementById('url-input').value = url;
-  document.querySelectorAll('.brand-quick').forEach(b => b.classList.remove('active'));
-  loadFrame(url);
+html, body { height: 100%; overflow: hidden; }
+body {
+  background: var(--bg);
+  font-family: 'Inter', sans-serif;
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
 }
 
-function loadFrame(url) {
-  currentUrl = url;
-  loadStartTime = Date.now();
-  const frame = document.getElementById('site-frame');
-  document.getElementById('blocked').style.display = 'none';
-  document.getElementById('loading').classList.remove('hide');
-  frame.src = url;
-  clearTimeout(loadTimer);
-  loadTimer = setTimeout(() => showBlocked(url), 4000);
+/* ─────────────────────────────────────────
+   HEADER
+   ───────────────────────────────────────── */
+.header {
+  height: 66px;
+  flex-shrink: 0;
+  background: var(--s1);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 0 22px;
 }
 
-function frameLoaded() {
-  const elapsed = Date.now() - loadStartTime;
-  const frame = document.getElementById('site-frame');
-  try {
-    const doc = frame.contentDocument || frame.contentWindow?.document;
-    if (doc && doc.URL && doc.URL !== 'about:blank' && doc.URL !== '') {
-      clearTimeout(loadTimer);
-      document.getElementById('loading').classList.add('hide');
-      document.getElementById('blocked').style.display = 'none';
-      return;
-    }
-    clearTimeout(loadTimer);
-    showBlocked(currentUrl);
-  } catch(e) {
-    if (elapsed < 900) return; // erro rápido = conexão recusada, aguarda timeout
-    clearTimeout(loadTimer);
-    document.getElementById('loading').classList.add('hide');
-    document.getElementById('blocked').style.display = 'none';
-  }
+/* Logo + Tagline */
+.brand {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex-shrink: 0;
+}
+.brand-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.6rem;
+  color: #ffffff;
+  letter-spacing: 6px;
+  line-height: 1;
+  user-select: none;
+}
+.brand-tag {
+  font-family: 'Montserrat', sans-serif;
+  font-size: .42rem;
+  color: var(--gold);
+  letter-spacing: 3.5px;
+  font-weight: 700;
+  text-transform: uppercase;
 }
 
-function frameError() {
-  clearTimeout(loadTimer);
-  showBlocked(currentUrl);
+/* Divisor */
+.vr {
+  width: 1px;
+  height: 28px;
+  background: linear-gradient(180deg, transparent, var(--border), transparent);
+  flex-shrink: 0;
 }
 
-function showBlocked(url) {
-  document.getElementById('loading').classList.add('hide');
-  const blocked = document.getElementById('blocked');
-  blocked.style.display = 'flex';
-  document.getElementById('blocked-link').href = url;
+/* Barra de URL */
+.urlbar {
+  flex: 1;
+  min-width: 0;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  padding: 0 12px;
+  transition: border-color .2s, box-shadow .2s;
+}
+.urlbar:focus-within {
+  border-color: rgba(201,168,76,.28);
+  box-shadow: 0 0 0 3px rgba(201,168,76,.06);
+}
+.urlbar svg { flex-shrink: 0; }
+.urlbar input {
+  flex: 1;
+  min-width: 0;
+  background: none;
+  border: none;
+  outline: none;
+  font-family: 'Inter', sans-serif;
+  font-size: .71rem;
+  color: var(--muted);
+  transition: color .15s;
+}
+.urlbar input:focus { color: var(--text); }
+.urlbar input::placeholder { color: var(--dim); }
+.btn-ir {
+  height: 26px;
+  padding: 0 14px;
+  background: var(--gold);
+  border: none;
+  border-radius: 6px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: .6rem;
+  letter-spacing: 1px;
+  color: #000;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: opacity .15s, transform .1s;
+}
+.btn-ir:hover  { opacity: .84; }
+.btn-ir:active { transform: scale(.95); }
+
+/* Badge de localização */
+.loc {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+  padding: 5px 12px;
+  background: rgba(255,255,255,.025);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+}
+.loc-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--gold);
+  animation: glow 2.8s ease-in-out infinite;
+}
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 3px rgba(201,168,76,.4); }
+  50%       { box-shadow: 0 0 8px rgba(201,168,76,.85); }
+}
+.loc-text {
+  font-size: .54rem;
+  font-weight: 500;
+  color: var(--muted);
+  letter-spacing: .8px;
 }
 
-document.getElementById('url-input').addEventListener('keydown', e => {
-  if (e.key === 'Enter') loadUrl();
-});
+/* ─────────────────────────────────────────
+   BRANDS BAR
+   ───────────────────────────────────────── */
+.brands {
+  height: 44px;
+  flex-shrink: 0;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 0 14px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.brands::-webkit-scrollbar { display: none; }
 
-window.onload = () => {
-  loadBrand('catalogo');
-  document.querySelectorAll('.brand-quick')[4].classList.add('active');
-};
-</script>
-</body>
-</html>
-                   
+.br-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 14px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  cursor: pointer;
+  white-space: nowrap;
+  font-family: 'Inter', sans-serif;
+  font-size: .64rem;
+  font-weight: 500;
+  color: var(--muted);
+  transition: background .18s, border-color .18s, color .18s;
+  flex-shrink: 0;
+}
+.br-btn:hover {
+  background: rgba(255,255,255,.04);
+  border-color: var(--border);
+  color: #b0b0b0;
+}
+.br-btn.active {
+  background: var(--gold-soft);
+  border-color: var(--gold-line);
+  color: var(--gold);
+  font-weight: 600;
+}
+
+/* Dot colorido por marca — único ícone identificador */
+.br-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition: box-shadow .18s;
+}
+.br-btn.active .br-dot { box-shadow: 0 0 5px currentColor; }
+
+.dot-botic  { background: #5aad72; }
+.dot-mk     { background: #d63f8c; }
+.dot-magalu { background: #3b82f6; }
+.dot-natura { background: #e07b3a; }
+.dot-ss09   { background: var(--gold); }
+
+/* ─────────────────────────────────────────
+   IFRAME
+   ───────────────────────────────────────── */
+.frame-wrap {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  min-height: 0;
+}
+#kiosk-frame {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+/* ─────────────────────────────────────────
+   LOADING
+   ───────────────────────────────────────── */
+.loading {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  transition: opacity .45s ease;
+}
+.loading.hide { opacity: 0; pointer-events: none; }
+
+.ld-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 3rem;
+  color: #fff;
+  letter-spacing: 7px;
+  animation: rise .5s ease both;
+}
+.ld-tag {
+  font-family: 'Montserrat', sans-serif;
+  font-size: .45rem;
+  color: var(--gold);
+  letter-spacing: 4px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-top: 5px;
+  margin-bottom: 26px;
+  animation: rise .5s .08s ease both;
+}
+.ld-bar {
+  width: 72px;
+  height: 1px;
+  background: rgba(255,255,255,.07);
+  overflow: hidden;
+  animation: rise .5s .15s ease both;
+}
+.ld-fill {
+  height: 100%;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  animation: sweep 1.5s ease-in-out infinite;
+}
+@keyframes sweep { 0% { transform: translateX(-100%); } 100% { transform: translateX(280%); } }
+@keyframes rise  { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+/* ─────────────────────────────────────────
+   TELA BLOQUEIO
+   ───────────────────────────────────────── */
+.blocked {
+  position: absolute;
+  inset: 0;
+  z-index: 21;
+  background: var(--bg);
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 48px;
+}
+.blocked.show {
+  display: flex;
+  animation: fadein .3s ease;
+}
+@keyframes fadein { from { opacity: 0; transform: translateY(7px); } to { opacity: 1; transform: none; } }
+
+.bl-ring {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: var(--s2);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4px;
+}
+
+/* Ícone inline SVG — lock */
+.ic-lock { color: var(--muted); }
+
+.bl-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: .88rem;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: .2px;
+}
+.bl-desc {
+  font-size: .66rem;
+  color: var(--muted);
+  text-align: center;
+  line-height: 1.8;
+  max-width: 272px;
+}
+.bl-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--gold);
+  color: #000;
+  border: none;
+  border-radius: 8px;
+  padding: 11px 26px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: .7rem;
+  letter-spacing: .5px;
+  text-decoration: none;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: opacity .15s, transform .1s;
+}
+.bl-cta:hover  { opacity: .83; }
+.bl-cta:active { transform: scale(.97); }
+
+/* ─────────────────────────────────────────
+   WATERMARK
+   ───────────────────────────────────────── */
+.watermark {
+  position: absolute;
+  bottom: 14px;
+  right: 14px;
+  z-index: 10;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  background: rgba(4,4,4,.9);
+  border: 1px solid var(--gold-line);
+  border-radius: 10px;
+  padding: 8px 14px;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+.wm-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: .88rem;
+  color: #fff;
+  letter-spacing: 3px;
+}
+.wm-vr {
+  width: 1px;
+  height: 18px;
+  background: rgba(255,255,255,.08);
+}
+.wm-info { display: flex; flex-direction: column; gap: 2px; }
+.wm-city {
+  font-size: .44rem;
+  color: var(--muted);
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+.wm-team {
+  font-size: .5rem;
+  color: var(--gold);
+  font-weight: 600;
+  letter-spacing: .5px;
+}
+
+/* ─────────────────────────────────────────
+   TICKER
+   ───────────────────────────────────────── 
