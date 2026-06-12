@@ -101,7 +101,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Montserrat',sans-serif;m
 .card-footer{display:flex;gap:8px;padding:10px 14px 14px;}
 .wa-btn{flex:1;display:flex;align-items:center;justify-content:center;gap:5px;background:#25D366;color:#fff;border:none;border-radius:10px;padding:10px 6px;font-family:'Montserrat',sans-serif;font-size:.7rem;font-weight:700;cursor:pointer;text-decoration:none;transition:transform .12s,opacity .12s;letter-spacing:.3px;}
 .wa-btn:active{transform:scale(.96);opacity:.9;}
-.wa-btn.iza{background:#075E54;}
+.wa-btn.iza{background:#ec4899;color:#fff;}
 
 /* ── ASSISTÊNCIA ── */
 .assist-hero{padding:28px 16px 16px;text-align:center;background:linear-gradient(160deg,#0d0d0d,#101a00);}
@@ -174,7 +174,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Montserrat',sans-serif;m
 .modal-wa{display:flex;align-items:center;justify-content:center;gap:10px;border:none;border-radius:14px;padding:15px 20px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.9rem;cursor:pointer;text-decoration:none;width:100%;transition:transform .12s;}
 .modal-wa:active{transform:scale(.97);}
 .modal-wa.janio{background:#25D366;color:#fff;box-shadow:0 4px 16px rgba(37,211,102,.25);}
-.modal-wa.iza{background:#075E54;color:#fff;box-shadow:0 4px 16px rgba(7,94,84,.25);}
+.modal-wa.iza{background:#ec4899;color:#fff;box-shadow:0 4px 16px rgba(236,72,153,.35);}
 .modal-close{position:absolute;top:14px;right:16px;background:var(--s2);border:1px solid #2a2a2a;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;color:var(--muted);}
 .modal-sheet{position:relative;}
 
@@ -220,13 +220,31 @@ body{background:var(--bg);color:var(--txt);font-family:'Montserrat',sans-serif;m
 .membro-cargo{font-size:.65rem;color:var(--gold);font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
 .membro-desc{font-size:.68rem;color:#aaa;line-height:1.5;margin-bottom:10px;}
 .membro-wa{display:flex;align-items:center;justify-content:center;gap:5px;background:#25D366;color:#fff;border:none;border-radius:10px;padding:8px 12px;font-family:'Montserrat',sans-serif;font-size:.7rem;font-weight:700;cursor:pointer;text-decoration:none;width:100%;}
-.membro-wa.escuro{background:#075E54;}
+.membro-wa.escuro{background:#ec4899;color:#fff;}
 
 /* ── CIDADES ── */
 .cidades{padding:24px 16px;border-bottom:1px solid #1a1a1a;}
 .cidades-grid{display:flex;flex-wrap:wrap;gap:8px;}
 .cidade-tag{background:var(--s2);border:1px solid #1e1e1e;border-radius:20px;padding:6px 14px;font-size:.69rem;color:#ccc;font-weight:600;}
 .cidade-tag.principal{background:rgba(201,168,76,.15);border-color:rgba(201,168,76,.3);color:var(--gold);}
+
+/* ── SERVIÇOS IZA (BELEZA) ── */
+.iza-banner{background:linear-gradient(135deg,#1a0010,#2d0020,#1a0010);border-bottom:1px solid rgba(236,72,153,.25);padding:20px 16px 14px;}
+.iza-banner-top{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+.iza-banner-avatar{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#ec4899,#be185d);display:flex;align-items:center;justify-content:center;font-size:1.6rem;flex-shrink:0;border:2px solid rgba(236,72,153,.5);}
+.iza-banner-info{flex:1;}
+.iza-banner-name{font-size:.9rem;font-weight:800;color:#fff;}
+.iza-banner-role{font-size:.65rem;color:#f472b6;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;}
+.iza-banner-brands{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;}
+.iza-brand-tag{background:rgba(236,72,153,.15);border:1px solid rgba(236,72,153,.3);border-radius:20px;padding:4px 12px;font-size:.67rem;color:#f9a8d4;font-weight:600;}
+.iza-svc-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:14px;}
+.iza-svc{background:rgba(236,72,153,.1);border:1px solid rgba(236,72,153,.25);border-radius:14px;padding:13px 11px;text-align:center;}
+.iza-svc-icon{font-size:1.4rem;margin-bottom:5px;}
+.iza-svc-name{font-size:.72rem;font-weight:700;color:#fff;margin-bottom:4px;line-height:1.25;}
+.iza-svc-price{font-size:.9rem;font-weight:800;color:#ec4899;}
+.iza-svc-price.ask{font-size:.68rem;color:#aaa;font-weight:600;}
+.iza-wa{display:flex;align-items:center;justify-content:center;gap:8px;background:#ec4899;color:#fff;border:none;border-radius:12px;padding:13px 16px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.82rem;cursor:pointer;text-decoration:none;width:100%;box-shadow:0 4px 20px rgba(236,72,153,.35);transition:transform .12s;}
+.iza-wa:active{transform:scale(.97);}
 
 /* ── RODAPÉ ── */
 .footer{background:var(--s1);border-top:2px solid var(--gold);padding:24px 16px 16px;}
@@ -355,7 +373,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Montserrat',sans-serif;m
 
   <!-- ── 7. EQUIPE ── -->
   <div class="equipe">
-    <div class="sec-label">Quem cuida do seu celular</div>
+    <div class="sec-label">Nossa equipe</div>
     <div class="equipe-grid">
       <div class="membro">
         <div class="membro-avatar">👨‍🔧</div>
@@ -366,13 +384,13 @@ body{background:var(--bg);color:var(--txt);font-family:'Montserrat',sans-serif;m
           💬 Falar com Jânio
         </a>
       </div>
-      <div class="membro">
-        <div class="membro-avatar">👩‍💼</div>
+      <div class="membro" style="border-color:#ec4899;border-width:1.5px;">
+        <div class="membro-avatar" style="background:linear-gradient(135deg,#ec4899,#be185d);">💄</div>
         <div class="membro-nome">Iza</div>
-        <div class="membro-cargo">Atendimento · Vendas</div>
-        <div class="membro-desc">Atendimento ao cliente e vendas. Pronta para tirar todas as suas dúvidas com atenção e carinho.</div>
-        <a class="membro-wa escuro" href="https://wa.me/5599984458625?text=Olá+Iza!+Gostaria+de+atendimento." target="_blank">
-          💬 Falar com Iza
+        <div class="membro-cargo" style="color:#ec4899;">Maquiadora · Consultora</div>
+        <div class="membro-desc">Consultora Mary Kay &amp; Natura. Maquiagem profissional na bancada. Cursos Básico e Profissional.</div>
+        <a class="membro-wa escuro" href="https://wa.me/5599984458625?text=Olá+Iza!+Gostaria+de+saber+sobre+os+serviços+de+beleza." target="_blank">
+          💄 Falar com Iza
         </a>
       </div>
     </div>
@@ -429,7 +447,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Montserrat',sans-serif;m
     <div style="font-size:.75rem;color:#aaa;margin-bottom:16px;">Segunda a Sábado · 8h às 18h · Resposta rápida</div>
     <div style="display:flex;flex-direction:column;gap:10px;padding:0 8px;">
       <a class="btn-wa" href="https://wa.me/5589988098980?text=Olá!+Preciso+de+atendimento+da+Smart+Store+09." target="_blank" style="text-decoration:none;">💬 WhatsApp — Jânio (89) 98809-8980</a>
-      <a class="btn-wa" href="https://wa.me/5599984458625?text=Olá!+Preciso+de+atendimento+da+Smart+Store+09." target="_blank" style="text-decoration:none;background:#075E54;box-shadow:0 4px 16px rgba(7,94,84,.3);">💬 WhatsApp — Iza (99) 98445-8625</a>
+      <a class="btn-wa" href="https://wa.me/5599984458625?text=Olá+Iza!+Gostaria+de+saber+mais+sobre+os+serviços+de+beleza." target="_blank" style="text-decoration:none;background:#ec4899;box-shadow:0 4px 16px rgba(236,72,153,.35);">💄 WhatsApp — Iza (99) 98445-8625</a>
     </div>
   </div>
 
@@ -504,6 +522,48 @@ body{background:var(--bg);color:var(--txt);font-family:'Montserrat',sans-serif;m
 
   <!-- ── Beleza ── -->
   <div id="cat-beleza" class="cat-sec">
+
+    <!-- Banner serviços da Iza -->
+    <div class="iza-banner">
+      <div class="iza-banner-top">
+        <div class="iza-banner-avatar">💄</div>
+        <div class="iza-banner-info">
+          <div class="iza-banner-name">Iza — Maquiadora Profissional</div>
+          <div class="iza-banner-role">Consultora Mary Kay &amp; Natura</div>
+        </div>
+      </div>
+      <div class="iza-banner-brands">
+        <span class="iza-brand-tag">💄 Mary Kay</span>
+        <span class="iza-brand-tag">🌿 Natura</span>
+        <span class="iza-brand-tag">✨ Outras marcas</span>
+      </div>
+      <div class="iza-svc-grid">
+        <div class="iza-svc">
+          <div class="iza-svc-icon">💋</div>
+          <div class="iza-svc-name">Maquiagem na Bancada</div>
+          <div class="iza-svc-price ask">A consultar</div>
+        </div>
+        <div class="iza-svc">
+          <div class="iza-svc-icon">🎓</div>
+          <div class="iza-svc-name">Curso Básico de Maquiagem</div>
+          <div class="iza-svc-price">R$ 300</div>
+        </div>
+        <div class="iza-svc">
+          <div class="iza-svc-icon">🏆</div>
+          <div class="iza-svc-name">Curso Profissional</div>
+          <div class="iza-svc-price">R$ 600</div>
+        </div>
+        <div class="iza-svc">
+          <div class="iza-svc-icon">🛍️</div>
+          <div class="iza-svc-name">Produtos de Beleza</div>
+          <div class="iza-svc-price ask">Ver catálogo</div>
+        </div>
+      </div>
+      <a class="iza-wa" href="https://wa.me/5599984458625?text=Olá+Iza!+Gostaria+de+saber+mais+sobre+os+serviços+de+beleza+e+maquiagem." target="_blank">
+        💄 Falar com Iza pelo WhatsApp
+      </a>
+    </div>
+
     <div class="products-wrap"><div class="prod-cards" id="cards-beleza"></div></div>
   </div>
 
@@ -669,7 +729,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Montserrat',sans-serif;m
     <div class="sec-label">Fale Conosco</div>
     <div style="display:flex;flex-direction:column;gap:10px;">
       <a class="btn-wa" href="https://wa.me/5589988098980?text=Olá!+Vi+o+catálogo+da+Smart+Store+09+e+gostaria+de+mais+informações." target="_blank" style="text-decoration:none;">💬 WhatsApp — Jânio</a>
-      <a class="btn-wa" href="https://wa.me/5599984458625?text=Olá!+Vi+o+catálogo+da+Smart+Store+09+e+gostaria+de+mais+informações." target="_blank" style="text-decoration:none;background:#128C7E;box-shadow:0 4px 20px rgba(18,140,126,.28);">💬 WhatsApp — Iza</a>
+      <a class="btn-wa" href="https://wa.me/5599984458625?text=Olá+Iza!+Vi+o+catálogo+e+gostaria+de+saber+sobre+os+serviços+de+beleza." target="_blank" style="text-decoration:none;background:#ec4899;box-shadow:0 4px 20px rgba(236,72,153,.35);">💄 WhatsApp — Iza</a>
     </div>
   </div>
 
@@ -977,8 +1037,7 @@ function mkCard(p){
       Jânio
     </a>
     <a class="wa-btn iza" href="${wa(WA_I,msgI)}" target="_blank">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.523 5.854L.057 23.43a.5.5 0 00.612.612l5.576-1.466A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.806 9.806 0 01-5.034-1.387l-.36-.214-3.732.982.998-3.647-.236-.375A9.818 9.818 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
-      Iza
+      💄 Iza
     </a>
   </div>
 </div>`;
@@ -1190,8 +1249,7 @@ renderDestaques();
         Falar com Jânio
       </a>
       <a class="modal-wa iza" id="mWaI" href="#" target="_blank">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.523 5.854L.057 23.43a.5.5 0 00.612.612l5.576-1.466A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.806 9.806 0 01-5.034-1.387l-.36-.214-3.732.982.998-3.647-.236-.375A9.818 9.818 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
-        Falar com Iza
+        💄 Falar com Iza
       </a>
     </div>
   </div>
