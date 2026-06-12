@@ -18,6 +18,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Montserrat',sans-serif;m
 /* ── HERO ── */
 .hero{background:linear-gradient(160deg,#0d0d0d 0%,#1a1200 60%,#0d0d0d 100%);padding:44px 20px 32px;text-align:center;border-bottom:1px solid #1e1e1e;position:relative;overflow:hidden;}
 .hero::before{content:'';position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:320px;height:320px;background:radial-gradient(circle,rgba(201,168,76,.13) 0%,transparent 70%);pointer-events:none;}
+.hero::after{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(201,168,76,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,.025) 1px,transparent 1px);background-size:32px 32px;pointer-events:none;}
 .logo-wrap{margin-bottom:18px;}
 .store-name{font-family:'Bebas Neue',sans-serif;font-size:2.8rem;letter-spacing:4px;color:var(--gold);line-height:1;}
 .store-sub{font-size:.68rem;color:#999;letter-spacing:2.5px;text-transform:uppercase;margin-top:5px;}
@@ -33,7 +34,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Montserrat',sans-serif;m
 
 /* ── CREDIBILITY ── */
 .credibility{background:var(--s1);padding:24px 16px;border-bottom:1px solid #1a1a1a;}
-.sec-label{font-size:.6rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;text-align:center;}
+.sec-label{font-size:.6rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;text-align:center;text-shadow:0 0 20px rgba(201,168,76,.3);}
 .cred-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
 .cred-item{display:flex;align-items:flex-start;gap:8px;background:var(--s2);border:1px solid #1e1e1e;border-radius:12px;padding:11px 12px;}
 .cred-icon{font-size:1.1rem;flex-shrink:0;margin-top:1px;}
@@ -57,12 +58,13 @@ body{background:var(--bg);color:var(--txt);font-family:'Montserrat',sans-serif;m
 /* ── NAV TABS ── */
 .nav-tabs{display:flex;overflow-x:auto;scrollbar-width:none;background:var(--s1);border-bottom:1px solid #1a1a1a;position:sticky;top:0;z-index:100;}
 .nav-tabs::-webkit-scrollbar{display:none;}
-.nav-tab{flex-shrink:0;padding:13px 16px;font-size:.7rem;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;transition:color .2s,border-color .2s;white-space:nowrap;}
-.nav-tab.active{color:var(--gold);border-bottom-color:var(--gold);}
+.nav-tab{flex-shrink:0;padding:12px 14px;font-size:.68rem;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;transition:color .2s,border-color .2s,text-shadow .2s;white-space:nowrap;letter-spacing:.3px;}
+.nav-tab.active{color:var(--gold);border-bottom-color:var(--gold);text-shadow:0 0 18px rgba(201,168,76,.5);}
 
 /* ── SEARCH ── */
 .search-wrap{padding:12px 16px;background:var(--s1);border-bottom:1px solid #1a1a1a;}
-.search-inp{width:100%;background:var(--s2);border:1px solid #252525;border-radius:10px;padding:10px 14px;color:#fff;font-family:'Montserrat',sans-serif;font-size:.8rem;outline:none;}
+.search-inp{width:100%;background:rgba(20,20,20,.8);border:1px solid #252525;border-radius:12px;padding:11px 14px;color:#fff;font-family:'Montserrat',sans-serif;font-size:.8rem;outline:none;transition:border-color .2s;}
+.search-inp:focus{border-color:rgba(201,168,76,.4);}
 .search-inp::placeholder{color:var(--muted);}
 
 /* ── BRAND FILTER ── */
@@ -74,10 +76,10 @@ body{background:var(--bg);color:var(--txt);font-family:'Montserrat',sans-serif;m
 /* ── PRODUCT CARDS ── */
 .products-wrap{padding:12px 14px;}
 .prod-cards{display:flex;flex-direction:column;gap:11px;}
-.prod-card{background:var(--s1);border:1px solid #1e1e1e;border-radius:16px;overflow:hidden;transition:border-color .2s;}
-.prod-card:active{border-color:var(--gold);}
+.prod-card{background:var(--s1);border:1px solid #222;border-radius:16px;overflow:hidden;transition:border-color .2s,box-shadow .2s;position:relative;}
+.prod-card:active{border-color:rgba(201,168,76,.5);box-shadow:0 0 0 1px rgba(201,168,76,.15);}
 .card-body{display:flex;gap:12px;padding:14px 14px 0;}
-.card-img{width:82px;height:82px;background:#fff;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:2.1rem;flex-shrink:0;overflow:hidden;}
+.card-img{width:82px;height:82px;background:#f0f0f0;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:2.1rem;flex-shrink:0;overflow:hidden;border:1px solid rgba(255,255,255,.08);}
 .card-img img{width:100%;height:100%;object-fit:cover;}
 .card-info{flex:1;min-width:0;}
 .card-badge{display:inline-block;font-size:.56rem;font-weight:700;padding:2px 8px;border-radius:4px;margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px;}
@@ -99,9 +101,10 @@ body{background:var(--bg);color:var(--txt);font-family:'Montserrat',sans-serif;m
 .stock-ok{color:var(--green);font-size:.63rem;font-weight:600;}
 .stock-last{color:var(--red);font-size:.63rem;font-weight:600;}
 .card-footer{display:flex;gap:8px;padding:10px 14px 14px;}
-.wa-btn{flex:1;display:flex;align-items:center;justify-content:center;gap:5px;background:#25D366;color:#fff;border:none;border-radius:10px;padding:10px 6px;font-family:'Montserrat',sans-serif;font-size:.7rem;font-weight:700;cursor:pointer;text-decoration:none;transition:transform .12s,opacity .12s;letter-spacing:.3px;}
-.wa-btn:active{transform:scale(.96);opacity:.9;}
-.wa-btn.iza{background:#ec4899;color:#fff;}
+.wa-btn{flex:1;display:flex;align-items:center;justify-content:center;gap:5px;background:rgba(37,211,102,.1);color:#4ade80;border:1px solid rgba(37,211,102,.35);border-radius:10px;padding:10px 6px;font-family:'Montserrat',sans-serif;font-size:.7rem;font-weight:700;cursor:pointer;text-decoration:none;transition:background .15s,border-color .15s;letter-spacing:.3px;}
+.wa-btn:active{background:rgba(37,211,102,.22);border-color:rgba(37,211,102,.6);}
+.wa-btn.iza{background:rgba(236,72,153,.1);color:#f9a8d4;border-color:rgba(236,72,153,.35);}
+.wa-btn.iza:active{background:rgba(236,72,153,.22);}
 
 /* ── ASSISTÊNCIA ── */
 .assist-hero{padding:28px 16px 16px;text-align:center;background:linear-gradient(160deg,#0d0d0d,#101a00);}
@@ -139,7 +142,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Montserrat',sans-serif;m
 /* ── BOTTOM NAV ── */
 .bnav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;background:rgba(8,8,8,.96);backdrop-filter:blur(12px);border-top:1px solid #1e1e1e;display:flex;z-index:500;}
 .bnav-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:10px 8px 14px;cursor:pointer;color:var(--muted);font-size:.58rem;font-weight:600;transition:color .2s;border:none;background:none;font-family:'Montserrat',sans-serif;}
-.bnav-btn.active{color:var(--gold);}
+.bnav-btn.active{color:var(--gold);text-shadow:0 0 14px rgba(201,168,76,.5);}
 .bnav-icon{font-size:1.2rem;}
 
 /* ── UTILS ── */
@@ -157,7 +160,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Montserrat',sans-serif;m
 .modal-sheet{background:var(--s1);border-radius:22px 22px 0 0;width:100%;max-width:430px;max-height:90vh;overflow-y:auto;transform:translateY(100%);transition:transform .28s cubic-bezier(.22,1,.36,1);padding-bottom:env(safe-area-inset-bottom,16px);}
 .modal-overlay.open .modal-sheet{transform:translateY(0);}
 .modal-drag{width:40px;height:4px;background:#333;border-radius:2px;margin:12px auto 0;}
-.modal-img{width:100%;aspect-ratio:1;background:#fff;display:flex;align-items:center;justify-content:center;font-size:5rem;overflow:hidden;margin:14px 16px 0;width:calc(100% - 32px);border-radius:16px;}
+.modal-img{width:calc(100% - 32px);aspect-ratio:1;background:#f0f0f0;display:flex;align-items:center;justify-content:center;font-size:5rem;overflow:hidden;margin:14px 16px 0;border-radius:16px;}
 .modal-img img{width:100%;height:100%;object-fit:contain;padding:8px;}
 .modal-body{padding:16px 16px 8px;}
 .modal-badge{display:inline-block;font-size:.6rem;font-weight:700;padding:3px 10px;border-radius:5px;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;}
@@ -209,7 +212,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Montserrat',sans-serif;m
 .dest-badge{display:inline-block;font-size:.55rem;font-weight:700;padding:2px 7px;border-radius:4px;text-transform:uppercase;margin-bottom:4px;}
 .dest-name{font-size:.72rem;font-weight:700;color:#fff;margin-bottom:3px;line-height:1.2;}
 .dest-price{font-size:.82rem;font-weight:800;color:var(--gold);}
-.dest-wa{display:flex;align-items:center;justify-content:center;gap:5px;background:#25D366;color:#fff;border:none;border-radius:8px;padding:7px;font-family:'Montserrat',sans-serif;font-size:.65rem;font-weight:700;cursor:pointer;text-decoration:none;width:100%;margin-top:7px;}
+.dest-wa{display:flex;align-items:center;justify-content:center;gap:5px;background:rgba(37,211,102,.1);color:#4ade80;border:1px solid rgba(37,211,102,.3);border-radius:8px;padding:7px;font-family:'Montserrat',sans-serif;font-size:.65rem;font-weight:700;cursor:pointer;text-decoration:none;width:100%;margin-top:7px;transition:background .15s;}
 
 /* ── EQUIPE ── */
 .equipe{background:var(--s2);padding:24px 16px;border-bottom:1px solid #1a1a1a;}
@@ -219,8 +222,10 @@ body{background:var(--bg);color:var(--txt);font-family:'Montserrat',sans-serif;m
 .membro-nome{font-size:.85rem;font-weight:800;color:#fff;margin-bottom:3px;}
 .membro-cargo{font-size:.65rem;color:var(--gold);font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
 .membro-desc{font-size:.68rem;color:#aaa;line-height:1.5;margin-bottom:10px;}
-.membro-wa{display:flex;align-items:center;justify-content:center;gap:5px;background:#25D366;color:#fff;border:none;border-radius:10px;padding:8px 12px;font-family:'Montserrat',sans-serif;font-size:.7rem;font-weight:700;cursor:pointer;text-decoration:none;width:100%;}
-.membro-wa.escuro{background:#ec4899;color:#fff;}
+.membro-wa{display:flex;align-items:center;justify-content:center;gap:5px;background:rgba(37,211,102,.1);color:#4ade80;border:1px solid rgba(37,211,102,.35);border-radius:10px;padding:8px 12px;font-family:'Montserrat',sans-serif;font-size:.7rem;font-weight:700;cursor:pointer;text-decoration:none;width:100%;transition:background .15s;}
+.membro-wa:active{background:rgba(37,211,102,.2);}
+.membro-wa.escuro{background:rgba(236,72,153,.1);color:#f9a8d4;border-color:rgba(236,72,153,.35);}
+.membro-wa.escuro:active{background:rgba(236,72,153,.2);}
 
 /* ── CIDADES ── */
 .cidades{padding:24px 16px;border-bottom:1px solid #1a1a1a;}
@@ -263,6 +268,13 @@ body{background:var(--bg);color:var(--txt);font-family:'Montserrat',sans-serif;m
 .iza-svc-price.ask{font-size:.68rem;color:#aaa;font-weight:600;}
 .iza-wa{display:flex;align-items:center;justify-content:center;gap:8px;background:#ec4899;color:#fff;border:none;border-radius:12px;padding:13px 16px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.82rem;cursor:pointer;text-decoration:none;width:100%;box-shadow:0 4px 20px rgba(236,72,153,.35);transition:transform .12s;}
 .iza-wa:active{transform:scale(.97);}
+
+/* ── BENEFITS STRIP ── */
+.benefits-strip{background:rgba(201,168,76,.05);border-bottom:1px solid rgba(201,168,76,.12);overflow:hidden;}
+.benefits-scroll{display:flex;align-items:center;padding:9px 16px;overflow-x:auto;scrollbar-width:none;white-space:nowrap;}
+.benefits-scroll::-webkit-scrollbar{display:none;}
+.benefit-item{display:flex;align-items:center;gap:5px;font-size:.68rem;font-weight:700;color:rgba(201,168,76,.9);flex-shrink:0;letter-spacing:.3px;}
+.benefit-sep{color:rgba(201,168,76,.2);margin:0 12px;font-size:.8rem;flex-shrink:0;}
 
 /* ── RODAPÉ ── */
 .footer{background:var(--s1);border-top:2px solid var(--gold);padding:24px 16px 16px;}
@@ -316,15 +328,20 @@ body{background:var(--bg);color:var(--txt);font-family:'Montserrat',sans-serif;m
     </div>
   </div>
 
-  <!-- ── 2. URGÊNCIA ── -->
-  <div class="urgencia">
-    <div class="urgencia-title">🔥 Ofertas da semana</div>
-    <div class="urgencia-items">
-      <span class="urgencia-item">⏰ Válido até domingo</span>
-      <span class="urgencia-item">📦 Estoque limitado</span>
-      <span class="urgencia-item">💳 10x sem juros</span>
-      <span class="urgencia-item">⚡ PIX com 10% OFF</span>
-      <span class="urgencia-item">🔧 Diagnóstico grátis</span>
+  <!-- ── 2. BENEFÍCIOS ── -->
+  <div class="benefits-strip">
+    <div class="benefits-scroll">
+      <div class="benefit-item">⚡ PIX com 10% OFF</div>
+      <div class="benefit-sep">·</div>
+      <div class="benefit-item">💳 10× sem juros</div>
+      <div class="benefit-sep">·</div>
+      <div class="benefit-item">🔧 Diagnóstico grátis</div>
+      <div class="benefit-sep">·</div>
+      <div class="benefit-item">✅ Garantia real</div>
+      <div class="benefit-sep">·</div>
+      <div class="benefit-item">🚀 Resposta rápida</div>
+      <div class="benefit-sep">·</div>
+      <div class="benefit-item">📦 Produto original</div>
     </div>
   </div>
 
@@ -1117,7 +1134,9 @@ function mkCard(p){
   const marca = p.marca||'';
   const codeInfo = marca ? `${p.code} · ${marca}` : p.code;
   const msgJ = `Olá! Vi ${p.name} (${p.code}) no catálogo da Smart Store 09 e gostaria de mais informações.`;
-  const msgI = msgJ;
+  const msgI = `Olá Iza! Vi ${p.name} no catálogo da Smart Store 09 e gostaria de saber mais.`;
+  const isBeauty = p.cat === 'beleza';
+  const waIcon = `<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.523 5.854L.057 23.43a.5.5 0 00.612.612l5.576-1.466A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.806 9.806 0 01-5.034-1.387l-.36-.214-3.732.982.998-3.647-.236-.375A9.818 9.818 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>`;
   return `<div class="prod-card" onclick="openModal(${p.id})" data-cat="${p.cat}" data-marca="${marca.toLowerCase()}" data-name="${p.name.toLowerCase()}" data-code="${p.code.toLowerCase()}" data-badge="${(p.badge||'').toLowerCase()}">
   <div class="card-body">
     <div class="card-img">${CODE_IMG[p.code] ? `<img src="${CODE_IMG[p.code]}" alt="${p.name}" loading="lazy">` : p.icon}</div>
@@ -1131,13 +1150,10 @@ function mkCard(p){
     </div>
   </div>
   <div class="card-footer">
-    <a class="wa-btn" onclick="event.stopPropagation()" href="${wa(WA_J,msgJ)}" target="_blank">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.523 5.854L.057 23.43a.5.5 0 00.612.612l5.576-1.466A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.806 9.806 0 01-5.034-1.387l-.36-.214-3.732.982.998-3.647-.236-.375A9.818 9.818 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
-      Jânio
+    <a class="wa-btn${isBeauty?' beauty-j':''}" onclick="event.stopPropagation()" href="${wa(WA_J,msgJ)}" target="_blank" style="${isBeauty?'flex:1.2':''}">
+      ${waIcon} ${isBeauty?'Jânio':'Pedir via WhatsApp'}
     </a>
-    <a class="wa-btn iza" href="${wa(WA_I,msgI)}" target="_blank">
-      💄 Iza
-    </a>
+    ${isBeauty?`<a class="wa-btn iza" onclick="event.stopPropagation()" href="${wa(WA_I,msgI)}" target="_blank">💄 Iza</a>`:''}
   </div>
 </div>`;
 }
