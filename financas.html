@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Financeiro · Smart Store 09</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#C9A84C;--bg:#080808;--s1:#0F0F0F;--s2:#141414;--s3:#1a1a1a;
+  --txt:#e8e8e8;--muted:#888;--green:#22C55E;--red:#ef4444;
+  --blue:#3b82f6;--pink:#ec4899;--purple:#8b5cf6;--orange:#f97316;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--txt);font-family:'Montserrat',sans-serif;max-width:430px;margin:0 auto;min-height:100vh;overflow-x:hidden;}
+
+/* ── PIN ── */
+#pin-screen{position:fixed;inset:0;background:var(--bg);z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 24px;}
+.pin-logo{font-family:'Bebas Neue',sans-serif;font-size:2.4rem;letter-spacing:4px;color:var(--gold);margin-bottom:4px;}
+.pin-sub{font-size:.65rem;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:40px;}
+.pin-label{font-size:.72rem;color:var(--muted);margin-bottom:14px;font-weight:600;}
+.pin-dots{display:flex;gap:14px;margin-bottom:32px;}
+.pin-dot{width:14px;height:14px;border-radius:50%;background:#222;border:1.5px solid #333;transition:background .15s,border-color .15s;}
+.pin-dot.filled{background:var(--gold);border-color:var(--gold);}
+.pin-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;width:100%;max-width:280px;}
+.pin-key{background:var(--s2);border:1px solid #222;border-radius:16px;padding:20px 0;font-size:1.4rem;font-weight:700;cursor:pointer;text-align:center;transition:background .1s;}
+.pin-key:active{background:#222;}
+.pin-key.del{font-size:1rem;color:var(--muted);}
+.pin-err{color:var(--red);font-size:.72rem;margin-top:12px;min-height:18px;text-align:center;}
+
+/* ── HEADER ── */
+.app-header{background:var(--s1);border-bottom:1px solid #1a1a1a;padding:14px 16px 0;position:sticky;top:0;z-index:100;}
+.header-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+.header-title{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:3px;color:var(--gold);}
+.header-who{display:flex;gap:6px;}
+.who-btn{padding:5px 12px;border-radius:20px;font-size:.65rem;font-weight:700;border:1.5px solid #2a2a2a;background:transparent;color:var(--muted);cursor:pointer;font-family:inherit;letter-spacing:.3px;transition:all .15s;}
+.who-btn.active.janio{background:rgba(59,130,246,.18);border-color:rgba(59,130,246,.5);color:#93c5fd;}
+.who-btn.active.iza{background:rgba(236,72,153,.18);border-color:rgba(236,72,153,.5);color:#f9a8d4;}
+.sync-btn{background:transparent;border:none;color:var(--muted);font-size:1.1rem;cursor:pointer;padding:4px 8px;}
+
+/* ── TABS ── */
+.nav-tabs{display:flex;overflow-x:auto;scrollbar-width:none;}
+.nav-tabs::-webkit-scrollbar{display:none;}
+.tab-item{flex-shrink:0;padding:10px 14px;font-size:.65rem;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;letter-spacing:.3px;}
+.tab-item.active{color:var(--gold);border-bottom-color:var(--gold);}
+
+/* ── SCREENS ── */
+.screen{display:none;padding-bottom:90px;}
+.screen.active{display:block;}
+
+/* ── TODAY DASHBOARD ── */
+.today-hero{background:linear-gradient(160deg,#0a0a00,#1a1200);padding:20px 16px;border-bottom:1px solid #1a1a00;}
+.today-date{font-size:.62rem;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;}
+.today-total{font-family:'Bebas Neue',sans-serif;font-size:3rem;color:var(--gold);line-height:1;letter-spacing:2px;}
+.today-total span{font-family:'Montserrat',sans-serif;font-size:.75rem;font-weight:600;color:var(--muted);letter-spacing:1px;}
+.today-split{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px;}
+.today-card{background:var(--s1);border:1px solid #1e1e1e;border-radius:12px;padding:10px 12px;}
+.today-card-name{font-size:.58rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;margin-bottom:3px;}
+.today-card-name.janio{color:#60a5fa;}
+.today-card-name.iza{color:#f472b6;}
+.today-card-val{font-size:1.1rem;font-weight:800;}
+
+.sec-title{font-size:.6rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);padding:14px 16px 8px;}
+.cat-summary{padding:0 12px;}
+.cat-row{display:flex;align-items:center;gap:10px;background:var(--s1);border:1px solid #1a1a1a;border-radius:10px;padding:10px 12px;margin-bottom:6px;}
+.cat-row-icon{font-size:1.2rem;flex-shrink:0;}
+.cat-row-label{font-size:.72rem;font-weight:600;flex:1;}
+.cat-row-val{font-size:.82rem;font-weight:700;color:var(--gold);}
+.cat-bar-wrap{height:3px;background:#1a1a1a;border-radius:2px;margin-top:4px;}
+.cat-bar{height:3px;border-radius:2px;background:var(--gold);}
+
+/* ── ALERT LOJA ── */
+.loja-alert{background:rgba(201,168,76,.07);border:1px solid rgba(201,168,76,.2);border-radius:12px;padding:12px 14px;margin:10px 12px;}
+.loja-alert-title{font-size:.6rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:3px;}
+.loja-alert-val{font-size:1.3rem;font-weight:800;color:var(--gold);}
+.loja-alert-sub{font-size:.62rem;color:var(--muted);margin-top:2px;}
+
+/* ── ENTRIES LIST ── */
+.entries{padding:0 12px;}
+.entry-item{display:flex;align-items:center;gap:10px;background:var(--s1);border:1px solid #1a1a1a;border-radius:10px;padding:10px 12px;margin-bottom:6px;position:relative;}
+.entry-icon{font-size:1.3rem;flex-shrink:0;}
+.entry-body{flex:1;min-width:0;}
+.entry-cat{font-size:.68rem;font-weight:700;color:var(--txt);}
+.entry-meta{font-size:.6rem;color:var(--muted);margin-top:1px;}
+.entry-who-dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:4px;flex-shrink:0;}
+.entry-who-dot.janio{background:#3b82f6;}
+.entry-who-dot.iza{background:#ec4899;}
+.entry-right{text-align:right;flex-shrink:0;}
+.entry-amount{font-size:.88rem;font-weight:800;color:var(--txt);}
+.entry-amount.loja{color:var(--gold);}
+.entry-del{background:transparent;border:none;color:#333;font-size:.9rem;cursor:pointer;padding:2px 4px;margin-left:4px;}
+.entry-del:active{color:var(--red);}
+
+/* ── MONTH STATS ── */
+.month-header{background:linear-gradient(160deg,#080808,#0a0a14);padding:16px;border-bottom:1px solid #1a1a2a;}
+.month-title{font-size:.62rem;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:3px;}
+.month-total{font-family:'Bebas Neue',sans-serif;font-size:2.6rem;color:#fff;letter-spacing:2px;}
+.month-cats{padding:0 12px;margin-top:8px;}
+.month-cat-row{background:var(--s1);border:1px solid #1a1a1a;border-radius:10px;padding:10px 12px;margin-bottom:6px;}
+.month-cat-top{display:flex;align-items:center;gap:8px;margin-bottom:5px;}
+.month-cat-icon{font-size:1.1rem;}
+.month-cat-label{font-size:.72rem;font-weight:600;flex:1;}
+.month-cat-val{font-size:.82rem;font-weight:800;}
+.month-cat-bar-wrap{height:4px;background:#1e1e1e;border-radius:2px;}
+.month-cat-bar{height:4px;border-radius:2px;transition:width .4s;}
+.month-who-split{display:flex;gap:4px;margin-top:4px;}
+.month-who-chip{font-size:.55rem;padding:2px 7px;border-radius:8px;font-weight:700;}
+.month-who-chip.janio{background:rgba(59,130,246,.18);color:#93c5fd;}
+.month-who-chip.iza{background:rgba(236,72,153,.18);color:#f9a8d4;}
+
+/* ── LOJA TAB ── */
+.loja-hero{background:linear-gradient(160deg,#0a0800,#1a1000);padding:20px 16px;border-bottom:1px solid #1a1000;}
+.loja-mes-total{font-family:'Bebas Neue',sans-serif;font-size:2.8rem;color:var(--gold);letter-spacing:2px;}
+.loja-warn{font-size:.65rem;color:#a07830;margin-top:4px;line-height:1.4;}
+.loja-who-split{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px;}
+.loja-who-card{background:var(--s1);border:1px solid #222;border-radius:12px;padding:10px 12px;}
+
+/* ── FAB ── */
+.fab{position:fixed;bottom:24px;right:50%;transform:translateX(50%);z-index:200;}
+.fab-btn{width:58px;height:58px;border-radius:50%;background:var(--gold);border:none;font-size:1.8rem;color:#000;cursor:pointer;box-shadow:0 4px 24px rgba(201,168,76,.4);display:flex;align-items:center;justify-content:center;transition:transform .15s,opacity .15s;font-weight:300;line-height:1;}
+.fab-btn:active{transform:scale(.93);opacity:.9;}
+
+/* ── ADD MODAL ── */
+.modal-ov{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:500;display:none;align-items:flex-end;}
+.modal-ov.open{display:flex;}
+.modal-sheet{background:var(--s1);border-radius:20px 20px 0 0;width:100%;max-height:90vh;overflow-y:auto;padding-bottom:env(safe-area-inset-bottom,0px);}
+.modal-drag{width:36px;height:4px;background:#2a2a2a;border-radius:2px;margin:10px auto 0;}
+.modal-title{font-size:.8rem;font-weight:800;letter-spacing:.5px;padding:14px 16px 4px;color:#ccc;}
+
+/* WHO SELECTOR in modal */
+.who-select{display:flex;gap:8px;padding:8px 16px 12px;}
+.who-opt{flex:1;padding:10px;border-radius:12px;border:1.5px solid #222;background:transparent;font-family:inherit;font-size:.75rem;font-weight:700;cursor:pointer;text-align:center;color:var(--muted);transition:all .15s;}
+.who-opt.sel.janio{background:rgba(59,130,246,.2);border-color:rgba(59,130,246,.6);color:#93c5fd;}
+.who-opt.sel.iza{background:rgba(236,72,153,.2);border-color:rgba(236,72,153,.6);color:#f9a8d4;}
+
+/* CATEGORY GRID in modal */
+.cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:0 12px 12px;}
+.cat-opt{background:var(--s2);border:1.5px solid #1e1e1e;border-radius:12px;padding:12px 6px 8px;cursor:pointer;text-align:center;transition:all .15s;}
+.cat-opt:active,.cat-opt.sel{border-color:rgba(201,168,76,.5);background:rgba(201,168,76,.08);}
+.cat-opt.loja-opt:active,.cat-opt.loja-opt.sel{border-color:rgba(239,68,68,.4);background:rgba(239,68,68,.07);}
+.cat-opt-icon{font-size:1.4rem;display:block;margin-bottom:4px;}
+.cat-opt-label{font-size:.58rem;font-weight:700;color:#aaa;letter-spacing:.2px;}
+
+/* AMOUNT INPUT */
+.amount-section{padding:0 16px 12px;}
+.amount-label{font-size:.62rem;font-weight:700;color:var(--muted);letter-spacing:.5px;text-transform:uppercase;margin-bottom:8px;}
+.amount-inp{width:100%;background:#111;border:1px solid #252525;border-radius:12px;color:#fff;font-family:'Bebas Neue',inherit;font-size:2rem;padding:14px 16px;outline:none;letter-spacing:2px;}
+.amount-inp:focus{border-color:rgba(201,168,76,.4);}
+.desc-inp{width:100%;background:#111;border:1px solid #1e1e1e;border-radius:10px;color:#ccc;font-family:inherit;font-size:.8rem;padding:10px 12px;outline:none;margin-top:6px;}
+.desc-inp::placeholder{color:#444;}
+.save-btn{display:block;width:calc(100% - 32px);margin:8px 16px 16px;padding:15px;background:var(--gold);color:#000;border:none;border-radius:14px;font-family:inherit;font-size:.9rem;font-weight:800;cursor:pointer;letter-spacing:.5px;}
+.save-btn:active{opacity:.85;}
+.save-btn:disabled{background:#222;color:#444;cursor:not-allowed;}
+
+/* ── SYNC MODAL ── */
+.sync-modal-ov{position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:600;display:none;align-items:center;justify-content:center;padding:24px;}
+.sync-modal-ov.open{display:flex;}
+.sync-modal{background:var(--s1);border:1px solid #222;border-radius:20px;width:100%;max-width:360px;padding:24px;}
+.sync-modal-title{font-size:.9rem;font-weight:800;color:var(--gold);margin-bottom:16px;text-align:center;}
+.sync-section{margin-bottom:16px;}
+.sync-section-label{font-size:.6rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
+.sync-code-box{background:#0a0a0a;border:1px solid #222;border-radius:8px;padding:10px;font-size:.6rem;color:#666;word-break:break-all;max-height:80px;overflow-y:auto;font-family:monospace;line-height:1.5;}
+.sync-action-btn{display:block;width:100%;padding:12px;border-radius:12px;border:1px solid #2a2a2a;background:transparent;color:#ccc;font-family:inherit;font-size:.78rem;font-weight:700;cursor:pointer;margin-bottom:8px;text-align:center;}
+.sync-action-btn.primary{background:var(--gold);color:#000;border:none;}
+.sync-action-btn.wa{background:rgba(37,211,102,.15);color:#22c55e;border-color:rgba(37,211,102,.3);}
+.sync-inp{width:100%;background:#0a0a0a;border:1px solid #2a2a2a;border-radius:8px;color:#ccc;font-family:monospace;font-size:.68rem;padding:10px;outline:none;resize:none;height:70px;}
+.sync-close{position:absolute;top:16px;right:16px;background:transparent;border:none;color:var(--muted);font-size:1.2rem;cursor:pointer;}
+
+/* ── EMPTY STATE ── */
+.empty{text-align:center;padding:48px 24px;color:var(--muted);}
+.empty-icon{font-size:2.5rem;margin-bottom:12px;opacity:.4;}
+.empty-txt{font-size:.75rem;line-height:1.5;}
+
+/* ── UTILS ── */
+.spacer{height:12px;}
+</style>
+</head>
+<body>
+
+<!-- ══ PIN SCREEN ══ -->
+<div id="pin-screen">
+  <div class="pin-logo">SMART STORE 09</div>
+  <div class="pin-sub">Financeiro Familiar</div>
+  <div class="pin-label">Digite o PIN</div>
+  <div class="pin-dots" id="pin-dots">
+    <div class="pin-dot" id="pd0"></div>
+    <div class="pin-dot" id="pd1"></div>
+    <div class="pin-dot" id="pd2"></div>
+    <div class="pin-dot" id="pd3"></div>
+  </div>
+  <div class="pin-grid">
+    <button class="pin-key" onclick="pinKey('1')">1</button>
+    <button class="pin-key" onclick="pinKey('2')">2</button>
+    <button class="pin-key" onclick="pinKey('3')">3</button>
+    <button class="pin-key" onclick="pinKey('4')">4</button>
+    <button class="pin-key" onclick="pinKey('5')">5</button>
+    <button class="pin-key" onclick="pinKey('6')">6</button>
+    <button class="pin-key" onclick="pinKey('7')">7</button>
+    <button class="pin-key" onclick="pinKey('8')">8</button>
+    <button class="pin-key" onclick="pinKey('9')">9</button>
+    <button class="pin-key" onclick="pinKey('')">⌫</button>
+    <button class="pin-key" onclick="pinKey('0')">0</button>
+    <button class="pin-key del" onclick="pinClear()">✕</button>
+  </div>
+  <div class="pin-err" id="pin-err"></div>
+</div>
+
+<!-- ══ MAIN APP ══ -->
+<div id="app" style="display:none;">
+
+  <div class="app-header">
+    <div class="header-top">
+      <div class="header-title">💰 Financeiro</div>
+      <div style="display:flex;align-items:center;gap:6px;">
+        <div class="header-who">
+          <button class="who-btn janio active" id="who-janio" onclick="setWho('janio')">Jânio</button>
+          <button class="who-btn iza" id="who-iza" onclick="setWho('iza')">Iza</button>
+        </div>
+        <button class="sync-btn" onclick="openSync()" title="Sincronizar">🔄</button>
+      </div>
+    </div>
+    <div class="nav-tabs">
+      <div class="tab-item active" id="tab-hoje" onclick="goTab('hoje')">📊 Hoje</div>
+      <div class="tab-item" id="tab-historico" onclick="goTab('historico')">📋 Histórico</div>
+      <div class="tab-item" id="tab-mes" onclick="goTab('mes')">📅 Mês</div>
+      <div class="tab-item" id="tab-loja" onclick="goTab('loja')">🏪 Retiradas</div>
+    </div>
+  </div>
+
+  <!-- TODAY -->
+  <div class="screen active" id="screen-hoje">
+    <div class="today-hero">
+      <div class="today-date" id="today-date"></div>
+      <div class="today-total" id="today-total"><span>R$</span> 0,00</div>
+      <div class="today-split">
+        <div class="today-card">
+          <div class="today-card-name janio">Jânio</div>
+          <div class="today-card-val" id="today-janio">R$ 0,00</div>
+        </div>
+        <div class="today-card">
+          <div class="today-card-name iza">Iza</div>
+          <div class="today-card-val" id="today-iza">R$ 0,00</div>
+        </div>
+      </div>
+    </div>
+    <div id="loja-alert-wrap"></div>
+    <div class="sec-title">GASTOS POR CATEGORIA</div>
+    <div class="cat-summary" id="today-cats"></div>
+    <div class="sec-title">LANÇAMENTOS DE HOJE</div>
+    <div class="entries" id="today-entries"></div>
+    <div class="spacer"></div>
+  </div>
+
+  <!-- HISTÓRICO -->
+  <div class="screen" id="screen-historico">
+    <div class="sec-title">ÚLTIMOS 50 LANÇAMENTOS</div>
+    <div class="entries" id="hist-entries"></div>
+    <div class="spacer"></div>
+  </div>
+
+  <!-- MÊS -->
+  <div class="screen" id="screen-mes">
+    <div class="month-header">
+      <div class="month-title" id="mes-label"></div>
+      <div class="month-total" id="mes-total">R$ 0,00</div>
+    </div>
+    <div class="spacer" style="height:8px;"></div>
+    <div class="month-cats" id="mes-cats"></div>
+    <div class="spacer"></div>
+  </div>
+
+  <!-- RETIRADAS DA LOJA -->
+  <div class="screen" id="screen-loja">
+    <div class="loja-hero">
+      <div class="month-title">RETIRADAS DA LOJA — <span id="loja-mes-label"></span></div>
+      <div class="loja-mes-total" id="loja-mes-total">R$ 0,00</div>
+      <div class="loja-warn">⚠ Retiradas devem ser registradas e descontadas do caixa da loja</div>
+      <div class="loja-who-split">
+        <div class="loja-who-card">
+          <div class="today-card-name janio" style="margin-bottom:3px;">Jânio</div>
+          <div class="today-card-val" id="loja-janio">R$ 0,00</div>
+        </div>
+        <div class="loja-who-card">
+          <div class="today-card-name iza" style="margin-bottom:3px;">Iza</div>
+          <div class="today-card-val" id="loja-iza">R$ 0,00</div>
+        </div>
+      </div>
+    </div>
+    <div class="sec-title">HISTÓRICO DE RETIRADAS</div>
+    <div class="entries" id="loja-entries"></div>
+    <div class="spacer"></div>
+  </div>
+
+</div><!-- /app -->
+
+<!-- ══ FAB ══ -->
+<div class="fab" id="fab-wrap" style="display:none;">
+  <button class="fab-btn" onclick="openAdd()">＋</button>
+</div>
+
+<!-- ══ ADD MODAL ══ -->
+<div class="modal-ov" id="add-modal">
+  <div class="modal-sheet">
+    <div class="modal-drag"></div>
+    <div class="modal-title">Novo Lançamento</div>
+
+    <div class="who-select">
+      <button class="who-opt janio" id="modal-who-janio" onclick="setModalWho('janio')">👨 Jânio</button>
+      <button class="who-opt iza" id="modal-who-iza" onclick="setModalWho('iza')">👩 Iza</button>
+    </div>
+
+    <div class="cat-grid" id="cat-grid"></div>
+
+    <div class="amount-section">
+      <div class="amount-label">Valor (R$)</div>
+      <input class="amount-inp" id="amount-inp" type="number" inputmode="decimal" placeholder="0,00" step="0.01" min="0">
+      <input class="desc-inp" id="desc-inp" type="text" placeholder="Descrição (opcional)" maxlength="60">
+    </div>
+
+    <button class="save-btn" id="save-btn" onclick="saveEntry()">SALVAR LANÇAMENTO</button>
+  </div>
+</div>
+
+<!-- ══ SYNC MODAL ══ -->
+<div class="sync-modal-ov" id="sync-modal">
+  <div class="sync-modal" style="position:relative;">
+    <button class="sync-close" onclick="closeSync()">✕</button>
+    <div class="sync-modal-title">🔄 Sincronizar Dados</div>
+
+    <div class="sync-section">
+      <div class="sync-section-label">Compartilhar meus dados com o outro celular</div>
+      <div class="sync-code-box" id="sync-export-code">Gerando código...</div>
+      <button class="sync-action-btn wa" onclick="syncViaWA()" style="margin-top:8px;">
+        📲 Enviar pelo WhatsApp
+      </button>
+    </div>
+
+    <div class="sync-section">
+      <div class="sync-section-label">Receber dados do outro celular (cole o código)</div>
+      <textarea class="sync-inp" id="sync-import-inp" placeholder="Cole aqui o código recebido..."></textarea>
+      <button class="sync-action-btn primary" onclick="doImport()">IMPORTAR E MESCLAR</button>
+    </div>
+
+    <div style="font-size:.6rem;color:var(--muted);text-align:center;margin-top:4px;line-height:1.5;">
+      Os dados são salvos apenas neste celular.<br>Use o WhatsApp para mesclar com o outro.
+    </div>
+  </div>
+</div>
+
+<script>
+// ─────────────────────────────────────────────────────────────
+// CONFIG
+// ─────────────────────────────────────────────────────────────
+const PIN = '0909';
+const KEY = 'ss09_financas';
+const WA_J = '5589988098980';
+
+const CATS = [
+  {id:'mercado',  label:'Mercado',    icon:'🛒', color:'#22c55e'},
+  {id:'acougue',  label:'Açougue',    icon:'🥩', color:'#ef4444'},
+  {id:'frutaria', label:'Frutaria',   icon:'🍎', color:'#f97316'},
+  {id:'aluguel',  label:'Aluguel',    icon:'🏠', color:'#6366f1'},
+  {id:'lanche',   label:'Lanche',     icon:'🍔', color:'#eab308'},
+  {id:'farmacia', label:'Farmácia',   icon:'💊', color:'#06b6d4'},
+  {id:'combustivel', label:'Combustível', icon:'⛽', color:'#8b5cf6'},
+  {id:'pessoal',  label:'Pessoal',    icon:'👗', color:'#ec4899'},
+  {id:'escola',   label:'Escola',     icon:'📚', color:'#3b82f6'},
+  {id:'parcela',  label:'Parcela',    icon:'💳', color:'#f43f5e'},
+  {id:'outros',   label:'Outros',     icon:'📦', color:'#6b7280'},
+  {id:'loja',     label:'Retirada da Loja', icon:'🏪', color:'#C9A84C', isLoja:true},
+];
+
+// ─────────────────────────────────────────────────────────────
+// STORAGE
+// ─────────────────────────────────────────────────────────────
+function load(){ return JSON.parse(localStorage.getItem(KEY)||'[]'); }
+function save(d){ localStorage.setItem(KEY, JSON.stringify(d)); }
+
+// ─────────────────────────────────────────────────────────────
+// PIN
+// ─────────────────────────────────────────────────────────────
+let pinBuf = '';
+function pinKey(d){
+  if(d === ''){
+    pinBuf = pinBuf.slice(0,-1);
+  } else {
+    if(pinBuf.length >= 4) return;
+    pinBuf += d;
+    if(pinBuf.length === 4) setTimeout(checkPin, 120);
+  }
+  updateDots();
+}
+function pinClear(){ pinBuf=''; updateDots(); document.getElementById('pin-err').textContent=''; }
+function updateDots(){
+  for(let i=0;i<4;i++){
+    document.getElementById('pd'+i).classList.toggle('filled', i < pinBuf.length);
+  }
+}
+function checkPin(){
+  if(pinBuf === PIN){
+    document.getElementById('pin-screen').style.display='none';
+    document.getElementById('app').style.display='block';
+    document.getElementById('fab-wrap').style.display='block';
+    initApp();
+  } else {
+    document.getElementById('pin-err').textContent='PIN incorreto. Tente novamente.';
+    pinBuf=''; updateDots();
+    setTimeout(()=>{ document.getElementById('pin-err').textContent=''; },1500);
+  }
+}
+
+// ─────────────────────────────────────────────────────────────
+// WHO SELECTOR
+// ─────────────────────────────────────────────────────────────
+let curWho = localStorage.getItem('ss09_fin_who') || 'janio';
+function setWho(who){
+  curWho = who;
+  localStorage.setItem('ss09_fin_who', who);
+  document.getElementById('who-janio').className = 'who-btn janio' + (who==='janio'?' active':'');
+  document.getElementById('who-iza').className   = 'who-btn iza'   + (who==='iza'  ?' active':'');
+  setModalWho(who);
+}
+
+// ─────────────────────────────────────────────────────────────
+// TABS
+// ─────────────────────────────────────────────────────────────
+let curTab = 'hoje';
+function goTab(t){
+  curTab = t;
+  document.querySelectorAll('.tab-item').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));
+  document.getElementById('tab-'+t).classList.add('active');
+  document.getElementById('screen-'+t).classList.add('active');
+  renderTab(t);
+}
+function renderTab(t){
+  if(t==='hoje') renderHoje();
+  else if(t==='historico') renderHistorico();
+  else if(t==='mes') renderMes();
+  else if(t==='loja') renderLoja();
+}
+
+// ─────────────────────────────────────────────────────────────
+// HELPERS
+// ─────────────────────────────────────────────────────────────
+function fmt(n){ return 'R$ ' + n.toFixed(2).replace('.',','); }
+function todayStr(){
+  const d = new Date();
+  return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+}
+function monthStr(){
+  const d = new Date();
+  return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0');
+}
+function fmtDate(ts){
+  const d = new Date(ts);
+  return d.toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit'}) + ' ' +
+         d.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
+}
+function catInfo(id){ return CATS.find(c=>c.id===id) || {label:id,icon:'📦',color:'#6b7280'}; }
+
+function delEntry(id){
+  const d = load().filter(e=>e.id!==id);
+  save(d);
+  renderTab(curTab);
+}
+
+// ─────────────────────────────────────────────────────────────
+// RENDER: HOJE
+// ─────────────────────────────────────────────────────────────
+function renderHoje(){
+  const all = load();
+  const today = todayStr();
+  const entries = all.filter(e=>e.date===today);
+
+  // Date label
+  document.getElementById('today-date').textContent =
+    new Date().toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'long'});
+
+  // Totals
+  const total = entries.reduce((s,e)=>s+e.amount,0);
+  const jTotal = entries.filter(e=>e.who==='janio').reduce((s,e)=>s+e.amount,0);
+  const iTotal = entries.filter(e=>e.who==='iza').reduce((s,e)=>s+e.amount,0);
+  document.getElementById('today-total').innerHTML = `<span>Total de hoje · R$</span> ${total.toFixed(2).replace('.',',')}`;
+  document.getElementById('today-janio').textContent = fmt(jTotal);
+  document.getElementById('today-iza').textContent = fmt(iTotal);
+
+  // Loja alert
+  const lojaMonth = all.filter(e=>e.date.startsWith(monthStr())&&e.cat==='loja');
+  const lojaTotal = lojaMonth.reduce((s,e)=>s+e.amount,0);
+  const alertWrap = document.getElementById('loja-alert-wrap');
+  if(lojaTotal>0){
+    alertWrap.innerHTML=`<div class="loja-alert">
+      <div class="loja-alert-title">🏪 Retiradas da loja este mês</div>
+      <div class="loja-alert-val">${fmt(lojaTotal)}</div>
+      <div class="loja-alert-sub">Jânio: ${fmt(lojaMonth.filter(e=>e.who==='janio').reduce((s,e)=>s+e.amount,0))} · Iza: ${fmt(lojaMonth.filter(e=>e.who==='iza').reduce((s,e)=>s+e.amount,0))}</div>
+    </div>`;
+  } else { alertWrap.innerHTML=''; }
+
+  // Category summary
+  const byCat={};
+  entries.forEach(e=>{ byCat[e.cat]=(byCat[e.cat]||0)+e.amount; });
+  const maxCat = Math.max(...Object.values(byCat),1);
+  const catEl = document.getElementById('today-cats');
+  if(Object.keys(byCat).length===0){
+    catEl.innerHTML='<div class="empty"><div class="empty-icon">📋</div><div class="empty-txt">Nenhum gasto hoje</div></div>';
+  } else {
+    catEl.innerHTML = Object.entries(byCat)
+      .sort((a,b)=>b[1]-a[1])
+      .map(([id,val])=>{
+        const c=catInfo(id);
+        const pct=Math.round(val/maxCat*100);
+        return `<div class="cat-row">
+          <div class="cat-row-icon">${c.icon}</div>
+          <div style="flex:1;min-width:0;">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <span class="cat-row-label">${c.label}</span>
+              <span class="cat-row-val">${fmt(val)}</span>
+            </div>
+            <div class="cat-bar-wrap"><div class="cat-bar" style="width:${pct}%;background:${c.color};"></div></div>
+          </div>
+        </div>`;
+      }).join('');
+  }
+
+  // Entries list
+  const entEl = document.getElementById('today-entries');
+  if(entries.length===0){
+    entEl.innerHTML='<div class="empty"><div class="empty-icon">✨</div><div class="empty-txt">Nenhum lançamento hoje.<br>Toque no + para registrar.</div></div>';
+  } else {
+    entEl.innerHTML = [...entries].reverse().map(e=>entryHTML(e)).join('');
+  }
+}
+
+// ─────────────────────────────────────────────────────────────
+// RENDER: HISTÓRICO
+// ─────────────────────────────────────────────────────────────
+function renderHistorico(){
+  const all = load().slice(-50).reverse();
+  const el = document.getElementById('hist-entries');
+  if(all.length===0){
+    el.innerHTML='<div class="empty"><div class="empty-icon">📋</div><div class="empty-txt">Nenhum lançamento ainda</div></div>';
+  } else {
+    el.innerHTML = all.map(e=>entryHTML(e,true)).join('');
+  }
+}
+
+// ─────────────────────────────────────────────────────────────
+// RENDER: MÊS
+// ─────────────────────────────────────────────────────────────
+function renderMes(){
+  const m = monthStr();
+  const all = load().filter(e=>e.date.startsWith(m));
+  const total = all.reduce((s,e)=>s+e.amount,0);
+
+  document.getElementById('mes-label').textContent =
+    new Date().toLocaleDateString('pt-BR',{month:'long',year:'numeric'}).toUpperCase();
+  document.getElementById('mes-total').textContent = fmt(total);
+
+  const byCat={};
+  all.forEach(e=>{
+    if(!byCat[e.cat]) byCat[e.cat]={total:0,janio:0,iza:0};
+    byCat[e.cat].total += e.amount;
+    byCat[e.cat][e.who] += e.amount;
+  });
+  const maxCat = Math.max(...Object.values(byCat).map(v=>v.total),1);
+
+  const el = document.getElementById('mes-cats');
+  if(Object.keys(byCat).length===0){
+    el.innerHTML='<div class="empty"><div class="empty-icon">📅</div><div class="empty-txt">Nenhum gasto este mês</div></div>';
+  } else {
+    el.innerHTML = Object.entries(byCat)
+      .sort((a,b)=>b[1].total-a[1].total)
+      .map(([id,v])=>{
+        const c=catInfo(id);
+        const pct=Math.round(v.total/maxCat*100);
+        return `<div class="month-cat-row">
+          <div class="month-cat-top">
+            <span class="month-cat-icon">${c.icon}</span>
+            <span class="month-cat-label">${c.label}</span>
+            <span class="month-cat-val" style="color:${c.color}">${fmt(v.total)}</span>
+          </div>
+          <div class="month-cat-bar-wrap"><div class="month-cat-bar" style="width:${pct}%;background:${c.color};"></div></div>
+          <div class="month-who-split">
+            ${v.janio>0?`<span class="month-who-chip janio">Jânio ${fmt(v.janio)}</span>`:''}
+            ${v.iza>0?`<span class="month-who-chip iza">Iza ${fmt(v.iza)}</span>`:''}
+          </div>
+        </div>`;
+      }).join('');
+  }
+}
+
+// ─────────────────────────────────────────────────────────────
+// RENDER: LOJA
+// ─────────────────────────────────────────────────────────────
+function renderLoja(){
+  const m = monthStr();
+  const all = load().filter(e=>e.cat==='loja'&&e.date.startsWith(m));
+  const total = all.reduce((s,e)=>s+e.amount,0);
+  const jTotal = all.filter(e=>e.who==='janio').reduce((s,e)=>s+e.amount,0);
+  const iTotal = all.filter(e=>e.who==='iza').reduce((s,e)=>s+e.amount,0);
+
+  document.getElementById('loja-mes-label').textContent =
+    new Date().toLocaleDateString('pt-BR',{month:'long',year:'numeric'}).toUpperCase();
+  document.getElementById('loja-mes-total').textContent = fmt(total);
+  document.getElementById('loja-janio').textContent = fmt(jTotal);
+  document.getElementById('loja-iza').textContent = fmt(iTotal);
+
+  const el = document.getElementById('loja-entries');
+  if(all.length===0){
+    el.innerHTML='<div class="empty"><div class="empty-icon">🏪</div><div class="empty-txt">Nenhuma retirada este mês</div></div>';
+  } else {
+    el.innerHTML = [...all].reverse().map(e=>entryHTML(e,true)).join('');
+  }
+}
+
+// ─────────────────────────────────────────────────────────────
+// ENTRY HTML
+// ─────────────────────────────────────────────────────────────
+function entryHTML(e, showDate=false){
+  const c = catInfo(e.cat);
+  const dateTxt = showDate ? `${fmtDate(e.id)} · ` : '';
+  return `<div class="entry-item">
+    <div class="entry-icon">${c.icon}</div>
+    <div class="entry-body">
+      <div class="entry-cat">${c.label}${e.desc?` · <span style="font-weight:500;color:var(--muted)">${e.desc}</span>`:''}</div>
+      <div class="entry-meta">
+        <span class="entry-who-dot ${e.who}"></span>
+        ${dateTxt}${e.who==='janio'?'Jânio':'Iza'}
+      </div>
+    </div>
+    <div class="entry-right">
+      <div class="entry-amount ${e.cat==='loja'?'loja':''}">${fmt(e.amount)}</div>
+    </div>
+    <button class="entry-del" onclick="delEntry(${e.id})">🗑</button>
+  </div>`;
+}
+
+// ─────────────────────────────────────────────────────────────
+// ADD MODAL
+// ─────────────────────────────────────────────────────────────
+let selCat = null;
+let modalWho = curWho;
+
+function openAdd(){
+  selCat = null;
+  document.getElementById('amount-inp').value='';
+  document.getElementById('desc-inp').value='';
+  setModalWho(curWho);
+  document.getElementById('add-modal').classList.add('open');
+  setTimeout(()=>document.getElementById('amount-inp').focus(),300);
+}
+function closeAdd(){
+  document.getElementById('add-modal').classList.remove('open');
+}
+document.getElementById('add-modal').addEventListener('click',function(e){
+  if(e.target===this) closeAdd();
+});
+
+function setModalWho(who){
+  modalWho=who;
+  document.getElementById('modal-who-janio').className='who-opt janio'+(who==='janio'?' sel':'');
+  document.getElementById('modal-who-iza').className='who-opt iza'+(who==='iza'?' sel':'');
+}
+
+// Build category grid
+function buildCatGrid(){
+  const el = document.getElementById('cat-grid');
+  el.innerHTML = CATS.map(c=>`
+    <button class="cat-opt${c.isLoja?' loja-opt':''}" id="copt-${c.id}" onclick="selCatFn('${c.id}')">
+      <span class="cat-opt-icon">${c.icon}</span>
+      <span class="cat-opt-label">${c.label}</span>
+    </button>`).join('');
+}
+
+function selCatFn(id){
+  selCat=id;
+  document.querySelectorAll('.cat-opt').forEach(b=>b.classList.remove('sel'));
+  document.getElementById('copt-'+id).classList.add('sel');
+}
+
+function saveEntry(){
+  if(!selCat){ alert('Selecione uma categoria'); return; }
+  const amt = parseFloat(document.getElementById('amount-inp').value);
+  if(!amt || amt<=0){ alert('Informe um valor válido'); return; }
+  const desc = document.getElementById('desc-inp').value.trim();
+  const entry = {
+    id: Date.now(),
+    who: modalWho,
+    cat: selCat,
+    amount: amt,
+    desc,
+    date: todayStr(),
+  };
+  const d = load();
+  d.push(entry);
+  save(d);
+  closeAdd();
+  renderTab(curTab);
+}
+
+// ─────────────────────────────────────────────────────────────
+// SYNC
+// ─────────────────────────────────────────────────────────────
+function openSync(){
+  const d = load();
+  const code = btoa(unescape(encodeURIComponent(JSON.stringify(d))));
+  document.getElementById('sync-export-code').textContent = code;
+  document.getElementById('sync-import-inp').value='';
+  document.getElementById('sync-modal').classList.add('open');
+}
+function closeSync(){
+  document.getElementById('sync-modal').classList.remove('open');
+}
+function syncViaWA(){
+  const code = document.getElementById('sync-export-code').textContent;
+  const msg = `*Smart Store 09 · Financeiro*\nCódigo de sincronização (cole no app do outro celular):\n\n${code}`;
+  window.open(`https://wa.me/${WA_J}?text=${encodeURIComponent(msg)}`,'_blank');
+}
+function doImport(){
+  const raw = document.getElementById('sync-import-inp').value.trim();
+  if(!raw){ alert('Cole o código primeiro'); return; }
+  try{
+    const incoming = JSON.parse(decodeURIComponent(escape(atob(raw))));
+    if(!Array.isArray(incoming)) throw new Error('inválido');
+    const existing = load();
+    const existingIds = new Set(existing.map(e=>e.id));
+    const merged = [...existing, ...incoming.filter(e=>!existingIds.has(e.id))];
+    merged.sort((a,b)=>a.id-b.id);
+    save(merged);
+    closeSync();
+    renderTab(curTab);
+    alert(`✅ ${incoming.filter(e=>!existingIds.has(e.id)).length} novos lançamentos importados!`);
+  }catch(e){
+    alert('Código inválido. Verifique e tente novamente.');
+  }
+}
+document.getElementById('sync-modal').addEventListener('click',function(e){
+  if(e.target===this) closeSync();
+});
+
+// ─────────────────────────────────────────────────────────────
+// INIT
+// ─────────────────────────────────────────────────────────────
+function initApp(){
+  buildCatGrid();
+  setWho(curWho);
+  renderHoje();
+}
+
+// Check URL param for auto-import
+window.addEventListener('DOMContentLoaded',()=>{
+  const params = new URLSearchParams(location.search);
+  const imp = params.get('import');
+  // Auto-unlock if PIN already used this session
+  const unlocked = sessionStorage.getItem('ss09_fin_unlocked');
+  if(unlocked){
+    document.getElementById('pin-screen').style.display='none';
+    document.getElementById('app').style.display='block';
+    document.getElementById('fab-wrap').style.display='block';
+    initApp();
+    if(imp){
+      document.getElementById('sync-import-inp').value=imp;
+      openSync();
+    }
+  }
+});
+
+// Save session unlock
+const origCheck = checkPin;
+// Override to save session
+window.checkPin = function(){
+  if(pinBuf === PIN){
+    sessionStorage.setItem('ss09_fin_unlocked','1');
+    document.getElementById('pin-screen').style.display='none';
+    document.getElementById('app').style.display='block';
+    document.getElementById('fab-wrap').style.display='block';
+    initApp();
+  } else {
+    document.getElementById('pin-err').textContent='PIN incorreto. Tente novamente.';
+    pinBuf=''; updateDots();
+    setTimeout(()=>{ document.getElementById('pin-err').textContent=''; },1500);
+  }
+};
+</script>
+</body>
+</html>
