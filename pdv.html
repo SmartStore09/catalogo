@@ -320,6 +320,7 @@
         <div class="fin-tab"     id="fintab-hist"    onclick="finGoTab('hist')">📋 Histórico</div>
         <div class="fin-tab"     id="fintab-mes"     onclick="finGoTab('mes')">📅 Mês</div>
         <div class="fin-tab"     id="fintab-loja"    onclick="finGoTab('loja')">🏪 Retiradas</div>
+        <div class="fin-tab"     id="fintab-sync"    onclick="finGoTab('sync')">🔄 Sync</div>
       </div>
 
       <!-- LANÇAR -->
@@ -360,6 +361,19 @@
           <div class="fin-dash-card"><small>RETIRADAS DA LOJA</small><b id="fm-loja" style="color:#f59e0b">R$ 0,00</b></div>
         </div>
         <div id="fm-cats"></div>
+      </div>
+
+      <!-- SYNC -->
+      <div class="fin-scr" id="finscr-sync">
+        <div style="font-size:12px;color:var(--mut);margin-bottom:14px;line-height:1.6">
+          Copie o código no celular que tem os dados → envie pelo WhatsApp → cole no outro dispositivo.
+        </div>
+        <div style="display:flex;gap:8px;margin-bottom:16px">
+          <button class="mbtn verde" onclick="finExportar()" style="flex:1">📤 Gerar Código</button>
+          <button class="mbtn azul" onclick="finImportar()" style="flex:1">📥 Importar Código</button>
+        </div>
+        <textarea id="fin-sync-code" rows="5" placeholder="Cole aqui o código recebido pelo WhatsApp..." style="width:100%;background:var(--panel2);border:1px solid var(--border);border-radius:9px;color:var(--txt);font-size:12px;padding:10px;font-family:monospace;resize:vertical;box-sizing:border-box"></textarea>
+        <div id="fin-sync-msg" style="margin-top:8px;font-size:12.5px;color:var(--acc)"></div>
       </div>
 
       <!-- RETIRADAS -->
@@ -939,6 +953,42 @@ document.addEventListener('keydown',e=>{
   if(e.key==='Escape')document.querySelectorAll('.modal.aberto').forEach(m=>m.classList.remove('aberto'));
 });
 document.getElementById('busca').addEventListener('input',renderLista);
+function finExportar(){
+  const dados = localStorage.getItem(FIN_KEY) || '[]';
+  const code = btoa(unescape(encodeURIComponent(dados)));
+  const ta = document.getElementById('fin-sync-code');
+  ta.value = code;
+  navigator.clipboard.writeText(code).then(()=>{
+    document.getElementById('fin-sync-msg').textContent = '✅ Código copiado! Cole no WhatsApp para a Iza ou no computador.';
+  }).catch(()=>{
+    document.getElementById('fin-sync-msg').textContent = '✅ Código gerado! Selecione tudo e copie manualmente.';
+  });
+  ta.select();
+}
+
+function finImportar(){
+  const code = document.getElementById('fin-sync-code').value.trim();
+  const msg = document.getElementById('fin-sync-msg');
+  if(!code){msg.style.color='#f87171';msg.textContent='⚠ Cole o código no campo acima primeiro.';return;}
+  try{
+    const json = decodeURIComponent(escape(atob(code)));
+    const dados = JSON.parse(json);
+    if(!Array.isArray(dados)) throw new Error('inválido');
+    const atual = finLoad();
+    // Merge: mantém locais + adiciona os que não existem (por id)
+    const ids = new Set(atual.map(e=>e.id));
+    const novos = dados.filter(e=>!ids.has(e.id));
+    const merged = [...atual, ...novos].sort((a,b)=>b.id-a.id);
+    finSave(merged);
+    msg.style.color='#4ade80';
+    msg.textContent = `✅ Importado! ${novos.length} novo(s) lançamento(s) adicionado(s).`;
+    document.getElementById('fin-sync-code').value='';
+  }catch(e){
+    msg.style.color='#f87171';
+    msg.textContent='❌ Código inválido. Certifique-se de copiar tudo.';
+  }
+}
+
 document.getElementById('busca').addEventListener('keydown',e=>{
   if(e.key==='Enter'){const f=filtrados();if(f.length===1)addCarrinho(f[0].c);}
 });
@@ -1020,6 +1070,7 @@ function finGoTab(t){
   document.querySelectorAll('.fin-scr').forEach(x=>x.classList.remove('on'));
   document.getElementById('fintab-'+t).classList.add('sel');
   document.getElementById('finscr-'+t).classList.add('on');
+  if(t==='sync'){ document.getElementById('fin-sync-msg').textContent=''; }
   if(t==='hoje') finRenderHoje();
   else if(t==='hist') finRenderHist();
   else if(t==='mes') finRenderMes();
