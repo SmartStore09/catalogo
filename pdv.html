@@ -236,9 +236,16 @@
     <div id="cart"><div id="vazio">Carrinho vazio.<br>Clique num produto para adicionar.</div></div>
     <div id="pagto">
       <div id="formas">
-        <button class="fp pix sel" data-f="PIX" onclick="setForma('PIX')">⚡ PIX −10%</button>
+        <button class="fp pix sel" data-f="PIX" onclick="setForma('PIX')">⚡ PIX</button>
         <button class="fp" data-f="DINHEIRO" onclick="setForma('DINHEIRO')">💵 Dinheiro</button>
         <button class="fp" data-f="CARTAO" onclick="setForma('CARTAO')">💳 Cartão</button>
+      </div>
+      <div class="extra" id="ex-pix" style="display:flex;align-items:center;gap:6px;margin-bottom:4px">
+        <label style="white-space:nowrap;font-size:12px;color:var(--mut)">Desc. PIX %</label>
+        <input id="pix-pct" type="number" min="0" max="100" step="1" value="" placeholder="ex: 10"
+          style="width:80px;padding:6px 8px;border-radius:7px;border:1px solid var(--border);background:var(--panel2);color:var(--txt);font-size:13px;outline:none"
+          oninput="render()">
+        <span style="font-size:12px;color:var(--mut)">% sobre o total</span>
       </div>
       <div class="extra" id="ex-din" style="display:none">
         <label>Recebido R$</label><input id="recebido" type="number" step="0.01" min="0" oninput="render()">
@@ -253,7 +260,7 @@
         <label>Desconto extra R$</label><input id="descx" type="number" step="0.01" min="0" value="" placeholder="0,00" oninput="render()">
       </div>
       <div class="lin"><span>Subtotal (preço normal)</span><span id="sub">R$ 0,00</span></div>
-      <div class="lin"><span>Desconto PIX</span><span class="pixoff" id="dpix">—</span></div>
+      <div class="lin" id="lin-dpix" style="display:none"><span>Desconto PIX</span><span class="pixoff" id="dpix">—</span></div>
       <div class="lin tt"><span>TOTAL</span><span id="total">R$ 0,00</span></div>
       <div class="lin lucro" id="llucro" style="display:none"><span>Lucro estimado</span><span id="lucro">—</span></div>
       <button id="fim" onclick="finalizar()" disabled>FINALIZAR VENDA (F2)</button>
@@ -755,8 +762,13 @@ function mudaQ(i,d){
 }
 function tira(i){carrinho.splice(i,1);render();}
 
-const unitario=(it)=> it.manual!=null ? (forma==='PIX'? r2(it.manual*0.9):it.manual)
-  : forma==='PIX' ? (it.prod.pix!=null?it.prod.pix:r2((it.prod.p||0)*0.9)) : (it.prod.p||0);
+const pixFator=()=>{ const v=parseFloat(document.getElementById('pix-pct').value); return isNaN(v)?1:Math.max(0,Math.min(100,v))/100; };
+const unitario=(it)=>{
+  const pf=1-pixFator();
+  if(it.manual!=null) return forma==='PIX'?r2(it.manual*pf):it.manual;
+  if(forma==='PIX') return it.prod.pix!=null?it.prod.pix:r2((it.prod.p||0)*pf);
+  return it.prod.p||0;
+};
 const unitNormal=(it)=> it.manual!=null?it.manual:(it.prod.p||0);
 
 function totais(){
@@ -775,6 +787,7 @@ function setForma(f){
   document.querySelectorAll('.fp').forEach(b=>b.classList.toggle('sel',b.dataset.f===f));
   document.getElementById('ex-din').style.display = f==='DINHEIRO'?'flex':'none';
   document.getElementById('ex-car').style.display = f==='CARTAO'?'flex':'none';
+  const ep=document.getElementById('ex-pix'); if(ep) ep.style.display=f==='PIX'?'flex':'none';
   render();
 }
 function toggleLucro(){ mostrarLucro=!mostrarLucro; render(); }
@@ -791,7 +804,10 @@ function render(){
     </div>`).join('');
   const t=totais();
   document.getElementById('sub').textContent=fmt(t.sub);
-  document.getElementById('dpix').textContent = (forma==='PIX'&&t.descPix>0)?('− '+fmt(t.descPix)):'—';
+  const dpixEl=document.getElementById('dpix');
+  const ldpix=document.getElementById('lin-dpix');
+  if(forma==='PIX'&&t.descPix>0){dpixEl.textContent='− '+fmt(t.descPix);if(ldpix)ldpix.style.display='flex';}
+  else{dpixEl.textContent='—';if(ldpix)ldpix.style.display='none';}
   document.getElementById('total').textContent=fmt(t.total);
   const ll=document.getElementById('llucro');
   ll.style.display=mostrarLucro?'flex':'none';
