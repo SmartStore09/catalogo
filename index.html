@@ -91,6 +91,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Montserrat',sans-serif;m
 .bedu{background:rgba(139,92,246,.13);color:#a78bfa;border:1px solid rgba(139,92,246,.3);}
 .bgift{background:rgba(239,68,68,.13);color:#fca5a5;border:1px solid rgba(239,68,68,.3);}
 .bpecas{background:rgba(14,165,233,.13);color:#38bdf8;border:1px solid rgba(14,165,233,.3);}
+.benc{background:rgba(139,92,246,.18);color:#a78bfa;border:1px solid rgba(139,92,246,.4);}
 .bgreen{background:rgba(34,197,94,.2);color:#4ade80;border:1px solid rgba(34,197,94,.4);}
 .card-code{font-size:.58rem;color:var(--muted);font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:2px;}
 .card-name{font-size:.86rem;font-weight:700;color:#fff;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
@@ -100,6 +101,24 @@ body{background:var(--bg);color:var(--txt);font-family:'Montserrat',sans-serif;m
 .card-price.consulta{font-size:.75rem;color:var(--muted);font-weight:600;}
 .stock-ok{color:var(--green);font-size:.63rem;font-weight:600;}
 .stock-last{color:var(--red);font-size:.63rem;font-weight:600;}
+/* ── ENCOMENDA ── */
+.stock-enc{color:var(--purple);font-size:.63rem;font-weight:700;}
+.enc-days{display:inline-block;background:rgba(139,92,246,.12);border:1px solid rgba(139,92,246,.3);color:var(--purple);border-radius:20px;padding:2px 8px;font-size:.6rem;font-weight:700;margin-left:4px;}
+.modal-stock.enc{background:rgba(139,92,246,.15);color:#a78bfa;border:1px solid rgba(139,92,246,.3);}
+/* CEP section */
+.modal-cep-sec{padding:0 16px 14px;border-top:1px solid #1a1a1a;margin-top:4px;}
+.cep-label{font-size:.62rem;font-weight:700;letter-spacing:.5px;color:var(--muted);text-transform:uppercase;margin-bottom:8px;margin-top:10px;}
+.cep-row{display:flex;gap:8px;}
+.cep-inp{flex:1;background:#111;border:1px solid #2a2a2a;border-radius:10px;color:#fff;font-family:inherit;font-size:.85rem;padding:10px 12px;outline:none;letter-spacing:1px;}
+.cep-inp:focus{border-color:rgba(139,92,246,.5);}
+.cep-go-btn{background:var(--purple);color:#fff;border:none;border-radius:10px;padding:10px 14px;font-family:inherit;font-size:.78rem;font-weight:700;cursor:pointer;white-space:nowrap;}
+.cep-go-btn:active{opacity:.85;}
+.cep-result{margin-top:8px;font-size:.72rem;color:#ccc;min-height:18px;line-height:1.5;}
+.cep-result.error{color:var(--red);}
+.cep-result.ok{color:#a78bfa;}
+.cep-line{display:flex;justify-content:space-between;align-items:center;background:#111;border:1px solid #1e1e1e;border-radius:8px;padding:8px 12px;margin-top:6px;}
+.cep-city{font-size:.74rem;font-weight:600;color:#eee;}
+.cep-val{font-size:.8rem;font-weight:800;color:var(--purple);}
 .card-footer{display:flex;gap:8px;padding:10px 14px 14px;}
 .wa-btn{flex:1;display:flex;align-items:center;justify-content:center;gap:5px;background:rgba(37,211,102,.1);color:#4ade80;border:1px solid rgba(37,211,102,.35);border-radius:10px;padding:10px 6px;font-family:'Montserrat',sans-serif;font-size:.7rem;font-weight:700;cursor:pointer;text-decoration:none;transition:background .15s,border-color .15s;letter-spacing:.3px;}
 .wa-btn:active{background:rgba(37,211,102,.22);border-color:rgba(37,211,102,.6);}
@@ -420,6 +439,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Montserrat',sans-serif;m
       <button class="cat-btn" onclick="goTab('pecas')"><span class="cat-btn-icon">🔩</span><span class="cat-btn-label">Peças</span></button>
       <button class="cat-btn" onclick="goTab('componentes')"><span class="cat-btn-icon">⚙️</span><span class="cat-btn-label">Componentes</span></button>
       <button class="cat-btn" onclick="goTab('magalu')" style="border-color:rgba(0,134,255,.3);"><span class="cat-btn-icon">🛒</span><span class="cat-btn-label" style="color:#60a5fa;">Vitrine Magalu</span></button>
+      <button class="cat-btn" onclick="goTab('encomenda')" style="border-color:rgba(139,92,246,.3);"><span class="cat-btn-icon">📦</span><span class="cat-btn-label" style="color:#a78bfa;">Encomenda</span></button>
     </div>
   </div>
 
@@ -547,6 +567,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Montserrat',sans-serif;m
     <div class="nav-tab"        id="tab-pecas"      onclick="goTab('pecas')">🔩 Peças</div>
     <div class="nav-tab"        id="tab-componentes" onclick="goTab('componentes')">⚙️ Componentes</div>
     <div class="nav-tab"        id="tab-magalu"      onclick="goTab('magalu')">🛒 Vitrine Magalu</div>
+    <div class="nav-tab"        id="tab-encomenda"   onclick="goTab('encomenda')">📦 Encomenda</div>
   </div>
 
   <!-- SEARCH -->
@@ -746,6 +767,15 @@ body{background:var(--bg);color:var(--txt);font-family:'Montserrat',sans-serif;m
     </div>
   </div>
 
+  <div id="cat-encomenda" class="cat-sec">
+    <div style="padding:10px 16px 4px;">
+      <div style="background:rgba(139,92,246,.08);border:1px solid rgba(139,92,246,.2);border-radius:12px;padding:12px 14px;margin-bottom:4px;">
+        <div style="font-size:.62rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#a78bfa;margin-bottom:4px;">📦 Encomenda sem estoque</div>
+        <div style="font-size:.72rem;color:#aaa;line-height:1.5;">Produto disponível sob encomenda. Receba em <strong style="color:#c4b5fd;">~10 dias</strong>. Confirme o frete pelo CEP abaixo. Pagamento via WhatsApp.</div>
+      </div>
+    </div>
+    <div class="products-wrap"><div class="prod-cards" id="cards-encomenda"></div></div>
+  </div>
   <div class="spacer"></div>
 </div>
 
@@ -970,6 +1000,56 @@ const REV_NAME = REV_SLUG
   : '';
 const revRef = REV_NAME ? `\n\n🤝 Indicado por: ${REV_NAME}` : '';
 
+const FRETE_TABLE = {
+  MA:{min:10,max:18,d:4},
+  PI:{min:13,max:21,d:5},CE:{min:13,max:21,d:5},
+  RN:{min:15,max:24,d:6},PB:{min:15,max:24,d:6},
+  PE:{min:15,max:25,d:6},AL:{min:16,max:26,d:6},SE:{min:16,max:26,d:6},
+  BA:{min:18,max:30,d:7},PA:{min:17,max:27,d:6},TO:{min:18,max:28,d:7},
+  AM:{min:22,max:36,d:9},AP:{min:22,max:36,d:9},
+  AC:{min:25,max:40,d:11},RO:{min:25,max:40,d:11},RR:{min:28,max:44,d:12},
+  GO:{min:20,max:32,d:7},DF:{min:20,max:32,d:7},
+  MT:{min:22,max:35,d:9},MS:{min:22,max:35,d:9},
+  MG:{min:20,max:34,d:8},ES:{min:22,max:36,d:9},
+  RJ:{min:22,max:36,d:9},SP:{min:22,max:36,d:9},
+  PR:{min:25,max:40,d:10},SC:{min:25,max:40,d:10},RS:{min:28,max:44,d:12},
+};
+let _currentEnc = null;
+let _freteAddr  = null;
+
+function formatCEP(v){return v.replace(/\D/g,'').replace(/(\d{5})(\d{1,3})/,'$1-$2');}
+
+async function calcularFrete(){
+  const raw=document.getElementById('m-cep-inp').value.replace(/\D/g,'');
+  const res=document.getElementById('m-cep-res');
+  if(raw.length<8){res.className='cep-result error';res.textContent='CEP inválido — informe 8 dígitos.';return;}
+  res.className='cep-result';res.textContent='Consultando...';
+  try{
+    const r=await fetch(`https://viacep.com.br/ws/${raw}/json/`);
+    const d=await r.json();
+    if(d.erro){res.className='cep-result error';res.textContent='CEP não encontrado.';return;}
+    _freteAddr=d;
+    const uf=d.uf.toUpperCase();
+    const ft=FRETE_TABLE[uf];
+    const prod=_currentEnc;
+    const dias=(prod&&prod.deliveryDays)||10;
+    if(ft){
+      res.innerHTML=`<div class="cep-line"><span class="cep-city">${d.localidade} – ${uf}</span><span class="cep-val">R$ ${ft.min},00–${ft.max},00</span></div><div style="font-size:.62rem;color:#888;margin-top:4px;">⏱ Entrega em ~${dias} dias · Frete confirmado via WhatsApp</div>`;
+      res.className='cep-result ok';
+    } else {
+      res.className='cep-result error';res.textContent=`${d.localidade}–${uf}: região não coberta. Consulte via WhatsApp.`;
+    }
+  }catch(e){res.className='cep-result error';res.textContent='Erro ao consultar. Tente novamente.';}
+}
+
+function aplicarFrete(p){
+  _currentEnc=p;
+  const sec=document.getElementById('modal-cep-sec');
+  if(sec) sec.style.display='block';
+  const inp=document.getElementById('m-cep-inp');
+  if(inp){inp.value='';document.getElementById('m-cep-res').textContent='';}
+}
+
 
 // ── PRODUCTS ──
 const P = [
@@ -1144,7 +1224,16 @@ const P = [
   {id:220,cat:'pecas',marca:'Samsung',code:'PC-SA-A26-5G',name:'Frontal Samsung A26 5G',specs:'AMOLED + Touch · OEM',price:'120,00',from:0,badge:'SAMSUNG',bc:'bpecas',stock:'ok',icon:'🔩'},
   {id:221,cat:'pecas',marca:'Samsung',code:'PC-SA-A50',name:'Frontal Samsung A30/A30S/A50/A50S',specs:'Super AMOLED + Touch · OEM',price:'120,00',from:0,badge:'SAMSUNG',bc:'bpecas',stock:'ok',icon:'🔩'},
   {id:230,cat:'pecas',marca:'Apple',code:'PC-AP-IPXR',name:'Frontal iPhone XR',specs:'Liquid Retina LCD + Touch · 6.1" · WEFIX',price:'120,00',from:0,badge:'APPLE',bc:'by',stock:'ok',icon:'🍎'},
-  {id:231,cat:'pecas',marca:'Apple',code:'PC-AP-IP11P',name:'Frontal iPhone 11 Pro',specs:'Super Retina XDR OLED + Touch · 5.8"',price:'205,40',from:1,badge:'APPLE',bc:'by',stock:'ok',icon:'🍎'},
+  {id:231,cat:'pecas',marca:'Apple',code:'PC-AP-IP11P',name:'Frontal iPhone 11 Pro',specs:'Super Retina XDR OLED + Touch · 5.8"',price:'205,40',from:1,badge:'APPLE',bc:'by',stock:'ok',icon:'🍎',
+  // -- ENCOMENDA --
+  {id:300,cat:'encomenda',code:'ENC-TV55',name:'Smart TV Samsung 55 4K Crystal UHD',specs:'55 4K UHD Crystal Display Tizen OS 3 HDMI Wi-Fi Bluetooth',price:'2.499,00',from:0,badge:'ENCOMENDA',bc:'benc',stock:'enc',deliveryDays:10,icon:'📺'},
+  {id:301,cat:'encomenda',code:'ENC-TABA9',name:'Samsung Galaxy Tab A9+ 5G',specs:'11 Snapdragon 695 8GB RAM 128GB 5G',price:'1.899,00',from:0,badge:'ENCOMENDA',bc:'benc',stock:'enc',deliveryDays:10,icon:'📱'},
+  {id:302,cat:'encomenda',code:'ENC-NOTE-POS',name:'Notebook Positivo Motion C4120H',specs:'14 Intel Core i3 4GB RAM 120GB SSD Linux',price:'1.499,00',from:0,badge:'ENCOMENDA',bc:'benc',stock:'enc',deliveryDays:12,icon:'💻'},
+  {id:303,cat:'encomenda',code:'ENC-IP16PM',name:'iPhone 16 Pro Max 256GB',specs:'6.9 Chip A18 Pro Camera 48MP Dynamic Island USB-C',price:'9.299,00',from:0,badge:'ENCOMENDA',bc:'benc',stock:'enc',deliveryDays:10,icon:'📱'},
+  {id:304,cat:'encomenda',code:'ENC-GS25U',name:'Samsung Galaxy S25 Ultra 512GB',specs:'6.9 Snapdragon 8 Elite 12GB RAM Camera 200MP S Pen',price:'8.499,00',from:0,badge:'ENCOMENDA',bc:'benc',stock:'enc',deliveryDays:10,icon:'📱'},
+  {id:305,cat:'encomenda',code:'ENC-AIRPODS4',name:'AirPods 4 com Cancelamento de Ruido',specs:'ANC Chip H2 USB-C 30h bateria Resistente agua',price:'1.799,00',from:0,badge:'ENCOMENDA',bc:'benc',stock:'enc',deliveryDays:10,icon:'🎧'},
+  {id:306,cat:'encomenda',code:'ENC-GW7',name:'Samsung Galaxy Watch 7 44mm',specs:'44mm BioActive Sensor ECG GPS 5ATM Wear OS',price:'1.499,00',from:0,badge:'ENCOMENDA',bc:'benc',stock:'enc',deliveryDays:10,icon:'⌚'},
+  {id:307,cat:'encomenda',code:'ENC-PS5S',name:'PlayStation 5 Slim Edicao Digital',specs:'Digital Edition 1TB SSD 8K/4K Ray Tracing DualSense',price:'3.599,00',from:0,badge:'ENCOMENDA',bc:'benc',stock:'enc',deliveryDays:12,icon:'🎮'}
 ];
 
 // ── RENDER ──
@@ -1152,7 +1241,9 @@ function mkCard(p){
   const priceHtml = p.price
     ? `<div class="card-price">${p.from?'<span class="pfx">A partir de R$ </span>':'<span class="pfx">R$ </span>'}${p.price}</div>`
     : `<div class="card-price consulta">Consultar preço</div>`;
-  const stockHtml = p.stock==='last'
+  const stockHtml = p.stock==='enc'
+    ? `<span class="stock-enc">📦 Receba em ~${p.deliveryDays||10} dias</span>`
+    : p.stock==='last'
     ? `<span class="stock-last">⚠ Último</span>`
     : `<span class="stock-ok">✓ Disponível</span>`;
   const marca = p.marca||'';
@@ -1245,7 +1336,7 @@ function filterBrand(btn,brand){
 // ── SEARCH ──
 function doSearch(){
   // Ensure all cats rendered before searching
-  ['iphones','android','acessorios','beleza','educacao','presentes','pecas','componentes'].forEach(renderCat);
+  ['iphones','android','acessorios','beleza','educacao','presentes','pecas','componentes','encomenda'].forEach(renderCat);
   const q=document.getElementById('srch').value.toLowerCase().trim();
   document.querySelectorAll('.prod-card').forEach(c=>{
     if(!q){c.style.display='';return;}
@@ -1283,9 +1374,19 @@ function openModal(id){
     priceEl.style.fontSize='1rem';
   }
   const stockEl=document.getElementById('m-stock');
-  stockEl.textContent=p.stock==='last'?'⚠ Último':'✓ Disponível';
-  stockEl.className='modal-stock '+(p.stock==='last'?'last':'ok');
-  const msgJ=`Olá! Vi ${p.name} (${p.code}) no catálogo da Smart Store 09 e gostaria de mais informações.${revRef}`;
+  if(p.stock==='enc'){
+    stockEl.textContent=`📦 Encomenda · ~${p.deliveryDays||10} dias`;
+    stockEl.className='modal-stock enc';
+    aplicarFrete(p);
+  } else {
+    stockEl.textContent=p.stock==='last'?'⚠ Último':'✓ Disponível';
+    stockEl.className='modal-stock '+(p.stock==='last'?'last':'ok');
+    const sec=document.getElementById('modal-cep-sec');
+    if(sec) sec.style.display='none';
+  }
+  const isEnc = p.stock==='enc';
+  const encInfo = isEnc ? `\n\n📦 *Quero fazer uma encomenda!*\nProduto: ${p.name} (${p.code})\nPrevisão de entrega: ~${p.deliveryDays||10} dias` : '';
+  const msgJ=`Olá! Vi ${p.name} (${p.code}) no catálogo da Smart Store 09 e gostaria de mais informações.${encInfo}${revRef}`;
   const msgI=msgJ;
   document.getElementById('mWaJ').href=wa(WA_J,msgJ);
   document.getElementById('mWaI').href=wa(WA_I,msgI);
@@ -1326,6 +1427,16 @@ window.addEventListener('DOMContentLoaded',()=>{
         <div class="modal-price" id="m-price"></div>
         <div id="m-stock" class="modal-stock ok"></div>
       </div>
+    </div>
+    <div class="modal-cep-sec" id="modal-cep-sec" style="display:none;">
+      <div class="cep-label">Consultar frete pelo CEP</div>
+      <div class="cep-row">
+        <input class="cep-inp" id="m-cep-inp" type="tel" placeholder="00000-000" maxlength="9"
+          oninput="this.value=formatCEP(this.value)"
+          onkeydown="if(event.key==='Enter')calcularFrete()">
+        <button class="cep-go-btn" onclick="calcularFrete()">Calcular</button>
+      </div>
+      <div class="cep-result" id="m-cep-res"></div>
     </div>
     <div class="modal-btns">
       <a class="modal-wa janio" id="mWaJ" href="#" target="_blank">
