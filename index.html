@@ -39,13 +39,13 @@ body{background:var(--bg);color:var(--txt);font-family:-apple-system,'Segoe UI',
 .list{padding:10px 12px 90px;display:flex;flex-direction:column;gap:10px;}
 
 /* ─ CARD ─ */
-.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px;cursor:pointer;transition:border-color .15s;}
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;display:flex;flex-direction:row;gap:0;transition:border-color .15s;}
 .card:active{border-color:#333;}
-.card-top{display:flex;gap:12px;margin-bottom:11px;}
-.card-icon{width:74px;height:74px;border-radius:10px;background:#191919;display:flex;align-items:center;justify-content:center;font-size:2rem;flex-shrink:0;overflow:hidden;border:1px solid #242424;}
-.card-icon img{width:100%;height:100%;object-fit:cover;border-radius:10px;}
-.card-info{flex:1;min-width:0;}
-.card-badge{display:inline-block;font-size:.55rem;font-weight:700;padding:2px 7px;border-radius:4px;margin-bottom:5px;text-transform:uppercase;letter-spacing:.5px;}
+.c-img{width:120px;min-width:120px;height:120px;background:#181818;display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;}
+.c-img img{width:100%;height:100%;object-fit:cover;}
+.c-body{flex:1;min-width:0;padding:11px 12px;display:flex;flex-direction:column;justify-content:space-between;gap:6px;}
+.c-top{}
+.card-badge{display:inline-block;font-size:.52rem;font-weight:700;padding:2px 7px;border-radius:4px;margin-bottom:4px;text-transform:uppercase;letter-spacing:.4px;}
 .by{background:rgba(201,168,76,.18);color:var(--gold);border:1px solid rgba(201,168,76,.3);}
 .bg{background:rgba(37,211,102,.12);color:#4ade80;border:1px solid rgba(37,211,102,.3);}
 .br{background:rgba(239,68,68,.12);color:#f87171;border:1px solid rgba(239,68,68,.3);}
@@ -56,18 +56,19 @@ body{background:var(--bg);color:var(--txt);font-family:-apple-system,'Segoe UI',
 .benc{background:rgba(139,92,246,.18);color:#a78bfa;border:1px solid rgba(139,92,246,.4);}
 .bedu{background:rgba(139,92,246,.12);color:#a78bfa;border:1px solid rgba(139,92,246,.3);}
 .bgreen{background:rgba(34,197,94,.2);color:#4ade80;border:1px solid rgba(34,197,94,.4);}
-.card-name{font-size:.98rem;font-weight:700;color:#fff;line-height:1.3;margin-bottom:3px;}
-.card-specs{font-size:.73rem;color:var(--sub);line-height:1.4;}
-.card-bottom{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;}
-.card-price{font-size:1.5rem;font-weight:800;color:var(--wa);}
-.card-from{font-size:.68rem;color:var(--sub);margin-bottom:1px;}
-.card-enc-tag{font-size:.72rem;color:var(--enc);margin-top:2px;}
-.card-consult{font-size:1rem;font-weight:700;color:var(--gold);}
-.btn-wa{display:inline-flex;align-items:center;gap:6px;background:var(--wa);color:#fff;border:none;border-radius:9px;padding:10px 16px;font-size:.88rem;font-weight:700;text-decoration:none;cursor:pointer;white-space:nowrap;transition:opacity .15s;}
-.btn-wa:active{opacity:.85;}
-.btn-wa-full{width:100%;justify-content:center;border-radius:10px;padding:13px;font-size:.95rem;margin-top:10px;}
-.btn-consulta{background:transparent;border:1.5px solid var(--gold);color:var(--gold);}
+.c-name{font-size:.88rem;font-weight:700;color:#fff;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.c-specs{font-size:.67rem;color:var(--sub);line-height:1.35;margin-top:2px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.c-foot{display:flex;align-items:flex-end;justify-content:space-between;gap:8px;flex-wrap:nowrap;}
+.c-prices{flex:1;min-width:0;}
+.c-from{font-size:.6rem;color:var(--sub);line-height:1;}
+.c-price{font-size:1.25rem;font-weight:800;color:var(--wa);line-height:1.1;}
+.c-consult{font-size:.88rem;font-weight:700;color:var(--gold);}
+.c-enc{font-size:.65rem;color:var(--enc);margin-top:2px;}
+.c-last{font-size:.65rem;color:#f87171;margin-top:2px;font-weight:700;}
+.c-btn{flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;background:var(--wa);color:#fff;border:none;border-radius:9px;padding:9px 13px;font-size:.8rem;font-weight:700;text-decoration:none;white-space:nowrap;transition:opacity .15s;}
+.c-btn:active{opacity:.82;}
 
+/* ─ STOCK TAGS ─ */
 /* ─ STOCK TAGS ─ */
 .stok{font-size:.68rem;font-weight:700;padding:3px 8px;border-radius:5px;margin-top:4px;display:inline-block;}
 .stok-ok{background:rgba(37,211,102,.12);color:#4ade80;border:1px solid rgba(37,211,102,.25);}
@@ -237,6 +238,44 @@ const FRETE_TABLE = {
   MG:{min:20,max:34,d:8},ES:{min:22,max:36,d:9},
   RJ:{min:22,max:36,d:9},SP:{min:22,max:36,d:9},
   PR:{min:25,max:40,d:10},SC:{min:25,max:40,d:10},RS:{min:28,max:44,d:12},
+
+"ENC-ACR-NV15": "https://smartstore09.github.io/catalogo/imgs/enc_acr_nv15.jpg",
+"ENC-AIW-BB200": "https://smartstore09.github.io/catalogo/imgs/enc_aiw_bb200.jpg",
+"ENC-AP-IP15-256": "https://smartstore09.github.io/catalogo/imgs/enc_ip15_256.jpg",
+"ENC-BRI-AF5L": "https://smartstore09.github.io/catalogo/imgs/enc_bri_af5l.jpg",
+"ENC-CAD-GAMER": "https://smartstore09.github.io/catalogo/imgs/enc_cad_gamer.jpg",
+"ENC-CHN-UA": "https://smartstore09.github.io/catalogo/imgs/enc_chn_ua.jpg",
+"ENC-ELX-AF3L": "https://smartstore09.github.io/catalogo/imgs/enc_elx_af3l.jpg",
+"ENC-FAC-AF3L": "https://smartstore09.github.io/catalogo/imgs/enc_fac_af3l.jpg",
+"ENC-HDR-ZEUS": "https://smartstore09.github.io/catalogo/imgs/enc_hdr_zeus.jpg",
+"ENC-HW-FIT5P": "https://smartstore09.github.io/catalogo/imgs/enc_hw_fit5p.jpg",
+"ENC-JBL-BB4": "https://smartstore09.github.io/catalogo/imgs/enc_jbl_bb4.jpg",
+"ENC-JBL-EE2": "https://smartstore09.github.io/catalogo/imgs/enc_jbl_ee2.jpg",
+"ENC-LAN-IDOL": "https://smartstore09.github.io/catalogo/imgs/enc_lan_idol.jpg",
+"ENC-LAN-TNT": "https://smartstore09.github.io/catalogo/imgs/enc_lan_tnt.jpg",
+"ENC-MCS-510": "https://smartstore09.github.io/catalogo/imgs/enc_mcs_510.jpg",
+"ENC-MT-G67-5G": "https://smartstore09.github.io/catalogo/imgs/enc_mt_g67_5g.jpg",
+"ENC-MT-G77-5G": "https://smartstore09.github.io/catalogo/imgs/enc_mt_g77_5g.jpg",
+"ENC-PAN-5PC": "https://smartstore09.github.io/catalogo/imgs/enc_pan_5pc.jpg",
+"ENC-PO-M8P": "https://smartstore09.github.io/catalogo/imgs/enc_po_m8p.jpg",
+"ENC-PO-X7P": "https://smartstore09.github.io/catalogo/imgs/enc_po_x7p.jpg",
+"ENC-PO-X8P-512": "https://smartstore09.github.io/catalogo/imgs/enc_po_x8p_512.jpg",
+"ENC-PO-X8PM-256": "https://smartstore09.github.io/catalogo/imgs/enc_po_x8pm_256.jpg",
+"ENC-PO-X8PM-512": "https://smartstore09.github.io/catalogo/imgs/enc_po_x8pm_512.jpg",
+"ENC-RD-N15-4G": "https://smartstore09.github.io/catalogo/imgs/enc_rd_n15_4g.jpg",
+"ENC-RD-N15-PRO": "https://smartstore09.github.io/catalogo/imgs/enc_rd_n15_pro.jpg",
+"ENC-RD-PAD2": "https://smartstore09.github.io/catalogo/imgs/enc_rd_pad2.jpg",
+"ENC-SA-A07": "https://smartstore09.github.io/catalogo/imgs/enc_sa_a07.jpg",
+"ENC-SA-A36-5G": "https://smartstore09.github.io/catalogo/imgs/enc_sa_a36_5g.jpg",
+"ENC-SA-A57-5G": "https://smartstore09.github.io/catalogo/imgs/enc_sa_a57_5g.jpg",
+"ENC-SA-AC12K": "https://smartstore09.github.io/catalogo/imgs/enc_sa_ac12k.jpg",
+"ENC-TAB-S10FE": "https://smartstore09.github.io/catalogo/imgs/enc_tab_s10fe.jpg",
+"ENC-TCL-50Q": "https://smartstore09.github.io/catalogo/imgs/enc_tcl_50q.jpg",
+"ENC-TCL-AC18K": "https://smartstore09.github.io/catalogo/imgs/enc_tcl_ac18k.jpg",
+"ENC-TEC-THAR": "https://smartstore09.github.io/catalogo/imgs/enc_tec_thar.jpg",
+"ENC-TEN-MAT": "https://smartstore09.github.io/catalogo/imgs/enc_ten_mat.jpg",
+"ENC-WAP-VPZ": "https://smartstore09.github.io/catalogo/imgs/enc_wap_vpz.jpg",
+"ENC-XI-PADX1": "https://smartstore09.github.io/catalogo/imgs/enc_xi_padx1.jpg",
 };
 
 const P = [
@@ -495,41 +534,39 @@ function waMsg(p){
 // ── CARD ──
 function mkCard(p){
   const fp = fmtP(p.price);
-  const img = CODE_IMG[p.code] ? `<img src="${CODE_IMG[p.code]}" alt="${p.name}" loading="lazy">` : p.icon;
-  const msgJ = waMsg(p);
-  const waUrl = wa(WA_J, msgJ);
+  const imgSrc = CODE_IMG[p.code];
+  const imgHtml = imgSrc
+    ? `<img src="${imgSrc}" alt="${p.name}" loading="lazy">`
+    : `<span style="font-size:2.2rem;">${p.icon||'📦'}</span>`;
   const isEnc = p.stock==='enc';
   const isLast = p.stock==='last';
-  const badge = p.badge ? `<span class="card-badge ${p.bc||'bb'}">${p.badge}</span><br>` : '';
-  const stokTag = isEnc
-    ? `<span class="stok stok-enc">📦 ~${p.deliveryDays||10} dias</span>`
-    : isLast
-    ? `<span class="stok stok-last">⚠ Último</span>`
-    : `<span class="stok stok-ok">✓ Disponível</span>`;
-
-  let priceHtml;
-  if(fp){
-    const pfx = p.from ? '<div class="card-from">A partir de</div>' : '';
-    priceHtml = `${pfx}<div class="card-price">R$ ${fp}</div>`;
-  } else {
-    priceHtml = `<div class="card-consult">Consultar preço</div>`;
-  }
-
-  const btnLabel = isEnc ? '💬 Fazer Encomenda' : fp ? '💬 Comprar pelo WhatsApp' : '💬 Consultar';
+  const msgJ = `Olá! Tenho interesse em: ${p.name}${p.specs?' ('+p.specs+')':''}. Pode me passar mais informações?${revRef}`;
+  const waUrl = wa(WA_J, msgJ);
+  const btnLabel = isEnc ? '💬 Encomendar' : fp ? '💬 Comprar' : '💬 Consultar';
+  const delivTag = isEnc
+    ? `<div class="c-enc">📦 Receba em ~${p.deliveryDays||10} dias</div>` : '';
+  const stokTag = isLast ? `<div class="c-last">⚠ Último</div>` : '';
+  const priceBlock = fp
+    ? `${p.from?'<div class="c-from">A partir de</div>':''}
+       <div class="c-price">R$ ${fp}</div>`
+    : `<div class="c-consult">Consultar preço</div>`;
+  const badge = p.badge ? `<span class="card-badge ${p.bc||'bb'}">${p.badge}</span>` : '';
 
   return `<div class="card">
-  <div class="card-top">
-    <div class="card-icon">${img}</div>
-    <div class="card-info">
+  <div class="c-img">${imgHtml}</div>
+  <div class="c-body">
+    <div class="c-top">
       ${badge}
-      <div class="card-name">${p.name}</div>
-      <div class="card-specs">${p.specs}</div>
-      ${stokTag}
+      <div class="c-name">${p.name}</div>
+      <div class="c-specs">${p.specs||''}</div>
     </div>
-  </div>
-  <div class="card-bottom">
-    ${priceHtml}
-    <a class="btn-wa" href="${waUrl}">${btnLabel}</a>
+    <div class="c-foot">
+      <div class="c-prices">
+        ${priceBlock}
+        ${delivTag}${stokTag}
+      </div>
+      <a class="c-btn" href="${waUrl}">${btnLabel}</a>
+    </div>
   </div>
 </div>`;
 }
