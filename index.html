@@ -3,142 +3,908 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
-<title>Smart Store 09 – Celulares, Peças e Assistência em Paraibano-MA</title>
-<meta name="description" content="Smart Store 09 – Celulares, assistência técnica, peças e acessórios em Paraibano-MA. Atendimento pelo WhatsApp.">
-<meta name="keywords" content="celular paraibano ma, assistência técnica celular paraibano, troca tela paraibano, iphone paraibano, samsung paraibano, smart store 09">
+<title>Smart Store 09 – Celulares, Assistência Técnica e Acessórios em Paraibano-MA</title>
+<meta name="description" content="Smart Store 09 – Loja de celulares, assistência técnica, acessórios, beleza e presentes em Paraibano-MA. Troca de tela, bateria, conector. Atendimento rápido com garantia.">
+<meta name="keywords" content="celular paraibano ma, assistência técnica celular paraibano, troca tela paraibano, iphone paraibano, samsung paraibano, smart store 09, celular passos bons ma, celular são joão dos patos ma, celular colinas ma, celular nova iorque ma, assistência técnica celular maranhão, troca de tela samsung motorola iphone">
 <link rel="canonical" href="https://smartstore09.github.io/catalogo/">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://smartstore09.github.io">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Bebas+Neue&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#080808;--card:#111;--border:#1e1e1e;--txt:#f0f0f0;--sub:#888;--gold:#C9A84C;--wa:#25D366;--wa2:#128C7E;--enc:#a78bfa;--red:#ef4444;}
+:root{--gold:#C9A84C;--gold2:#e8c76a;--bg:#080808;--s1:#0F0F0F;--s2:#141414;--s3:#1a1a1a;--green:#22C55E;--wa:#25D366;--wa2:#128C7E;--txt:#e8e8e8;--muted:#888;--red:#ef4444;--pink:#ec4899;--purple:#8b5cf6;--blue:#3b82f6;}
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
-body{background:var(--bg);color:var(--txt);font-family:-apple-system,'Segoe UI',sans-serif;max-width:480px;margin:0 auto;min-height:100vh;overflow-x:hidden;}
+body{background:var(--bg);color:var(--txt);font-family:'Montserrat',sans-serif;max-width:430px;margin:0 auto;min-height:100vh;overflow-x:hidden;}
 
-/* ─ TOP BAR ─ */
-.topbar{position:sticky;top:0;z-index:200;background:#090909;border-bottom:1px solid #181818;padding:10px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;}
-.logo-txt{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:3px;color:var(--gold);line-height:1;}
-.logo-sub{font-size:.58rem;color:#666;letter-spacing:1.5px;text-transform:uppercase;}
-.topbar-wa{background:var(--wa);color:#fff;border:none;border-radius:22px;padding:9px 15px;font-size:.82rem;font-weight:700;text-decoration:none;display:flex;align-items:center;gap:5px;white-space:nowrap;flex-shrink:0;}
+/* ── HERO ── */
+.hero{background:linear-gradient(160deg,#0d0d0d 0%,#1a1200 60%,#0d0d0d 100%);padding:44px 20px 32px;text-align:center;border-bottom:1px solid #1e1e1e;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:320px;height:320px;background:radial-gradient(circle,rgba(201,168,76,.13) 0%,transparent 70%);pointer-events:none;}
+.hero::after{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(201,168,76,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,.025) 1px,transparent 1px);background-size:32px 32px;pointer-events:none;}
+.logo-wrap{margin-bottom:18px;}
+.store-name{font-family:'Bebas Neue',sans-serif;font-size:2.8rem;letter-spacing:4px;color:var(--gold);line-height:1;}
+.store-sub{font-size:.68rem;color:#999;letter-spacing:2.5px;text-transform:uppercase;margin-top:5px;}
+.hero-headline{font-size:1.05rem;font-weight:700;color:#fff;margin:16px 0 6px;line-height:1.4;}
+.hero-desc{font-size:.75rem;color:var(--muted);margin-bottom:20px;line-height:1.5;}
+.hero-chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-bottom:24px;}
+.hero-chip{background:var(--s2);border:1px solid #252525;border-radius:20px;padding:5px 12px;font-size:.68rem;color:#bbb;}
+.hero-cta{display:flex;flex-direction:column;gap:10px;padding:0 8px;}
+.btn-wa{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--wa);color:#fff;border:none;border-radius:14px;padding:15px 20px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.9rem;cursor:pointer;text-decoration:none;box-shadow:0 4px 20px rgba(37,211,102,.28);transition:transform .15s,opacity .15s;}
+.btn-wa:active{transform:scale(.97);opacity:.9;}
+.btn-out{display:flex;align-items:center;justify-content:center;gap:8px;background:transparent;color:var(--gold);border:1.5px solid var(--gold);border-radius:14px;padding:13px 20px;font-family:'Montserrat',sans-serif;font-weight:600;font-size:.85rem;cursor:pointer;text-decoration:none;transition:background .15s;}
+.btn-out:active{background:rgba(201,168,76,.1);}
 
-/* ─ SEARCH ─ */
-.search-sec{padding:10px 13px 6px;background:#090909;border-bottom:1px solid #141414;}
-.search-inp{width:100%;background:#161616;border:1.5px solid #232323;border-radius:11px;padding:12px 15px;color:#fff;font-size:1rem;outline:none;font-family:inherit;transition:border-color .2s;}
-.search-inp:focus{border-color:var(--wa);}
-.search-inp::placeholder{color:#555;}
+/* ── CREDIBILITY ── */
+.credibility{background:var(--s1);padding:24px 16px;border-bottom:1px solid #1a1a1a;}
+.sec-label{font-size:.6rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;text-align:center;text-shadow:0 0 20px rgba(201,168,76,.3);}
+.cred-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
+.cred-item{display:flex;align-items:flex-start;gap:8px;background:var(--s2);border:1px solid #1e1e1e;border-radius:12px;padding:11px 12px;}
+.cred-icon{font-size:1.1rem;flex-shrink:0;margin-top:1px;}
+.cred-txt{font-size:.71rem;color:#ccc;line-height:1.35;}
 
-/* ─ TABS ─ */
-.tabs{display:flex;overflow-x:auto;scrollbar-width:none;background:#090909;border-bottom:2px solid #141414;}
-.tabs::-webkit-scrollbar{display:none;}
-.tab{flex-shrink:0;padding:12px 15px;font-size:.82rem;font-weight:700;color:#666;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;white-space:nowrap;transition:color .15s,border-color .15s;letter-spacing:.3px;}
-.tab.on{color:var(--wa);border-bottom-color:var(--wa);}
+/* ── CATEGORIES GRID ── */
+.cat-grid-section{padding:20px 16px;}
+.cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;}
+.cat-btn{background:var(--s1);border:1px solid #1e1e1e;border-radius:14px;padding:14px 8px;cursor:pointer;font-family:inherit;display:flex;flex-direction:column;align-items:center;gap:6px;transition:border-color .2s;}
+.cat-btn:active{border-color:var(--gold);}
+.cat-btn-icon{font-size:1.5rem;}
+.cat-btn-label{font-size:.68rem;color:#ccc;font-weight:600;text-align:center;}
 
-/* ─ COUNT ─ */
-.count-bar{padding:7px 14px;font-size:.7rem;color:#555;background:var(--bg);border-bottom:1px solid #111;}
+/* ── REVIEWS ── */
+.reviews{background:var(--s1);padding:24px 16px;border-top:1px solid #1a1a1a;}
+.review-card{background:var(--s2);border:1px solid #1e1e1e;border-radius:14px;padding:14px;margin-bottom:10px;}
+.review-stars{color:#f59e0b;font-size:.88rem;margin-bottom:6px;letter-spacing:2px;}
+.review-txt{font-size:.76rem;color:#ccc;line-height:1.55;margin-bottom:8px;font-style:italic;}
+.review-author{font-size:.66rem;color:var(--gold);font-weight:700;}
 
-/* ─ LIST ─ */
-.list{padding:10px 12px 90px;display:flex;flex-direction:column;gap:10px;}
+/* ── NAV TABS ── */
+.nav-tabs{display:flex;overflow-x:auto;scrollbar-width:none;background:var(--s1);border-bottom:1px solid #1a1a1a;position:sticky;top:0;z-index:100;}
+.nav-tabs::-webkit-scrollbar{display:none;}
+.nav-tab{flex-shrink:0;padding:12px 14px;font-size:.68rem;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;transition:color .2s,border-color .2s,text-shadow .2s;white-space:nowrap;letter-spacing:.3px;}
+.nav-tab.active{color:var(--gold);border-bottom-color:var(--gold);text-shadow:0 0 18px rgba(201,168,76,.5);}
 
-/* ─ CARD ─ */
-.card{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;display:flex;flex-direction:row;gap:0;transition:border-color .15s;}
-.card:active{border-color:#333;}
-.c-img{width:120px;min-width:120px;height:120px;background:#181818;display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;}
-.c-img img{width:100%;height:100%;object-fit:cover;}
-.c-body{flex:1;min-width:0;padding:11px 12px;display:flex;flex-direction:column;justify-content:space-between;gap:6px;}
-.c-top{}
-.card-badge{display:inline-block;font-size:.52rem;font-weight:700;padding:2px 7px;border-radius:4px;margin-bottom:4px;text-transform:uppercase;letter-spacing:.4px;}
+/* ── SEARCH ── */
+.search-wrap{padding:12px 16px;background:var(--s1);border-bottom:1px solid #1a1a1a;}
+.search-inp{width:100%;background:rgba(20,20,20,.8);border:1px solid #252525;border-radius:12px;padding:11px 14px;color:#fff;font-family:'Montserrat',sans-serif;font-size:.8rem;outline:none;transition:border-color .2s;}
+.search-inp:focus{border-color:rgba(201,168,76,.4);}
+.search-inp::placeholder{color:var(--muted);}
+
+/* ── BRAND FILTER ── */
+.brand-wrap{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:12px 16px 4px;background:var(--s1);}
+.brand-wrap::-webkit-scrollbar{display:none;}
+.brand-btn{flex-shrink:0;background:var(--s2);border:1.5px solid #252525;border-radius:20px;padding:6px 14px;font-family:'Montserrat',sans-serif;font-size:.7rem;font-weight:600;color:var(--muted);cursor:pointer;transition:all .2s;}
+.brand-btn.active{background:var(--gold);border-color:var(--gold);color:#000;}
+
+/* ── PRODUCT CARDS ── */
+.products-wrap{padding:12px 14px;}
+.prod-cards{display:flex;flex-direction:column;gap:11px;}
+.prod-card{background:var(--s1);border:1px solid #222;border-radius:16px;overflow:hidden;transition:border-color .2s,box-shadow .2s;position:relative;}
+.prod-card:active{border-color:rgba(201,168,76,.5);box-shadow:0 0 0 1px rgba(201,168,76,.15);}
+.card-body{display:flex;gap:12px;padding:14px 14px 0;}
+.card-img{width:82px;height:82px;background:#f0f0f0;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:2.1rem;flex-shrink:0;overflow:hidden;border:1px solid rgba(255,255,255,.08);}
+.card-img img{width:100%;height:100%;object-fit:cover;}
+.card-info{flex:1;min-width:0;}
+.card-badge{display:inline-block;font-size:.56rem;font-weight:700;padding:2px 8px;border-radius:4px;margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px;}
 .by{background:rgba(201,168,76,.18);color:var(--gold);border:1px solid rgba(201,168,76,.3);}
-.bg{background:rgba(37,211,102,.12);color:#4ade80;border:1px solid rgba(37,211,102,.3);}
-.br{background:rgba(239,68,68,.12);color:#f87171;border:1px solid rgba(239,68,68,.3);}
-.bb{background:rgba(59,130,246,.12);color:#60a5fa;border:1px solid rgba(59,130,246,.3);}
-.bpink{background:rgba(236,72,153,.12);color:#f472b6;border:1px solid rgba(236,72,153,.3);}
-.bgift{background:rgba(239,68,68,.12);color:#fca5a5;border:1px solid rgba(239,68,68,.3);}
-.bpecas{background:rgba(14,165,233,.12);color:#38bdf8;border:1px solid rgba(14,165,233,.3);}
+.bg{background:rgba(34,197,94,.13);color:#22c55e;border:1px solid rgba(34,197,94,.3);}
+.br{background:rgba(239,68,68,.13);color:#f87171;border:1px solid rgba(239,68,68,.3);}
+.bb{background:rgba(59,130,246,.13);color:#60a5fa;border:1px solid rgba(59,130,246,.3);}
+.bpink{background:rgba(236,72,153,.13);color:#f472b6;border:1px solid rgba(236,72,153,.3);}
+.bedu{background:rgba(139,92,246,.13);color:#a78bfa;border:1px solid rgba(139,92,246,.3);}
+.bgift{background:rgba(239,68,68,.13);color:#fca5a5;border:1px solid rgba(239,68,68,.3);}
+.bpecas{background:rgba(14,165,233,.13);color:#38bdf8;border:1px solid rgba(14,165,233,.3);}
 .benc{background:rgba(139,92,246,.18);color:#a78bfa;border:1px solid rgba(139,92,246,.4);}
-.bedu{background:rgba(139,92,246,.12);color:#a78bfa;border:1px solid rgba(139,92,246,.3);}
 .bgreen{background:rgba(34,197,94,.2);color:#4ade80;border:1px solid rgba(34,197,94,.4);}
-.c-name{font-size:.88rem;font-weight:700;color:#fff;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
-.c-specs{font-size:.67rem;color:var(--sub);line-height:1.35;margin-top:2px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
-.c-foot{display:flex;align-items:flex-end;justify-content:space-between;gap:8px;flex-wrap:nowrap;}
-.c-prices{flex:1;min-width:0;}
-.c-from{font-size:.6rem;color:var(--sub);line-height:1;}
-.c-price{font-size:1.25rem;font-weight:800;color:var(--wa);line-height:1.1;}
-.c-consult{font-size:.88rem;font-weight:700;color:var(--gold);}
-.c-enc{font-size:.65rem;color:var(--enc);margin-top:2px;}
-.c-last{font-size:.65rem;color:#f87171;margin-top:2px;font-weight:700;}
-.c-btn{flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;background:var(--wa);color:#fff;border:none;border-radius:9px;padding:9px 13px;font-size:.8rem;font-weight:700;text-decoration:none;white-space:nowrap;transition:opacity .15s;}
-.c-btn:active{opacity:.82;}
+.card-code{font-size:.58rem;color:var(--muted);font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:2px;}
+.card-name{font-size:.86rem;font-weight:700;color:#fff;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.card-specs{font-size:.69rem;color:var(--muted);line-height:1.4;margin-bottom:6px;}
+.card-price{font-size:1rem;font-weight:800;color:var(--gold);}
+.card-price .pfx{font-size:.62rem;font-weight:500;color:var(--muted);}
+.card-price.consulta{font-size:.75rem;color:var(--muted);font-weight:600;}
+.stock-ok{color:var(--green);font-size:.63rem;font-weight:600;}
+.stock-last{color:var(--red);font-size:.63rem;font-weight:600;}
+/* ── ENCOMENDA ── */
+.stock-enc{color:var(--purple);font-size:.63rem;font-weight:700;}
+.enc-days{display:inline-block;background:rgba(139,92,246,.12);border:1px solid rgba(139,92,246,.3);color:var(--purple);border-radius:20px;padding:2px 8px;font-size:.6rem;font-weight:700;margin-left:4px;}
+.modal-stock.enc{background:rgba(139,92,246,.15);color:#a78bfa;border:1px solid rgba(139,92,246,.3);}
+/* CEP section */
+.modal-cep-sec{padding:0 16px 14px;border-top:1px solid #1a1a1a;margin-top:4px;}
+.cep-label{font-size:.62rem;font-weight:700;letter-spacing:.5px;color:var(--muted);text-transform:uppercase;margin-bottom:8px;margin-top:10px;}
+.cep-row{display:flex;gap:8px;}
+.cep-inp{flex:1;background:#111;border:1px solid #2a2a2a;border-radius:10px;color:#fff;font-family:inherit;font-size:.85rem;padding:10px 12px;outline:none;letter-spacing:1px;}
+.cep-inp:focus{border-color:rgba(139,92,246,.5);}
+.cep-go-btn{background:var(--purple);color:#fff;border:none;border-radius:10px;padding:10px 14px;font-family:inherit;font-size:.78rem;font-weight:700;cursor:pointer;white-space:nowrap;}
+.cep-go-btn:active{opacity:.85;}
+.cep-result{margin-top:8px;font-size:.72rem;color:#ccc;min-height:18px;line-height:1.5;}
+.cep-result.error{color:var(--red);}
+.cep-result.ok{color:#a78bfa;}
+.cep-line{display:flex;justify-content:space-between;align-items:center;background:#111;border:1px solid #1e1e1e;border-radius:8px;padding:8px 12px;margin-top:6px;}
+.cep-city{font-size:.74rem;font-weight:600;color:#eee;}
+.cep-val{font-size:.8rem;font-weight:800;color:var(--purple);}
+.card-footer{display:flex;gap:8px;padding:10px 14px 14px;}
+.wa-btn{flex:1;display:flex;align-items:center;justify-content:center;gap:5px;background:rgba(37,211,102,.1);color:#4ade80;border:1px solid rgba(37,211,102,.35);border-radius:10px;padding:10px 6px;font-family:'Montserrat',sans-serif;font-size:.7rem;font-weight:700;cursor:pointer;text-decoration:none;transition:background .15s,border-color .15s;letter-spacing:.3px;}
+.wa-btn:active{background:rgba(37,211,102,.22);border-color:rgba(37,211,102,.6);}
+.wa-btn.iza{background:rgba(236,72,153,.1);color:#f9a8d4;border-color:rgba(236,72,153,.35);}
+.wa-btn.iza:active{background:rgba(236,72,153,.22);}
 
-/* ─ STOCK TAGS ─ */
-/* ─ STOCK TAGS ─ */
-.stok{font-size:.68rem;font-weight:700;padding:3px 8px;border-radius:5px;margin-top:4px;display:inline-block;}
-.stok-ok{background:rgba(37,211,102,.12);color:#4ade80;border:1px solid rgba(37,211,102,.25);}
-.stok-last{background:rgba(239,68,68,.12);color:#f87171;border:1px solid rgba(239,68,68,.25);}
-.stok-enc{background:rgba(139,92,246,.12);color:#c4b5fd;border:1px solid rgba(139,92,246,.25);}
+/* ── ASSISTÊNCIA ── */
+.assist-hero{padding:28px 16px 16px;text-align:center;background:linear-gradient(160deg,#0d0d0d,#101a00);}
+.assist-hero-title{font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold);font-weight:700;}
+.assist-hero-h{font-size:1.1rem;font-weight:700;color:#fff;margin:8px 0 4px;}
+.assist-hero-sub{font-size:.74rem;color:var(--muted);}
+.services-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:16px;}
+.svc-card{background:var(--s1);border:1px solid #1e1e1e;border-radius:14px;padding:15px 12px;cursor:pointer;text-decoration:none;transition:border-color .2s;display:block;}
+.svc-card:active{border-color:var(--gold);}
+.svc-icon{font-size:1.6rem;margin-bottom:7px;}
+.svc-name{font-size:.78rem;font-weight:700;color:#fff;margin-bottom:4px;}
+.svc-price{font-size:.88rem;font-weight:800;color:var(--gold);}
+.svc-price.free{color:var(--green);}
+.svc-price.ask{font-size:.72rem;color:var(--muted);font-weight:600;}
+.gallery-title{font-size:.75rem;font-weight:700;color:#fff;padding:0 16px 10px;}
+.gallery-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 16px 20px;}
+.gal-item{background:var(--s2);border:1px solid #1e1e1e;border-radius:13px;aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;position:relative;}
+.gal-emoji{font-size:2.2rem;}
+.gal-lbl{font-size:.58rem;color:var(--muted);font-weight:700;letter-spacing:1px;text-transform:uppercase;}
+.arrow-badge{background:var(--gold);color:#000;font-size:.6rem;font-weight:800;padding:3px 8px;border-radius:4px;position:absolute;bottom:10px;}
+.cta-wrap{padding:0 16px 8px;}
+.wa-big{display:flex;align-items:center;justify-content:center;gap:10px;background:var(--wa);color:#fff;border:none;border-radius:14px;padding:15px 20px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.9rem;cursor:pointer;text-decoration:none;width:100%;box-shadow:0 4px 20px rgba(37,211,102,.28);}
+.wa-big:active{opacity:.9;}
+.diag-note{text-align:center;font-size:.7rem;color:var(--muted);padding:10px 16px 0;}
 
-/* ─ HERO (tab Tudo) ─ */
-.hero{background:linear-gradient(160deg,#0d0d0d 0%,#0d1a00 60%,#0d0d0d 100%);padding:28px 16px 24px;text-align:center;border-bottom:1px solid #141414;margin-bottom:2px;}
-.hero-name{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;letter-spacing:4px;color:var(--gold);line-height:1;margin-bottom:6px;}
-.hero-desc{font-size:.8rem;color:#aaa;margin-bottom:18px;line-height:1.5;}
-.hero-btn{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--wa);color:#fff;border:none;border-radius:13px;padding:15px;font-size:1rem;font-weight:700;text-decoration:none;box-shadow:0 4px 20px rgba(37,211,102,.3);}
-.hero-chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:14px;}
-.chip{background:#141414;border:1px solid #222;border-radius:20px;padding:5px 12px;font-size:.7rem;color:#aaa;}
+/* ── LOCATION / SOBRE ── */
+.location-wrap{padding:22px 16px;}
+.map-box{border-radius:14px;overflow:hidden;margin-bottom:16px;border:1px solid #1e1e1e;}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
+.info-cell{background:var(--s1);border-radius:12px;padding:12px 14px;}
+.info-lbl{font-size:.58rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;}
+.info-val{font-size:.78rem;font-weight:600;color:#fff;line-height:1.4;}
+.contacts-wrap{padding:0 16px 24px;}
 
-/* ─ ASSISTÊNCIA ─ */
-.assist-sec{padding:16px 13px 0;}
-.assist-title{font-size:1rem;font-weight:800;color:var(--gold);margin-bottom:12px;}
-.assist-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:13px 14px;margin-bottom:8px;display:flex;align-items:center;justify-content:space-between;gap:10px;}
-.assist-name{font-size:.9rem;font-weight:700;color:#fff;}
-.assist-price{font-size:.82rem;color:var(--wa);font-weight:700;}
-.assist-link{background:var(--wa);color:#fff;border:none;border-radius:8px;padding:8px 13px;font-size:.78rem;font-weight:700;text-decoration:none;flex-shrink:0;}
+/* ── BOTTOM NAV ── */
+.bnav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;background:rgba(8,8,8,.96);backdrop-filter:blur(12px);border-top:1px solid #1e1e1e;display:flex;z-index:500;}
+.bnav-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:10px 8px 14px;cursor:pointer;color:var(--muted);font-size:.58rem;font-weight:600;transition:color .2s;border:none;background:none;font-family:'Montserrat',sans-serif;}
+.bnav-btn.active{color:var(--gold);text-shadow:0 0 14px rgba(201,168,76,.5);}
+.bnav-icon{font-size:1.2rem;}
 
-/* ─ EMPTY ─ */
-.empty{text-align:center;padding:50px 20px;color:#444;}
-.empty-ico{font-size:2.5rem;margin-bottom:12px;}
-.empty-txt{font-size:.9rem;}
+/* ── UTILS ── */
+.page{display:none;}.page.active{display:block;}
+.cat-sec{display:none;}.cat-sec.active{display:block;}
+.hidden{display:none!important;}
+.spacer{height:72px;}
+.empty-state{text-align:center;padding:44px 20px;color:var(--muted);}
+.empty-state-icon{font-size:3rem;margin-bottom:12px;}
+.empty-state-txt{font-size:.82rem;margin-bottom:20px;}
 
-/* ─ FIXED WA ─ */
-.fixed-wa{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;padding:16px 14px 14px;background:linear-gradient(transparent,#080808 40%);z-index:150;pointer-events:none;}
-.fixed-wa a{pointer-events:all;display:flex;align-items:center;justify-content:center;gap:8px;background:var(--wa);color:#fff;border-radius:13px;padding:15px;font-size:.98rem;font-weight:700;text-decoration:none;box-shadow:0 4px 24px rgba(37,211,102,.35);}
+/* ── MODAL PRODUTO ── */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:1000;display:flex;align-items:flex-end;justify-content:center;opacity:0;pointer-events:none;transition:opacity .25s;}
+.modal-overlay.open{opacity:1;pointer-events:all;}
+.modal-sheet{background:var(--s1);border-radius:22px 22px 0 0;width:100%;max-width:430px;max-height:90vh;overflow-y:auto;transform:translateY(100%);transition:transform .28s cubic-bezier(.22,1,.36,1);padding-bottom:env(safe-area-inset-bottom,16px);}
+.modal-overlay.open .modal-sheet{transform:translateY(0);}
+.modal-drag{width:40px;height:4px;background:#333;border-radius:2px;margin:12px auto 0;}
+.modal-img{width:calc(100% - 32px);aspect-ratio:1;background:#f0f0f0;display:flex;align-items:center;justify-content:center;font-size:5rem;overflow:hidden;margin:14px 16px 0;border-radius:16px;}
+.modal-img img{width:100%;height:100%;object-fit:contain;padding:8px;}
+.modal-body{padding:16px 16px 8px;}
+.modal-badge{display:inline-block;font-size:.6rem;font-weight:700;padding:3px 10px;border-radius:5px;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;}
+.modal-name{font-size:1.05rem;font-weight:800;color:#fff;margin-bottom:4px;line-height:1.3;}
+.modal-code{font-size:.62rem;color:var(--muted);font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;}
+.modal-specs{font-size:.76rem;color:#aaa;line-height:1.6;margin-bottom:12px;border-top:1px solid #1e1e1e;padding-top:10px;}
+.modal-price-row{display:flex;align-items:baseline;gap:6px;margin-bottom:16px;}
+.modal-price{font-size:1.6rem;font-weight:800;color:var(--gold);}
+.modal-price-label{font-size:.72rem;color:var(--muted);}
+.modal-stock{font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:20px;margin-left:auto;}
+.modal-stock.ok{background:rgba(34,197,94,.15);color:#22c55e;border:1px solid rgba(34,197,94,.3);}
+.modal-stock.last{background:rgba(239,68,68,.15);color:#f87171;border:1px solid rgba(239,68,68,.3);}
+.modal-btns{display:flex;flex-direction:column;gap:10px;padding:0 16px 16px;}
+.modal-wa{display:flex;align-items:center;justify-content:center;gap:10px;border:none;border-radius:14px;padding:15px 20px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.9rem;cursor:pointer;text-decoration:none;width:100%;transition:transform .12s;}
+.modal-wa:active{transform:scale(.97);}
+.modal-wa.janio{background:#25D366;color:#fff;box-shadow:0 4px 16px rgba(37,211,102,.25);}
+.modal-wa.iza{background:#ec4899;color:#fff;box-shadow:0 4px 16px rgba(236,72,153,.35);}
+.modal-close{position:absolute;top:14px;right:16px;background:var(--s2);border:1px solid #2a2a2a;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;color:var(--muted);}
+.modal-sheet{position:relative;}
+
+/* ── FLOATING WA ── */
+.wa-float{position:fixed;bottom:82px;right:16px;z-index:600;width:56px;height:56px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.5);animation:waPulse 2.5s infinite;}
+@keyframes waPulse{0%,100%{box-shadow:0 4px 20px rgba(37,211,102,.5);}50%{box-shadow:0 4px 32px rgba(37,211,102,.8),0 0 0 8px rgba(37,211,102,.15);}}
+.wa-float svg{width:28px;height:28px;fill:#fff;}
+
+/* ── URGÊNCIA ── */
+.urgencia{background:linear-gradient(135deg,#1a0a00,#2d1500);padding:16px;border-bottom:1px solid #2a1800;border-top:1px solid #2a1800;}
+.urgencia-title{font-size:.65rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:#ff6b35;text-align:center;margin-bottom:10px;}
+.urgencia-items{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;}
+.urgencia-item{background:rgba(255,107,53,.12);border:1px solid rgba(255,107,53,.3);border-radius:20px;padding:5px 12px;font-size:.68rem;color:#ffb085;font-weight:600;}
+
+/* ── PROVA SOCIAL ── */
+.prova-social{background:var(--s2);padding:20px 16px;border-bottom:1px solid #1a1a1a;}
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+.stat-card{background:var(--s1);border:1px solid #1e1e1e;border-radius:14px;padding:14px 10px;text-align:center;}
+.stat-num{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--gold);line-height:1;}
+.stat-label{font-size:.6rem;color:#aaa;margin-top:3px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;}
+.stat-stars{color:#f59e0b;font-size:.7rem;margin-bottom:3px;}
+
+/* ── PRODUTOS DESTAQUE ── */
+.destaques{padding:20px 16px 0;}
+.destaques-scroll{display:flex;gap:12px;overflow-x:auto;scrollbar-width:none;padding-bottom:12px;}
+.destaques-scroll::-webkit-scrollbar{display:none;}
+.dest-card{flex-shrink:0;width:150px;background:var(--s1);border:1px solid #1e1e1e;border-radius:16px;overflow:hidden;cursor:pointer;transition:border-color .2s;}
+.dest-card:active{border-color:var(--gold);}
+.dest-img{width:100%;height:120px;background:#fff;display:flex;align-items:center;justify-content:center;font-size:2.5rem;overflow:hidden;}
+.dest-img img{width:100%;height:100%;object-fit:contain;padding:6px;}
+.dest-info{padding:8px 10px 10px;}
+.dest-badge{display:inline-block;font-size:.55rem;font-weight:700;padding:2px 7px;border-radius:4px;text-transform:uppercase;margin-bottom:4px;}
+.dest-name{font-size:.72rem;font-weight:700;color:#fff;margin-bottom:3px;line-height:1.2;}
+.dest-price{font-size:.82rem;font-weight:800;color:var(--gold);}
+.dest-wa{display:flex;align-items:center;justify-content:center;gap:5px;background:rgba(37,211,102,.1);color:#4ade80;border:1px solid rgba(37,211,102,.3);border-radius:8px;padding:7px;font-family:'Montserrat',sans-serif;font-size:.65rem;font-weight:700;cursor:pointer;text-decoration:none;width:100%;margin-top:7px;transition:background .15s;}
+
+/* ── EQUIPE ── */
+.equipe{background:var(--s2);padding:24px 16px;border-bottom:1px solid #1a1a1a;}
+.equipe-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.membro{background:var(--s1);border:1px solid #1e1e1e;border-radius:16px;padding:16px;text-align:center;}
+.membro-avatar{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--gold),#8B6914);display:flex;align-items:center;justify-content:center;font-size:1.8rem;margin:0 auto 10px;}
+.membro-nome{font-size:.85rem;font-weight:800;color:#fff;margin-bottom:3px;}
+.membro-cargo{font-size:.65rem;color:var(--gold);font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
+.membro-desc{font-size:.68rem;color:#aaa;line-height:1.5;margin-bottom:10px;}
+.membro-wa{display:flex;align-items:center;justify-content:center;gap:5px;background:rgba(37,211,102,.1);color:#4ade80;border:1px solid rgba(37,211,102,.35);border-radius:10px;padding:8px 12px;font-family:'Montserrat',sans-serif;font-size:.7rem;font-weight:700;cursor:pointer;text-decoration:none;width:100%;transition:background .15s;}
+.membro-wa:active{background:rgba(37,211,102,.2);}
+.membro-wa.escuro{background:rgba(236,72,153,.1);color:#f9a8d4;border-color:rgba(236,72,153,.35);}
+.membro-wa.escuro:active{background:rgba(236,72,153,.2);}
+
+/* ── CIDADES ── */
+.cidades{padding:24px 16px;border-bottom:1px solid #1a1a1a;}
+.cidades-grid{display:flex;flex-wrap:wrap;gap:8px;}
+.cidade-tag{background:var(--s2);border:1px solid #1e1e1e;border-radius:20px;padding:6px 14px;font-size:.69rem;color:#ccc;font-weight:600;}
+.cidade-tag.principal{background:rgba(201,168,76,.15);border-color:rgba(201,168,76,.3);color:var(--gold);}
+
+/* ── VITRINE MAGALU ── */
+.magalu-header{background:linear-gradient(135deg,#0a0a2e,#00185a,#0a0a2e);padding:18px 16px 14px;border-bottom:1px solid rgba(0,120,255,.2);}
+.magalu-logo-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.magalu-logo-badge{background:#0086ff;border-radius:10px;padding:5px 12px;font-size:.75rem;font-weight:800;color:#fff;letter-spacing:.5px;}
+.magalu-tag{font-size:.62rem;background:rgba(0,134,255,.15);border:1px solid rgba(0,134,255,.3);border-radius:10px;padding:3px 10px;color:#60a5fa;font-weight:600;}
+.magalu-desc{font-size:.68rem;color:#888;margin-bottom:12px;line-height:1.5;}
+.magalu-cats{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:14px;}
+.magalu-cat{display:flex;align-items:center;gap:10px;background:#0f1a2e;border:1px solid rgba(0,120,255,.2);border-radius:14px;padding:12px 13px;text-decoration:none;transition:border-color .2s;}
+.magalu-cat:active{border-color:#0086ff;}
+.magalu-cat-icon{font-size:1.5rem;flex-shrink:0;}
+.magalu-cat-body{flex:1;}
+.magalu-cat-name{font-size:.76rem;font-weight:700;color:#fff;margin-bottom:2px;}
+.magalu-cat-sub{font-size:.62rem;color:#6b9de8;}
+.magalu-btn-full{display:flex;align-items:center;justify-content:center;gap:8px;background:#0086ff;color:#fff;border:none;border-radius:12px;padding:14px 16px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.82rem;cursor:pointer;text-decoration:none;width:100%;box-shadow:0 4px 20px rgba(0,134,255,.3);transition:transform .12s;}
+.magalu-btn-full:active{transform:scale(.97);}
+.magalu-notice{display:flex;align-items:flex-start;gap:8px;background:rgba(0,134,255,.07);border:1px solid rgba(0,134,255,.15);border-radius:10px;padding:10px 12px;margin-top:10px;}
+.magalu-notice-txt{font-size:.63rem;color:#6b9de8;line-height:1.5;}
+
+/* ── SERVIÇOS IZA (BELEZA) ── */
+.iza-banner{background:linear-gradient(135deg,#1a0010,#2d0020,#1a0010);border-bottom:1px solid rgba(236,72,153,.25);padding:20px 16px 14px;}
+.iza-banner-top{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+.iza-banner-avatar{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#ec4899,#be185d);display:flex;align-items:center;justify-content:center;font-size:1.6rem;flex-shrink:0;border:2px solid rgba(236,72,153,.5);}
+.iza-banner-info{flex:1;}
+.iza-banner-name{font-size:.9rem;font-weight:800;color:#fff;}
+.iza-banner-role{font-size:.65rem;color:#f472b6;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;}
+.iza-banner-brands{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;}
+.iza-brand-tag{background:rgba(236,72,153,.15);border:1px solid rgba(236,72,153,.3);border-radius:20px;padding:4px 12px;font-size:.67rem;color:#f9a8d4;font-weight:600;}
+.iza-svc-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:14px;}
+.iza-svc{background:rgba(236,72,153,.1);border:1px solid rgba(236,72,153,.25);border-radius:14px;padding:13px 11px;text-align:center;}
+.iza-svc-icon{font-size:1.4rem;margin-bottom:5px;}
+.iza-svc-name{font-size:.72rem;font-weight:700;color:#fff;margin-bottom:4px;line-height:1.25;}
+.iza-svc-price{font-size:.9rem;font-weight:800;color:#ec4899;}
+.iza-svc-price.ask{font-size:.68rem;color:#aaa;font-weight:600;}
+.iza-wa{display:flex;align-items:center;justify-content:center;gap:8px;background:#ec4899;color:#fff;border:none;border-radius:12px;padding:13px 16px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.82rem;cursor:pointer;text-decoration:none;width:100%;box-shadow:0 4px 20px rgba(236,72,153,.35);transition:transform .12s;}
+.iza-wa:active{transform:scale(.97);}
+
+/* ── BENEFITS STRIP ── */
+.benefits-strip{background:rgba(201,168,76,.05);border-bottom:1px solid rgba(201,168,76,.12);overflow:hidden;}
+.benefits-scroll{display:flex;align-items:center;padding:9px 16px;overflow-x:auto;scrollbar-width:none;white-space:nowrap;}
+.benefits-scroll::-webkit-scrollbar{display:none;}
+.benefit-item{display:flex;align-items:center;gap:5px;font-size:.68rem;font-weight:700;color:rgba(201,168,76,.9);flex-shrink:0;letter-spacing:.3px;}
+.benefit-sep{color:rgba(201,168,76,.2);margin:0 12px;font-size:.8rem;flex-shrink:0;}
+
+/* ── RODAPÉ ── */
+.footer{background:var(--s1);border-top:2px solid var(--gold);padding:24px 16px 16px;}
+.footer-logo{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--gold);letter-spacing:3px;text-align:center;margin-bottom:4px;}
+.footer-tagline{font-size:.65rem;color:#666;text-align:center;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;}
+.footer-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;}
+.footer-col-title{font-size:.6rem;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;}
+.footer-item{font-size:.7rem;color:#888;margin-bottom:5px;line-height:1.4;}
+.footer-item strong{color:#ccc;}
+.footer-bottom{border-top:1px solid #1e1e1e;padding-top:12px;text-align:center;font-size:.6rem;color:#555;}
+.footer-cities{font-size:.62rem;color:#555;text-align:center;margin-top:6px;line-height:1.5;}
+
+/* ── REVENDEDOR JÚNIOR BANNER ── */
+.rev-banner{display:none;background:rgba(201,168,76,.07);border-bottom:1px solid rgba(201,168,76,.18);padding:9px 16px;text-align:center;position:sticky;top:0;z-index:200;}
+.rev-banner.ativo{display:block;}
+.rev-banner-txt{font-size:.64rem;color:var(--gold);font-weight:600;letter-spacing:.3px;display:flex;align-items:center;justify-content:center;gap:5px;}
+.rev-banner-name{font-weight:800;color:#fff;}
 </style>
 </head>
 <body>
 
-<!-- TOP BAR -->
-<div class="topbar">
-  <div>
-    <div class="logo-txt">Smart Store 09</div>
-    <div class="logo-sub">Paraibano-MA</div>
+<!-- ── REVENDEDOR JÚNIOR BANNER ── -->
+<div class="rev-banner" id="rev-banner" aria-live="polite">
+  <div class="rev-banner-txt">
+    <span>🤝</span>
+    <span>Vitrine de <span class="rev-banner-name" id="rev-nome"></span></span>
+    <span style="opacity:.45">·</span>
+    <span style="opacity:.7">Smart Store 09</span>
   </div>
-  <a class="topbar-wa" id="wa-top" href="#">💬 Falar agora</a>
 </div>
 
-<!-- SEARCH -->
-<div class="search-sec">
-  <input class="search-inp" id="search" type="text" placeholder="🔍  Buscar produto..." autocomplete="off" oninput="doSearch(this.value)">
+<!-- ══ BOTTOM NAV ══ -->
+<nav class="bnav" id="bnav">
+  <button class="bnav-btn active" onclick="goPage('home')"><span class="bnav-icon">🏠</span>Início</button>
+  <button class="bnav-btn" onclick="goPage('catalogo')"><span class="bnav-icon">📦</span>Catálogo</button>
+  <button class="bnav-btn" onclick="goPage('assistencia')"><span class="bnav-icon">🔧</span>Assistência</button>
+  <button class="bnav-btn" onclick="goPage('sobre')"><span class="bnav-icon">ℹ️</span>Sobre</button>
+</nav>
+
+<!-- FLOATING WA -->
+<a class="wa-float" href="https://wa.me/5589988098980?text=Olá!+Vi+o+catálogo+da+Smart+Store+09+e+gostaria+de+atendimento." target="_blank" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.523 5.854L.057 23.43a.5.5 0 00.612.612l5.576-1.466A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.806 9.806 0 01-5.034-1.387l-.36-.214-3.732.982.998-3.647-.236-.375A9.818 9.818 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+</a>
+
+<!-- ══════════════════════════════════════════
+     PAGE: HOME
+══════════════════════════════════════════ -->
+<div id="page-home" class="page active">
+
+  <!-- ── 1. HERO ── -->
+  <div class="hero">
+    <div class="logo-wrap">
+      <div class="store-name">SMART STORE 09</div>
+      <div class="store-sub">Celulares · Assistência · Acessórios</div>
+    </div>
+    <div class="hero-headline">Seu celular quebrou?<br>Precisa trocar de aparelho?</div>
+    <div class="hero-desc">Atendimento especializado em Paraibano-MA.<br>Garantia real, parcelamento e suporte pós-venda.</div>
+    <div class="hero-chips">
+      <span class="hero-chip">📍 Paraibano-MA</span>
+      <span class="hero-chip">✅ Garantia nos serviços</span>
+      <span class="hero-chip">💳 Parcelamento</span>
+      <span class="hero-chip">🚚 Toda a região</span>
+    </div>
+    <div class="hero-cta">
+      <a class="btn-wa" href="https://wa.me/5589988098980?text=Olá!+Preciso+de+atendimento+na+Smart+Store+09." target="_blank">💬 Falar no WhatsApp agora</a>
+      <button class="btn-out" onclick="goPage('assistencia')">🔧 Ver Assistência Técnica</button>
+      <a class="btn-out" href="financas.html" style="border-color:rgba(201,168,76,.4);color:var(--gold);">💰 Controle Financeiro</a>
+    </div>
+  </div>
+
+  <!-- ── 2. BENEFÍCIOS ── -->
+  <div class="benefits-strip">
+    <div class="benefits-scroll">
+      <div class="benefit-item">⚡ PIX com 10% OFF</div>
+      <div class="benefit-sep">·</div>
+      <div class="benefit-item">💳 10× sem juros</div>
+      <div class="benefit-sep">·</div>
+      <div class="benefit-item">🔧 Diagnóstico grátis</div>
+      <div class="benefit-sep">·</div>
+      <div class="benefit-item">✅ Garantia real</div>
+      <div class="benefit-sep">·</div>
+      <div class="benefit-item">🚀 Resposta rápida</div>
+      <div class="benefit-sep">·</div>
+      <div class="benefit-item">📦 Produto original</div>
+    </div>
+  </div>
+
+  <!-- ── 3. PROVA SOCIAL ── -->
+  <div class="prova-social">
+    <div class="sec-label">Números que provam nossa confiança</div>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-stars">★★★★★</div>
+        <div class="stat-num">1.500+</div>
+        <div class="stat-label">Aparelhos vendidos</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-stars">★★★★★</div>
+        <div class="stat-num">3.000+</div>
+        <div class="stat-label">Atendimentos</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-stars">★★★★★</div>
+        <div class="stat-num">20+</div>
+        <div class="stat-label">Cidades atendidas</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 4. PRODUTOS EM DESTAQUE ── -->
+  <div class="destaques">
+    <div class="sec-label">Mais procurados agora</div>
+    <div class="destaques-scroll" id="destaques-scroll">
+      <!-- Preenchido por JS -->
+    </div>
+  </div>
+
+  <!-- ── 5. CREDIBILIDADE ── -->
+  <div class="credibility">
+    <div class="sec-label">Por que a Smart Store 09 é diferente?</div>
+    <div class="cred-grid">
+      <div class="cred-item"><span class="cred-icon">🏪</span><span class="cred-txt">Loja física em Paraibano-MA — você pode ir pessoalmente</span></div>
+      <div class="cred-item"><span class="cred-icon">✅</span><span class="cred-txt">Garantia real em todos os serviços realizados</span></div>
+      <div class="cred-item"><span class="cred-icon">⚡</span><span class="cred-txt">Atendimento rápido — sem enrolação</span></div>
+      <div class="cred-item"><span class="cred-icon">💳</span><span class="cred-txt">Parcelamento em até 10x sem juros</span></div>
+      <div class="cred-item"><span class="cred-icon">📱</span><span class="cred-txt">Produtos novos, originais e seminovos</span></div>
+      <div class="cred-item"><span class="cred-icon">🔧</span><span class="cred-txt">Diagnóstico gratuito — sem compromisso</span></div>
+      <div class="cred-item"><span class="cred-icon">💬</span><span class="cred-txt">Suporte pelo WhatsApp após a compra</span></div>
+      <div class="cred-item"><span class="cred-icon">🗺️</span><span class="cred-txt">Atendemos toda a região do Médio Mearim</span></div>
+    </div>
+  </div>
+
+  <!-- ── 6. CATEGORIAS ── -->
+  <div class="cat-grid-section">
+    <div class="sec-label">Explorar por categoria</div>
+    <div class="cat-grid">
+      <button class="cat-btn" onclick="goTab('iphones')"><span class="cat-btn-icon">📱</span><span class="cat-btn-label">iPhones</span></button>
+      <button class="cat-btn" onclick="goTab('android')"><span class="cat-btn-icon">📲</span><span class="cat-btn-label">Android</span></button>
+      <button class="cat-btn" onclick="goTab('acessorios')"><span class="cat-btn-icon">🛒</span><span class="cat-btn-label">Acessórios</span></button>
+      <button class="cat-btn" onclick="goPage('assistencia')"><span class="cat-btn-icon">🔧</span><span class="cat-btn-label">Assistência</span></button>
+      <button class="cat-btn" onclick="goTab('beleza')"><span class="cat-btn-icon">💄</span><span class="cat-btn-label">Beleza</span></button>
+      <button class="cat-btn" onclick="goTab('presentes')"><span class="cat-btn-icon">🎁</span><span class="cat-btn-label">Presentes</span></button>
+      <button class="cat-btn" onclick="goTab('educacao')"><span class="cat-btn-icon">📚</span><span class="cat-btn-label">Educação</span></button>
+      <button class="cat-btn" onclick="goTab('pecas')"><span class="cat-btn-icon">🔩</span><span class="cat-btn-label">Peças</span></button>
+      <button class="cat-btn" onclick="goTab('componentes')"><span class="cat-btn-icon">⚙️</span><span class="cat-btn-label">Componentes</span></button>
+      <button class="cat-btn" onclick="goTab('magalu')" style="border-color:rgba(0,134,255,.3);"><span class="cat-btn-icon">🛒</span><span class="cat-btn-label" style="color:#60a5fa;">Vitrine Magalu</span></button>
+      <button class="cat-btn" onclick="goTab('encomenda')" style="border-color:rgba(139,92,246,.3);"><span class="cat-btn-icon">📦</span><span class="cat-btn-label" style="color:#a78bfa;">Encomenda</span></button>
+    </div>
+  </div>
+
+  <!-- ── 7. EQUIPE ── -->
+  <div class="equipe">
+    <div class="sec-label">Nossa equipe</div>
+    <div class="equipe-grid">
+      <div class="membro">
+        <div class="membro-avatar">👨‍🔧</div>
+        <div class="membro-nome">Jânio Joaquim</div>
+        <div class="membro-cargo">Fundador · Técnico</div>
+        <div class="membro-desc">Professor de Física e técnico especializado em Apple e Android. Atende Paraibano e toda a região.</div>
+        <a class="membro-wa" href="https://wa.me/5589988098980?text=Olá+Jânio!+Gostaria+de+atendimento." target="_blank">
+          💬 Falar com Jânio
+        </a>
+      </div>
+      <div class="membro" style="border-color:#ec4899;border-width:1.5px;">
+        <div class="membro-avatar" style="background:linear-gradient(135deg,#ec4899,#be185d);">💄</div>
+        <div class="membro-nome">Iza</div>
+        <div class="membro-cargo" style="color:#ec4899;">Maquiadora · Consultora</div>
+        <div class="membro-desc">Consultora Mary Kay &amp; Natura. Maquiagem profissional na bancada. Cursos Básico e Profissional.</div>
+        <a class="membro-wa escuro" href="https://wa.me/5599984458625?text=Olá+Iza!+Gostaria+de+saber+sobre+os+serviços+de+beleza." target="_blank">
+          💄 Falar com Iza
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 8. DEPOIMENTOS ── -->
+  <div class="reviews">
+    <div class="sec-label">O que nossos clientes dizem</div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <div class="review-txt">"Troquei a tela do meu Samsung aqui. Ficou perfeito, entregou no prazo e ainda tem garantia. Melhor assistência de Paraibano!"</div>
+      <div class="review-author">— Maria S. · Paraibano-MA · via WhatsApp</div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <div class="review-txt">"Comprei meu iPhone aqui. Produto original, preço justo. O Jânio é muito atencioso, explicou tudo antes de fechar."</div>
+      <div class="review-author">— Carlos R. · Passos Bons-MA · via WhatsApp</div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <div class="review-txt">"Já trouxe 3 celulares diferentes para reparar. Sempre sai no prazo e com qualidade. Não levo meu celular em outro lugar!"</div>
+      <div class="review-author">— Ana P. · Paraibano-MA · cliente desde 2023</div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <div class="review-txt">"Viajei de São João dos Patos só para trazer meu celular aqui. Valeu muito a pena. Serviço de qualidade e preço honesto."</div>
+      <div class="review-author">— Roberto M. · São João dos Patos-MA · via WhatsApp</div>
+    </div>
+  </div>
+
+  <!-- ── 9. CIDADES ATENDIDAS ── -->
+  <div class="cidades">
+    <div class="sec-label">Cidades atendidas</div>
+    <p style="font-size:.72rem;color:var(--muted);margin-bottom:12px;line-height:1.6;">Atendemos presencialmente em Paraibano e Passos Bons. Enviamos peças e produtos para toda a região do Médio Mearim e Grande São Luís.</p>
+    <div class="cidades-grid">
+      <span class="cidade-tag principal">📍 Paraibano</span>
+      <span class="cidade-tag principal">📍 Passos Bons</span>
+      <span class="cidade-tag">São João dos Patos</span>
+      <span class="cidade-tag">Colinas</span>
+      <span class="cidade-tag">Nova Iorque</span>
+      <span class="cidade-tag">Passagem Franca</span>
+      <span class="cidade-tag">Sucupira do Riachão</span>
+      <span class="cidade-tag">São Francisco do Maranhão</span>
+      <span class="cidade-tag">Mirador</span>
+      <span class="cidade-tag">Formosa da Serra Negra</span>
+      <span class="cidade-tag">Loreto</span>
+      <span class="cidade-tag">Benedito Leite</span>
+    </div>
+  </div>
+
+  <!-- ── 10. CTA FINAL ── -->
+  <div style="padding:20px 16px;background:linear-gradient(160deg,#0d0d0d,#1a1200);text-align:center;border-top:1px solid #1e1e1e;">
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--gold);letter-spacing:2px;margin-bottom:6px;">FALE AGORA COM A SMART STORE 09</div>
+    <div style="font-size:.75rem;color:#aaa;margin-bottom:16px;">Segunda a Sábado · 8h às 18h · Resposta rápida</div>
+    <div style="display:flex;flex-direction:column;gap:10px;padding:0 8px;">
+      <a class="btn-wa" href="https://wa.me/5589988098980?text=Olá!+Preciso+de+atendimento+da+Smart+Store+09." target="_blank" style="text-decoration:none;">💬 WhatsApp — Jânio (89) 98809-8980</a>
+      <a class="btn-wa" href="https://wa.me/5599984458625?text=Olá+Iza!+Gostaria+de+saber+mais+sobre+os+serviços+de+beleza." target="_blank" style="text-decoration:none;background:#ec4899;box-shadow:0 4px 16px rgba(236,72,153,.35);">💄 WhatsApp — Iza (99) 98445-8625</a>
+    </div>
+  </div>
+
+  <!-- ── 11. RODAPÉ ── -->
+  <footer class="footer">
+    <div class="footer-logo">SMART STORE 09</div>
+    <div class="footer-tagline">Celulares · Assistência · Acessórios</div>
+    <div class="footer-grid">
+      <div>
+        <div class="footer-col-title">📍 Localização</div>
+        <div class="footer-item"><strong>Paraibano-MA</strong></div>
+        <div class="footer-item">Passos Bons-MA</div>
+        <div class="footer-item"><strong>Horário:</strong> Seg–Sáb 8h–18h</div>
+      </div>
+      <div>
+        <div class="footer-col-title">📱 Contato</div>
+        <div class="footer-item"><strong>Jânio:</strong> (89) 98809-8980</div>
+        <div class="footer-item"><strong>Iza:</strong> (99) 98445-8625</div>
+        <div class="footer-item">WhatsApp disponível</div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2026 Smart Store 09 · Todos os direitos reservados<br>
+      <a href="https://smartstore09.github.io/catalogo/" style="color:#555;text-decoration:none;">smartstore09.github.io/catalogo</a>
+    </div>
+    <div class="footer-cities">Atendemos: Paraibano · Passos Bons · São João dos Patos · Colinas · Nova Iorque · Passagem Franca · Sucupira do Riachão · São Francisco do Maranhão · Mirador · Loreto e toda a região do MA</div>
+  </footer>
+
+  <div class="spacer"></div>
 </div>
 
-<!-- TABS -->
-<div class="tabs" id="tabs">
-  <div class="tab on" data-tab="todos" onclick="setTab('todos')">🏠 Tudo</div>
-  <div class="tab" data-tab="celulares" onclick="setTab('celulares')">📱 Celulares</div>
-  <div class="tab" data-tab="pecas" onclick="setTab('pecas')">⚙️ Peças</div>
-  <div class="tab" data-tab="encomenda" onclick="setTab('encomenda')">📦 Encomenda</div>
-  <div class="tab" data-tab="mais" onclick="setTab('mais')">🛒 Mais</div>
-  <div class="tab" data-tab="servicos" onclick="setTab('servicos')">🔧 Serviços</div>
+<!-- ══════════════════════════════════════════
+     PAGE: CATÁLOGO
+══════════════════════════════════════════ -->
+<div id="page-catalogo" class="page">
+
+  <!-- TABS -->
+  <div class="nav-tabs" id="cattabs">
+    <div class="nav-tab active" id="tab-iphones"    onclick="goTab('iphones')">📱 iPhones</div>
+    <div class="nav-tab"        id="tab-android"    onclick="goTab('android')">📲 Android</div>
+    <div class="nav-tab"        id="tab-acessorios" onclick="goTab('acessorios')">🛒 Acessórios</div>
+    <div class="nav-tab"        id="tab-beleza"     onclick="goTab('beleza')">💄 Beleza</div>
+    <div class="nav-tab"        id="tab-educacao"   onclick="goTab('educacao')">📚 Educação</div>
+    <div class="nav-tab"        id="tab-presentes"  onclick="goTab('presentes')">🎁 Presentes</div>
+    <div class="nav-tab"        id="tab-pecas"      onclick="goTab('pecas')">🔩 Peças</div>
+    <div class="nav-tab"        id="tab-componentes" onclick="goTab('componentes')">⚙️ Componentes</div>
+    <div class="nav-tab"        id="tab-magalu"      onclick="goTab('magalu')">🛒 Vitrine Magalu</div>
+    <div class="nav-tab"        id="tab-encomenda"   onclick="goTab('encomenda')">📦 Encomenda</div>
+  </div>
+
+  <!-- SEARCH -->
+  <div class="search-wrap">
+    <input class="search-inp" type="search" id="srch" placeholder="🔍 Buscar produto, código ou marca..." oninput="doSearch()">
+  </div>
+
+  <!-- ── iPhones ── -->
+  <div id="cat-iphones" class="cat-sec active">
+    <div class="products-wrap"><div class="prod-cards" id="cards-iphones"></div></div>
+  </div>
+
+  <!-- ── Android ── -->
+  <div id="cat-android" class="cat-sec">
+    <div class="empty-state">
+      <div class="empty-state-icon">📲</div>
+      <div class="empty-state-txt">Em breve: Samsung, Motorola, Xiaomi e muito mais.<br>Consulte disponibilidade pelo WhatsApp!</div>
+      <a class="btn-wa" style="max-width:280px;margin:0 auto;" href="https://wa.me/5589988098980?text=Olá!+Quais+celulares+Android+estão+disponíveis?" target="_blank">💬 Consultar pelo WhatsApp</a>
+    </div>
+  </div>
+
+  <!-- ── Acessórios ── -->
+  <div id="cat-acessorios" class="cat-sec">
+    <div class="products-wrap"><div class="prod-cards" id="cards-acessorios"></div></div>
+  </div>
+
+  <!-- ── Beleza ── -->
+  <div id="cat-beleza" class="cat-sec">
+
+    <!-- Banner serviços da Iza -->
+    <div class="iza-banner">
+      <div class="iza-banner-top">
+        <div class="iza-banner-avatar">💄</div>
+        <div class="iza-banner-info">
+          <div class="iza-banner-name">Iza — Maquiadora Profissional</div>
+          <div class="iza-banner-role">Consultora Mary Kay &amp; Natura</div>
+        </div>
+      </div>
+      <div class="iza-banner-brands">
+        <span class="iza-brand-tag">💄 Mary Kay</span>
+        <span class="iza-brand-tag">🌿 Natura</span>
+        <span class="iza-brand-tag">✨ Outras marcas</span>
+      </div>
+      <div class="iza-svc-grid">
+        <div class="iza-svc">
+          <div class="iza-svc-icon">💋</div>
+          <div class="iza-svc-name">Maquiagem na Bancada</div>
+          <div class="iza-svc-price ask">A consultar</div>
+        </div>
+        <div class="iza-svc">
+          <div class="iza-svc-icon">🎓</div>
+          <div class="iza-svc-name">Curso Básico de Maquiagem</div>
+          <div class="iza-svc-price">R$ 300</div>
+        </div>
+        <div class="iza-svc">
+          <div class="iza-svc-icon">🏆</div>
+          <div class="iza-svc-name">Curso Profissional</div>
+          <div class="iza-svc-price">R$ 600</div>
+        </div>
+        <div class="iza-svc">
+          <div class="iza-svc-icon">🛍️</div>
+          <div class="iza-svc-name">Produtos de Beleza</div>
+          <div class="iza-svc-price ask">Ver catálogo</div>
+        </div>
+      </div>
+      <a class="iza-wa" href="https://wa.me/5599984458625?text=Olá+Iza!+Gostaria+de+saber+mais+sobre+os+serviços+de+beleza+e+maquiagem." target="_blank">
+        💄 Falar com Iza pelo WhatsApp
+      </a>
+    </div>
+
+    <div class="products-wrap"><div class="prod-cards" id="cards-beleza"></div></div>
+  </div>
+
+  <!-- ── Educação ── -->
+  <div id="cat-educacao" class="cat-sec">
+    <div class="products-wrap"><div class="prod-cards" id="cards-educacao"></div></div>
+  </div>
+
+  <!-- ── Presentes ── -->
+  <div id="cat-presentes" class="cat-sec">
+    <div class="products-wrap"><div class="prod-cards" id="cards-presentes"></div></div>
+  </div>
+
+  <!-- ── Componentes ── -->
+  <div id="cat-componentes" class="cat-sec">
+    <div class="brand-wrap" id="bfilter-comp">
+      <button class="brand-btn active" onclick="filterComp(this,'todas')">Todas</button>
+      <button class="brand-btn" onclick="filterComp(this,'Samsung')">Samsung</button>
+      <button class="brand-btn" onclick="filterComp(this,'Motorola')">Motorola</button>
+      <button class="brand-btn" onclick="filterComp(this,'Xiaomi')">Xiaomi</button>
+      <button class="brand-btn" onclick="filterComp(this,'Redmi')">Redmi</button>
+      <button class="brand-btn" onclick="filterComp(this,'Realme')">Realme</button>
+    </div>
+    <div class="brand-wrap" id="tipo-filter" style="padding-top:0;">
+      <button class="brand-btn active" onclick="filterTipo(this,'todas')">Todos tipos</button>
+      <button class="brand-btn" onclick="filterTipo(this,'PLACA CARGA')">⚡ Placa Carga</button>
+      <button class="brand-btn" onclick="filterTipo(this,'TAMPA')">🔲 Tampa</button>
+      <button class="brand-btn" onclick="filterTipo(this,'CONECTOR')">🔗 Conector</button>
+      <button class="brand-btn" onclick="filterTipo(this,'FLEX POWER')">🔌 Flex</button>
+      <button class="brand-btn" onclick="filterTipo(this,'LENTE CAM')">📷 Lente</button>
+      <button class="brand-btn" onclick="filterTipo(this,'BOTÃO')">🔘 Botão</button>
+      <button class="brand-btn" onclick="filterTipo(this,'CAMPAINHA')">🔊 Campainha</button>
+    </div>
+    <div class="products-wrap"><div class="prod-cards" id="cards-componentes"></div></div>
+  </div>
+
+    <!-- ── Peças ── -->
+  <div id="cat-pecas" class="cat-sec">
+    <div class="brand-wrap" id="bfilter">
+      <button class="brand-btn active" onclick="filterBrand(this,'todas')">Todas</button>
+      <button class="brand-btn" onclick="filterBrand(this,'Samsung')">Samsung</button>
+      <button class="brand-btn" onclick="filterBrand(this,'Apple')">Apple</button>
+      <button class="brand-btn" onclick="filterBrand(this,'Motorola')">Motorola</button>
+      <button class="brand-btn" onclick="filterBrand(this,'Infinix')">Infinix</button>
+      <button class="brand-btn" onclick="filterBrand(this,'Redmi')">Redmi</button>
+      <button class="brand-btn" onclick="filterBrand(this,'Realme')">Realme</button>
+    </div>
+    <div class="products-wrap"><div class="prod-cards" id="cards-pecas"></div></div>
+  </div>
+
+  <!-- ── Vitrine Magalu ── -->
+  <div id="cat-magalu" class="cat-sec">
+    <div class="magalu-header">
+      <div class="magalu-logo-row">
+        <div class="magalu-logo-badge">🛒 Influenciador Magalu</div>
+        <div class="magalu-tag">Smartstore09</div>
+      </div>
+      <div class="magalu-desc">Produtos Magalu curados pela Smart Store 09. Você compra direto no site da Magalu com toda a segurança — frete, nota fiscal e garantia da Magalu. Nós indicamos os melhores.</div>
+
+      <div class="magalu-cats">
+        <a class="magalu-cat" href="https://www.magazinevoce.com.br/magazinesmartstore09/busca/smartphone+samsung/" target="_blank">
+          <div class="magalu-cat-icon">📱</div>
+          <div class="magalu-cat-body">
+            <div class="magalu-cat-name">Samsung Galaxy</div>
+            <div class="magalu-cat-sub">A15 · A35 · A55 · S25</div>
+          </div>
+        </a>
+        <a class="magalu-cat" href="https://www.magazinevoce.com.br/magazinesmartstore09/busca/iphone/" target="_blank">
+          <div class="magalu-cat-icon">🍎</div>
+          <div class="magalu-cat-body">
+            <div class="magalu-cat-name">iPhone</div>
+            <div class="magalu-cat-sub">15 · 16 · Pro · SE</div>
+          </div>
+        </a>
+        <a class="magalu-cat" href="https://www.magazinevoce.com.br/magazinesmartstore09/busca/motorola+moto+g/" target="_blank">
+          <div class="magalu-cat-icon">📲</div>
+          <div class="magalu-cat-body">
+            <div class="magalu-cat-name">Motorola Moto G</div>
+            <div class="magalu-cat-sub">G35 · G55 · G85 · Edge</div>
+          </div>
+        </a>
+        <a class="magalu-cat" href="https://www.magazinevoce.com.br/magazinesmartstore09/busca/fone+bluetooth+ouvido/" target="_blank">
+          <div class="magalu-cat-icon">🎧</div>
+          <div class="magalu-cat-body">
+            <div class="magalu-cat-name">Fones Bluetooth</div>
+            <div class="magalu-cat-sub">JBL · Samsung · Xiaomi</div>
+          </div>
+        </a>
+        <a class="magalu-cat" href="https://www.magazinevoce.com.br/magazinesmartstore09/busca/smartwatch/" target="_blank">
+          <div class="magalu-cat-icon">⌚</div>
+          <div class="magalu-cat-body">
+            <div class="magalu-cat-name">Smartwatch</div>
+            <div class="magalu-cat-sub">Galaxy Watch · Apple Watch</div>
+          </div>
+        </a>
+        <a class="magalu-cat" href="https://www.magazinevoce.com.br/magazinesmartstore09/busca/capa+capinha+celular/" target="_blank">
+          <div class="magalu-cat-icon">🛡️</div>
+          <div class="magalu-cat-body">
+            <div class="magalu-cat-name">Capas e Películas</div>
+            <div class="magalu-cat-sub">Samsung · iPhone · Universal</div>
+          </div>
+        </a>
+        <a class="magalu-cat" href="https://www.magazinevoce.com.br/magazinesmartstore09/busca/carregador+celular+rapido/" target="_blank">
+          <div class="magalu-cat-icon">⚡</div>
+          <div class="magalu-cat-body">
+            <div class="magalu-cat-name">Carregadores</div>
+            <div class="magalu-cat-sub">Turbo · Wireless · Cabo USB-C</div>
+          </div>
+        </a>
+        <a class="magalu-cat" href="https://www.magazinevoce.com.br/magazinesmartstore09/busca/tablet+android/" target="_blank">
+          <div class="magalu-cat-icon">📟</div>
+          <div class="magalu-cat-body">
+            <div class="magalu-cat-name">Tablets</div>
+            <div class="magalu-cat-sub">Samsung Tab · Multilaser</div>
+          </div>
+        </a>
+      </div>
+
+      <a class="magalu-btn-full" href="https://www.magazinevoce.com.br/magazinesmartstore09/" target="_blank">
+        🛒 Ver toda a loja Smart Store 09 na Magalu
+      </a>
+
+      <div class="magalu-notice">
+        <span style="font-size:1rem;">ℹ️</span>
+        <span class="magalu-notice-txt">Ao clicar você será redirecionado para o site oficial da Magazine Luiza. Compra, pagamento e entrega são 100% responsabilidade da Magalu. A Smart Store 09 é parceira oficial do programa Influenciador Magalu.</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="cat-encomenda" class="cat-sec">
+    <div style="padding:10px 16px 4px;">
+      <div style="background:rgba(139,92,246,.08);border:1px solid rgba(139,92,246,.2);border-radius:12px;padding:12px 14px;margin-bottom:4px;">
+        <div style="font-size:.62rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#a78bfa;margin-bottom:4px;">📦 Encomenda sem estoque</div>
+        <div style="font-size:.72rem;color:#aaa;line-height:1.5;">Produto disponível sob encomenda. Receba em <strong style="color:#c4b5fd;">~10 dias</strong>. Confirme o frete pelo CEP abaixo. Pagamento via WhatsApp.</div>
+      </div>
+    </div>
+    <div class="products-wrap"><div class="prod-cards" id="cards-encomenda"></div></div>
+  </div>
+  <div class="spacer"></div>
 </div>
 
-<!-- COUNT -->
-<div class="count-bar" id="count-bar"></div>
+<!-- ══════════════════════════════════════════
+     PAGE: ASSISTÊNCIA
+══════════════════════════════════════════ -->
+<div id="page-assistencia" class="page">
 
-<!-- CONTENT -->
-<div id="content"></div>
+  <div class="assist-hero">
+    <div class="assist-hero-title">Assistência Técnica</div>
+    <div class="assist-hero-h">Conserto rápido com garantia</div>
+    <div class="assist-hero-sub">Peças originais · Diagnóstico grátis · Entrega no prazo</div>
+  </div>
 
-<!-- FIXED FOOTER -->
-<div class="fixed-wa" id="fixed-wa">
-  <a href="#" id="wa-footer">💬 Falar com a Smart Store 09</a>
+  <div class="services-grid">
+    <a class="svc-card" href="https://wa.me/5589988098980?text=Olá!+Gostaria+de+orçamento+para+troca+de+tela." target="_blank">
+      <div class="svc-icon">📱</div>
+      <div class="svc-name">Troca de Tela</div>
+      <div class="svc-price">A partir de R$ 180</div>
+    </a>
+    <a class="svc-card" href="https://wa.me/5589988098980?text=Olá!+Gostaria+de+orçamento+para+troca+de+bateria." target="_blank">
+      <div class="svc-icon">🔋</div>
+      <div class="svc-name">Troca de Bateria</div>
+      <div class="svc-price ask">Consultar preço</div>
+    </a>
+    <a class="svc-card" href="https://wa.me/5589988098980?text=Olá!+Gostaria+de+orçamento+para+troca+de+conector+de+carga." target="_blank">
+      <div class="svc-icon">🔌</div>
+      <div class="svc-name">Conector de Carga</div>
+      <div class="svc-price">R$ 100,00</div>
+    </a>
+    <a class="svc-card" href="https://wa.me/5589988098980?text=Olá!+Gostaria+de+orçamento+para+troca+de+placa+de+carga." target="_blank">
+      <div class="svc-icon">🔧</div>
+      <div class="svc-name">Placa de Carga</div>
+      <div class="svc-price">R$ 100,00</div>
+    </a>
+    <a class="svc-card" href="https://wa.me/5589988098980?text=Olá!+Gostaria+de+orçamento+para+formatação+do+meu+celular." target="_blank">
+      <div class="svc-icon">💻</div>
+      <div class="svc-name">Formatação</div>
+      <div class="svc-price ask">Consultar preço</div>
+    </a>
+    <a class="svc-card" href="https://wa.me/5589988098980?text=Olá!+Gostaria+de+fazer+o+diagnóstico+grátis+do+meu+celular." target="_blank">
+      <div class="svc-icon">🔍</div>
+      <div class="svc-name">Diagnóstico</div>
+      <div class="svc-price free">GRÁTIS</div>
+    </a>
+    <a class="svc-card" href="https://wa.me/5589988098980?text=Olá!+Gostaria+de+orçamento+para+limpeza+técnica." target="_blank">
+      <div class="svc-icon">✨</div>
+      <div class="svc-name">Limpeza Técnica</div>
+      <div class="svc-price ask">Consultar preço</div>
+    </a>
+    <a class="svc-card" href="https://wa.me/5589988098980?text=Olá!+Gostaria+de+orçamento+para+um+reparo+no+meu+celular." target="_blank">
+      <div class="svc-icon">⚙️</div>
+      <div class="svc-name">Outros Reparos</div>
+      <div class="svc-price ask">Consultar preço</div>
+    </a>
+  </div>
+
+  <!-- ANTES E DEPOIS -->
+  <div class="gallery-title">📸 Antes e Depois — exemplos reais</div>
+  <div class="gallery-grid">
+    <div class="gal-item">
+      <span class="gal-emoji">💔</span>
+      <span class="gal-lbl">Tela Quebrada</span>
+      <span class="arrow-badge">ANTES</span>
+    </div>
+    <div class="gal-item">
+      <span class="gal-emoji">✨</span>
+      <span class="gal-lbl">Tela Nova</span>
+      <span class="arrow-badge" style="background:var(--green);color:#000;">DEPOIS</span>
+    </div>
+    <div class="gal-item">
+      <span class="gal-emoji">🔌</span>
+      <span class="gal-lbl">Conector Oxidado</span>
+      <span class="arrow-badge">ANTES</span>
+    </div>
+    <div class="gal-item">
+      <span class="gal-emoji">✅</span>
+      <span class="gal-lbl">Conector Novo</span>
+      <span class="arrow-badge" style="background:var(--green);color:#000;">DEPOIS</span>
+    </div>
+  </div>
+
+  <div class="cta-wrap">
+    <a class="wa-big" href="https://wa.me/5589988098980?text=Olá!+Gostaria+de+um+orçamento+gratuito+para+reparo+do+meu+celular." target="_blank">
+      💬 Solicitar Orçamento Grátis
+    </a>
+  </div>
+  <div class="diag-note">🔍 Diagnóstico gratuito · Garantia em todos os serviços</div>
+
+  <div class="spacer"></div>
 </div>
 
+<!-- ══════════════════════════════════════════
+     PAGE: SOBRE
+══════════════════════════════════════════ -->
+<div id="page-sobre" class="page">
+
+  <div class="location-wrap">
+    <div class="sec-label">Nossa Localização</div>
+    <div class="map-box">
+      <iframe src="https://maps.google.com/maps?q=Paraibano,+Maranhão,+Brasil&output=embed&z=14"
+        width="100%" height="220" style="border:0;display:block;" allowfullscreen="" loading="lazy"></iframe>
+    </div>
+    <div class="info-grid">
+      <div class="info-cell"><div class="info-lbl">📍 Cidade</div><div class="info-val">Paraibano-MA</div></div>
+      <div class="info-cell"><div class="info-lbl">📍 Também em</div><div class="info-val">Passos Bons-MA</div></div>
+      <div class="info-cell"><div class="info-lbl">🕐 Horário</div><div class="info-val">Seg–Sáb<br>8h às 18h</div></div>
+      <div class="info-cell"><div class="info-lbl">📱 WhatsApp</div><div class="info-val">(89) 98809‑8980</div></div>
+    </div>
+  </div>
+
+  <div class="contacts-wrap">
+    <div class="sec-label">Fale Conosco</div>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <a class="btn-wa" href="https://wa.me/5589988098980?text=Olá!+Vi+o+catálogo+da+Smart+Store+09+e+gostaria+de+mais+informações." target="_blank" style="text-decoration:none;">💬 WhatsApp — Jânio</a>
+      <a class="btn-wa" href="https://wa.me/5599984458625?text=Olá+Iza!+Vi+o+catálogo+e+gostaria+de+saber+sobre+os+serviços+de+beleza." target="_blank" style="text-decoration:none;background:#ec4899;box-shadow:0 4px 20px rgba(236,72,153,.35);">💄 WhatsApp — Iza</a>
+    </div>
+  </div>
+
+  <div class="spacer"></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SCRIPT
+══════════════════════════════════════════ -->
 <script>
+// Images served externally from /imgs/
+
 const CODE_IMG = {
 "IP-16E-128-BR": "https://smartstore09.github.io/catalogo/imgs/p1.jpg",
 "IP-17-256-PT": "https://smartstore09.github.io/catalogo/imgs/p2.jpg",
@@ -222,23 +988,7 @@ const CODE_IMG = {
 "PC-AP-IP11P": "https://smartstore09.github.io/catalogo/imgs/ap_ip11p.jpg",
 "PC-AP-IP13": "https://smartstore09.github.io/catalogo/imgs/ap_ip13.jpg",
 "PC-AP-TAMP": "https://smartstore09.github.io/catalogo/imgs/ap_tamp.jpg"
-};
-
-
-const FRETE_TABLE = {
-  MA:{min:10,max:18,d:4},
-  PI:{min:13,max:21,d:5},CE:{min:13,max:21,d:5},
-  RN:{min:15,max:24,d:6},PB:{min:15,max:24,d:6},
-  PE:{min:15,max:25,d:6},AL:{min:16,max:26,d:6},SE:{min:16,max:26,d:6},
-  BA:{min:18,max:30,d:7},PA:{min:17,max:27,d:6},TO:{min:18,max:28,d:7},
-  AM:{min:22,max:36,d:9},AP:{min:22,max:36,d:9},
-  AC:{min:25,max:40,d:11},RO:{min:25,max:40,d:11},RR:{min:28,max:44,d:12},
-  GO:{min:20,max:32,d:7},DF:{min:20,max:32,d:7},
-  MT:{min:22,max:35,d:9},MS:{min:22,max:35,d:9},
-  MG:{min:20,max:34,d:8},ES:{min:22,max:36,d:9},
-  RJ:{min:22,max:36,d:9},SP:{min:22,max:36,d:9},
-  PR:{min:25,max:40,d:10},SC:{min:25,max:40,d:10},RS:{min:28,max:44,d:12},
-
+}
 "ENC-ACR-NV15": "https://smartstore09.github.io/catalogo/imgs/enc_acr_nv15.jpg",
 "ENC-AIW-BB200": "https://smartstore09.github.io/catalogo/imgs/enc_aiw_bb200.jpg",
 "ENC-AP-IP15-256": "https://smartstore09.github.io/catalogo/imgs/enc_ip15_256.jpg",
@@ -276,8 +1026,71 @@ const FRETE_TABLE = {
 "ENC-TEN-MAT": "https://smartstore09.github.io/catalogo/imgs/enc_ten_mat.jpg",
 "ENC-WAP-VPZ": "https://smartstore09.github.io/catalogo/imgs/enc_wap_vpz.jpg",
 "ENC-XI-PADX1": "https://smartstore09.github.io/catalogo/imgs/enc_xi_padx1.jpg",
-};
+;
 
+const WA_J = '5589988098980';
+const WA_I = '5599984458625';
+const wa = (p,m) => `https://wa.me/${p}?text=${encodeURIComponent(m)}`;
+
+// ── REVENDEDOR JÚNIOR ──
+const REV_SLUG = new URLSearchParams(location.search).get('rev') || '';
+const REV_NAME = REV_SLUG
+  ? decodeURIComponent(REV_SLUG.replace(/-/g,' ')).replace(/\b\w/g, c => c.toUpperCase())
+  : '';
+const revRef = REV_NAME ? `\n\n🤝 Indicado por: ${REV_NAME}` : '';
+
+const FRETE_TABLE = {
+  MA:{min:10,max:18,d:4},
+  PI:{min:13,max:21,d:5},CE:{min:13,max:21,d:5},
+  RN:{min:15,max:24,d:6},PB:{min:15,max:24,d:6},
+  PE:{min:15,max:25,d:6},AL:{min:16,max:26,d:6},SE:{min:16,max:26,d:6},
+  BA:{min:18,max:30,d:7},PA:{min:17,max:27,d:6},TO:{min:18,max:28,d:7},
+  AM:{min:22,max:36,d:9},AP:{min:22,max:36,d:9},
+  AC:{min:25,max:40,d:11},RO:{min:25,max:40,d:11},RR:{min:28,max:44,d:12},
+  GO:{min:20,max:32,d:7},DF:{min:20,max:32,d:7},
+  MT:{min:22,max:35,d:9},MS:{min:22,max:35,d:9},
+  MG:{min:20,max:34,d:8},ES:{min:22,max:36,d:9},
+  RJ:{min:22,max:36,d:9},SP:{min:22,max:36,d:9},
+  PR:{min:25,max:40,d:10},SC:{min:25,max:40,d:10},RS:{min:28,max:44,d:12},
+};
+let _currentEnc = null;
+let _freteAddr  = null;
+
+function formatCEP(v){return v.replace(/\D/g,'').replace(/(\d{5})(\d{1,3})/,'$1-$2');}
+
+async function calcularFrete(){
+  const raw=document.getElementById('m-cep-inp').value.replace(/\D/g,'');
+  const res=document.getElementById('m-cep-res');
+  if(raw.length<8){res.className='cep-result error';res.textContent='CEP inválido — informe 8 dígitos.';return;}
+  res.className='cep-result';res.textContent='Consultando...';
+  try{
+    const r=await fetch(`https://viacep.com.br/ws/${raw}/json/`);
+    const d=await r.json();
+    if(d.erro){res.className='cep-result error';res.textContent='CEP não encontrado.';return;}
+    _freteAddr=d;
+    const uf=d.uf.toUpperCase();
+    const ft=FRETE_TABLE[uf];
+    const prod=_currentEnc;
+    const dias=(prod&&prod.deliveryDays)||10;
+    if(ft){
+      res.innerHTML=`<div class="cep-line"><span class="cep-city">${d.localidade} – ${uf}</span><span class="cep-val">R$ ${ft.min},00–${ft.max},00</span></div><div style="font-size:.62rem;color:#888;margin-top:4px;">⏱ Entrega em ~${dias} dias · Frete confirmado via WhatsApp</div>`;
+      res.className='cep-result ok';
+    } else {
+      res.className='cep-result error';res.textContent=`${d.localidade}–${uf}: região não coberta. Consulte via WhatsApp.`;
+    }
+  }catch(e){res.className='cep-result error';res.textContent='Erro ao consultar. Tente novamente.';}
+}
+
+function aplicarFrete(p){
+  _currentEnc=p;
+  const sec=document.getElementById('modal-cep-sec');
+  if(sec) sec.style.display='block';
+  const inp=document.getElementById('m-cep-inp');
+  if(inp){inp.value='';document.getElementById('m-cep-res').textContent='';}
+}
+
+
+// ── PRODUCTS ──
 const P = [
   // iPhones
   {id:5,cat:'iphones',code:'IP-16E-128-BR',name:'iPhone 16e 128GB Branco',specs:'128GB · Chip A16 Bionic · Face ID · USB-C',price:'3.498,99',from:0,badge:'LANÇAMENTO',bc:'by',stock:'ok',icon:'📱'},
@@ -513,184 +1326,226 @@ const P = [
   {id:442,cat:'encomenda',marca:'Lancôme',code:'ENC-LAN-IDOL',name:'Idôle Lancôme EDT 100ml',specs:'EDT · 100ml · Feminino · Floral-Fresco',price:'609',from:0,badge:'ENCOMENDA',bc:'benc',stock:'enc',deliveryDays:7,icon:'🌸'}
 ];
 
-// ── UTILS ──
-const WA_J = '5589988098980';
-const WA_I = '5599984458625';
-const REV_SLUG = new URLSearchParams(location.search).get('rev')||'';
-const REV_NAME = REV_SLUG ? decodeURIComponent(REV_SLUG.replace(/-/g,' ')).replace(/\b\w/g,c=>c.toUpperCase()) : '';
-const revRef = REV_NAME ? `\n\n🤝 Indicado por: ${REV_NAME}` : '';
 
-function wa(num, msg){ return `https://wa.me/${num}?text=${encodeURIComponent(msg)}`; }
 function fmtP(p){
-  if(p===undefined||p===null||p==='') return null;
-  const s = String(p).trim();
-  if(!s) return null;
-  return s.includes(',') ? s : s + ',00';
-}
-function waMsg(p){
-  return `Olá! Vi ${p.name} (${p.code}) no catálogo e quero mais informações.${revRef}`;
+  if(p===undefined||p===null||p==='') return p;
+  const s=String(p).trim();
+  return s.includes(',') ? s : (s+',00');
 }
 
-// ── CARD ──
+// ── RENDER ──
 function mkCard(p){
-  const fp = fmtP(p.price);
-  const imgSrc = CODE_IMG[p.code];
-  const imgHtml = imgSrc
-    ? `<img src="${imgSrc}" alt="${p.name}" loading="lazy">`
-    : `<span style="font-size:2.2rem;">${p.icon||'📦'}</span>`;
-  const isEnc = p.stock==='enc';
-  const isLast = p.stock==='last';
-  const msgJ = `Olá! Tenho interesse em: ${p.name}${p.specs?' ('+p.specs+')':''}. Pode me passar mais informações?${revRef}`;
-  const waUrl = wa(WA_J, msgJ);
-  const btnLabel = isEnc ? '💬 Encomendar' : fp ? '💬 Comprar' : '💬 Consultar';
-  const delivTag = isEnc
-    ? `<div class="c-enc">📦 Receba em ~${p.deliveryDays||10} dias</div>` : '';
-  const stokTag = isLast ? `<div class="c-last">⚠ Último</div>` : '';
-  const priceBlock = fp
-    ? `${p.from?'<div class="c-from">A partir de</div>':''}
-       <div class="c-price">R$ ${fp}</div>`
-    : `<div class="c-consult">Consultar preço</div>`;
-  const badge = p.badge ? `<span class="card-badge ${p.bc||'bb'}">${p.badge}</span>` : '';
-
-  return `<div class="card">
-  <div class="c-img">${imgHtml}</div>
-  <div class="c-body">
-    <div class="c-top">
-      ${badge}
-      <div class="c-name">${p.name}</div>
-      <div class="c-specs">${p.specs||''}</div>
+  const priceHtml = p.price
+    ? `<div class="card-price">${p.from?'<span class="pfx">A partir de R$ </span>':'<span class="pfx">R$ </span>'}${fmtP(p.price)}</div>`
+    : `<div class="card-price consulta">Consultar preço</div>`;
+  const stockHtml = p.stock==='enc'
+    ? `<span class="stock-enc">📦 Receba em ~${p.deliveryDays||10} dias</span>`
+    : p.stock==='last'
+    ? `<span class="stock-last">⚠ Último</span>`
+    : `<span class="stock-ok">✓ Disponível</span>`;
+  const marca = p.marca||'';
+  const codeInfo = marca ? `${p.code} · ${marca}` : p.code;
+  const msgJ = `Olá! Vi ${p.name} (${p.code}) no catálogo da Smart Store 09 e gostaria de mais informações.${revRef}`;
+  const msgI = msgJ;
+  const waIcon = `<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.523 5.854L.057 23.43a.5.5 0 00.612.612l5.576-1.466A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.806 9.806 0 01-5.034-1.387l-.36-.214-3.732.982.998-3.647-.236-.375A9.818 9.818 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>`;
+  return `<div class="prod-card" onclick="openModal(${p.id})" data-cat="${p.cat}" data-marca="${marca.toLowerCase()}" data-name="${p.name.toLowerCase()}" data-code="${p.code.toLowerCase()}" data-badge="${(p.badge||'').toLowerCase()}">
+  <div class="card-body">
+    <div class="card-img">${CODE_IMG[p.code] ? `<img src="${CODE_IMG[p.code]}" alt="${p.name}" loading="lazy">` : p.icon}</div>
+    <div class="card-info">
+      ${p.badge?`<div class="card-badge ${p.bc}">${p.badge}</div>`:''}
+      <div class="card-code">${codeInfo}</div>
+      <div class="card-name">${p.name}</div>
+      <div class="card-specs">${p.specs}</div>
+      ${priceHtml}
+      ${stockHtml}
     </div>
-    <div class="c-foot">
-      <div class="c-prices">
-        ${priceBlock}
-        ${delivTag}${stokTag}
-      </div>
-      <a class="c-btn" href="${waUrl}">${btnLabel}</a>
-    </div>
+  </div>
+  <div class="card-footer">
+    <a class="wa-btn" onclick="event.stopPropagation()" href="${wa(WA_J,msgJ)}" target="_blank">
+      ${waIcon} Jânio
+    </a>
+    <a class="wa-btn iza" onclick="event.stopPropagation()" href="${wa(WA_I,msgI)}" target="_blank">
+      💄 Iza
+    </a>
   </div>
 </div>`;
 }
 
-// ── TABS ──
-let activeTab = 'todos';
-let searchQ = '';
-
-const CAT_MAP = {
-  todos:    p => p.stock !== 'enc',
-  celulares:p => ['iphones','android'].includes(p.cat),
-  pecas:    p => ['pecas','componentes'].includes(p.cat),
-  encomenda:p => p.stock === 'enc',
-  mais:     p => ['acessorios','beleza','presentes','educacao','vitrine'].includes(p.cat),
-  servicos: ()=> false,
-};
-
-function filtered(){
-  const q = searchQ.toLowerCase().trim();
-  let list = P.filter(CAT_MAP[activeTab] || (()=>true));
-  if(q) list = P.filter(p =>
-    p.name.toLowerCase().includes(q) ||
-    (p.marca||'').toLowerCase().includes(q) ||
-    (p.specs||'').toLowerCase().includes(q) ||
-    (p.code||'').toLowerCase().includes(q)
-  );
-  return list;
+const _rendered = {};
+function renderCat(cat) {
+  if (_rendered[cat]) return;
+  _rendered[cat] = true;
+  const list = P.filter(p => p.cat === cat);
+  const el = document.getElementById('cards-' + cat);
+  if (el) el.innerHTML = list.map(mkCard).join('');
 }
+function renderAll(){ renderCat('iphones'); } // Only render visible tab on load
 
-function render(){
-  const content = document.getElementById('content');
-  const countBar = document.getElementById('count-bar');
-
-  if(activeTab === 'servicos' && !searchQ){
-    content.innerHTML = mkServicos();
-    countBar.textContent = '';
-    return;
-  }
-
-  const list = filtered();
-  countBar.textContent = `${list.length} produto${list.length!==1?'s':''} encontrado${list.length!==1?'s':''}`;
-
-  if(!list.length){
-    content.innerHTML = `<div class="empty"><div class="empty-ico">🔍</div><div class="empty-txt">Nenhum produto encontrado.</div></div>`;
-    return;
-  }
-
-  let html = '';
-  if(activeTab === 'todos' && !searchQ){
-    html += mkHero();
-  }
-  html += `<div class="list">${list.map(mkCard).join('')}</div>`;
-  content.innerHTML = html;
-}
-
-function setTab(t){
-  activeTab = t;
-  searchQ = '';
-  document.getElementById('search').value = '';
-  document.querySelectorAll('.tab').forEach(el => el.classList.toggle('on', el.dataset.tab === t));
-  render();
+// ── NAVIGATION ──
+const PAGE_IDX={home:0,catalogo:1,assistencia:2,sobre:3};
+function goPage(page){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+page).classList.add('active');
+  document.querySelectorAll('.bnav-btn').forEach((b,i)=>b.classList.toggle('active',i===PAGE_IDX[page]));
   window.scrollTo(0,0);
 }
 
-function doSearch(v){
-  searchQ = v;
-  // Mostrar count mesmo durante busca
-  render();
+function goTab(tab){
+  goPage('catalogo');
+  document.querySelectorAll('.cat-sec').forEach(s=>s.classList.remove('active'));
+  const el=document.getElementById('cat-'+tab);
+  if(el)el.classList.add('active');
+  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+  const tabEl=document.getElementById('tab-'+tab);
+  if(tabEl){tabEl.classList.add('active');tabEl.scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'});}
+  renderCat(tab); // Lazy render on demand
 }
 
-// ── HERO ──
-function mkHero(){
-  return `<div class="hero">
-  <div class="hero-name">Smart Store 09</div>
-  <div class="hero-desc">Celulares · Peças · Assistência · Acessórios<br>Paraibano-MA · Atendimento pelo WhatsApp</div>
-  <a class="hero-btn" href="https://wa.me/${WA_J}?text=${encodeURIComponent('Olá! Vi o catálogo da Smart Store 09 e quero atendimento.'+revRef)}">
-    💬 Falar com a Smart Store 09
-  </a>
-  <div class="hero-chips">
-    <span class="chip">📍 Paraibano-MA</span>
-    <span class="chip">✅ Garantia</span>
-    <span class="chip">💳 Parcelamento</span>
-    <span class="chip">⚡ PIX</span>
-  </div>
-</div>`;
+// ── BRAND FILTER ──
+let curBrand='todas';
+function filterComp(btn,brand){
+  document.querySelectorAll('#bfilter-comp .brand-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('#cards-componentes .prod-card').forEach(c=>{
+    const m=c.dataset.marca.toLowerCase();
+    c.style.display=(brand==='todas'||m===brand.toLowerCase())?'':'none';
+  });
+}
+let _curTipo='todas';
+function filterTipo(btn,tipo){
+  _curTipo=tipo;
+  document.querySelectorAll('#tipo-filter .brand-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('#cards-componentes .prod-card').forEach(c=>{
+    const b=c.dataset.badge||'';
+    c.style.display=(tipo==='todas'||b===tipo)?'':'none';
+  });
+}
+function filterBrand(btn,brand){
+  curBrand=brand;
+  document.querySelectorAll('#bfilter .brand-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('#cards-pecas .prod-card').forEach(c=>{
+    c.style.display=(brand==='todas'||c.dataset.marca===brand.toLowerCase())?'':'none';
+  });
 }
 
-// ── ASSISTÊNCIA ──
-function mkServicos(){
-  const servicos = [
-    ['🔲 Troca de Tela','A partir de R$ 180,00'],
-    ['🔋 Troca de Bateria','Consultar'],
-    ['🔌 Troca de Conector','R$ 100,00'],
-    ['🔧 Placa de Carga','R$ 100,00'],
-    ['💻 Formatação','Consultar'],
-    ['🔍 Diagnóstico','GRÁTIS'],
-    ['✨ Limpeza Técnica','Consultar'],
-  ];
-  const cards = servicos.map(([n,p])=>`
-  <div class="assist-card">
-    <div>
-      <div class="assist-name">${n}</div>
-      <div class="assist-price">${p}</div>
-    </div>
-    <a class="assist-link" href="${wa(WA_J,`Olá! Preciso de orçamento: ${n}${revRef}`)}">💬 Orçamento</a>
-  </div>`).join('');
-  return `<div class="assist-sec">
-  <div class="assist-title">🔧 Assistência Técnica</div>
-  ${cards}
-  <div style="height:80px;"></div>
-</div>`;
+// ── SEARCH ──
+function doSearch(){
+  // Ensure all cats rendered before searching
+  ['iphones','android','acessorios','beleza','educacao','presentes','pecas','componentes','encomenda'].forEach(renderCat);
+  const q=document.getElementById('srch').value.toLowerCase().trim();
+  document.querySelectorAll('.prod-card').forEach(c=>{
+    if(!q){c.style.display='';return;}
+    const m=c.dataset.name.includes(q)||c.dataset.code.includes(q)||(c.dataset.marca||'').includes(q)||(c.dataset.badge||'').includes(q);
+    c.style.display=m?'':'none';
+  });
+  // Show/hide empty states per cat-sec
+  document.querySelectorAll('.cat-sec.active').forEach(sec=>{
+    const cards=sec.querySelectorAll('.prod-card');
+    const visible=[...cards].some(c=>c.style.display!=='none');
+    let empty=sec.querySelector('.empty-state');
+    if(empty) empty.style.display=visible||!q?'none':'';
+  });
 }
 
-// ── WA LINKS ──
-function updateWaLinks(){
-  const msg = 'Olá! Vi o catálogo da Smart Store 09 e quero atendimento.' + revRef;
-  const url = wa(WA_J, msg);
-  document.getElementById('wa-top').href = url;
-  document.getElementById('wa-footer').href = url;
+// ── MODAL ──
+function openModal(id){
+  const p=P.find(x=>x.id===id);
+  if(!p)return;
+  const ov=document.getElementById('modal-ov');
+  const imgEl=document.getElementById('m-img');
+  const src=CODE_IMG[p.code];
+  imgEl.innerHTML=src?`<img src="${src}" alt="${p.name}">`:`<span>${p.icon}</span>`;
+  document.getElementById('m-badge').className=`modal-badge ${p.bc}`;
+  document.getElementById('m-badge').textContent=p.badge||'';
+  document.getElementById('m-name').textContent=p.name;
+  document.getElementById('m-code').textContent=`${p.code}${p.marca?' · '+p.marca:''}`;
+  document.getElementById('m-specs').textContent=p.specs;
+  const priceEl=document.getElementById('m-price');
+  if(p.price){
+    priceEl.innerHTML=`${p.from?'A partir de ':''}R$ ${p.price}`;
+    priceEl.style.fontSize='1.6rem';
+  } else {
+    priceEl.textContent='Consultar preço';
+    priceEl.style.fontSize='1rem';
+  }
+  const stockEl=document.getElementById('m-stock');
+  if(p.stock==='enc'){
+    stockEl.textContent=`📦 Encomenda · ~${p.deliveryDays||10} dias`;
+    stockEl.className='modal-stock enc';
+    aplicarFrete(p);
+  } else {
+    stockEl.textContent=p.stock==='last'?'⚠ Último':'✓ Disponível';
+    stockEl.className='modal-stock '+(p.stock==='last'?'last':'ok');
+    const sec=document.getElementById('modal-cep-sec');
+    if(sec) sec.style.display='none';
+  }
+  const isEnc = p.stock==='enc';
+  const encInfo = isEnc ? `\n\n📦 *Quero fazer uma encomenda!*\nProduto: ${p.name} (${p.code})\nPrevisão de entrega: ~${p.deliveryDays||10} dias` : '';
+  const msgJ=`Olá! Vi ${p.name} (${p.code}) no catálogo da Smart Store 09 e gostaria de mais informações.${encInfo}${revRef}`;
+  const msgI=msgJ;
+  document.getElementById('mWaJ').href=wa(WA_J,msgJ);
+  document.getElementById('mWaI').href=wa(WA_I,msgI);
+  ov.classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeModal(){
+  document.getElementById('modal-ov').classList.remove('open');
+  document.body.style.overflow='';
 }
 
 // ── INIT ──
-updateWaLinks();
-render();
+window.addEventListener('DOMContentLoaded',()=>{
+  renderAll();
+  // Ativar banner de revendedor
+  if (REV_NAME) {
+    document.getElementById('rev-nome').textContent = REV_NAME;
+    document.getElementById('rev-banner').classList.add('ativo');
+  }
+  document.getElementById('modal-ov').addEventListener('click',function(e){
+    if(e.target===this)closeModal();
+  });
+});
 </script>
+
+<!-- ── MODAL PRODUTO ── -->
+<div class="modal-overlay" id="modal-ov">
+  <div class="modal-sheet">
+    <div class="modal-drag"></div>
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-img" id="m-img"></div>
+    <div class="modal-body">
+      <div id="m-badge" class="modal-badge"></div>
+      <div class="modal-name" id="m-name"></div>
+      <div class="modal-code" id="m-code"></div>
+      <div class="modal-specs" id="m-specs"></div>
+      <div class="modal-price-row">
+        <div class="modal-price" id="m-price"></div>
+        <div id="m-stock" class="modal-stock ok"></div>
+      </div>
+    </div>
+    <div class="modal-cep-sec" id="modal-cep-sec" style="display:none;">
+      <div class="cep-label">Consultar frete pelo CEP</div>
+      <div class="cep-row">
+        <input class="cep-inp" id="m-cep-inp" type="tel" placeholder="00000-000" maxlength="9"
+          oninput="this.value=formatCEP(this.value)"
+          onkeydown="if(event.key==='Enter')calcularFrete()">
+        <button class="cep-go-btn" onclick="calcularFrete()">Calcular</button>
+      </div>
+      <div class="cep-result" id="m-cep-res"></div>
+    </div>
+    <div class="modal-btns">
+      <a class="modal-wa janio" id="mWaJ" href="#" target="_blank">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.523 5.854L.057 23.43a.5.5 0 00.612.612l5.576-1.466A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.806 9.806 0 01-5.034-1.387l-.36-.214-3.732.982.998-3.647-.236-.375A9.818 9.818 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+        💬 Falar com Jânio
+      </a>
+      <a class="modal-wa iza" id="mWaI" href="#" target="_blank">
+        💄 Falar com Iza
+      </a>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
