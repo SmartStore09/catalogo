@@ -1027,7 +1027,6 @@ const CODE_IMG = {
 "ENC-XI-PADX1": "https://smartstore09.github.io/catalogo/imgs/enc_xi_padx1.jpg"
 };
 
-
 const WA_J = '5589988098980';
 const WA_I = '5599984458625';
 const wa = (p,m) => `https://wa.me/${p}?text=${encodeURIComponent(m)}`;
@@ -1326,13 +1325,7 @@ const P = [
   {id:442,cat:'encomenda',marca:'Lancôme',code:'ENC-LAN-IDOL',name:'Idôle Lancôme EDT 100ml',specs:'EDT · 100ml · Feminino · Floral-Fresco',price:'609',from:0,badge:'ENCOMENDA',bc:'benc',stock:'enc',deliveryDays:7,icon:'🌸'}
 ];
 
-
-function fmtP(p){
-  if(p===undefined||p===null||p==='') return p;
-  const s=String(p).trim();
-  return s.includes(',') ? s : (s+',00');
-}
-
+function fmtP(v){var s=String(v||"").trim();return s&&!s.includes(",")?s+",00":s;}
 // ── RENDER ──
 function mkCard(p){
   const priceHtml = p.price
@@ -1464,7 +1457,7 @@ function openModal(id){
   document.getElementById('m-specs').textContent=p.specs;
   const priceEl=document.getElementById('m-price');
   if(p.price){
-    priceEl.innerHTML=`${p.from?'A partir de ':''}R$ ${p.price}`;
+    priceEl.innerHTML=`${p.from?'A partir de ':''}R$ ${fmtP(p.price)}`;
     priceEl.style.fontSize='1.6rem';
   } else {
     priceEl.textContent='Consultar preço';
