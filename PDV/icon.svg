@@ -1,0 +1,6 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <rect width="512" height="512" rx="96" fill="#0f1420"/>
+  <circle cx="256" cy="216" r="132" fill="#22c55e"/>
+  <text x="256" y="260" font-family="'Segoe UI',system-ui,sans-serif" font-size="150" font-weight="800" fill="#04210f" text-anchor="middle">🏪</text>
+  <text x="256" y="420" font-family="'Segoe UI',system-ui,sans-serif" font-size="96" font-weight="800" fill="#ffffff" text-anchor="middle">09</text>
+</svg>

@@ -1,0 +1,15 @@
+{
+  "name": "PDV Smart Store 09",
+  "short_name": "PDV SS09",
+  "description": "Ponto de venda da Smart Store 09 — Paraibano-MA",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0f1420",
+  "theme_color": "#0f1420",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "maskable" }
+  ]
+}

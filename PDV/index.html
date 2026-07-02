@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PDV — Smart Store 09</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0f1420">
+<link rel="apple-touch-icon" href="icon.svg">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <h1>🏪 SMART STORE <span>09</span> · PDV</h1>
+  <span id="clock"></span>
+  <span id="status-cat" class="badge off">catálogo: carregando…</span>
+  <span id="badge-sync-fila" class="badge off" style="display:none"></span>
+  <div class="sp"></div>
+  <button class="hbtn" onclick="carregarTudo(true)">🔄<span class="lbl"> Recarregar</span></button>
+  <button class="hbtn" onclick="window.open(URL_PLANILHA,'_blank')">📊<span class="lbl"> Planilha</span></button>
+  <button class="hbtn" id="btn-conectar-planilha" onclick="conectarPlanilha()" title="Conectar ao Google Sheets (sincroniza vendas e estoque)">🔗<span class="lbl"> Conectar</span></button>
+  <button class="hbtn" onclick="abrirHistorico()">🧾<span class="lbl"> Vendas</span></button>
+  <button class="hbtn" id="olho" onclick="toggleLucro()" title="Mostrar/ocultar lucro">👁<span class="lbl"> Lucro</span></button>
+  <button class="hbtn hbtn-fin" style="background:rgba(34,197,94,.15);border-color:rgba(34,197,94,.3);color:#4ade80" onclick="abrirFinanceiro()">💰<span class="lbl"> Financeiro</span></button>
+</header>
+
+<main>
+  <div id="left">
+    <div id="searchbar"><input id="busca" placeholder="🔍 Buscar produto ou código…  (atalho: tecla /)" autocomplete="off"></div>
+    <div id="chips"></div>
+    <div id="lista"></div>
+  </div>
+  <div id="right">
+    <h2>Carrinho</h2>
+    <div id="cart"><div id="vazio">Carrinho vazio.<br>Clique num produto para adicionar.</div></div>
+    <div id="pagto">
+      <div id="formas">
+        <button class="fp pix sel" data-f="PIX" onclick="setForma('PIX')">⚡ PIX</button>
+        <button class="fp" data-f="DINHEIRO" onclick="setForma('DINHEIRO')">💵 Dinheiro</button>
+        <button class="fp" data-f="CARTAO" onclick="setForma('CARTAO')">💳 Cartão</button>
+      </div>
+      <div class="extra" id="ex-pix" style="display:flex;align-items:center;gap:6px;margin-bottom:4px">
+        <label style="white-space:nowrap;font-size:12px;color:var(--mut)">Desc. PIX %</label>
+        <input id="pix-pct" type="number" min="0" max="100" step="1" value="" placeholder="ex: 10"
+          style="width:80px;padding:6px 8px;border-radius:7px;border:1px solid var(--border);background:var(--panel2);color:var(--txt);font-size:13px;outline:none"
+          oninput="render()">
+        <span style="font-size:12px;color:var(--mut)">% sobre o total</span>
+      </div>
+      <div class="extra" id="ex-din" style="display:none">
+        <label>Recebido R$</label><input id="recebido" type="number" step="0.01" min="0" oninput="render()">
+        <label id="troco" style="color:var(--acc);font-weight:700">Troco: —</label>
+      </div>
+      <div class="extra" id="ex-car" style="display:none">
+        <label>Parcelas</label>
+        <select id="parcelas" onchange="render()"></select>
+        <label id="vparc" style="font-weight:700">—</label>
+      </div>
+      <div class="extra">
+        <label>Desconto extra R$</label><input id="descx" type="number" step="0.01" min="0" value="" placeholder="0,00" oninput="render()">
+      </div>
+      <div class="lin"><span>Subtotal (preço normal)</span><span id="sub">R$ 0,00</span></div>
+      <div class="lin" id="lin-dpix" style="display:none"><span>Desconto PIX</span><span class="pixoff" id="dpix">—</span></div>
+      <div class="lin tt"><span>TOTAL</span><span id="total">R$ 0,00</span></div>
+      <div class="lin lucro" id="llucro" style="display:none"><span>Lucro estimado</span><span id="lucro">—</span></div>
+      <button id="fim" onclick="finalizar()" disabled>FINALIZAR VENDA (F2)</button>
+    </div>
+  </div>
+</main>
+
+<!-- RECIBO -->
+<div class="modal" id="m-recibo">
+  <div class="mbox">
+    <div class="mhead"><b>✅ Venda registrada</b><button class="xbtn" onclick="fechar('m-recibo')">✕</button></div>
+    <div class="mbody">
+      <div id="recibo-txt"></div>
+      <div class="extra" style="margin-top:10px">
+        <label>WhatsApp do cliente</label><input id="zap" placeholder="89 9XXXX-XXXX (opcional)">
+      </div>
+    </div>
+    <div class="mfoot">
+      <button class="mbtn verde" onclick="enviarZap()">📲 Enviar WhatsApp</button>
+      <button class="mbtn azul" onclick="window.print()">🖨 Imprimir</button>
+      <button class="mbtn" onclick="copiarRecibo()">📋 Copiar</button>
+      <button class="mbtn" onclick="fechar('m-recibo')">Fechar</button>
+    </div>
+  </div>
+</div>
+
+<!-- HISTÓRICO -->
+<div class="modal" id="m-hist">
+  <div class="mbox" style="width:min(640px,94vw)">
+    <div class="mhead">
+      <b>🧾 Vendas / Fechamento</b>
+      <input type="date" id="dia" style="background:var(--panel2);color:var(--txt);border:1px solid var(--border);border-radius:8px;padding:6px 10px" onchange="abrirHistorico(this.value)">
+      <button class="xbtn" onclick="fechar('m-hist')">✕</button>
+    </div>
+    <div class="mbody">
+      <div class="resumo" id="resumo"></div>
+      <div id="vendas-lista"></div>
+    </div>
+    <div class="mfoot">
+      <button class="mbtn azul" onclick="exportarCSV()">⬇ Exportar CSV (tudo)</button>
+      <button class="mbtn verde" onclick="copiarFechamento()">📋 Copiar fechamento</button>
+      <button class="mbtn" style="color:var(--red)" onclick="limparHistorico()">🗑 Limpar histórico</button>
+    </div>
+  </div>
+</div>
+
+<!-- FINANCEIRO -->
+<div class="modal" id="m-fin">
+  <div class="mbox">
+    <div class="mhead">
+      <b>💰 Controle Financeiro — Smart Store 09</b>
+      <button class="xbtn" onclick="fechar('m-fin')">✕</button>
+    </div>
+    <div class="mbody" style="padding:14px 16px">
+      <!-- WHO -->
+      <div class="fin-who">
+        <button class="fin-who-btn j" id="fin-who-j" onclick="finSetWho('j')">👨 Jânio</button>
+        <button class="fin-who-btn iz" id="fin-who-iz" onclick="finSetWho('iz')">👩 Iza</button>
+      </div>
+      <!-- TABS -->
+      <div class="fin-tabs">
+        <div class="fin-tab sel" id="fintab-lancar"  onclick="finGoTab('lancar')">➕ Lançar</div>
+        <div class="fin-tab"     id="fintab-hoje"    onclick="finGoTab('hoje')">📊 Hoje</div>
+        <div class="fin-tab"     id="fintab-hist"    onclick="finGoTab('hist')">📋 Histórico</div>
+        <div class="fin-tab"     id="fintab-mes"     onclick="finGoTab('mes')">📅 Mês</div>
+        <div class="fin-tab"     id="fintab-loja"    onclick="finGoTab('loja')">🏪 Retiradas</div>
+        <div class="fin-tab"     id="fintab-sync"    onclick="finGoTab('sync')">🔄 Sync</div>
+      </div>
+
+      <!-- LANÇAR -->
+      <div class="fin-scr on" id="finscr-lancar">
+        <div style="font-size:11px;color:var(--mut);letter-spacing:.5px;text-transform:uppercase;margin-bottom:8px">Categoria</div>
+        <div class="cat-grid-fin" id="fin-cat-grid"></div>
+        <div style="font-size:11px;color:var(--mut);letter-spacing:.5px;text-transform:uppercase;margin-bottom:6px">Valor (R$)</div>
+        <div class="fin-amount-row">
+          <input class="fin-amount-inp" id="fin-amt" type="number" inputmode="decimal" placeholder="0,00" step="0.01" min="0">
+        </div>
+        <input class="fin-desc-inp" id="fin-desc" type="text" placeholder="Descrição (opcional)" maxlength="60">
+        <button class="fin-save-btn" id="fin-save" onclick="finSalvar()" disabled>REGISTRAR GASTO</button>
+      </div>
+
+      <!-- HOJE -->
+      <div class="fin-scr" id="finscr-hoje">
+        <div class="fin-dash-grid">
+          <div class="fin-dash-card"><small>TOTAL DO DIA</small><b id="fh-total">R$ 0,00</b></div>
+          <div class="fin-dash-card"><small>JÂNIO</small><b id="fh-janio" style="color:#93c5fd">R$ 0,00</b></div>
+          <div class="fin-dash-card"><small>IZA</small><b id="fh-iza" style="color:#f9a8d4">R$ 0,00</b></div>
+        </div>
+        <div id="fh-loja-alert"></div>
+        <div style="font-size:11px;color:var(--mut);letter-spacing:.5px;text-transform:uppercase;margin-bottom:8px">POR CATEGORIA</div>
+        <div id="fh-cats"></div>
+        <div style="font-size:11px;color:var(--mut);letter-spacing:.5px;text-transform:uppercase;margin:10px 0 8px">LANÇAMENTOS</div>
+        <div id="fh-entries"></div>
+      </div>
+
+      <!-- HISTÓRICO -->
+      <div class="fin-scr" id="finscr-hist">
+        <div id="fin-hist-list"></div>
+      </div>
+
+      <!-- MÊS -->
+      <div class="fin-scr" id="finscr-mes">
+        <div class="fin-dash-grid" style="grid-template-columns:1fr 1fr">
+          <div class="fin-dash-card"><small id="fm-label">MÊS ATUAL</small><b id="fm-total">R$ 0,00</b></div>
+          <div class="fin-dash-card"><small>RETIRADAS DA LOJA</small><b id="fm-loja" style="color:#f59e0b">R$ 0,00</b></div>
+        </div>
+        <div id="fm-cats"></div>
+      </div>
+
+      <!-- SYNC -->
+      <div class="fin-scr" id="finscr-sync">
+        <div style="font-size:12px;color:var(--mut);margin-bottom:14px;line-height:1.6">
+          Copie o código no dispositivo que tem os dados → envie pelo WhatsApp → cole no outro dispositivo e clique Importar.
+        </div>
+        <div style="display:flex;gap:8px;margin-bottom:16px">
+          <button class="mbtn verde" onclick="finExportar()" style="flex:1">📤 Gerar Código</button>
+          <button class="mbtn azul" onclick="finImportar()" style="flex:1">📥 Importar Código</button>
+        </div>
+        <textarea id="fin-sync-code" rows="5" placeholder="Cole aqui o código recebido pelo WhatsApp..." style="width:100%;background:var(--panel2);border:1px solid var(--border);border-radius:9px;color:var(--txt);font-size:12px;padding:10px;font-family:monospace;resize:vertical;box-sizing:border-box"></textarea>
+        <div id="fin-sync-msg" style="margin-top:8px;font-size:12.5px;color:var(--acc)"></div>
+      </div>
+
+      <!-- RETIRADAS -->
+      <div class="fin-scr" id="finscr-loja">
+        <div class="fin-dash-grid">
+          <div class="fin-dash-card"><small>MÊS — TOTAL</small><b id="fl-total" style="color:#f59e0b">R$ 0,00</b></div>
+          <div class="fin-dash-card"><small>JÂNIO</small><b id="fl-j" style="color:#93c5fd">R$ 0,00</b></div>
+          <div class="fin-dash-card"><small>IZA</small><b id="fl-iz" style="color:#f9a8d4">R$ 0,00</b></div>
+        </div>
+        <div style="background:rgba(245,158,11,.07);border:1px solid rgba(245,158,11,.2);border-radius:8px;padding:8px 12px;font-size:12px;color:#a07830;margin-bottom:12px">
+          ⚠ Retiradas devem ser registradas e descontadas do caixa da loja
+        </div>
+        <div id="fl-entries"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PIN -->
+<div id="pin-ov">
+  <div class="pin-title">🏪 PDV SMART STORE 09</div>
+  <div class="pin-sub">ACESSO RESTRITO</div>
+  <div class="pin-dots">
+    <div class="pin-dot" id="pd0"></div>
+    <div class="pin-dot" id="pd1"></div>
+    <div class="pin-dot" id="pd2"></div>
+    <div class="pin-dot" id="pd3"></div>
+  </div>
+  <div class="pin-grid">
+    <button class="pin-k" onclick="pk('1')">1</button>
+    <button class="pin-k" onclick="pk('2')">2</button>
+    <button class="pin-k" onclick="pk('3')">3</button>
+    <button class="pin-k" onclick="pk('4')">4</button>
+    <button class="pin-k" onclick="pk('5')">5</button>
+    <button class="pin-k" onclick="pk('6')">6</button>
+    <button class="pin-k" onclick="pk('7')">7</button>
+    <button class="pin-k" onclick="pk('8')">8</button>
+    <button class="pin-k" onclick="pk('9')">9</button>
+    <button class="pin-k" onclick="pk('')" style="color:var(--mut)">⌫</button>
+    <button class="pin-k" onclick="pk('0')">0</button>
+    <button class="pin-k" onclick="pinBuf='';updDots()" style="color:var(--mut);font-size:14px">✕</button>
+  </div>
+  <div class="pin-err" id="pin-err"></div>
+</div>
+
+<!-- MOBILE NAV -->
+<div id="mob-nav">
+  <div class="mob-tab sel" id="mtab-prod" onclick="mobTab('prod')">
+    <span class="mob-tab-icon">📦</span>Produtos
+  </div>
+  <div class="mob-tab" id="mtab-cart" onclick="mobTab('cart')">
+    <span class="mob-tab-icon">🛒</span>Carrinho
+    <span class="cart-badge" id="cart-badge" style="display:none"></span>
+  </div>
+  <div class="mob-tab" id="mtab-fin" onclick="mobTab('fin')">
+    <span class="mob-tab-icon">💰</span>Financeiro
+  </div>
+</div>
+
+<script src="config.js"></script>
+<script src="sheets.js"></script>
+<script src="acessorios.js"></script>
+<script src="estoque.js"></script>
+<script src="oauth.js"></script>
+<script src="vendas-sync.js"></script>
+<script src="carrinho.js"></script>
+<script src="pagamento.js"></script>
+<script src="historico.js"></script>
+<script src="financeiro.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
