@@ -61,9 +61,9 @@ async function carregarCatalogo(manual){
       const ctl=new AbortController(); const t=setTimeout(()=>ctl.abort(),9000);
       const resp=await fetch(url,{signal:ctl.signal,cache:'no-store'});
       clearTimeout(t);
-      if(!resp.ok) continue;
+      if(!resp.ok){ console.warn('[catalogo] '+url+' respondeu HTTP '+resp.status); continue; }
       const txt=await resp.text();
-      if(!/C[ÓO]DIGO/i.test(txt)) continue;
+      if(!/C[ÓO]DIGO/i.test(txt)){ console.warn('[catalogo] '+url+' não retornou um CSV com cabeçalho CÓDIGO (permissão da planilha? HTML de erro?)'); continue; }
       const prods=linhasParaProdutos(parseCSV(txt));
       if(prods.length>10){
         CATALOGO=prods;
@@ -72,7 +72,8 @@ async function carregarCatalogo(manual){
         badge.textContent=`catálogo: planilha ✓ (${prods.length} itens)`;
         renderChips(); renderLista(); return;
       }
-    }catch(e){/* tenta a próxima fonte */}
+      console.warn('[catalogo] '+url+' retornou poucas linhas ('+prods.length+'), ignorando');
+    }catch(e){ console.warn('[catalogo] falha ao buscar '+url+':', e.message); }
   }
   const cache=ls(LS_CACHE);
   if(cache && cache.prods && cache.prods.length){

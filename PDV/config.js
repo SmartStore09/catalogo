@@ -11,7 +11,7 @@ const LOJA = {nome:'SMART STORE 09', fone:'(89) 98809-8980', cidade:'Paraibano-M
 const EMOJI = {'Assistência':'🔧','iPhones':'📱','Acessórios':'🔌','Beleza':'💄','Presentes':'🎁','Educação':'🎓','Peças/Frontais':'📲','Componentes':'⚙️','Capinhas':'📱','Películas':'🎬'};
 
 /* Preço padrão quando a aba CAPINHAS/PELÍCULAS não traz preço próprio na linha */
-const GID_PELICULAS = '1624936366';
+const GID_PELICULAS = '969815590'; // corrigido em 02/07/2026 (o valor antigo estava desatualizado)
 const NOMES_ABA_CAPINHAS  = ['CAPINHAS','📱 CAPINHAS','Capinhas','CAPINHA'];
 const NOMES_ABA_PELICULAS = ['PELÍCULAS','PELICULAS','Películas','🎬 PELÍCULAS'];
 const precoCapinha = () => ({venda:15, pix:13.5});
