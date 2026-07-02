@@ -4,10 +4,6 @@
    então carrinho, baixa de estoque, busca e finalização de venda já funcionam sem nenhuma
    mudança nesses módulos. */
 
-const normHeader = s => String(s||'').toLowerCase()
-  .replace(/[áàâã]/g,'a').replace(/[éê]/g,'e').replace(/í/g,'i')
-  .replace(/[óôõ]/g,'o').replace(/ú/g,'u').replace(/ç/g,'c').trim();
-
 function mapaColunas(headerRow){
   const map={};
   headerRow.forEach((h,i)=>{
@@ -64,41 +60,6 @@ function parseAcessorios(rows, categoria, precoPadrao, origem){
   return out;
 }
 
-async function fetchCSVPorNomeAba(nomes){
-  for(const nome of nomes){
-    const url=`https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(nome)}`;
-    try{
-      const ctl=new AbortController(); const t=setTimeout(()=>ctl.abort(),9000);
-      const resp=await fetch(url,{signal:ctl.signal,cache:'no-store'});
-      clearTimeout(t);
-      if(!resp.ok){ console.warn('[acessorios] aba "'+nome+'" respondeu HTTP '+resp.status); continue; }
-      const txt=await resp.text();
-      if(/^\s*<(!DOCTYPE|html)/i.test(txt)){ console.warn('[acessorios] aba "'+nome+'" retornou HTML em vez de CSV (nome errado ou sem permissão?)'); continue; }
-      return {texto:txt, nome}; // "nome" = título exato da aba, usado depois p/ escrever de volta (Tarefa 4)
-    }catch(e){ console.warn('[acessorios] falha ao buscar aba "'+nome+'":', e.message); }
-  }
-  return null;
-}
-
-async function fetchCSVPorGid(gid){
-  const urls=[
-    `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&gid=${gid}`,
-    `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=${gid}`
-  ];
-  for(const url of urls){
-    try{
-      const ctl=new AbortController(); const t=setTimeout(()=>ctl.abort(),9000);
-      const resp=await fetch(url,{signal:ctl.signal,cache:'no-store'});
-      clearTimeout(t);
-      if(!resp.ok){ console.warn('[acessorios] gid '+gid+' respondeu HTTP '+resp.status, url); continue; }
-      const txt=await resp.text();
-      if(/^\s*<(!DOCTYPE|html)/i.test(txt)){ console.warn('[acessorios] gid '+gid+' retornou HTML em vez de CSV (gid errado ou sem permissão?)', url); continue; }
-      return txt;
-    }catch(e){ console.warn('[acessorios] falha ao buscar gid '+gid+':', e.message); }
-  }
-  return null;
-}
-
 async function carregarAcessorios(){
   try{
     const resCap = await fetchCSVPorNomeAba(NOMES_ABA_CAPINHAS);
@@ -106,14 +67,9 @@ async function carregarAcessorios(){
     else console.warn('[acessorios] nenhuma aba de Capinhas encontrada entre os nomes tentados:', NOMES_ABA_CAPINHAS);
   }catch(e){ console.warn('[acessorios] erro carregando Capinhas:', e); /* segue sem capinhas por modelo — itens genéricos do catálogo continuam disponíveis */ }
   try{
-    let texto = await fetchCSVPorGid(GID_PELICULAS);
-    let origem = {abaGid: GID_PELICULAS};
-    if(!texto){
-      const resPel = await fetchCSVPorNomeAba(NOMES_ABA_PELICULAS);
-      if(resPel){ texto = resPel.texto; origem = {aba: resPel.nome}; }
-    }
-    if(texto) CATALOGO = CATALOGO.concat(parseAcessorios(parseCSV(texto), 'Películas', precoPelicula, origem));
-    else console.warn('[acessorios] nenhuma aba de Películas encontrada (gid '+GID_PELICULAS+' nem nomes):', NOMES_ABA_PELICULAS);
+    const resPel = await fetchCSVPorNomeAba(NOMES_ABA_PELICULAS);
+    if(resPel) CATALOGO = CATALOGO.concat(parseAcessorios(parseCSV(resPel.texto), 'Películas', precoPelicula, {aba:resPel.nome}));
+    else console.warn('[acessorios] nenhuma aba de Películas encontrada entre os nomes tentados:', NOMES_ABA_PELICULAS);
   }catch(e){ console.warn('[acessorios] erro carregando Películas:', e); /* segue sem películas por modelo — itens genéricos do catálogo continuam disponíveis */ }
 }
 

@@ -1,19 +1,21 @@
 'use strict';
 /* ================= CONFIG ================= */
-const SHEET_ID  = '1XvRe9O1PnHNi758Uml3LntZOnQKGDpWG';
-const GID       = '658847615';
+// SHEET_ID atualizado em 02/07/2026: o arquivo antigo era um .xlsx só "aberto" no Sheets
+// (nunca convertido de verdade), o que fazia a exportação CSV falhar com erro 400.
+// O usuário converteu via Arquivo → "Salvar como Planilhas Google", gerando este novo arquivo.
+const SHEET_ID  = '1g37KoM93BgpbC0GJnFYj_423RKxbFt2mHWscnfWYUBA';
+const GID       = '794665000'; // gid da aba CATÁLOGO — usado só pro botão "Planilha" abrir na aba certa
 const URL_PLANILHA = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/edit?gid=${GID}`;
-const FONTES_CSV = [
-  `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&gid=${GID}`,
-  `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=${GID}`
-];
 const LOJA = {nome:'SMART STORE 09', fone:'(89) 98809-8980', cidade:'Paraibano-MA', site:'smartstore09.github.io/catalogo'};
 const EMOJI = {'Assistência':'🔧','iPhones':'📱','Acessórios':'🔌','Beleza':'💄','Presentes':'🎁','Educação':'🎓','Peças/Frontais':'📲','Componentes':'⚙️','Capinhas':'📱','Películas':'🎬'};
 
-/* Preço padrão quando a aba CAPINHAS/PELÍCULAS não traz preço próprio na linha */
-const GID_PELICULAS = '969815590'; // corrigido em 02/07/2026 (o valor antigo estava desatualizado)
+/* Nomes de abas usados para buscar por NOME em vez de gid — gids não são estáveis (mudam se o
+   arquivo for convertido/recriado), nome da aba é bem mais confiável. */
+const NOMES_ABA_CATALOGO  = ['CATÁLOGO','CATALOGO'];
 const NOMES_ABA_CAPINHAS  = ['CAPINHAS','📱 CAPINHAS','Capinhas','CAPINHA'];
 const NOMES_ABA_PELICULAS = ['PELÍCULAS','PELICULAS','Películas','🎬 PELÍCULAS'];
+
+/* Preço padrão quando a aba CAPINHAS/PELÍCULAS não traz preço próprio na linha */
 const precoCapinha = () => ({venda:15, pix:13.5});
 const precoPelicula = (tipo) => {
   const t=String(tipo||'').toLowerCase();
@@ -257,3 +259,27 @@ const lsSet = (k,v) => localStorage.setItem(k, JSON.stringify(v));
 const fmt = n => (n==null||isNaN(n)) ? '—' : n.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
 const r2 = n => Math.round(n*100)/100;
 const esc = s => String(s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+/* ================= LEITURA DA PLANILHA POR NOME DE ABA (compartilhado) =================
+   Buscar por NOME de aba em vez de gid: gid não é estável (muda se o arquivo for convertido/
+   recriado, como já aconteceu uma vez). Usado tanto pelo catálogo principal quanto por
+   Capinhas/Películas. */
+const normHeader = s => String(s||'').toLowerCase()
+  .replace(/[áàâã]/g,'a').replace(/[éê]/g,'e').replace(/í/g,'i')
+  .replace(/[óôõ]/g,'o').replace(/ú/g,'u').replace(/ç/g,'c').trim();
+
+async function fetchCSVPorNomeAba(nomes){
+  for(const nome of nomes){
+    const url=`https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(nome)}`;
+    try{
+      const ctl=new AbortController(); const t=setTimeout(()=>ctl.abort(),9000);
+      const resp=await fetch(url,{signal:ctl.signal,cache:'no-store'});
+      clearTimeout(t);
+      if(!resp.ok){ console.warn('[planilha] aba "'+nome+'" respondeu HTTP '+resp.status); continue; }
+      const txt=await resp.text();
+      if(/^\s*<(!DOCTYPE|html)/i.test(txt)){ console.warn('[planilha] aba "'+nome+'" retornou HTML em vez de CSV (nome errado, permissão, ou arquivo nao convertido p/ Google Sheets?)'); continue; }
+      return {texto:txt, nome}; // "nome" = título exato da aba, usado depois p/ escrever de volta (Tarefa 4)
+    }catch(e){ console.warn('[planilha] falha ao buscar aba "'+nome+'":', e.message); }
+  }
+  return null;
+}

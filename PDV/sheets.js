@@ -26,26 +26,54 @@ const brl = s => {
 };
 const limpaCat = s => String(s||'').replace(/^[^0-9A-Za-zÀ-ÿ⚙]+/u,'').replace(/^⚙️?\s*/,'').trim();
 
+/* Colunas identificadas pelo texto do cabeçalho (não por posição fixa) — a planilha já mudou de
+   layout uma vez (colunas internas Preço Compra/Lucro/Margem inseridas antes de Estoque/Status),
+   então depender de índice fixo quebra fácil. */
+function mapaColunasCatalogo(headerRow){
+  const map={};
+  headerRow.forEach((h,i)=>{
+    const n=normHeader(h);
+    if(map.codigo===undefined && /codigo/.test(n)) map.codigo=i;
+    else if(map.categoria===undefined && /categoria/.test(n)) map.categoria=i;
+    else if(map.nome===undefined && /produto/.test(n)) map.nome=i;
+    else if(map.marca===undefined && /marca/.test(n)) map.marca=i;
+    else if(map.espec===undefined && /especifica/.test(n)) map.espec=i;
+    else if(map.pix===undefined && /pix/.test(n)) map.pix=i;
+    else if(map.preco===undefined && /venda/.test(n)) map.preco=i;
+    else if(map.custo===undefined && /compra/.test(n)) map.custo=i;
+    else if(map.estq===undefined && /estoque|qtd/.test(n)) map.estq=i;
+    else if(map.status===undefined && /status/.test(n)) map.status=i;
+    else if(map.obs===undefined && /observa/.test(n)) map.obs=i;
+  });
+  return map;
+}
+
 function linhasParaProdutos(rows){
-  let h=-1;
+  let h=-1, map=null;
   for(let i=0;i<rows.length;i++){
-    const c0=(rows[i][0]||'').trim().toUpperCase();
-    if(c0==='CÓDIGO'||c0==='CODIGO'){h=i;break;}
+    const m=mapaColunasCatalogo(rows[i]);
+    if(m.codigo!==undefined && m.nome!==undefined){ h=i; map=m; break; }
   }
   if(h<0) return [];
   const out=[];
   for(let i=h+1;i<rows.length;i++){
     const r=rows[i];
-    const c0=(r[0]||'').trim();
+    const c0=(r[map.codigo]||'').trim();
     if(!c0 || c0.toUpperCase().startsWith('TOTAL')) continue;
-    if(!(r[2]||'').trim()) continue;            // linha separadora de categoria
-    const estq = (r[8]||'').trim();
+    const nome=(map.nome!==undefined?(r[map.nome]||''):'').trim();
+    if(!nome) continue;                          // linha separadora de categoria
+    const estq = map.estq!==undefined ? (r[map.estq]||'').trim() : '';
     out.push({
-      c:c0, cat:limpaCat(r[1]), n:(r[2]||'').trim(), m:(r[3]||'').trim(), e:(r[4]||'').trim(),
-      p:brl(r[5]), pix:brl(r[6]), custo:brl(r[7]),
+      c:c0, cat:limpaCat(map.categoria!==undefined?r[map.categoria]:''), n:nome,
+      m:(map.marca!==undefined?(r[map.marca]||''):'').trim(),
+      e:(map.espec!==undefined?(r[map.espec]||''):'').trim(),
+      p: map.preco!==undefined?brl(r[map.preco]):null,
+      pix: map.pix!==undefined?brl(r[map.pix]):null,
+      custo: map.custo!==undefined?brl(r[map.custo]):null,
       estq: estq==='' ? null : (parseInt(estq,10)||0),
-      st:(r[9]||'Ativo').trim(), obs:(r[11]||'').trim(),
-      linha:i+1, estqCol:8, abaGid:GID // usados na Tarefa 4 p/ escrever a baixa de estoque de volta na planilha
+      st: (map.status!==undefined?(r[map.status]||''):'').trim() || 'Ativo',
+      obs: (map.obs!==undefined?(r[map.obs]||''):'').trim(),
+      linha:i+1, estqCol: map.estq!==undefined?map.estq:null // "aba" é preenchido em carregarCatalogo() com o nome real que bateu na busca
     });
   }
   return out;
@@ -56,15 +84,11 @@ const embutidoParaProdutos = () => EMBUTIDO.map(a=>({c:a[0],cat:a[1],n:a[2],m:a[
 async function carregarCatalogo(manual){
   const badge=document.getElementById('status-cat');
   badge.className='badge off'; badge.textContent='catálogo: carregando…';
-  for(const url of FONTES_CSV){
-    try{
-      const ctl=new AbortController(); const t=setTimeout(()=>ctl.abort(),9000);
-      const resp=await fetch(url,{signal:ctl.signal,cache:'no-store'});
-      clearTimeout(t);
-      if(!resp.ok){ console.warn('[catalogo] '+url+' respondeu HTTP '+resp.status); continue; }
-      const txt=await resp.text();
-      if(!/C[ÓO]DIGO/i.test(txt)){ console.warn('[catalogo] '+url+' não retornou um CSV com cabeçalho CÓDIGO (permissão da planilha? HTML de erro?)'); continue; }
-      const prods=linhasParaProdutos(parseCSV(txt));
+  try{
+    const res = await fetchCSVPorNomeAba(NOMES_ABA_CATALOGO);
+    if(res){
+      const prods=linhasParaProdutos(parseCSV(res.texto));
+      prods.forEach(p => p.aba = res.nome);
       if(prods.length>10){
         CATALOGO=prods;
         lsSet(LS_CACHE,{t:Date.now(),prods});
@@ -72,9 +96,10 @@ async function carregarCatalogo(manual){
         badge.textContent=`catálogo: planilha ✓ (${prods.length} itens)`;
         renderChips(); renderLista(); return;
       }
-      console.warn('[catalogo] '+url+' retornou poucas linhas ('+prods.length+'), ignorando');
-    }catch(e){ console.warn('[catalogo] falha ao buscar '+url+':', e.message); }
-  }
+      console.warn('[catalogo] aba encontrada mas com poucas linhas úteis ('+prods.length+') — conferir cabeçalhos');
+    }
+  }catch(e){ console.warn('[catalogo] falha ao carregar catálogo da planilha:', e); }
+
   const cache=ls(LS_CACHE);
   if(cache && cache.prods && cache.prods.length){
     CATALOGO=cache.prods;
