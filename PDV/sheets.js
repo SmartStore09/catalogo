@@ -73,7 +73,7 @@ function linhasParaProdutos(rows){
       estq: estq==='' ? null : (parseInt(estq,10)||0),
       st: (map.status!==undefined?(r[map.status]||''):'').trim() || 'Ativo',
       obs: (map.obs!==undefined?(r[map.obs]||''):'').trim(),
-      linha:i+1, estqCol: map.estq!==undefined?map.estq:null // "aba" é preenchido em carregarCatalogo() com o nome real que bateu na busca
+      linha:i+1, estqCol: map.estq!==undefined?map.estq:null, abaGid: GID_CATALOGO
     });
   }
   return out;
@@ -85,10 +85,9 @@ async function carregarCatalogo(manual){
   const badge=document.getElementById('status-cat');
   badge.className='badge off'; badge.textContent='catálogo: carregando…';
   try{
-    const res = await fetchCSVPorNomeAba(NOMES_ABA_CATALOGO);
-    if(res){
-      const prods=linhasParaProdutos(parseCSV(res.texto));
-      prods.forEach(p => p.aba = res.nome);
+    const texto = await fetchCSVPorGid(GID_CATALOGO);
+    if(texto){
+      const prods=linhasParaProdutos(parseCSV(texto));
       if(prods.length>10){
         CATALOGO=prods;
         lsSet(LS_CACHE,{t:Date.now(),prods});

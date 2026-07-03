@@ -25,7 +25,7 @@ function parseAcessorios(rows, categoria, precoPadrao, origem){
   let h=-1, map=null;
   for(let i=0;i<Math.min(rows.length,15);i++){
     const m=mapaColunas(rows[i]);
-    if(m.modelo!==undefined || m.codigo!==undefined){ h=i; map=m; break; }
+    if(m.modelo!==undefined && m.codigo!==undefined){ h=i; map=m; break; } // exige os DOIS — evita confundir titulo/subtitulo com o cabecalho real
   }
   if(h<0) return [];
   const prefixo = categoria==='Capinhas' ? 'CAP' : 'PEL';
@@ -62,14 +62,14 @@ function parseAcessorios(rows, categoria, precoPadrao, origem){
 
 async function carregarAcessorios(){
   try{
-    const resCap = await fetchCSVPorNomeAba(NOMES_ABA_CAPINHAS);
-    if(resCap) CATALOGO = CATALOGO.concat(parseAcessorios(parseCSV(resCap.texto), 'Capinhas', precoCapinha, {aba:resCap.nome}));
-    else console.warn('[acessorios] nenhuma aba de Capinhas encontrada entre os nomes tentados:', NOMES_ABA_CAPINHAS);
+    const texto = await fetchCSVPorGid(GID_CAPINHAS);
+    if(texto) CATALOGO = CATALOGO.concat(parseAcessorios(parseCSV(texto), 'Capinhas', precoCapinha, {abaGid:GID_CAPINHAS}));
+    else console.warn('[acessorios] não encontrei a aba de Capinhas (gid '+GID_CAPINHAS+')');
   }catch(e){ console.warn('[acessorios] erro carregando Capinhas:', e); /* segue sem capinhas por modelo — itens genéricos do catálogo continuam disponíveis */ }
   try{
-    const resPel = await fetchCSVPorNomeAba(NOMES_ABA_PELICULAS);
-    if(resPel) CATALOGO = CATALOGO.concat(parseAcessorios(parseCSV(resPel.texto), 'Películas', precoPelicula, {aba:resPel.nome}));
-    else console.warn('[acessorios] nenhuma aba de Películas encontrada entre os nomes tentados:', NOMES_ABA_PELICULAS);
+    const texto = await fetchCSVPorGid(GID_PELICULAS);
+    if(texto) CATALOGO = CATALOGO.concat(parseAcessorios(parseCSV(texto), 'Películas', precoPelicula, {abaGid:GID_PELICULAS}));
+    else console.warn('[acessorios] não encontrei a aba de Películas (gid '+GID_PELICULAS+')');
   }catch(e){ console.warn('[acessorios] erro carregando Películas:', e); /* segue sem películas por modelo — itens genéricos do catálogo continuam disponíveis */ }
 }
 

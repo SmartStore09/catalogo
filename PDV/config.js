@@ -6,14 +6,18 @@
 const SHEET_ID  = '1g37KoM93BgpbC0GJnFYj_423RKxbFt2mHWscnfWYUBA';
 const GID       = '794665000'; // gid da aba CATÁLOGO — usado só pro botão "Planilha" abrir na aba certa
 const URL_PLANILHA = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/edit?gid=${GID}`;
+
+// Leitura pública dos dados: "Arquivo → Compartilhar → Publicar na Web" (não é o mesmo que só
+// "Compartilhar"!). O link de compartilhamento normal faz o Google redirecionar pedidos automáticos
+// (fetch) para uma tela de login, mesmo com "qualquer pessoa com o link" — bloqueado por CORS.
+// O link "Publicado na Web" é feito exatamente pra isso e libera CORS de verdade (testado 02/07/2026).
+const PUBLICADO_ID = '2PACX-1vTtVKdjB-s5CnSPBG1qmIPRSsLNjunczEO2Vg9MF9fv7evqvXjRUDFPDpgV4J1Jqp2T_GUnRbqzoVty';
+const GID_CATALOGO  = '794665000';
+const GID_CAPINHAS  = '628233761';
+const GID_PELICULAS = '969815590';
+
 const LOJA = {nome:'SMART STORE 09', fone:'(89) 98809-8980', cidade:'Paraibano-MA', site:'smartstore09.github.io/catalogo'};
 const EMOJI = {'Assistência':'🔧','iPhones':'📱','Acessórios':'🔌','Beleza':'💄','Presentes':'🎁','Educação':'🎓','Peças/Frontais':'📲','Componentes':'⚙️','Capinhas':'📱','Películas':'🎬'};
-
-/* Nomes de abas usados para buscar por NOME em vez de gid — gids não são estáveis (mudam se o
-   arquivo for convertido/recriado), nome da aba é bem mais confiável. */
-const NOMES_ABA_CATALOGO  = ['CATÁLOGO','CATALOGO'];
-const NOMES_ABA_CAPINHAS  = ['CAPINHAS','📱 CAPINHAS','Capinhas','CAPINHA'];
-const NOMES_ABA_PELICULAS = ['PELÍCULAS','PELICULAS','Películas','🎬 PELÍCULAS'];
 
 /* Preço padrão quando a aba CAPINHAS/PELÍCULAS não traz preço próprio na linha */
 const precoCapinha = () => ({venda:15, pix:13.5});
@@ -260,26 +264,24 @@ const fmt = n => (n==null||isNaN(n)) ? '—' : n.toLocaleString('pt-BR',{style:'
 const r2 = n => Math.round(n*100)/100;
 const esc = s => String(s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
-/* ================= LEITURA DA PLANILHA POR NOME DE ABA (compartilhado) =================
-   Buscar por NOME de aba em vez de gid: gid não é estável (muda se o arquivo for convertido/
-   recriado, como já aconteceu uma vez). Usado tanto pelo catálogo principal quanto por
-   Capinhas/Películas. */
+/* ================= LEITURA DA PLANILHA VIA "PUBLICAR NA WEB" (compartilhado) =================
+   Usa o link publicado (PUBLICADO_ID) em vez do link de compartilhamento comum — só esse libera
+   CORS de verdade pra fetch() do navegador. Usado pelo catálogo principal e por Capinhas/Películas.
+   O nome real da aba (pra Tarefa 4 escrever de volta) é resolvido separadamente via API autenticada
+   (obterNomeAba em vendas-sync.js), então aqui só precisamos do gid. */
 const normHeader = s => String(s||'').toLowerCase()
   .replace(/[áàâã]/g,'a').replace(/[éê]/g,'e').replace(/í/g,'i')
   .replace(/[óôõ]/g,'o').replace(/ú/g,'u').replace(/ç/g,'c').trim();
 
-async function fetchCSVPorNomeAba(nomes){
-  for(const nome of nomes){
-    const url=`https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(nome)}`;
-    try{
-      const ctl=new AbortController(); const t=setTimeout(()=>ctl.abort(),9000);
-      const resp=await fetch(url,{signal:ctl.signal,cache:'no-store'});
-      clearTimeout(t);
-      if(!resp.ok){ console.warn('[planilha] aba "'+nome+'" respondeu HTTP '+resp.status); continue; }
-      const txt=await resp.text();
-      if(/^\s*<(!DOCTYPE|html)/i.test(txt)){ console.warn('[planilha] aba "'+nome+'" retornou HTML em vez de CSV (nome errado, permissão, ou arquivo nao convertido p/ Google Sheets?)'); continue; }
-      return {texto:txt, nome}; // "nome" = título exato da aba, usado depois p/ escrever de volta (Tarefa 4)
-    }catch(e){ console.warn('[planilha] falha ao buscar aba "'+nome+'":', e.message); }
-  }
-  return null;
+async function fetchCSVPorGid(gid){
+  const url = `https://docs.google.com/spreadsheets/d/e/${PUBLICADO_ID}/pub?gid=${gid}&single=true&output=csv`;
+  try{
+    const ctl=new AbortController(); const t=setTimeout(()=>ctl.abort(),9000);
+    const resp=await fetch(url,{signal:ctl.signal,cache:'no-store'});
+    clearTimeout(t);
+    if(!resp.ok){ console.warn('[planilha] gid '+gid+' respondeu HTTP '+resp.status); return null; }
+    const txt=await resp.text();
+    if(/^\s*<(!DOCTYPE|html)/i.test(txt)){ console.warn('[planilha] gid '+gid+' retornou HTML em vez de CSV (gid errado, ou a planilha precisa ser "Publicada na Web" de novo?)'); return null; }
+    return txt;
+  }catch(e){ console.warn('[planilha] falha ao buscar gid '+gid+':', e.message); return null; }
 }
