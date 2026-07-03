@@ -4,10 +4,10 @@
    por dispositivo/navegador (botão "Conectar" no cabeçalho) e o token fica salvo no localStorage.
    Esse token só permite editar planilhas do Google, nunca aparece em nenhum arquivo do projeto. */
 
-// TODO: troque pelo Client ID OAuth do seu projeto no Google Cloud Console (guia passo a passo no chat).
+// Client ID do projeto "SmartStore09 PDV" no Google Cloud (criado em 03/07/2026).
 // É um identificador público (não é segredo) — termina sempre em ".apps.googleusercontent.com".
-// Origens autorizadas a usar: https://smartstore09.github.io (produção) e http://localhost:8901 (testes locais).
-const GOOGLE_CLIENT_ID = 'COLE_AQUI_SEU_CLIENT_ID.apps.googleusercontent.com';
+// Origens autorizadas: https://smartstore09.github.io (produção) e http://localhost:8901 (testes locais).
+const GOOGLE_CLIENT_ID = '1067771380688-hqs51j17b5d99tr8uhkfv1l4hmh649t9.apps.googleusercontent.com';
 const GOOGLE_SCOPE = 'https://www.googleapis.com/auth/spreadsheets';
 const LS_GTOKEN = 'ss09_gtoken';
 
