@@ -31,11 +31,13 @@ main{flex:1;display:flex;min-height:0}
 #busca{width:100%;padding:11px 14px;border-radius:10px;border:1px solid var(--border);background:var(--panel2);color:var(--txt);font-size:15px;outline:none}
 #busca:focus{border-color:var(--acc)}
 #chips{display:flex;gap:6px;padding:6px 12px;overflow-x:auto;flex-wrap:wrap}
-.chip{background:var(--panel2);color:var(--mut);border:1px solid var(--border);padding:5px 11px;border-radius:18px;font-size:12px;font-weight:600;white-space:nowrap}
+.chip{background:var(--panel2);color:var(--mut);border:1px solid var(--border);padding:5px 11px;border-radius:18px;font-size:12px;font-weight:600;white-space:nowrap;transition:transform .08s}
 .chip.sel{background:var(--acc);color:#04210f;border-color:var(--acc)}
+.chip:active{transform:scale(.94)}
 #lista{flex:1;overflow-y:auto;padding:6px 12px 12px}
-.prod{display:flex;align-items:center;gap:10px;background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:9px 12px;margin-bottom:6px;cursor:pointer;transition:border-color .1s}
+.prod{display:flex;align-items:center;gap:10px;background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:9px 12px;margin-bottom:6px;cursor:pointer;transition:border-color .12s,transform .08s,box-shadow .12s;box-shadow:0 1px 3px rgba(0,0,0,.2)}
 .prod:hover{border-color:var(--acc)}
+.prod:active{transform:scale(.98);box-shadow:0 1px 1px rgba(0,0,0,.15)}
 .prod .info{flex:1;min-width:0}
 .prod .nome{font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .prod .det{font-size:11.5px;color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -168,17 +170,20 @@ main{flex:1;display:flex;min-height:0}
 
 /* ===== MOBILE ===== */
 #mob-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--panel);border-top:1px solid var(--border);z-index:40}
-.mob-tab{flex:1;padding:12px 0;text-align:center;font-size:12px;font-weight:700;color:var(--mut);cursor:pointer;position:relative}
+.mob-tab{flex:1;padding:12px 0;text-align:center;font-size:12px;font-weight:700;color:var(--mut);cursor:pointer;position:relative;transition:color .12s}
 .mob-tab.sel{color:#22c55e}
+.mob-tab:active{opacity:.6}
 .mob-tab-icon{font-size:18px;display:block;margin-bottom:2px}
 .cart-badge{position:absolute;top:8px;right:calc(50% - 22px);background:#ef4444;color:#fff;border-radius:10px;padding:1px 5px;font-size:10px;font-weight:800;min-width:16px}
 
 @media(max-width:768px){
-  header{padding:8px 10px;gap:8px;flex-wrap:nowrap;overflow-x:auto}
-  header h1{font-size:15px}
+  header{padding:8px 8px;gap:6px;flex-wrap:nowrap;overflow-x:auto} /* overflow-x é só rede de segurança; o objetivo é caber tudo sem precisar rolar */
+  header h1{font-size:15px;white-space:nowrap;flex-shrink:0}
+  header h1 .marca,header h1 .sufixo{display:none} /* mobile: só "🏪 09" — libera espaço pros botões caberem numa linha só */
   #clock{display:none}
   #status-cat{display:none} /* status do catálogo cabe no botão Recarregar; some espaço no topo */
-  .hbtn{padding:9px 11px;font-size:16px;min-height:40px;min-width:40px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  header .sp{flex:0 0 auto}
+  .hbtn{padding:8px;font-size:15px;min-height:38px;min-width:38px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
   .hbtn .lbl{display:none} /* mobile: só o ícone, texto reaparece no desktop */
   .hbtn-fin{display:none} /* redundante: já existe a aba "Financeiro" na navegação inferior */
   main{position:fixed;top:56px;bottom:60px;left:0;right:0}

@@ -92,6 +92,7 @@ function updCartBadge(){
 /* ================= INICIA ================= */
 function init(){
   setForma('PIX');
+  mobTab('prod'); // define o estado inicial das abas no mobile (senão os dois painéis ficam sobrepostos até o 1º toque)
   render();
   carregarTudo(false);
   atualizarBadgeConexao();
