@@ -57,7 +57,15 @@ document.addEventListener('keydown',e=>{
   if(e.key==='F2'){e.preventDefault();if(!document.getElementById('fim').disabled)finalizar();}
   if(e.key==='Escape')document.querySelectorAll('.modal.aberto').forEach(m=>m.classList.remove('aberto'));
 });
-document.getElementById('busca').addEventListener('input',renderLista);
+document.getElementById('busca').addEventListener('input',()=>{
+  renderLista();
+  // Mobile: enquanto tem texto digitado (teclado aberto), esconde os chips de categoria
+  // pra sobrar espaço de verdade pro produto aparecer acima do teclado.
+  if(window.innerWidth<=768){
+    const temTexto = document.getElementById('busca').value.trim()!=='';
+    document.getElementById('chips').style.display = temTexto ? 'none' : '';
+  }
+});
 document.getElementById('busca').addEventListener('keydown',e=>{
   if(e.key==='Enter'){const f=filtrados();if(f.length===1)addCarrinho(f[0].c);}
 });
