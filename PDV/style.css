@@ -16,7 +16,8 @@ header h1 span{color:var(--acc)}
 .badge.on{background:#06402b;color:#4ade80}
 .badge.off{background:#4a2a06;color:#fbbf24}
 header .sp{flex:1}
-.hbtn{background:var(--panel2);color:var(--txt);border:1px solid var(--border);padding:6px 12px;border-radius:8px;font-size:12.5px;font-weight:600}
+.hbtn{background:var(--panel2);color:var(--txt);border:1px solid var(--border);padding:6px 12px;border-radius:8px;font-size:12.5px;font-weight:600;display:inline-flex;align-items:center;gap:6px}
+.hbtn-icon{width:16px;height:16px;flex-shrink:0}
 .hbtn:hover{background:var(--border)}
 .hbtn.conectado{background:rgba(34,197,94,.15);border-color:rgba(34,197,94,.3);color:#4ade80}
 #badge-sync-fila{background:#4a2a06;color:#fbbf24}
@@ -184,6 +185,7 @@ main{flex:1;display:flex;min-height:0}
   #status-cat{display:none} /* status do catálogo cabe no botão Recarregar; some espaço no topo */
   header .sp{flex:0 0 auto}
   .hbtn{padding:8px;font-size:15px;min-height:38px;min-width:38px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .hbtn-icon{width:19px;height:19px}
   .hbtn .lbl{display:none} /* mobile: só o ícone, texto reaparece no desktop */
   .hbtn-fin{display:none} /* redundante: já existe a aba "Financeiro" na navegação inferior */
   main{position:fixed;top:56px;bottom:60px;left:0;right:0}
