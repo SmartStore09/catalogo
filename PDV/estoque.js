@@ -6,6 +6,8 @@ function estoqueDe(p){
 }
 function setEstoque(code,qtd){
   const m=ls(LS_ESTQ)||{}; m[code]=qtd; lsSet(LS_ESTQ,m); renderLista();
+  const prod=CATALOGO.find(x=>x.c===code);
+  if(prod) sincronizarEstoqueManual(prod, qtd); // reflete na planilha em segundo plano, se estiver conectado
 }
 function ajustarEstoque(ev,code){
   ev.stopPropagation();

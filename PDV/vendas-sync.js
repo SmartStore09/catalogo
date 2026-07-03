@@ -90,6 +90,25 @@ async function baixarEstoqueNaPlanilha(venda, token){
   });
 }
 
+/* Ajuste manual de estoque (toque no "estq: N" pra digitar um novo número) — reflete direto
+   na planilha, sem esperar uma venda. Só roda se já estiver conectado; se não tiver conexão,
+   fica só local mesmo (o próximo ajuste ou venda acaba corrigindo quando reconectar). */
+async function sincronizarEstoqueManual(prod, novoValor){
+  if(prod.linha == null || prod.estqCol == null) return; // produto sem linha rastreada na planilha
+  const token = tokenSalvo();
+  if(!token) return;
+  try{
+    const abaNome = prod.abaGid != null ? await obterNomeAba(token.access_token, prod.abaGid) : prod.aba;
+    if(!abaNome) return;
+    await apiSheets(token.access_token, '/values:batchUpdate', {
+      method:'POST',
+      body: JSON.stringify({valueInputOption:'USER_ENTERED', data:[
+        {range:`'${abaNome}'!${colLetra(prod.estqCol)}${prod.linha}`, values:[[novoValor]]}
+      ]})
+    });
+  }catch(e){ console.warn('[estoque] falha ao sincronizar ajuste manual:', e); }
+}
+
 function enfileirarVenda(n){
   const fila = ls(LS_FILA_SYNC) || [];
   if(!fila.includes(n)){ fila.push(n); lsSet(LS_FILA_SYNC, fila); }
