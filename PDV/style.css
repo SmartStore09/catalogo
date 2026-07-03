@@ -205,6 +205,18 @@ main{flex:1;display:flex;min-height:0}
   .prod .pv{font-size:16.5px}
   .prod .ppix{font-size:13.5px}
   .tag{font-size:12px;padding:3px 9px}
+
+  /* Resultado único da busca: 1 produto sozinho, bem grande — pro vendedor ver na hora, andando na loja */
+  .prod-unico{background:var(--panel);border:1.5px solid var(--acc);border-radius:16px;padding:22px 20px;margin:14px 12px;box-shadow:0 4px 14px rgba(0,0,0,.3)}
+  .pu-nome{font-size:23px;font-weight:800;line-height:1.28;margin-bottom:10px}
+  .pu-det{font-size:15.5px;color:#b7c4dd;line-height:1.4;margin-bottom:14px}
+  .pu-tags{margin-bottom:14px}
+  .pu-tags .tag{font-size:13px;padding:4px 11px}
+  .pu-precos{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:20px}
+  .pu-pv{font-size:30px;font-weight:800}
+  .pu-ppix{font-size:16.5px;color:var(--pix);font-weight:700}
+  .pu-add{width:100%;padding:17px;border-radius:12px;background:var(--acc);color:#04210f;font-size:17.5px;font-weight:800}
+  .pu-add:active{background:var(--acc2);transform:scale(.98)}
   #pagto{padding:10px 10px}
   #right h2{padding:8px 10px 4px;font-size:12px}
   #cart{padding:0 10px}

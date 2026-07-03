@@ -15,6 +15,24 @@ function filtrados(){
 }
 function renderLista(){
   const fs=filtrados();
+  // Mobile + busca encontrou exatamente 1 produto: mostra ele sozinho, bem grande, em vez da lista.
+  // No desktop ou com vários resultados, comportamento não muda em nada.
+  if(window.innerWidth<=768 && fs.length===1){
+    const p=fs[0];
+    const eq=estoqueDe(p);
+    let tags='';
+    if(p.st==='Último') tags+='<span class="tag ult">ÚLTIMO</span>';
+    if(p.p==null) tags+='<span class="tag cons">CONSULTAR</span>';
+    if(eq!==null) tags+=`<span class="tag ${eq<=0?'zero':'estq'}" onclick="ajustarEstoque(event,'${esc(p.c)}')" title="Clique para ajustar estoque">estq: ${eq}</span>`;
+    document.getElementById('lista').innerHTML = `<div class="prod-unico">
+      <div class="pu-nome">${esc(p.n)}</div>
+      <div class="pu-det">${esc(p.c)} · ${esc(p.e||p.m)}${p.obs?' · '+esc(p.obs):''}</div>
+      <div class="pu-tags">${tags}</div>
+      <div class="pu-precos"><div class="pu-pv">${fmt(p.p)}</div><div class="pu-ppix">${p.pix!=null?'PIX '+fmt(p.pix):''}</div></div>
+      <button class="pu-add" onclick="addCarrinho('${esc(p.c)}')">+ Adicionar ao Carrinho</button>
+    </div>`;
+    return;
+  }
   document.getElementById('lista').innerHTML = fs.slice(0,200).map(p=>{
     const eq=estoqueDe(p);
     let tags='';
