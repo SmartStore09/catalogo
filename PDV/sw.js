@@ -4,7 +4,7 @@
    da rede para o PDV mostrar estoque/preço atualizado; o fallback offline já é tratado
    pelo próprio app (catálogo EMBUTIDO em config.js). */
 
-const CACHE = 'ss09-pdv-v3';
+const CACHE = 'ss09-pdv-v4';
 const ASSETS = [
   './',
   './index.html',
