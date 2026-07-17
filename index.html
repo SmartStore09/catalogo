@@ -205,7 +205,10 @@ body{background:var(--bg);color:var(--txt);font-family:'Montserrat',sans-serif;m
 .modal-wa:active{transform:scale(.97);}
 .modal-wa.janio{background:#25D366;color:#fff;box-shadow:0 4px 16px rgba(37,211,102,.25);}
 .modal-wa.iza{background:#ec4899;color:#fff;box-shadow:0 4px 16px rgba(236,72,153,.35);}
-.modal-close{position:absolute;top:14px;right:16px;background:var(--s2);border:1px solid #2a2a2a;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;color:var(--muted);}
+.modal-close{position:absolute;top:14px;right:16px;background:var(--s2);border:1px solid #2a2a2a;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1rem;color:var(--muted);z-index:2;}
+.modal-share{position:absolute;top:14px;left:16px;background:var(--s2);border:1px solid #2a2a2a;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--gold);z-index:2;}
+.modal-share .icon-svg{width:16px;height:16px;}
+.modal-share-msg{position:absolute;top:52px;left:16px;background:var(--gold);color:#000;font-size:.68rem;font-weight:700;padding:4px 10px;border-radius:8px;z-index:2;pointer-events:none;}
 .modal-sheet{position:relative;}
 
 /* ── FLOATING WA ── */
@@ -255,9 +258,10 @@ body{background:var(--bg);color:var(--txt);font-family:'Montserrat',sans-serif;m
 
 /* ── EQUIPE ── */
 .equipe{background:var(--s2);padding:24px 16px;border-bottom:1px solid #1a1a1a;}
+.equipe-foto{width:100%;aspect-ratio:4/3;border-radius:16px;overflow:hidden;margin-bottom:14px;background:#fff;border:1px solid #1e1e1e;}
+.equipe-foto img{width:100%;height:100%;object-fit:cover;object-position:center 22%;display:block;}
 .equipe-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 .membro{background:var(--s1);border:1px solid #1e1e1e;border-radius:16px;padding:16px;text-align:center;}
-.membro-avatar{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--gold),#8B6914);display:flex;align-items:center;justify-content:center;font-size:1.8rem;margin:0 auto 10px;}
 .membro-nome{font-size:.85rem;font-weight:800;color:#fff;margin-bottom:3px;}
 .membro-cargo{font-size:.65rem;color:var(--gold);font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
 .membro-desc{font-size:.68rem;color:#aaa;line-height:1.5;margin-bottom:10px;}
@@ -293,7 +297,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Montserrat',sans-serif;m
 /* ── SERVIÇOS IZA (BELEZA) ── */
 .iza-banner{background:linear-gradient(135deg,#1a0010,#2d0020,#1a0010);border-bottom:1px solid rgba(236,72,153,.25);padding:20px 16px 14px;}
 .iza-banner-top{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
-.iza-banner-avatar{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#ec4899,#be185d);display:flex;align-items:center;justify-content:center;font-size:1.6rem;flex-shrink:0;border:2px solid rgba(236,72,153,.5);}
+.iza-banner-avatar{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#ec4899,#be185d);display:flex;align-items:center;justify-content:center;font-size:1.6rem;flex-shrink:0;border:2px solid rgba(236,72,153,.5);background-size:300% auto;background-repeat:no-repeat;color:transparent;}
 .iza-banner-info{flex:1;}
 .iza-banner-name{font-size:.9rem;font-weight:800;color:#fff;}
 .iza-banner-role{font-size:.65rem;color:#f472b6;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;}
@@ -454,9 +458,11 @@ body{background:var(--bg);color:var(--txt);font-family:'Montserrat',sans-serif;m
   <!-- ── 7. EQUIPE ── -->
   <div class="equipe">
     <div class="sec-label">Nossa equipe</div>
+    <div class="equipe-foto">
+      <img src="imgs/equipe_izabel_janio.png" alt="Jânio e Iza — Smart Store 09" loading="lazy">
+    </div>
     <div class="equipe-grid">
       <div class="membro">
-        <div class="membro-avatar">👨‍🔧</div>
         <div class="membro-nome">Jânio Joaquim</div>
         <div class="membro-cargo">Fundador · Técnico</div>
         <div class="membro-desc">Professor de Física e técnico especializado em Apple e Android. Atende Paraibano e toda a região.</div>
@@ -465,7 +471,6 @@ body{background:var(--bg);color:var(--txt);font-family:'Montserrat',sans-serif;m
         </a>
       </div>
       <div class="membro" style="border-color:#ec4899;border-width:1.5px;">
-        <div class="membro-avatar" style="background:linear-gradient(135deg,#ec4899,#be185d);">💄</div>
         <div class="membro-nome">Iza</div>
         <div class="membro-cargo" style="color:#ec4899;">Maquiadora · Consultora</div>
         <div class="membro-desc">Consultora Mary Kay &amp; Natura. Maquiagem profissional na bancada. Cursos Básico e Profissional.</div>
@@ -623,7 +628,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Montserrat',sans-serif;m
     <!-- Banner serviços da Iza -->
     <div class="iza-banner">
       <div class="iza-banner-top">
-        <div class="iza-banner-avatar">💄</div>
+        <div class="iza-banner-avatar" style="background-image:url('imgs/equipe_izabel_janio.png');background-position:27% 24%;"></div>
         <div class="iza-banner-info">
           <div class="iza-banner-name">Iza — Maquiadora Profissional</div>
           <div class="iza-banner-role">Consultora Mary Kay &amp; Natura</div>
@@ -1068,6 +1073,26 @@ const REV_NAME = REV_SLUG
   ? decodeURIComponent(REV_SLUG.replace(/-/g,' ')).replace(/\b\w/g, c => c.toUpperCase())
   : '';
 const revRef = REV_NAME ? `\n\n🤝 Indicado por: ${REV_NAME}` : '';
+
+// ── LINK DIRETO DE PRODUTO (compartilhar) ──
+const PRODUTO_CODE = new URLSearchParams(location.search).get('p') || '';
+function linkProduto(code){
+  return `${location.origin}${location.pathname}?p=${encodeURIComponent(code)}`;
+}
+async function shareProduct(code, name){
+  const url = linkProduto(code);
+  const texto = `${name} — Smart Store 09\n${url}`;
+  if(navigator.share){
+    try{ await navigator.share({title:name, text:name, url}); return; }catch(e){ if(e.name==='AbortError') return; }
+  }
+  try{
+    await navigator.clipboard.writeText(texto);
+    const btn=document.getElementById('m-share-msg');
+    if(btn){ btn.textContent='Link copiado!'; setTimeout(()=>btn.textContent='',1800); }
+  }catch(e){
+    prompt('Copie o link do produto:', url);
+  }
+}
 
 const FRETE_TABLE = {
   MA:{min:10,max:18,d:4},
@@ -1629,6 +1654,7 @@ function openModal(id){
   const msgI=msgJ;
   document.getElementById('mWaJ').href=wa(WA_J,msgJ);
   document.getElementById('mWaI').href=wa(WA_I,msgI);
+  document.getElementById('m-share-btn').onclick=()=>shareProduct(p.code,p.name);
   ov.classList.add('open');
   document.body.style.overflow='hidden';
 }
@@ -1650,6 +1676,11 @@ window.addEventListener('DOMContentLoaded',()=>{
     if(e.target===this)closeModal();
   });
   document.getElementById('lightbox').addEventListener('click',closeLightbox);
+  // Abre direto o produto se vier de um link compartilhado (?p=CODIGO)
+  if(PRODUTO_CODE){
+    const prod = P.find(x=>x.code===PRODUTO_CODE);
+    if(prod){ goTab(prod.cat); openModal(prod.id); }
+  }
 });
 </script>
 
@@ -1658,7 +1689,11 @@ window.addEventListener('DOMContentLoaded',()=>{
   <div class="modal-sheet">
     <div class="modal-drag"></div>
     <button class="modal-close" onclick="closeModal()">✕</button>
+    <button class="modal-share" id="m-share-btn" title="Compartilhar link deste produto">
+      <svg class="icon-svg" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>
+    </button>
     <div class="modal-img" id="m-img"></div>
+    <div class="modal-share-msg" id="m-share-msg"></div>
     <div class="modal-body">
       <div id="m-badge" class="modal-badge"></div>
       <div class="modal-name" id="m-name"></div>
