@@ -586,7 +586,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Montserrat',sans-serif;m
 ══════════════════════════════════════════ -->
 <div id="page-busca" class="page">
   <div class="search-wrap" style="display:flex;align-items:center;gap:10px;">
-    <button onclick="goPage('home')" style="background:var(--s2);border:1px solid #2a2a2a;border-radius:50%;width:34px;height:34px;flex-shrink:0;display:flex;align-items:center;justify-content:center;color:#ccc;cursor:pointer;"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
+    <button onclick="history.back()" style="background:var(--s2);border:1px solid #2a2a2a;border-radius:50%;width:34px;height:34px;flex-shrink:0;display:flex;align-items:center;justify-content:center;color:#ccc;cursor:pointer;"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
     <input class="search-inp" type="search" id="srch-busca" placeholder="Buscar produto, código ou marca..." oninput="buscaGeral()" style="flex:1;">
   </div>
   <div id="busca-resumo" style="padding:0 16px 4px;color:#999;font-size:.72rem;"></div>
@@ -1547,9 +1547,14 @@ function openLightbox(src){
   if(!src) return;
   document.getElementById('lb-img').src = src;
   document.getElementById('lightbox').classList.add('open');
+  history.pushState({lightbox:true}, '', location.pathname+location.search);
+}
+function _hideLightboxNow(){
+  document.getElementById('lightbox').classList.remove('open');
 }
 function closeLightbox(){
-  document.getElementById('lightbox').classList.remove('open');
+  if(history.state && history.state.lightbox) history.back();
+  else _hideLightboxNow();
 }
 
 const _rendered = {};
@@ -1564,15 +1569,16 @@ function renderAll(){ renderCat('iphones'); } // Only render visible tab on load
 
 // ── NAVIGATION ──
 const PAGE_IDX={home:0,catalogo:1,assistencia:2,sobre:3};
-function goPage(page){
+function goPage(page,fromPop){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.getElementById('page-'+page).classList.add('active');
   document.querySelectorAll('.bnav-btn').forEach((b,i)=>b.classList.toggle('active',i===PAGE_IDX[page]));
   window.scrollTo(0,0);
+  if(!fromPop) history.pushState({page}, '', location.pathname);
 }
 
-function goTab(tab){
-  goPage('catalogo');
+function goTab(tab,fromPop){
+  goPage('catalogo', true);
   document.querySelectorAll('.cat-sec').forEach(s=>s.classList.remove('active'));
   const el=document.getElementById('cat-'+tab);
   if(el)el.classList.add('active');
@@ -1580,7 +1586,21 @@ function goTab(tab){
   const tabEl=document.getElementById('tab-'+tab);
   if(tabEl){tabEl.classList.add('active');tabEl.scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'});}
   renderCat(tab); // Lazy render on demand
+  if(!fromPop) history.pushState({page:'catalogo',tab}, '', location.pathname);
 }
+
+// ── BOTÃO VOLTAR (não deixa o back do navegador sair do site) ──
+function _hideModalNow(){
+  document.getElementById('modal-ov').classList.remove('open');
+  document.body.style.overflow='';
+}
+window.addEventListener('popstate', (e)=>{
+  if(document.getElementById('lightbox').classList.contains('open')){ _hideLightboxNow(); return; }
+  if(document.getElementById('modal-ov').classList.contains('open')){ _hideModalNow(); return; }
+  const st=e.state||{page:'home'};
+  if(st.tab) goTab(st.tab, true);
+  else goPage(st.page||'home', true);
+});
 
 // ── BRAND FILTER ──
 let curBrand='todas';
@@ -1704,10 +1724,11 @@ function openModal(id){
   document.getElementById('m-share-btn').onclick=()=>shareProduct(p.code,p.name);
   ov.classList.add('open');
   document.body.style.overflow='hidden';
+  history.pushState({modal:true,code:p.code}, '', linkProduto(p.code));
 }
 function closeModal(){
-  document.getElementById('modal-ov').classList.remove('open');
-  document.body.style.overflow='';
+  if(history.state && history.state.modal) history.back();
+  else _hideModalNow();
 }
 
 // ── INIT ──
@@ -1726,7 +1747,15 @@ window.addEventListener('DOMContentLoaded',()=>{
   // Abre direto o produto se vier de um link compartilhado (?p=CODIGO)
   if(PRODUTO_CODE){
     const prod = P.find(x=>x.code===PRODUTO_CODE);
-    if(prod){ goTab(prod.cat); openModal(prod.id); }
+    if(prod){
+      goTab(prod.cat, true);
+      history.replaceState({page:'catalogo',tab:prod.cat}, '', location.pathname);
+      openModal(prod.id);
+    } else {
+      history.replaceState({page:'home'}, '', location.pathname);
+    }
+  } else {
+    history.replaceState({page:'home'}, '', location.pathname);
   }
 });
 </script>
