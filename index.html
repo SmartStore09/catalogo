@@ -148,6 +148,9 @@ body{background:var(--bg);color:var(--txt);font-family:'Montserrat',sans-serif;m
 .gal-emoji{font-size:2.2rem;}
 .gal-lbl{font-size:.58rem;color:var(--muted);font-weight:700;letter-spacing:1px;text-transform:uppercase;}
 .arrow-badge{background:var(--gold);color:#000;font-size:.6rem;font-weight:800;padding:3px 8px;border-radius:4px;position:absolute;bottom:10px;}
+.gal-photo{grid-column:span 2;aspect-ratio:16/9;overflow:hidden;padding:0;}
+.gal-photo img{width:100%;height:100%;object-fit:cover;}
+.gal-photo .gal-lbl{position:absolute;bottom:10px;left:12px;background:rgba(0,0,0,.65);color:#fff;padding:4px 10px;border-radius:6px;}
 .cta-wrap{padding:0 16px 8px;}
 .wa-big{display:flex;align-items:center;justify-content:center;gap:10px;background:var(--wa);color:#fff;border:none;border-radius:14px;padding:15px 20px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.9rem;cursor:pointer;text-decoration:none;width:100%;box-shadow:0 4px 20px rgba(37,211,102,.28);}
 .wa-big:active{opacity:.9;}
@@ -887,15 +890,9 @@ body{background:var(--bg);color:var(--txt);font-family:'Montserrat',sans-serif;m
   <!-- ANTES E DEPOIS -->
   <div class="gallery-title">📸 Antes e Depois — exemplos reais</div>
   <div class="gallery-grid">
-    <div class="gal-item">
-      <span class="gal-emoji">💔</span>
-      <span class="gal-lbl">Tela Quebrada</span>
-      <span class="arrow-badge">ANTES</span>
-    </div>
-    <div class="gal-item">
-      <span class="gal-emoji">✨</span>
-      <span class="gal-lbl">Tela Nova</span>
-      <span class="arrow-badge" style="background:var(--green);color:#000;">DEPOIS</span>
+    <div class="gal-item gal-photo">
+      <img src="imgs/assist_tela_antes_depois.png" alt="Troca de tela — antes e depois">
+      <span class="gal-lbl">Troca de Tela</span>
     </div>
     <div class="gal-item">
       <span class="gal-emoji">🔌</span>
