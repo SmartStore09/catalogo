@@ -285,10 +285,6 @@ body{background:var(--bg);color:var(--txt);font-family:'Montserrat',sans-serif;m
 .membro-wa.escuro:active{background:rgba(236,72,153,.2);}
 
 /* ── CIDADES ── */
-.cidades{padding:24px 16px;border-bottom:1px solid #1a1a1a;}
-.cidades-grid{display:flex;flex-wrap:wrap;gap:8px;}
-.cidade-tag{background:var(--s2);border:1px solid #1e1e1e;border-radius:20px;padding:6px 14px;font-size:.69rem;color:#ccc;font-weight:600;}
-.cidade-tag.principal{background:rgba(201,168,76,.15);border-color:rgba(201,168,76,.3);color:var(--gold);}
 
 /* ── VITRINE MAGALU ── */
 .magalu-header{background:linear-gradient(135deg,#0a0a2e,#00185a,#0a0a2e);padding:18px 16px 14px;border-bottom:1px solid rgba(0,120,255,.2);}
@@ -385,10 +381,10 @@ body{background:var(--bg);color:var(--txt);font-family:'Montserrat',sans-serif;m
   <div class="hero">
     <div class="logo-wrap">
       <div class="store-name">SMART STORE 09</div>
-      <div class="store-sub">Celulares · Assistência · Acessórios</div>
+      <div class="store-sub">Celulares · Acessórios · Beleza · Presentes · Assistência</div>
     </div>
-    <div class="hero-headline">Seu celular quebrou?<br>Precisa trocar de aparelho?</div>
-    <div class="hero-desc">Atendimento especializado em Paraibano-MA.<br>Garantia real, parcelamento e suporte pós-venda.</div>
+    <div class="hero-headline">Tudo o que você precisa,<br>em um só lugar</div>
+    <div class="hero-desc">Celulares, acessórios, beleza, presentes e assistência técnica — com garantia e parcelamento em Paraibano-MA.</div>
     <div class="hero-cta">
       <a class="btn-wa" href="https://wa.me/5589988098980?text=Olá!+Preciso+de+atendimento+na+Smart+Store+09." target="_blank"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.4 8.4 0 01-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.4 8.4 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg> Falar no WhatsApp agora</a>
       <button class="btn-out" onclick="goPage('assistencia')"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M14.5 6.5a4 4 0 00-5.4 4.9L4 16.5V20h3.5l5.1-5.1a4 4 0 004.9-5.4l-2.6 2.6-2-2 2.6-2.6z"/></svg> Ver Assistência Técnica</button>
@@ -416,29 +412,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Montserrat',sans-serif;m
     </div>
   </div>
 
-  <!-- ── 3. PROVA SOCIAL ── -->
-  <div class="prova-social">
-    <div class="sec-label">Números que provam nossa confiança</div>
-    <div class="stats-grid">
-      <div class="stat-card">
-        <div class="stat-stars">★★★★★</div>
-        <div class="stat-num">1.500+</div>
-        <div class="stat-label">Aparelhos vendidos</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-stars">★★★★★</div>
-        <div class="stat-num">3.000+</div>
-        <div class="stat-label">Atendimentos</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-stars">★★★★★</div>
-        <div class="stat-num">20+</div>
-        <div class="stat-label">Cidades atendidas</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ── 4. PRODUTOS EM DESTAQUE ── -->
+  <!-- ── 3. PRODUTOS EM DESTAQUE ── -->
   <div class="destaques">
     <div class="sec-label">Mais procurados agora</div>
     <div class="destaques-scroll" id="destaques-scroll">
@@ -502,6 +476,28 @@ body{background:var(--bg);color:var(--txt);font-family:'Montserrat',sans-serif;m
     </div>
   </div>
 
+  <!-- ── 7b. PROVA SOCIAL ── -->
+  <div class="prova-social">
+    <div class="sec-label">Números que provam nossa confiança</div>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-stars">★★★★★</div>
+        <div class="stat-num">1.500+</div>
+        <div class="stat-label">Aparelhos vendidos</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-stars">★★★★★</div>
+        <div class="stat-num">3.000+</div>
+        <div class="stat-label">Atendimentos</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-stars">★★★★★</div>
+        <div class="stat-num">20+</div>
+        <div class="stat-label">Cidades atendidas</div>
+      </div>
+    </div>
+  </div>
+
   <!-- ── 8. DEPOIMENTOS ── -->
   <div class="reviews">
     <div class="sec-label">O que nossos clientes dizem</div>
@@ -542,27 +538,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Montserrat',sans-serif;m
     </div>
   </div>
 
-  <!-- ── 10. CIDADES ATENDIDAS ── -->
-  <div class="cidades">
-    <div class="sec-label">Cidades atendidas</div>
-    <p style="font-size:.72rem;color:var(--muted);margin-bottom:12px;line-height:1.6;">Atendemos presencialmente em Paraibano e Passos Bons. Enviamos peças e produtos para toda a região do Médio Mearim e Grande São Luís.</p>
-    <div class="cidades-grid">
-      <span class="cidade-tag principal">📍 Paraibano</span>
-      <span class="cidade-tag principal">📍 Passos Bons</span>
-      <span class="cidade-tag">São João dos Patos</span>
-      <span class="cidade-tag">Colinas</span>
-      <span class="cidade-tag">Nova Iorque</span>
-      <span class="cidade-tag">Passagem Franca</span>
-      <span class="cidade-tag">Sucupira do Riachão</span>
-      <span class="cidade-tag">São Francisco do Maranhão</span>
-      <span class="cidade-tag">Mirador</span>
-      <span class="cidade-tag">Formosa da Serra Negra</span>
-      <span class="cidade-tag">Loreto</span>
-      <span class="cidade-tag">Benedito Leite</span>
-    </div>
-  </div>
-
-  <!-- ── 11. CTA FINAL ── -->
+  <!-- ── 10. CTA FINAL ── -->
   <div style="padding:20px 16px;background:linear-gradient(160deg,#0d0d0d,#1a1200);text-align:center;border-top:1px solid #1e1e1e;">
     <div style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--gold);letter-spacing:2px;margin-bottom:6px;">FALE AGORA COM A SMART STORE 09</div>
     <div style="font-size:.75rem;color:#aaa;margin-bottom:16px;">Segunda a Sábado · 8h às 18h · Resposta rápida</div>
@@ -575,7 +551,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Montserrat',sans-serif;m
   <!-- ── 12. RODAPÉ ── -->
   <footer class="footer">
     <div class="footer-logo">SMART STORE 09</div>
-    <div class="footer-tagline">Celulares · Assistência · Acessórios</div>
+    <div class="footer-tagline">Celulares · Acessórios · Beleza · Presentes · Assistência</div>
     <div class="footer-grid">
       <div>
         <div class="footer-col-title"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 22s7-6.6 7-12A7 7 0 105 10c0 5.4 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg> Localização</div>
