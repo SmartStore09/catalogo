@@ -1241,6 +1241,8 @@ const revRef = REV_NAME ? `\n\n🤝 Indicado por: ${REV_NAME}` : '';
 
 // ── LINK DIRETO DE PRODUTO (compartilhar) ──
 const PRODUTO_CODE = new URLSearchParams(location.search).get('p') || '';
+const TAB_PARAM = new URLSearchParams(location.search).get('tab') || '';
+const PAGE_PARAM = new URLSearchParams(location.search).get('page') || '';
 function linkProduto(code){
   return `${location.origin}${location.pathname}?p=${encodeURIComponent(code)}`;
 }
@@ -1816,7 +1818,10 @@ function goPage(page,fromPop){
   document.getElementById('page-'+page).classList.add('active');
   document.querySelectorAll('.bnav-btn').forEach((b,i)=>b.classList.toggle('active',i===PAGE_IDX[page]));
   window.scrollTo(0,0);
-  if(!fromPop) history.pushState({page}, '', location.pathname);
+  if(!fromPop){
+    const qs = (page==='home'||page==='catalogo') ? '' : ('?page='+page);
+    history.pushState({page}, '', location.pathname+qs);
+  }
 }
 
 function goTab(tab,fromPop){
@@ -1828,7 +1833,7 @@ function goTab(tab,fromPop){
   const tabEl=document.getElementById('tab-'+tab);
   if(tabEl){tabEl.classList.add('active');tabEl.scrollIntoView({behavior:'smooth',inline:'center',block:'nearest'});}
   renderCat(tab); // Lazy render on demand
-  if(!fromPop) history.pushState({page:'catalogo',tab}, '', location.pathname);
+  if(!fromPop) history.pushState({page:'catalogo',tab}, '', location.pathname+'?tab='+tab);
 }
 
 // ── BOTÃO VOLTAR (não deixa o back do navegador sair do site) ──
@@ -2012,6 +2017,14 @@ window.addEventListener('DOMContentLoaded',()=>{
     } else {
       history.replaceState({page:'home'}, '', location.pathname);
     }
+  } else if(TAB_PARAM && document.getElementById('cat-'+TAB_PARAM)){
+    // Abre direto na aba compartilhada (?tab=CATEGORIA)
+    goTab(TAB_PARAM, true);
+    history.replaceState({page:'catalogo',tab:TAB_PARAM}, '', location.pathname+'?tab='+TAB_PARAM);
+  } else if(PAGE_PARAM && document.getElementById('page-'+PAGE_PARAM)){
+    // Abre direto na página compartilhada (?page=assistencia/sobre)
+    goPage(PAGE_PARAM, true);
+    history.replaceState({page:PAGE_PARAM}, '', location.pathname+'?page='+PAGE_PARAM);
   } else {
     history.replaceState({page:'home'}, '', location.pathname);
   }
