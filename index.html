@@ -188,6 +188,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Montserrat',sans-serif;m
 /* ── UTILS ── */
 .page{display:none;}.page.active{display:block;}
 .cat-sec{display:none;}.cat-sec.active{display:block;}
+.iza-dept-sec{display:none;}.iza-dept-sec.active{display:block;}
 .hidden{display:none!important;}
 .spacer{height:72px;}
 .empty-state{text-align:center;padding:44px 20px;color:var(--muted);}
@@ -454,7 +455,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Montserrat',sans-serif;m
       <button class="cat-btn" onclick="goTab('android')"><span class="cat-btn-icon"><img src="imgs/cat_android.png" alt="Android" loading="lazy"></span><span class="cat-btn-label">Android</span></button>
       <button class="cat-btn" onclick="goTab('acessorios')"><span class="cat-btn-icon"><img src="imgs/cat_acessorios.png" alt="Acessórios" loading="lazy"></span><span class="cat-btn-label">Acessórios</span></button>
       <button class="cat-btn" onclick="goPage('assistencia')"><span class="cat-btn-icon"><img src="imgs/cat_assistencia.png" alt="Assistência" loading="lazy"></span><span class="cat-btn-label">Assistência</span></button>
-      <button class="cat-btn" onclick="goTab('beleza')"><span class="cat-btn-icon"><img src="imgs/cat_beleza.png" alt="Beleza" loading="lazy"></span><span class="cat-btn-label">Beleza</span></button>
+      <button class="cat-btn" onclick="goTab('beleza')"><span class="cat-btn-icon"><img src="imgs/cat_beleza.png" alt="Iza" loading="lazy"></span><span class="cat-btn-label">Iza</span></button>
       <button class="cat-btn" onclick="goTab('presentes')"><span class="cat-btn-icon"><img src="imgs/cat_presentes.png" alt="Presentes" loading="lazy"></span><span class="cat-btn-label">Presentes</span></button>
       <button class="cat-btn" onclick="goTab('brinquedos')"><span class="cat-btn-icon"><img src="imgs/cat_brinquedos.png" alt="Brinquedos" loading="lazy"></span><span class="cat-btn-label">Brinquedos</span></button>
       <button class="cat-btn" onclick="goTab('educacao')"><span class="cat-btn-icon"><img src="imgs/cat_educacao.png" alt="Educação" loading="lazy"></span><span class="cat-btn-label">Educação</span></button>
@@ -626,7 +627,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Montserrat',sans-serif;m
     <div class="nav-tab active" id="tab-iphones"    onclick="goTab('iphones')"><svg class="icon-svg" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M11 18h2"/></svg> iPhones</div>
     <div class="nav-tab"        id="tab-android"    onclick="goTab('android')"><svg class="icon-svg" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M11 18h2"/></svg> Android</div>
     <div class="nav-tab"        id="tab-acessorios" onclick="goTab('acessorios')"><svg class="icon-svg" viewBox="0 0 24 24"><circle cx="9" cy="20" r="1"/><circle cx="18" cy="20" r="1"/><path d="M2.5 3h2l2.3 11.4a2 2 0 002 1.6h8.4a2 2 0 002-1.6L21 7H6"/></svg> Acessórios</div>
-    <div class="nav-tab"        id="tab-beleza"     onclick="goTab('beleza')"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 3l1.2 4 4 1.2-4 1.2-1.2 4-1.2-4-4-1.2 4-1.2L12 3z"/><path d="M5 16l.7 1.9L7.5 18.5l-1.8.7L5 21l-.7-1.8L2.5 18.5l1.8-.6L5 16z"/></svg> Beleza</div>
+    <div class="nav-tab"        id="tab-beleza"     onclick="goTab('beleza')"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 3l1.2 4 4 1.2-4 1.2-1.2 4-1.2-4-4-1.2 4-1.2L12 3z"/><path d="M5 16l.7 1.9L7.5 18.5l-1.8.7L5 21l-.7-1.8L2.5 18.5l1.8-.6L5 16z"/></svg> Iza</div>
     <div class="nav-tab"        id="tab-educacao"   onclick="goTab('educacao')"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M3 5c2.5-1.5 5.5-1.5 8 0v13c-2.5-1.5-5.5-1.5-8 0V5z"/><path d="M21 5c-2.5-1.5-5.5-1.5-8 0v13c2.5-1.5 5.5-1.5 8 0V5z"/></svg> Educação</div>
     <div class="nav-tab"        id="tab-presentes"  onclick="goTab('presentes')"><svg class="icon-svg" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="4" rx="0.5"/><path d="M4 12h16v8a1 1 0 01-1 1H5a1 1 0 01-1-1v-8z"/><path d="M12 8v13"/><path d="M12 8C10 5 7 5 6 6.5S7 9 12 8z"/><path d="M12 8c2-3 5-3 6-1.5S17 9 12 8z"/></svg> Presentes</div>
     <div class="nav-tab"        id="tab-brinquedos" onclick="goTab('brinquedos')"><svg class="icon-svg" viewBox="0 0 24 24"><rect x="4" y="10" width="7" height="7" rx="1"/><rect x="13" y="10" width="7" height="7" rx="1"/><rect x="8.5" y="3" width="7" height="7" rx="1"/></svg> Brinquedos</div>
@@ -704,7 +705,59 @@ body{background:var(--bg);color:var(--txt);font-family:'Montserrat',sans-serif;m
       </a>
     </div>
 
-    <div class="products-wrap"><div class="prod-cards" id="cards-beleza"></div></div>
+    <div class="brand-wrap" id="iza-depts">
+      <button class="brand-btn active" onclick="izaDept(this,'calcados')">👡 Calçados</button>
+      <button class="brand-btn" onclick="izaDept(this,'marykay')">💄 Mary Kay</button>
+      <button class="brand-btn" onclick="izaDept(this,'boticario')">🌿 Boticário</button>
+      <button class="brand-btn" onclick="izaDept(this,'eudora')">✨ Eudora</button>
+      <button class="brand-btn" onclick="izaDept(this,'roupas')">👗 Roupas</button>
+      <button class="brand-btn" onclick="izaDept(this,'bolsas')">👜 Bolsas</button>
+      <button class="brand-btn" onclick="izaDept(this,'multimarcas')">🏷️ Multimarcas</button>
+    </div>
+
+    <div id="dept-calcados" class="iza-dept-sec active">
+      <div class="brand-wrap" id="estilo-filter">
+        <button class="brand-btn active" onclick="filterEstilo(this,'todas')">Todas</button>
+        <button class="brand-btn" onclick="filterEstilo(this,'simples')">Simples</button>
+        <button class="brand-btn" onclick="filterEstilo(this,'luxo')">Luxo</button>
+        <button class="brand-btn" onclick="filterEstilo(this,'saltinho_bloco')">Saltinho Bloco</button>
+        <button class="brand-btn" onclick="filterEstilo(this,'plataforma')">Plataforma</button>
+        <button class="brand-btn" onclick="filterEstilo(this,'salto_alto')">Salto Alto</button>
+        <button class="brand-btn" onclick="filterEstilo(this,'havaianas')">Havaianas</button>
+      </div>
+      <div class="products-wrap"><div class="prod-cards" id="cards-beleza"></div></div>
+    </div>
+
+    <div id="dept-marykay" class="iza-dept-sec">
+      <div class="empty-state">
+        <div class="empty-state-icon">💄</div>
+        <div class="empty-state-txt">Em breve: catálogo Mary Kay completo.<br>Consulte disponibilidade pelo WhatsApp!</div>
+        <a class="btn-wa" style="max-width:280px;margin:0 auto;" href="https://wa.me/5599984458625?text=Olá+Iza!+Gostaria+de+ver+produtos+Mary+Kay." target="_blank">💬 Consultar pelo WhatsApp</a>
+      </div>
+    </div>
+    <div id="dept-boticario" class="iza-dept-sec">
+      <div class="products-wrap"><div class="prod-cards" id="cards-boticario"></div></div>
+    </div>
+    <div id="dept-eudora" class="iza-dept-sec">
+      <div class="products-wrap"><div class="prod-cards" id="cards-eudora"></div></div>
+    </div>
+    <div id="dept-roupas" class="iza-dept-sec">
+      <div class="empty-state">
+        <div class="empty-state-icon">👗</div>
+        <div class="empty-state-txt">Em breve: roupas femininas.<br>Consulte disponibilidade pelo WhatsApp!</div>
+        <a class="btn-wa" style="max-width:280px;margin:0 auto;" href="https://wa.me/5599984458625?text=Olá+Iza!+Gostaria+de+ver+roupas+disponíveis." target="_blank">💬 Consultar pelo WhatsApp</a>
+      </div>
+    </div>
+    <div id="dept-bolsas" class="iza-dept-sec">
+      <div class="empty-state">
+        <div class="empty-state-icon">👜</div>
+        <div class="empty-state-txt">Em breve: bolsas femininas.<br>Consulte disponibilidade pelo WhatsApp!</div>
+        <a class="btn-wa" style="max-width:280px;margin:0 auto;" href="https://wa.me/5599984458625?text=Olá+Iza!+Gostaria+de+ver+bolsas+disponíveis." target="_blank">💬 Consultar pelo WhatsApp</a>
+      </div>
+    </div>
+    <div id="dept-multimarcas" class="iza-dept-sec">
+      <div class="products-wrap"><div class="prod-cards" id="cards-multimarcas"></div></div>
+    </div>
   </div>
 
   <!-- ── Educação ── -->
@@ -1089,6 +1142,86 @@ const CODE_IMG = {
 "ENC-TEN-MAT": "https://smartstore09.github.io/catalogo/imgs/enc_ten_mat.jpg",
 "ENC-WAP-VPZ": "https://smartstore09.github.io/catalogo/imgs/enc_wap_vpz.jpg",
 "ENC-XI-PADX1": "https://smartstore09.github.io/catalogo/imgs/enc_xi_padx1.jpg",
+"CALC-SIMP-001": "imgs/calc_simples_001.jpg",
+"CALC-SIMP-002": "imgs/calc_simples_002.jpg",
+"CALC-SIMP-003": "imgs/calc_simples_003.jpg",
+"CALC-SIMP-004": "imgs/calc_simples_004.jpg",
+"CALC-SIMP-005": "imgs/calc_simples_005.jpg",
+"CALC-SIMP-006": "imgs/calc_simples_006.jpg",
+"CALC-SIMP-007": "imgs/calc_simples_007.jpg",
+"CALC-SIMP-008": "imgs/calc_simples_008.jpg",
+"CALC-SIMP-009": "imgs/calc_simples_009.jpg",
+"CALC-LUXO-001": "imgs/calc_luxo_001.jpg",
+"CALC-LUXO-002": "imgs/calc_luxo_002.jpg",
+"CALC-LUXO-003": "imgs/calc_luxo_003.jpg",
+"CALC-LUXO-004": "imgs/calc_luxo_004.jpg",
+"CALC-LUXO-005": "imgs/calc_luxo_005.jpg",
+"CALC-LUXO-006": "imgs/calc_luxo_006.jpg",
+"CALC-LUXO-007": "imgs/calc_luxo_007.jpg",
+"CALC-LUXO-008": "imgs/calc_luxo_008.jpg",
+"CALC-LUXO-009": "imgs/calc_luxo_009.jpg",
+"CALC-LUXO-010": "imgs/calc_luxo_010.jpg",
+"CALC-LUXO-011": "imgs/calc_luxo_011.jpg",
+"CALC-LUXO-012": "imgs/calc_luxo_012.jpg",
+"CALC-LUXO-013": "imgs/calc_luxo_013.jpg",
+"CALC-LUXO-014": "imgs/calc_luxo_014.jpg",
+"CALC-LUXO-015": "imgs/calc_luxo_015.jpg",
+"CALC-LUXO-016": "imgs/calc_luxo_016.jpg",
+"CALC-LUXO-017": "imgs/calc_luxo_017.jpg",
+"CALC-LUXO-018": "imgs/calc_luxo_018.jpg",
+"CALC-LUXO-019": "imgs/calc_luxo_019.jpg",
+"CALC-LUXO-020": "imgs/calc_luxo_020.jpg",
+"CALC-LUXO-021": "imgs/calc_luxo_021.jpg",
+"CALC-LUXO-022": "imgs/calc_luxo_022.jpg",
+"CALC-LUXO-023": "imgs/calc_luxo_023.jpg",
+"CALC-LUXO-024": "imgs/calc_luxo_024.jpg",
+"CALC-LUXO-025": "imgs/calc_luxo_025.jpg",
+"CALC-LUXO-026": "imgs/calc_luxo_026.jpg",
+"CALC-LUXO-027": "imgs/calc_luxo_027.jpg",
+"CALC-LUXO-028": "imgs/calc_luxo_028.jpg",
+"CALC-LUXO-029": "imgs/calc_luxo_029.jpg",
+"CALC-LUXO-030": "imgs/calc_luxo_030.jpg",
+"CALC-LUXO-031": "imgs/calc_luxo_031.jpg",
+"CALC-LUXO-032": "imgs/calc_luxo_032.jpg",
+"CALC-LUXO-033": "imgs/calc_luxo_033.jpg",
+"CALC-LUXO-034": "imgs/calc_luxo_034.jpg",
+"CALC-LUXO-035": "imgs/calc_luxo_035.jpg",
+"CALC-LUXO-036": "imgs/calc_luxo_036.jpg",
+"CALC-LUXO-037": "imgs/calc_luxo_037.jpg",
+"CALC-LUXO-038": "imgs/calc_luxo_038.jpg",
+"CALC-LUXO-039": "imgs/calc_luxo_039.jpg",
+"CALC-LUXO-040": "imgs/calc_luxo_040.jpg",
+"CALC-LUXO-041": "imgs/calc_luxo_041.jpg",
+"CALC-LUXO-042": "imgs/calc_luxo_042.jpg",
+"CALC-LUXO-043": "imgs/calc_luxo_043.jpg",
+"CALC-BLOCO-001": "imgs/calc_bloco_001.jpg",
+"CALC-BLOCO-002": "imgs/calc_bloco_002.jpg",
+"CALC-BLOCO-003": "imgs/calc_bloco_003.jpg",
+"CALC-BLOCO-004": "imgs/calc_bloco_004.jpg",
+"CALC-BLOCO-005": "imgs/calc_bloco_005.jpg",
+"CALC-PLAT-001": "imgs/calc_plataforma_001.jpg",
+"CALC-PLAT-002": "imgs/calc_plataforma_002.jpg",
+"CALC-PLAT-003": "imgs/calc_plataforma_003.jpg",
+"CALC-PLAT-004": "imgs/calc_plataforma_004.jpg",
+"CALC-PLAT-005": "imgs/calc_plataforma_005.jpg",
+"CALC-PLAT-006": "imgs/calc_plataforma_006.jpg",
+"CALC-PLAT-007": "imgs/calc_plataforma_007.jpg",
+"CALC-PLAT-008": "imgs/calc_plataforma_008.jpg",
+"CALC-PLAT-009": "imgs/calc_plataforma_009.jpg",
+"CALC-PLAT-010": "imgs/calc_plataforma_010.jpg",
+"CALC-PLAT-011": "imgs/calc_plataforma_011.jpg",
+"CALC-PLAT-012": "imgs/calc_plataforma_012.jpg",
+"CALC-PLAT-013": "imgs/calc_plataforma_013.jpg",
+"CALC-PLAT-014": "imgs/calc_plataforma_014.jpg",
+"CALC-PLAT-015": "imgs/calc_plataforma_015.jpg",
+"CALC-ALTO-001": "imgs/calc_alto_001.jpg",
+"CALC-ALTO-002": "imgs/calc_alto_002.jpg",
+"CALC-ALTO-003": "imgs/calc_alto_003.jpg",
+"CALC-ALTO-004": "imgs/calc_alto_004.jpg",
+"CALC-ALTO-005": "imgs/calc_alto_005.jpg",
+"CALC-HAV-001": "imgs/calc_havaianas_001.jpg",
+"CALC-HAV-002": "imgs/calc_havaianas_002.jpg",
+"CALC-HAV-003": "imgs/calc_havaianas_003.jpg",
 "BR-001": "imgs/br_casa_bonecas.png",
 "BR-002": "imgs/br_estabulo_adesivado.png",
 "BR-003": "imgs/br_estabulo_cru.png",
@@ -1196,17 +1329,17 @@ const P = [
   {id:23,cat:'acessorios',code:'AC-PWB-001',name:'Power Bank 10.000mAh',specs:'10.000mAh · 2 saídas USB · LED indicador',price:'45,00',from:0,badge:'AUTONOMIA',bc:'bb',stock:'ok',icon:'🔋'},
   {id:24,cat:'acessorios',code:'AC-FON-001',name:'Fone de Ouvido',specs:'Com fio · P2 · Bass reforçado · Volume integrado',price:'20,00',from:0,badge:'SOM',bc:'bb',stock:'ok',icon:'🎧'},
   // Beleza
-  {id:40,cat:'beleza',code:'75.792',name:'Floratta Flores Secretas 75ml',specs:'O Boticário · Eau de Toilette · Feminino',price:'164,90',from:0,badge:'FAVORITA',bc:'bpink',stock:'ok',icon:'🌸'},
-  {id:41,cat:'beleza',code:'77.183',name:'Creme Hidratante Liz 250g',specs:'Natura · Hidratação profunda · Pele macia',price:'74,90',from:0,badge:'NATURA',bc:'bpink',stock:'ok',icon:'🧴'},
-  {id:42,cat:'beleza',code:'85.124',name:'Loção Hidratante Deleite 400ml',specs:'O Boticário · Hidratação prolongada',price:'74,90',from:0,badge:'BOTICÁRIO',bc:'bpink',stock:'ok',icon:'🧴'},
-  {id:43,cat:'beleza',code:'BL-BS1',name:'Body Splash Deleite 200ml',specs:'O Boticário · Fragrância suave e duradoura',price:'92,90',from:0,badge:'PERFUMADO',bc:'bpink',stock:'ok',icon:'💦'},
-  {id:44,cat:'beleza',code:'51.130',name:'Body Splash Beijinho 200ml',specs:'Avon · Aroma doce irresistível',price:'92,90',from:0,badge:'AVON',bc:'bpink',stock:'ok',icon:'💦'},
-  {id:45,cat:'beleza',code:'85.120',name:'Sabonete Deleite 2un',specs:'O Boticário · Hidratante · Kit 2 unidades',price:'23,90',from:0,badge:'KIT',bc:'bpink',stock:'ok',icon:'🧼'},
-  {id:46,cat:'beleza',code:'52.381',name:'Sabonete Cereja Eudora',specs:'Eudora · Cereja e Amêndoas · Hidratante',price:'32,99',from:0,badge:'EUDORA',bc:'bpink',stock:'ok',icon:'🧼'},
-  {id:47,cat:'beleza',code:'58.181',name:'Batom Cremoso Cor 120',specs:'QDB · Acabamento acetinado · Longa duração',price:'29,90',from:0,badge:'MAQUIAGEM',bc:'bpink',stock:'ok',icon:'💄'},
-  {id:48,cat:'beleza',code:'56.672',name:'Pincel Blush Niina Secrets',specs:'Niina Secrets · Pelos naturais · Profissional',price:'69,99',from:0,badge:'PROFISSIONAL',bc:'bpink',stock:'ok',icon:'🖌️'},
-  {id:49,cat:'beleza',code:'95.018',name:'Paleta Sombras Diabo Veste Prada',specs:'12 cores · Fosco e shimmer · Alta pigmentação',price:'234,99',from:0,badge:'PREMIUM',bc:'bpink',stock:'ok',icon:'🎨'},
-  {id:50,cat:'beleza',code:'BL-007',name:'Kit Pincéis Maquiagem 12 pcs',specs:'12 pincéis profissionais · Case inclusa',price:'45,00',from:0,badge:'KIT COMPLETO',bc:'bpink',stock:'ok',icon:'🖌️'},
+  {id:40,cat:'beleza',subcat:'boticario',code:'75.792',name:'Floratta Flores Secretas 75ml',specs:'O Boticário · Eau de Toilette · Feminino',price:'164,90',from:0,badge:'FAVORITA',bc:'bpink',stock:'ok',icon:'🌸'},
+  {id:41,cat:'beleza',subcat:'multimarcas',code:'77.183',name:'Creme Hidratante Liz 250g',specs:'Natura · Hidratação profunda · Pele macia',price:'74,90',from:0,badge:'NATURA',bc:'bpink',stock:'ok',icon:'🧴'},
+  {id:42,cat:'beleza',subcat:'boticario',code:'85.124',name:'Loção Hidratante Deleite 400ml',specs:'O Boticário · Hidratação prolongada',price:'74,90',from:0,badge:'BOTICÁRIO',bc:'bpink',stock:'ok',icon:'🧴'},
+  {id:43,cat:'beleza',subcat:'boticario',code:'BL-BS1',name:'Body Splash Deleite 200ml',specs:'O Boticário · Fragrância suave e duradoura',price:'92,90',from:0,badge:'PERFUMADO',bc:'bpink',stock:'ok',icon:'💦'},
+  {id:44,cat:'beleza',subcat:'multimarcas',code:'51.130',name:'Body Splash Beijinho 200ml',specs:'Avon · Aroma doce irresistível',price:'92,90',from:0,badge:'AVON',bc:'bpink',stock:'ok',icon:'💦'},
+  {id:45,cat:'beleza',subcat:'boticario',code:'85.120',name:'Sabonete Deleite 2un',specs:'O Boticário · Hidratante · Kit 2 unidades',price:'23,90',from:0,badge:'KIT',bc:'bpink',stock:'ok',icon:'🧼'},
+  {id:46,cat:'beleza',subcat:'eudora',code:'52.381',name:'Sabonete Cereja Eudora',specs:'Eudora · Cereja e Amêndoas · Hidratante',price:'32,99',from:0,badge:'EUDORA',bc:'bpink',stock:'ok',icon:'🧼'},
+  {id:47,cat:'beleza',subcat:'multimarcas',code:'58.181',name:'Batom Cremoso Cor 120',specs:'QDB · Acabamento acetinado · Longa duração',price:'29,90',from:0,badge:'MAQUIAGEM',bc:'bpink',stock:'ok',icon:'💄'},
+  {id:48,cat:'beleza',subcat:'multimarcas',code:'56.672',name:'Pincel Blush Niina Secrets',specs:'Niina Secrets · Pelos naturais · Profissional',price:'69,99',from:0,badge:'PROFISSIONAL',bc:'bpink',stock:'ok',icon:'🖌️'},
+  {id:49,cat:'beleza',subcat:'multimarcas',code:'95.018',name:'Paleta Sombras Diabo Veste Prada',specs:'12 cores · Fosco e shimmer · Alta pigmentação',price:'234,99',from:0,badge:'PREMIUM',bc:'bpink',stock:'ok',icon:'🎨'},
+  {id:50,cat:'beleza',subcat:'multimarcas',code:'BL-007',name:'Kit Pincéis Maquiagem 12 pcs',specs:'12 pincéis profissionais · Case inclusa',price:'45,00',from:0,badge:'KIT COMPLETO',bc:'bpink',stock:'ok',icon:'🖌️'},
   // Educação
   {id:51,cat:'educacao',code:'ED-001',name:'Quiz Interativo Digital',specs:'Física · Matemática · Biologia · Geografia',price:'',from:0,badge:'DIGITAL',bc:'bedu',stock:'ok',icon:'📝'},
   {id:52,cat:'educacao',code:'ED-002',name:'Atividade Avaliativa',specs:'PDF/Word personalizado · Qualquer disciplina',price:'',from:0,badge:'PERSONALIZADO',bc:'bedu',stock:'ok',icon:'📄'},
@@ -1415,7 +1548,88 @@ const P = [
   {id:439,cat:'encomenda',marca:'Matteo',code:'ENC-TEN-MAT',name:'Tênis Matteo Classic Ease',specs:'Couro · Masculino · Casual · Preto · Nr 37-45',price:'304',from:0,badge:'ENCOMENDA',bc:'benc',stock:'enc',deliveryDays:7,icon:'👟'},
   {id:440,cat:'encomenda',marca:'Under Armour',code:'ENC-CHN-UA',name:'Chinelo Under Armour Core 2',specs:'Unissex · EVA · Anatômico',price:'182',from:0,badge:'ENCOMENDA',bc:'benc',stock:'enc',deliveryDays:7,icon:'👟'},
   {id:441,cat:'encomenda',marca:'Lancôme',code:'ENC-LAN-TNT',name:'La Nuit Trésor Lancôme EDP 30ml',specs:'EDP · 30ml · Feminino',price:'487',from:0,badge:'ENCOMENDA',bc:'benc',stock:'enc',deliveryDays:7,icon:'🌸'},
-  {id:442,cat:'encomenda',marca:'Lancôme',code:'ENC-LAN-IDOL',name:'Idôle Lancôme EDT 100ml',specs:'EDT · 100ml · Feminino · Floral-Fresco',price:'609',from:0,badge:'ENCOMENDA',bc:'benc',stock:'enc',deliveryDays:7,icon:'🌸'}
+  {id:442,cat:'encomenda',marca:'Lancôme',code:'ENC-LAN-IDOL',name:'Idôle Lancôme EDT 100ml',specs:'EDT · 100ml · Feminino · Floral-Fresco',price:'609',from:0,badge:'ENCOMENDA',bc:'benc',stock:'enc',deliveryDays:7,icon:'🌸'},
+  // Iza / Calçados
+  {id:700,cat:'beleza',subcat:'calcados',estilo:'simples',code:'CALC-SIMP-001',name:'Rasteirinha Simples',specs:'Sandália feminina · Ver detalhes na foto',price:'49,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:701,cat:'beleza',subcat:'calcados',estilo:'simples',code:'CALC-SIMP-002',name:'Rasteirinha Simples',specs:'Sandália feminina · Ver detalhes na foto',price:'49,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:702,cat:'beleza',subcat:'calcados',estilo:'simples',code:'CALC-SIMP-003',name:'Rasteirinha Simples',specs:'Sandália feminina · Ver detalhes na foto',price:'49,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:703,cat:'beleza',subcat:'calcados',estilo:'simples',code:'CALC-SIMP-004',name:'Rasteirinha Simples',specs:'Sandália feminina · Ver detalhes na foto',price:'49,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:704,cat:'beleza',subcat:'calcados',estilo:'simples',code:'CALC-SIMP-005',name:'Rasteirinha Simples',specs:'Sandália feminina · Ver detalhes na foto',price:'49,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:705,cat:'beleza',subcat:'calcados',estilo:'simples',code:'CALC-SIMP-006',name:'Rasteirinha Simples',specs:'Sandália feminina · Ver detalhes na foto',price:'49,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:706,cat:'beleza',subcat:'calcados',estilo:'simples',code:'CALC-SIMP-007',name:'Rasteirinha Simples',specs:'Sandália feminina · Ver detalhes na foto',price:'49,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:707,cat:'beleza',subcat:'calcados',estilo:'simples',code:'CALC-SIMP-008',name:'Rasteirinha Simples',specs:'Sandália feminina · Ver detalhes na foto',price:'49,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:708,cat:'beleza',subcat:'calcados',estilo:'simples',code:'CALC-SIMP-009',name:'Rasteirinha Simples',specs:'Sandália feminina · Ver detalhes na foto',price:'49,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:709,cat:'beleza',subcat:'calcados',estilo:'luxo',code:'CALC-LUXO-001',name:'Rasteirinha Luxo',specs:'Sandália feminina · Ver detalhes na foto',price:'70,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:710,cat:'beleza',subcat:'calcados',estilo:'luxo',code:'CALC-LUXO-002',name:'Rasteirinha Luxo',specs:'Sandália feminina · Ver detalhes na foto',price:'70,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:711,cat:'beleza',subcat:'calcados',estilo:'luxo',code:'CALC-LUXO-003',name:'Rasteirinha Luxo',specs:'Sandália feminina · Ver detalhes na foto',price:'70,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:712,cat:'beleza',subcat:'calcados',estilo:'luxo',code:'CALC-LUXO-004',name:'Rasteirinha Luxo',specs:'Sandália feminina · Ver detalhes na foto',price:'70,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:713,cat:'beleza',subcat:'calcados',estilo:'luxo',code:'CALC-LUXO-005',name:'Rasteirinha Luxo',specs:'Sandália feminina · Ver detalhes na foto',price:'70,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:714,cat:'beleza',subcat:'calcados',estilo:'luxo',code:'CALC-LUXO-006',name:'Rasteirinha Luxo',specs:'Sandália feminina · Ver detalhes na foto',price:'70,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:715,cat:'beleza',subcat:'calcados',estilo:'luxo',code:'CALC-LUXO-007',name:'Rasteirinha Luxo',specs:'Sandália feminina · Ver detalhes na foto',price:'70,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:716,cat:'beleza',subcat:'calcados',estilo:'luxo',code:'CALC-LUXO-008',name:'Rasteirinha Luxo',specs:'Sandália feminina · Ver detalhes na foto',price:'70,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:717,cat:'beleza',subcat:'calcados',estilo:'luxo',code:'CALC-LUXO-009',name:'Rasteirinha Luxo',specs:'Sandália feminina · Ver detalhes na foto',price:'70,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:718,cat:'beleza',subcat:'calcados',estilo:'luxo',code:'CALC-LUXO-010',name:'Rasteirinha Luxo',specs:'Sandália feminina · Ver detalhes na foto',price:'70,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:719,cat:'beleza',subcat:'calcados',estilo:'luxo',code:'CALC-LUXO-011',name:'Rasteirinha Luxo',specs:'Sandália feminina · Ver detalhes na foto',price:'70,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:720,cat:'beleza',subcat:'calcados',estilo:'luxo',code:'CALC-LUXO-012',name:'Rasteirinha Luxo',specs:'Sandália feminina · Ver detalhes na foto',price:'70,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:721,cat:'beleza',subcat:'calcados',estilo:'luxo',code:'CALC-LUXO-013',name:'Rasteirinha Luxo',specs:'Sandália feminina · Ver detalhes na foto',price:'70,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:722,cat:'beleza',subcat:'calcados',estilo:'luxo',code:'CALC-LUXO-014',name:'Rasteirinha Luxo',specs:'Sandália feminina · Ver detalhes na foto',price:'70,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:723,cat:'beleza',subcat:'calcados',estilo:'luxo',code:'CALC-LUXO-015',name:'Rasteirinha Luxo',specs:'Sandália feminina · Ver detalhes na foto',price:'70,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:724,cat:'beleza',subcat:'calcados',estilo:'luxo',code:'CALC-LUXO-016',name:'Rasteirinha Luxo',specs:'Sandália feminina · Ver detalhes na foto',price:'70,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:725,cat:'beleza',subcat:'calcados',estilo:'luxo',code:'CALC-LUXO-017',name:'Rasteirinha Luxo',specs:'Sandália feminina · Ver detalhes na foto',price:'70,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:726,cat:'beleza',subcat:'calcados',estilo:'luxo',code:'CALC-LUXO-018',name:'Rasteirinha Luxo',specs:'Sandália feminina · Ver detalhes na foto',price:'70,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:727,cat:'beleza',subcat:'calcados',estilo:'luxo',code:'CALC-LUXO-019',name:'Rasteirinha Luxo',specs:'Sandália feminina · Ver detalhes na foto',price:'70,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:728,cat:'beleza',subcat:'calcados',estilo:'luxo',code:'CALC-LUXO-020',name:'Rasteirinha Luxo',specs:'Sandália feminina · Ver detalhes na foto',price:'70,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:729,cat:'beleza',subcat:'calcados',estilo:'luxo',code:'CALC-LUXO-021',name:'Rasteirinha Luxo',specs:'Sandália feminina · Ver detalhes na foto',price:'70,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:730,cat:'beleza',subcat:'calcados',estilo:'luxo',code:'CALC-LUXO-022',name:'Rasteirinha Luxo',specs:'Sandália feminina · Ver detalhes na foto',price:'70,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:731,cat:'beleza',subcat:'calcados',estilo:'luxo',code:'CALC-LUXO-023',name:'Rasteirinha Luxo',specs:'Sandália feminina · Ver detalhes na foto',price:'70,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:732,cat:'beleza',subcat:'calcados',estilo:'luxo',code:'CALC-LUXO-024',name:'Rasteirinha Luxo',specs:'Sandália feminina · Ver detalhes na foto',price:'70,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:733,cat:'beleza',subcat:'calcados',estilo:'luxo',code:'CALC-LUXO-025',name:'Rasteirinha Luxo',specs:'Sandália feminina · Ver detalhes na foto',price:'70,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:734,cat:'beleza',subcat:'calcados',estilo:'luxo',code:'CALC-LUXO-026',name:'Rasteirinha Luxo',specs:'Sandália feminina · Ver detalhes na foto',price:'70,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:735,cat:'beleza',subcat:'calcados',estilo:'luxo',code:'CALC-LUXO-027',name:'Rasteirinha Luxo',specs:'Sandália feminina · Ver detalhes na foto',price:'70,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:736,cat:'beleza',subcat:'calcados',estilo:'luxo',code:'CALC-LUXO-028',name:'Rasteirinha Luxo',specs:'Sandália feminina · Ver detalhes na foto',price:'70,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:737,cat:'beleza',subcat:'calcados',estilo:'luxo',code:'CALC-LUXO-029',name:'Rasteirinha Luxo',specs:'Sandália feminina · Ver detalhes na foto',price:'70,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:738,cat:'beleza',subcat:'calcados',estilo:'luxo',code:'CALC-LUXO-030',name:'Rasteirinha Luxo',specs:'Sandália feminina · Ver detalhes na foto',price:'70,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:739,cat:'beleza',subcat:'calcados',estilo:'luxo',code:'CALC-LUXO-031',name:'Rasteirinha Luxo',specs:'Sandália feminina · Ver detalhes na foto',price:'70,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:740,cat:'beleza',subcat:'calcados',estilo:'luxo',code:'CALC-LUXO-032',name:'Rasteirinha Luxo',specs:'Sandália feminina · Ver detalhes na foto',price:'70,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:741,cat:'beleza',subcat:'calcados',estilo:'luxo',code:'CALC-LUXO-033',name:'Rasteirinha Luxo',specs:'Sandália feminina · Ver detalhes na foto',price:'70,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:742,cat:'beleza',subcat:'calcados',estilo:'luxo',code:'CALC-LUXO-034',name:'Rasteirinha Luxo',specs:'Sandália feminina · Ver detalhes na foto',price:'70,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:743,cat:'beleza',subcat:'calcados',estilo:'luxo',code:'CALC-LUXO-035',name:'Rasteirinha Luxo',specs:'Sandália feminina · Ver detalhes na foto',price:'70,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:744,cat:'beleza',subcat:'calcados',estilo:'luxo',code:'CALC-LUXO-036',name:'Rasteirinha Luxo',specs:'Sandália feminina · Ver detalhes na foto',price:'70,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:745,cat:'beleza',subcat:'calcados',estilo:'luxo',code:'CALC-LUXO-037',name:'Rasteirinha Luxo',specs:'Sandália feminina · Ver detalhes na foto',price:'70,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:746,cat:'beleza',subcat:'calcados',estilo:'luxo',code:'CALC-LUXO-038',name:'Rasteirinha Luxo',specs:'Sandália feminina · Ver detalhes na foto',price:'70,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:747,cat:'beleza',subcat:'calcados',estilo:'luxo',code:'CALC-LUXO-039',name:'Rasteirinha Luxo',specs:'Sandália feminina · Ver detalhes na foto',price:'70,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:748,cat:'beleza',subcat:'calcados',estilo:'luxo',code:'CALC-LUXO-040',name:'Rasteirinha Luxo',specs:'Sandália feminina · Ver detalhes na foto',price:'70,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:749,cat:'beleza',subcat:'calcados',estilo:'luxo',code:'CALC-LUXO-041',name:'Rasteirinha Luxo',specs:'Sandália feminina · Ver detalhes na foto',price:'70,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:750,cat:'beleza',subcat:'calcados',estilo:'luxo',code:'CALC-LUXO-042',name:'Rasteirinha Luxo',specs:'Sandália feminina · Ver detalhes na foto',price:'70,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:751,cat:'beleza',subcat:'calcados',estilo:'luxo',code:'CALC-LUXO-043',name:'Rasteirinha Luxo',specs:'Sandália feminina · Ver detalhes na foto',price:'70,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:752,cat:'beleza',subcat:'calcados',estilo:'saltinho_bloco',code:'CALC-BLOCO-001',name:'Saltinho Bloco',specs:'Sandália feminina · Ver detalhes na foto',price:'80,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:753,cat:'beleza',subcat:'calcados',estilo:'saltinho_bloco',code:'CALC-BLOCO-002',name:'Saltinho Bloco',specs:'Sandália feminina · Ver detalhes na foto',price:'80,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:754,cat:'beleza',subcat:'calcados',estilo:'saltinho_bloco',code:'CALC-BLOCO-003',name:'Saltinho Bloco',specs:'Sandália feminina · Ver detalhes na foto',price:'80,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:755,cat:'beleza',subcat:'calcados',estilo:'saltinho_bloco',code:'CALC-BLOCO-004',name:'Saltinho Bloco',specs:'Sandália feminina · Ver detalhes na foto',price:'80,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:756,cat:'beleza',subcat:'calcados',estilo:'saltinho_bloco',code:'CALC-BLOCO-005',name:'Saltinho Bloco',specs:'Sandália feminina · Ver detalhes na foto',price:'80,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:757,cat:'beleza',subcat:'calcados',estilo:'plataforma',code:'CALC-PLAT-001',name:'Plataforma',specs:'Sandália feminina · Ver detalhes na foto',price:'120,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:758,cat:'beleza',subcat:'calcados',estilo:'plataforma',code:'CALC-PLAT-002',name:'Plataforma',specs:'Sandália feminina · Ver detalhes na foto',price:'120,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:759,cat:'beleza',subcat:'calcados',estilo:'plataforma',code:'CALC-PLAT-003',name:'Plataforma',specs:'Sandália feminina · Ver detalhes na foto',price:'120,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:760,cat:'beleza',subcat:'calcados',estilo:'plataforma',code:'CALC-PLAT-004',name:'Plataforma',specs:'Sandália feminina · Ver detalhes na foto',price:'120,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:761,cat:'beleza',subcat:'calcados',estilo:'plataforma',code:'CALC-PLAT-005',name:'Plataforma',specs:'Sandália feminina · Ver detalhes na foto',price:'120,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:762,cat:'beleza',subcat:'calcados',estilo:'plataforma',code:'CALC-PLAT-006',name:'Plataforma',specs:'Sandália feminina · Ver detalhes na foto',price:'120,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:763,cat:'beleza',subcat:'calcados',estilo:'plataforma',code:'CALC-PLAT-007',name:'Plataforma',specs:'Sandália feminina · Ver detalhes na foto',price:'120,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:764,cat:'beleza',subcat:'calcados',estilo:'plataforma',code:'CALC-PLAT-008',name:'Plataforma',specs:'Sandália feminina · Ver detalhes na foto',price:'120,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:765,cat:'beleza',subcat:'calcados',estilo:'plataforma',code:'CALC-PLAT-009',name:'Plataforma',specs:'Sandália feminina · Ver detalhes na foto',price:'120,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:766,cat:'beleza',subcat:'calcados',estilo:'plataforma',code:'CALC-PLAT-010',name:'Plataforma',specs:'Sandália feminina · Ver detalhes na foto',price:'120,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:767,cat:'beleza',subcat:'calcados',estilo:'plataforma',code:'CALC-PLAT-011',name:'Plataforma',specs:'Sandália feminina · Ver detalhes na foto',price:'120,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:768,cat:'beleza',subcat:'calcados',estilo:'plataforma',code:'CALC-PLAT-012',name:'Plataforma',specs:'Sandália feminina · Ver detalhes na foto',price:'120,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:769,cat:'beleza',subcat:'calcados',estilo:'plataforma',code:'CALC-PLAT-013',name:'Plataforma',specs:'Sandália feminina · Ver detalhes na foto',price:'120,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:770,cat:'beleza',subcat:'calcados',estilo:'plataforma',code:'CALC-PLAT-014',name:'Plataforma',specs:'Sandália feminina · Ver detalhes na foto',price:'120,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:771,cat:'beleza',subcat:'calcados',estilo:'plataforma',code:'CALC-PLAT-015',name:'Plataforma',specs:'Sandália feminina · Ver detalhes na foto',price:'120,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:772,cat:'beleza',subcat:'calcados',estilo:'salto_alto',code:'CALC-ALTO-001',name:'Salto Alto',specs:'Sandália feminina · Ver detalhes na foto',price:'160,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:773,cat:'beleza',subcat:'calcados',estilo:'salto_alto',code:'CALC-ALTO-002',name:'Salto Alto',specs:'Sandália feminina · Ver detalhes na foto',price:'160,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:774,cat:'beleza',subcat:'calcados',estilo:'salto_alto',code:'CALC-ALTO-003',name:'Salto Alto',specs:'Sandália feminina · Ver detalhes na foto',price:'160,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:775,cat:'beleza',subcat:'calcados',estilo:'salto_alto',code:'CALC-ALTO-004',name:'Salto Alto',specs:'Sandália feminina · Ver detalhes na foto',price:'160,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:776,cat:'beleza',subcat:'calcados',estilo:'salto_alto',code:'CALC-ALTO-005',name:'Salto Alto',specs:'Sandália feminina · Ver detalhes na foto',price:'160,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:777,cat:'beleza',subcat:'calcados',estilo:'havaianas',code:'CALC-HAV-001',name:'Havaianas fARM',specs:'Sandália feminina · Ver detalhes na foto',price:'35,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:778,cat:'beleza',subcat:'calcados',estilo:'havaianas',code:'CALC-HAV-002',name:'Havaianas fARM',specs:'Sandália feminina · Ver detalhes na foto',price:'35,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
+  {id:779,cat:'beleza',subcat:'calcados',estilo:'havaianas',code:'CALC-HAV-003',name:'Havaianas fARM',specs:'Sandália feminina · Ver detalhes na foto',price:'35,00',from:0,badge:'',bc:'bpink',stock:'ok',icon:'👡'},
 ];
 
 function fmtP(v){var s=String(v||"").trim();return s&&!s.includes(",")?s+",00":s;}
@@ -1488,7 +1702,7 @@ function mkCard(p){
   const msgJ = `Olá! Vi ${p.name} (${p.code}) no catálogo da Smart Store 09 e gostaria de mais informações.${revRef}`;
   const msgI = msgJ;
   const waIcon = `<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.523 5.854L.057 23.43a.5.5 0 00.612.612l5.576-1.466A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.806 9.806 0 01-5.034-1.387l-.36-.214-3.732.982.998-3.647-.236-.375A9.818 9.818 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>`;
-  return `<div class="prod-card" onclick="openModal(${p.id})" data-cat="${p.cat}" data-marca="${marca.toLowerCase()}" data-name="${p.name.toLowerCase()}" data-code="${p.code.toLowerCase()}" data-badge="${(p.badge||'').toLowerCase()}">
+  return `<div class="prod-card" onclick="openModal(${p.id})" data-cat="${p.cat}" data-marca="${marca.toLowerCase()}" data-name="${p.name.toLowerCase()}" data-code="${p.code.toLowerCase()}" data-badge="${(p.badge||'').toLowerCase()}" data-estilo="${p.estilo||''}">
   <div class="card-body">
     <div class="card-img">${imgOrIcon(p.code, p.icon, p.name)}</div>
     <div class="card-info">
@@ -1576,11 +1790,22 @@ function closeLightbox(){
 
 const _rendered = {};
 function renderCat(cat) {
+  if(cat==='beleza'){ renderIzaAll(); return; }
   if (_rendered[cat]) return;
   _rendered[cat] = true;
   const list = P.filter(p => p.cat === cat);
   const el = document.getElementById('cards-' + cat);
   if (el) el.innerHTML = list.map(mkCard).join('');
+}
+function renderIzaAll(){
+  if(_rendered['beleza']) return;
+  _rendered['beleza']=true;
+  const bySubcat = s => P.filter(p=>p.cat==='beleza'&&p.subcat===s);
+  const put=(id,list)=>{ const el=document.getElementById(id); if(el) el.innerHTML=list.map(mkCard).join(''); };
+  put('cards-beleza', bySubcat('calcados'));
+  put('cards-boticario', bySubcat('boticario'));
+  put('cards-eudora', bySubcat('eudora'));
+  put('cards-multimarcas', bySubcat('multimarcas'));
 }
 function renderAll(){ renderCat('iphones'); } // Only render visible tab on load
 
@@ -1645,6 +1870,22 @@ function filterBrand(btn,brand){
   btn.classList.add('active');
   document.querySelectorAll('#cards-pecas .prod-card').forEach(c=>{
     c.style.display=(brand==='todas'||c.dataset.marca===brand.toLowerCase())?'':'none';
+  });
+}
+
+// ── IZA — DEPARTAMENTOS E ESTILO DE CALÇADOS ──
+function izaDept(btn,dept){
+  document.querySelectorAll('#iza-depts .brand-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.iza-dept-sec').forEach(s=>s.classList.remove('active'));
+  document.getElementById('dept-'+dept).classList.add('active');
+  if(dept==='calcados') renderCat('beleza');
+}
+function filterEstilo(btn,estilo){
+  document.querySelectorAll('#estilo-filter .brand-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('#cards-beleza .prod-card').forEach(c=>{
+    c.style.display=(estilo==='todas'||c.dataset.estilo===estilo)?'':'none';
   });
 }
 
