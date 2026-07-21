@@ -1765,18 +1765,24 @@ function closeLightbox(){
 }
 
 const _rendered = {};
+function sortByPhoto(list){
+  return list.map((p,i)=>({p,i})).sort((a,b)=>{
+    const ap=CODE_IMG[a.p.code]?0:1, bp=CODE_IMG[b.p.code]?0:1;
+    return ap!==bp ? ap-bp : a.i-b.i;
+  }).map(x=>x.p);
+}
 function renderCat(cat) {
   if(cat==='beleza'){ renderIzaAll(); return; }
   if (_rendered[cat]) return;
   _rendered[cat] = true;
-  const list = P.filter(p => p.cat === cat);
+  const list = sortByPhoto(P.filter(p => p.cat === cat));
   const el = document.getElementById('cards-' + cat);
   if (el) el.innerHTML = list.map(mkCard).join('');
 }
 function renderIzaAll(){
   if(_rendered['beleza']) return;
   _rendered['beleza']=true;
-  const bySubcat = s => P.filter(p=>p.cat==='beleza'&&p.subcat===s);
+  const bySubcat = s => sortByPhoto(P.filter(p=>p.cat==='beleza'&&p.subcat===s));
   const put=(id,list)=>{ const el=document.getElementById(id); if(el) el.innerHTML=list.map(mkCard).join(''); };
   put('cards-beleza', bySubcat('calcados'));
   put('cards-boticario', bySubcat('boticario'));
@@ -1908,12 +1914,12 @@ function buscaGeral(){
     resumoEl.textContent='Digite para buscar em todo o catálogo.';
     return;
   }
-  const results=P.filter(p=>
+  const results=sortByPhoto(P.filter(p=>
     p.name.toLowerCase().includes(q) ||
     p.code.toLowerCase().includes(q) ||
     (p.marca||'').toLowerCase().includes(q) ||
     (p.badge||'').toLowerCase().includes(q)
-  );
+  ));
   cardsEl.innerHTML=results.map(mkCard).join('');
   emptyEl.style.display=results.length?'none':'';
   resumoEl.textContent=`${results.length} resultado${results.length===1?'':'s'} para "${q}"`;
