@@ -759,6 +759,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Montserrat',sans-serif;m
       <button class="brand-btn" onclick="filterComp(this,'Motorola')">Motorola</button>
       <button class="brand-btn" onclick="filterComp(this,'Xiaomi')">Xiaomi</button>
       <button class="brand-btn" onclick="filterComp(this,'Redmi')">Redmi</button>
+      <button class="brand-btn" onclick="filterComp(this,'Apple')">Apple</button>
       <button class="brand-btn" onclick="filterComp(this,'Realme')">Realme</button>
     </div>
     <div class="brand-wrap" id="tipo-filter" style="padding-top:0;">
@@ -770,6 +771,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Montserrat',sans-serif;m
       <button class="brand-btn" onclick="filterTipo(this,'LENTE CAM')">📷 Lente</button>
       <button class="brand-btn" onclick="filterTipo(this,'BOTÃO')">🔘 Botão</button>
       <button class="brand-btn" onclick="filterTipo(this,'CAMPAINHA')">🔊 Campainha</button>
+      <button class="brand-btn" onclick="filterTipo(this,'FPC')">🔌 FPC</button>
     </div>
     <div class="products-wrap"><div class="prod-cards" id="cards-componentes"></div></div>
   </div>
@@ -909,7 +911,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Montserrat',sans-serif;m
     <a class="svc-card" href="https://wa.me/5589988098980?text=Olá!+Gostaria+de+orçamento+para+troca+de+placa+de+carga." target="_blank">
       <div class="svc-icon"><svg class="icon-svg" viewBox="0 0 24 24"><path d="M14.5 6.5a4 4 0 00-5.4 4.9L4 16.5V20h3.5l5.1-5.1a4 4 0 004.9-5.4l-2.6 2.6-2-2 2.6-2.6z"/></svg></div>
       <div class="svc-name">Placa de Carga</div>
-      <div class="svc-price">R$ 100,00</div>
+      <div class="svc-price">R$ 120,00</div>
     </a>
     <a class="svc-card" href="https://wa.me/5589988098980?text=Olá!+Gostaria+de+orçamento+para+formatação+do+meu+celular." target="_blank">
       <div class="svc-icon"><svg class="icon-svg" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="10" rx="1"/><path d="M2 18h20"/></svg></div>
@@ -1399,11 +1401,11 @@ const P = [
   {id:321,cat:'componentes',marca:'Samsung',code:'COMP-366',name:'Flex Power Samsung A02/A32/M32',specs:'A02 · A32 4G · M32',price:'20,00',from:0,badge:'FLEX POWER',bc:'bgreen',stock:'ok',icon:'🔌'},
   {id:322,cat:'componentes',marca:'Xiaomi',code:'COMP-11281',name:'Flex Power Xiaomi Note 11 4G/11S/M4 Pro',specs:'Note 11 4G · Note 11S · M4 Pro 4G',price:'20,00',from:0,badge:'FLEX POWER',bc:'bgreen',stock:'ok',icon:'🔌'},
   {id:323,cat:'componentes',marca:'Xiaomi',code:'COMP-11283',name:'Flex Power Xiaomi Note 12 4G',specs:'Note 12 4G',price:'20,00',from:0,badge:'FLEX POWER',bc:'bgreen',stock:'ok',icon:'🔌'},
-  {id:330,cat:'componentes',marca:'Samsung',code:'COMP-412',name:'Lente Câmera Samsung A20S',specs:'A20S · Vidro da câmera',price:'20,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
-  {id:331,cat:'componentes',marca:'Samsung',code:'COMP-442',name:'Lente Câmera Samsung A10S',specs:'A10S · Vidro da câmera',price:'20,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:330,cat:'componentes',marca:'Samsung',code:'COMP-412',name:'Lente Câmera Samsung A20S',specs:'A20S · Vidro da câmera',price:'22,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:331,cat:'componentes',marca:'Samsung',code:'COMP-442',name:'Lente Câmera Samsung A10S',specs:'A10S · Vidro da câmera',price:'22,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
   {id:332,cat:'componentes',marca:'Samsung',code:'COMP-478',name:'Lente Câmera Samsung A22',specs:'A22 · Vidro da câmera',price:'20,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
-  {id:333,cat:'componentes',marca:'Samsung',code:'COMP-521',name:'Lente Câmera Samsung A32',specs:'A32 · Vidro da câmera',price:'20,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
-  {id:334,cat:'componentes',marca:'Redmi',code:'COMP-3275',name:'Lente Câmera Redmi Note 11 4G',specs:'Note 11 4G · Vidro da câmera',price:'20,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:333,cat:'componentes',marca:'Samsung',code:'COMP-521',name:'Lente Câmera Samsung A32',specs:'A32 · Vidro da câmera',price:'22,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:334,cat:'componentes',marca:'Redmi',code:'COMP-3275',name:'Lente Câmera Redmi Note 11 4G',specs:'Note 11 4G · Vidro da câmera',price:'22,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
   {id:340,cat:'componentes',marca:'Motorola',code:'COMP-1478',name:'Conector Solto G4/G4 Plus',specs:'G4 · G4 Plus · Mín 10 pcs',price:'20,00',from:0,badge:'CONECTOR',bc:'bpecas',stock:'ok',icon:'🔗'},
   {id:341,cat:'componentes',marca:'Motorola',code:'COMP-1486',name:'Conector Solto G7/G7 Plus',specs:'G7 · G7 Plus · Mín 5 pcs',price:'20,00',from:0,badge:'CONECTOR',bc:'bpecas',stock:'ok',icon:'🔗'},
   {id:342,cat:'componentes',marca:'Outros',code:'COMP-1490',name:'Conector Solto Tablet DL',specs:'Tablet DL · Mín 10 pcs',price:'20,00',from:0,badge:'CONECTOR',bc:'bpecas',stock:'ok',icon:'🔗'},
@@ -1419,7 +1421,7 @@ const P = [
   {id:362,cat:'componentes',marca:'Samsung',code:'COMP-8531',name:'Tampa Samsung A03 Core Preto',specs:'A03 Core · Preto',price:'48,25',from:0,badge:'TAMPA',bc:'by',stock:'ok',icon:'🔲'},
   {id:363,cat:'componentes',marca:'Samsung',code:'COMP-10754',name:'Tampa Samsung A02 Azul',specs:'A02 · Azul · Mín 2 pcs',price:'49,75',from:0,badge:'TAMPA',bc:'by',stock:'ok',icon:'🔲'},
   {id:364,cat:'componentes',marca:'Samsung',code:'COMP-10782',name:'Tampa Samsung A03 Core Vermelho',specs:'A03 Core · Vermelho · Mín 2 pcs',price:'54,60',from:0,badge:'TAMPA',bc:'by',stock:'ok',icon:'🔲'},
-  {id:365,cat:'componentes',marca:'Samsung',code:'COMP-8714',name:'Tampa Samsung A13 Branco',specs:'A13 · Branco',price:'47,45',from:0,badge:'TAMPA',bc:'by',stock:'ok',icon:'🔲'},
+  {id:365,cat:'componentes',marca:'Samsung',code:'COMP-8714',name:'Tampa Samsung A13 Branco',specs:'A13 · Branco',price:'37,00',from:0,badge:'TAMPA',bc:'by',stock:'ok',icon:'🔲'},
   {id:366,cat:'componentes',marca:'Samsung',code:'COMP-8715',name:'Tampa Samsung A13 Preto',specs:'A13 · Preto · Mín 2 pcs',price:'42,70',from:0,badge:'TAMPA',bc:'by',stock:'ok',icon:'🔲'},
   {id:367,cat:'componentes',marca:'Samsung',code:'COMP-11495',name:'Tampa Samsung A13 Azul',specs:'A13 · Azul',price:'30,50',from:0,badge:'TAMPA',bc:'by',stock:'ok',icon:'🔲'},
   {id:368,cat:'componentes',marca:'Samsung',code:'COMP-10713',name:'Tampa Samsung A23 Branca',specs:'A23 · Branca',price:'32,65',from:0,badge:'TAMPA',bc:'by',stock:'ok',icon:'🔲'},
@@ -1455,6 +1457,78 @@ const P = [
   {id:404,cat:'pecas',marca:'Samsung',code:'PC-SA-A10S',name:'Frontal Samsung A10S',specs:'Sem Aro WK · China · Cód:K2085',price:'180,00',from:0,badge:'SAMSUNG',bc:'bpecas',stock:'ok',icon:'🔩'},
   {id:405,cat:'pecas',marca:'Redmi',code:'PC-RD-N11A',name:'Frontal Redmi Note 11/11S/12S Com Aro',specs:'Com Aro WK · Cód:K6006',price:'180,00',from:0,badge:'REDMI',bc:'bpecas',stock:'ok',icon:'🔩'},
   {id:391,cat:'componentes',marca:'Samsung',code:'COMP-8423',name:'Campainha/Alto Falante Samsung',specs:'A12 · A10 · A20 · A02 · A14 4G · A22 4G · A32 · A21S · Mín 2 pcs',price:'22,55',from:0,badge:'CAMPAINHA',bc:'bgift',stock:'ok',icon:'🔊'},
+  {id:800,cat:'componentes',marca:'Samsung',code:'COMP-10952',name:'Lente Câmera Samsung A03',specs:'A03 · Vidro da câmera',price:'22,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:801,cat:'componentes',marca:'Samsung',code:'COMP-8512',name:'Lente Câmera Samsung A03 Core',specs:'A03 Core · Vidro da câmera',price:'22,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:802,cat:'componentes',marca:'Samsung',code:'COMP-3297',name:'Lente Câmera Samsung A03S',specs:'A03S · Vidro da câmera',price:'22,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:803,cat:'componentes',marca:'Samsung',code:'COMP-445',name:'Lente Câmera Samsung A10',specs:'A10 · Vidro da câmera',price:'22,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:804,cat:'componentes',marca:'Redmi',code:'COMP-11820',name:'Lente Câmera Redmi 13C/Poco C65',specs:'Redmi 13C · Poco C65 · Vidro da câmera',price:'22,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:805,cat:'componentes',marca:'Redmi',code:'COMP-2080',name:'Lente Câmera Redmi Note 8',specs:'Note 8 · Vidro da câmera',price:'22,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:806,cat:'componentes',marca:'Apple',code:'COMP-401',name:'Lente Câmera iPhone 7 Plus/8 Plus',specs:'iPhone 7 Plus · 8 Plus · Vidro da câmera',price:'22,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:807,cat:'componentes',marca:'Motorola',code:'COMP-3298',name:'Lente Câmera Moto E20',specs:'E20 · Vidro da câmera',price:'22,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:808,cat:'componentes',marca:'Redmi',code:'COMP-472',name:'Lente Câmera Redmi Note 10 4G/Poco M5S',specs:'Note 10 4G · Poco M5S · Note 10S · Vidro da câmera',price:'22,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:809,cat:'componentes',marca:'Redmi',code:'COMP-10723',name:'Lente Câmera Redmi Note 9',specs:'Note 9 · Vidro da câmera',price:'22,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:810,cat:'componentes',marca:'Redmi',code:'COMP-11365',name:'Lente Câmera Redmi 10A',specs:'Redmi 10A · Vidro da câmera',price:'22,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:811,cat:'componentes',marca:'Motorola',code:'COMP-520',name:'Lente Câmera Moto G20',specs:'G20 · Vidro da câmera',price:'22,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:812,cat:'componentes',marca:'Redmi',code:'COMP-560',name:'Lente Câmera Redmi 9A',specs:'Redmi 9A · Vidro da câmera',price:'22,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:813,cat:'componentes',marca:'Motorola',code:'COMP-12866',name:'Lente Câmera G50 4G',specs:'G50 4G · Vidro da câmera',price:'22,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:814,cat:'componentes',marca:'Apple',code:'COMP-2087',name:'Lente Câmera iPhone 11 Pro',specs:'iPhone 11 Pro · Vidro da câmera',price:'22,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:815,cat:'componentes',marca:'Apple',code:'COMP-452',name:'Lente Câmera iPhone X/XS',specs:'iPhone X · XS · Vidro da câmera',price:'22,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:816,cat:'componentes',marca:'Motorola',code:'COMP-11047',name:'Lente Câmera Moto E13',specs:'E13 · Vidro da câmera',price:'22,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:817,cat:'componentes',marca:'Motorola',code:'COMP-10951',name:'Lente Câmera Moto E22/G32',specs:'E22 · G32 · Vidro da câmera',price:'22,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:818,cat:'componentes',marca:'Motorola',code:'COMP-11350',name:'Lente Câmera Moto E30/E40',specs:'E30 · E40 · Vidro da câmera',price:'22,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:819,cat:'componentes',marca:'Motorola',code:'COMP-522',name:'Lente Câmera Moto G10',specs:'G10 · Vidro da câmera',price:'22,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:820,cat:'componentes',marca:'Motorola',code:'COMP-11797',name:'Lente Câmera Moto G13',specs:'G13 · Vidro da câmera',price:'23,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:821,cat:'componentes',marca:'Motorola',code:'COMP-8463',name:'Lente Câmera Moto G22',specs:'G22 · Vidro da câmera',price:'22,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:822,cat:'componentes',marca:'Motorola',code:'COMP-11340',name:'Lente Câmera Moto G23',specs:'G23 · Vidro da câmera',price:'22,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:823,cat:'componentes',marca:'Motorola',code:'COMP-12023',name:'Lente Câmera Moto G24',specs:'G24 · Vidro da câmera',price:'22,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:824,cat:'componentes',marca:'Motorola',code:'COMP-11341',name:'Lente Câmera Moto G31/G41/G51/G71',specs:'G31 · G41 · G51 · G71 · Vidro da câmera',price:'22,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:825,cat:'componentes',marca:'Motorola',code:'COMP-12024',name:'Lente Câmera Moto G34',specs:'G34 · Vidro da câmera',price:'22,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:826,cat:'componentes',marca:'Motorola',code:'COMP-500',name:'Lente Câmera Moto G8 Play',specs:'G8 Play · Vidro da câmera',price:'23,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:827,cat:'componentes',marca:'Motorola',code:'COMP-2095',name:'Lente Câmera Moto G9 Play',specs:'G9 Play · Vidro da câmera',price:'22,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:828,cat:'componentes',marca:'Xiaomi',code:'COMP-484',name:'Lente Câmera Poco M3',specs:'Poco M3 · Vidro da câmera',price:'22,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:829,cat:'componentes',marca:'Xiaomi',code:'COMP-482',name:'Lente Câmera Poco X3',specs:'Poco X3 · Vidro da câmera',price:'22,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:830,cat:'componentes',marca:'Redmi',code:'COMP-11366',name:'Lente Câmera Redmi 10C',specs:'Redmi 10C · Vidro da câmera',price:'22,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:831,cat:'componentes',marca:'Redmi',code:'COMP-11368',name:'Lente Câmera Redmi 12C',specs:'Redmi 12C · Vidro da câmera',price:'22,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:832,cat:'componentes',marca:'Redmi',code:'COMP-476',name:'Lente Câmera Redmi 8A',specs:'Redmi 8A · Vidro da câmera',price:'22,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:833,cat:'componentes',marca:'Redmi',code:'COMP-8464',name:'Lente Câmera Redmi 9',specs:'Redmi 9 · Vidro da câmera',price:'22,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:834,cat:'componentes',marca:'Redmi',code:'COMP-11821',name:'Lente Câmera Redmi A1',specs:'Redmi A1 · Vidro da câmera',price:'22,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:835,cat:'componentes',marca:'Redmi',code:'COMP-12036',name:'Lente Câmera Redmi A2',specs:'Redmi A2 · Vidro da câmera',price:'22,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:836,cat:'componentes',marca:'Redmi',code:'COMP-12037',name:'Lente Câmera Redmi A3',specs:'Redmi A3 · Vidro da câmera',price:'23,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:837,cat:'componentes',marca:'Redmi',code:'COMP-11285',name:'Lente Câmera Redmi Note 12 4G',specs:'Note 12 4G · Vidro da câmera',price:'22,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:838,cat:'componentes',marca:'Redmi',code:'COMP-12039',name:'Lente Câmera Redmi Note 13 4G',specs:'Note 13 4G · Vidro da câmera',price:'23,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:839,cat:'componentes',marca:'Samsung',code:'COMP-11347',name:'Lente Câmera Samsung A04',specs:'A04 · Vidro da câmera',price:'22,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:840,cat:'componentes',marca:'Samsung',code:'COMP-10718',name:'Lente Câmera Samsung A04E',specs:'A04E · Vidro da câmera',price:'22,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:841,cat:'componentes',marca:'Samsung',code:'COMP-10953',name:'Lente Câmera Samsung A04S',specs:'A04S · Vidro da câmera',price:'22,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:842,cat:'componentes',marca:'Samsung',code:'COMP-11791',name:'Lente Câmera Samsung A05',specs:'A05 · Vidro da câmera',price:'22,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:843,cat:'componentes',marca:'Samsung',code:'COMP-11792',name:'Lente Câmera Samsung A05S',specs:'A05S · Vidro da câmera',price:'22,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:844,cat:'componentes',marca:'Samsung',code:'COMP-456',name:'Lente Câmera Samsung A11',specs:'A11 · Vidro da câmera',price:'22,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:845,cat:'componentes',marca:'Samsung',code:'COMP-513',name:'Lente Câmera Samsung A12',specs:'A12 · Vidro da câmera',price:'22,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:846,cat:'componentes',marca:'Samsung',code:'COMP-10954',name:'Lente Câmera Samsung A13',specs:'A13 · Vidro da câmera',price:'22,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:847,cat:'componentes',marca:'Samsung',code:'COMP-10955',name:'Lente Câmera Samsung A14 4G',specs:'A14 4G · Vidro da câmera',price:'22,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:848,cat:'componentes',marca:'Samsung',code:'COMP-443',name:'Lente Câmera Samsung A20',specs:'A20 · Vidro da câmera',price:'22,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:849,cat:'componentes',marca:'Samsung',code:'COMP-417',name:'Lente Câmera Samsung A21S',specs:'A21S · Vidro da câmera',price:'22,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:850,cat:'componentes',marca:'Samsung',code:'COMP-444',name:'Lente Câmera Samsung A30',specs:'A30 · Vidro da câmera',price:'22,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:851,cat:'componentes',marca:'Samsung',code:'COMP-415',name:'Lente Câmera Samsung A31',specs:'A31 · Vidro da câmera',price:'22,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:852,cat:'componentes',marca:'Samsung',code:'COMP-413',name:'Lente Câmera Samsung A50',specs:'A50 · Vidro da câmera',price:'22,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:853,cat:'componentes',marca:'Samsung',code:'COMP-418',name:'Lente Câmera Samsung A51',specs:'A51 · Vidro da câmera',price:'22,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:854,cat:'componentes',marca:'Samsung',code:'COMP-11358',name:'Lente Câmera Samsung A52',specs:'A52 · Vidro da câmera',price:'22,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:855,cat:'componentes',marca:'Samsung',code:'COMP-10957',name:'Lente Câmera Samsung A54',specs:'A54 · Vidro da câmera',price:'22,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:856,cat:'componentes',marca:'Samsung',code:'COMP-505',name:'Lente Câmera Samsung J2 Core',specs:'J2 Core · Vidro da câmera',price:'22,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:857,cat:'componentes',marca:'Samsung',code:'COMP-460',name:'Lente Câmera Samsung J4',specs:'J4 · Vidro da câmera',price:'22,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:858,cat:'componentes',marca:'Samsung',code:'COMP-2009',name:'Lente Câmera Samsung J5 Prime',specs:'J5 Prime · Vidro da câmera',price:'23,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:859,cat:'componentes',marca:'Samsung',code:'COMP-473',name:'Lente Câmera Samsung J6',specs:'J6 · Vidro da câmera',price:'23,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:860,cat:'componentes',marca:'Samsung',code:'COMP-516',name:'Lente Câmera Samsung J8',specs:'J8 · Vidro da câmera',price:'22,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:861,cat:'componentes',marca:'Samsung',code:'COMP-2073',name:'Lente Câmera Samsung Note 10',specs:'Note 10 · Vidro da câmera',price:'25,00',from:0,badge:'LENTE CAM',bc:'bpink',stock:'ok',icon:'📷'},
+  {id:862,cat:'componentes',marca:'Samsung',code:'COMP-8516',name:'Tampa Samsung A52 Preta',specs:'A52 · Preta',price:'26,00',from:0,badge:'TAMPA',bc:'by',stock:'ok',icon:'🔲'},
+  {id:863,cat:'componentes',marca:'Samsung',code:'COMP-12168',name:'Tampa/Carcaça Samsung J4 Core Azul',specs:'J4 Core · Azul',price:'40,00',from:0,badge:'TAMPA',bc:'by',stock:'ok',icon:'🔲'},
+  {id:864,cat:'componentes',marca:'Outros',code:'COMP-1341',name:'Tampa LG K41S Preta',specs:'LG K41S · Preta',price:'54,00',from:0,badge:'TAMPA',bc:'by',stock:'ok',icon:'🔲'},
+  {id:865,cat:'componentes',marca:'Samsung',code:'COMP-13945',name:'Tampa Samsung Note 10 Azul Escuro',specs:'Note 10 · Azul escuro',price:'27,00',from:0,badge:'TAMPA',bc:'by',stock:'ok',icon:'🔲'},
+  {id:866,cat:'componentes',marca:'Outros',code:'COMP-12598',name:'FPC Diversos Modelos',specs:'Flex FPC · Vários modelos',price:'22,00',from:0,badge:'FPC',bc:'bgreen',stock:'ok',icon:'🔌'},
+  {id:867,cat:'componentes',marca:'Samsung',code:'COMP-11025',name:'FPC Samsung A12/A22/A32/A52/A72 e outros',specs:'A12 · A02 · A22 · A32 · A42 · A52 · A72 · M12 · A33 · A34 · A53 · M22 · M23 · M32 · M33 · M35 · A54',price:'23,00',from:0,badge:'FPC',bc:'bgreen',stock:'ok',icon:'🔌'},
+  {id:868,cat:'componentes',marca:'Samsung',code:'COMP-11030',name:'FPC Samsung A21S/A31/A51/A71',specs:'A21S · A31 · A51 · A71 · A70 · S20 FE · M62',price:'24,00',from:0,badge:'FPC',bc:'bgreen',stock:'ok',icon:'🔌'},
+  {id:869,cat:'componentes',marca:'Redmi',code:'COMP-12399',name:'FPC Redmi Note 8',specs:'Note 8',price:'22,00',from:0,badge:'FPC',bc:'bgreen',stock:'ok',icon:'🔌'},
+  {id:870,cat:'componentes',marca:'Motorola',code:'COMP-11018',name:'FPC Moto E20/E22/E40/G20/G10/G30/G22',specs:'E20 · E22 · E40 · G20 · G10 · G30 · G22',price:'24,00',from:0,badge:'FPC',bc:'bgreen',stock:'ok',icon:'🔌'},
+  {id:871,cat:'componentes',marca:'Samsung',code:'COMP-11031',name:'FPC Samsung A04/A04S/A05',specs:'A04 · A04S · A05',price:'22,00',from:0,badge:'FPC',bc:'bgreen',stock:'ok',icon:'🔌'},
   // Novos produtos com fotos
   {id:200,cat:'pecas',marca:'Samsung',code:'PC-SA-A02S',name:'Frontal Samsung A02S/A03/A03S',specs:'LCD + Touch · OEM · A02S · A03 · A03 Core · A03S',price:'180,00',from:0,badge:'SAMSUNG',bc:'bpecas',stock:'ok',icon:'🔩'},
   {id:201,cat:'pecas',marca:'Samsung',code:'PC-SA-A04',name:'Frontal Samsung A04/A04S/A04E',specs:'LCD + Touch · OEM · A04 · A04S · A04E',price:'180,00',from:0,badge:'SAMSUNG',bc:'bpecas',stock:'ok',icon:'🔩'},
@@ -1832,23 +1906,28 @@ window.addEventListener('popstate', (e)=>{
 
 // ── BRAND FILTER ──
 let curBrand='todas';
-function filterComp(btn,brand){
-  document.querySelectorAll('#bfilter-comp .brand-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
+let _compBrand='todas';
+let _curTipo='todas';
+function applyCompFilters(){
   document.querySelectorAll('#cards-componentes .prod-card').forEach(c=>{
-    const m=c.dataset.marca.toLowerCase();
-    c.style.display=(brand==='todas'||m===brand.toLowerCase())?'':'none';
+    const m=(c.dataset.marca||'').toLowerCase();
+    const b=(c.dataset.badge||'').toLowerCase();
+    const okMarca=_compBrand==='todas'||m===_compBrand.toLowerCase();
+    const okTipo=_curTipo==='todas'||b===_curTipo.toLowerCase();
+    c.style.display=(okMarca&&okTipo)?'':'none';
   });
 }
-let _curTipo='todas';
+function filterComp(btn,brand){
+  _compBrand=brand;
+  document.querySelectorAll('#bfilter-comp .brand-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  applyCompFilters();
+}
 function filterTipo(btn,tipo){
   _curTipo=tipo;
   document.querySelectorAll('#tipo-filter .brand-btn').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
-  document.querySelectorAll('#cards-componentes .prod-card').forEach(c=>{
-    const b=c.dataset.badge||'';
-    c.style.display=(tipo==='todas'||b===tipo)?'':'none';
-  });
+  applyCompFilters();
 }
 function filterBrand(btn,brand){
   curBrand=brand;
