@@ -772,6 +772,7 @@ body{background:var(--bg);color:var(--txt);font-family:'Montserrat',sans-serif;m
       <button class="brand-btn" onclick="filterTipo(this,'BOTÃO')">🔘 Botão</button>
       <button class="brand-btn" onclick="filterTipo(this,'CAMPAINHA')">🔊 Campainha</button>
       <button class="brand-btn" onclick="filterTipo(this,'FPC')">🔌 FPC</button>
+      <button class="brand-btn" onclick="filterTipo(this,'BATERIA')">🔋 Bateria</button>
     </div>
     <div class="products-wrap"><div class="prod-cards" id="cards-componentes"></div></div>
   </div>
@@ -1421,7 +1422,7 @@ const P = [
   {id:362,cat:'componentes',marca:'Samsung',code:'COMP-8531',name:'Tampa Samsung A03 Core Preto',specs:'A03 Core · Preto',price:'48,25',from:0,badge:'TAMPA',bc:'by',stock:'ok',icon:'🔲'},
   {id:363,cat:'componentes',marca:'Samsung',code:'COMP-10754',name:'Tampa Samsung A02 Azul',specs:'A02 · Azul · Mín 2 pcs',price:'49,75',from:0,badge:'TAMPA',bc:'by',stock:'ok',icon:'🔲'},
   {id:364,cat:'componentes',marca:'Samsung',code:'COMP-10782',name:'Tampa Samsung A03 Core Vermelho',specs:'A03 Core · Vermelho · Mín 2 pcs',price:'54,60',from:0,badge:'TAMPA',bc:'by',stock:'ok',icon:'🔲'},
-  {id:365,cat:'componentes',marca:'Samsung',code:'COMP-8714',name:'Tampa Samsung A13 Branco',specs:'A13 · Branco',price:'37,00',from:0,badge:'TAMPA',bc:'by',stock:'ok',icon:'🔲'},
+  {id:365,cat:'componentes',marca:'Samsung',code:'COMP-8714',name:'Tampa Samsung A13 Branco',specs:'A13 · Branco',price:'47,45',from:0,badge:'TAMPA',bc:'by',stock:'ok',icon:'🔲'},
   {id:366,cat:'componentes',marca:'Samsung',code:'COMP-8715',name:'Tampa Samsung A13 Preto',specs:'A13 · Preto · Mín 2 pcs',price:'42,70',from:0,badge:'TAMPA',bc:'by',stock:'ok',icon:'🔲'},
   {id:367,cat:'componentes',marca:'Samsung',code:'COMP-11495',name:'Tampa Samsung A13 Azul',specs:'A13 · Azul',price:'30,50',from:0,badge:'TAMPA',bc:'by',stock:'ok',icon:'🔲'},
   {id:368,cat:'componentes',marca:'Samsung',code:'COMP-10713',name:'Tampa Samsung A23 Branca',specs:'A23 · Branca',price:'32,65',from:0,badge:'TAMPA',bc:'by',stock:'ok',icon:'🔲'},
@@ -1453,7 +1454,7 @@ const P = [
   {id:400,cat:'componentes',marca:'Samsung',code:'COMP-15009',name:'Placa de Carga Samsung A33 4G',specs:'A33 4G · AAA',price:'52,00',from:0,badge:'PLACA CARGA',bc:'bb',stock:'ok',icon:'⚡'},
   {id:401,cat:'componentes',marca:'Samsung',code:'COMP-15010',name:'Placa de Carga Samsung A34 4G',specs:'A34 4G · AAA',price:'44,00',from:0,badge:'PLACA CARGA',bc:'bb',stock:'ok',icon:'⚡'},
   {id:402,cat:'componentes',marca:'Samsung',code:'COMP-15011',name:'Campainha/Alto Falante A03 Core',specs:'A03 Core',price:'33,00',from:0,badge:'CAMPAINHA',bc:'bgift',stock:'ok',icon:'🔊'},
-  {id:403,cat:'componentes',marca:'Samsung',code:'BAT-SA-A13-5G',name:'Bateria Samsung A13 5G / M13',specs:'A13 5G · M13 4G · M13 5G',price:'138,00',from:0,badge:'SAMSUNG',bc:'bb',stock:'ok',icon:'🔋'},
+  {id:403,cat:'componentes',marca:'Samsung',code:'BAT-SA-A13-5G',name:'Bateria Samsung A13 5G / M13',specs:'A13 5G · M13 4G · M13 5G',price:'138,00',from:0,badge:'BATERIA',bc:'bb',stock:'ok',icon:'🔋'},
   {id:404,cat:'pecas',marca:'Samsung',code:'PC-SA-A10S',name:'Frontal Samsung A10S',specs:'Sem Aro WK · China · Cód:K2085',price:'180,00',from:0,badge:'SAMSUNG',bc:'bpecas',stock:'ok',icon:'🔩'},
   {id:405,cat:'pecas',marca:'Redmi',code:'PC-RD-N11A',name:'Frontal Redmi Note 11/11S/12S Com Aro',specs:'Com Aro WK · Cód:K6006',price:'180,00',from:0,badge:'REDMI',bc:'bpecas',stock:'ok',icon:'🔩'},
   {id:391,cat:'componentes',marca:'Samsung',code:'COMP-8423',name:'Campainha/Alto Falante Samsung',specs:'A12 · A10 · A20 · A02 · A14 4G · A22 4G · A32 · A21S · Mín 2 pcs',price:'22,55',from:0,badge:'CAMPAINHA',bc:'bgift',stock:'ok',icon:'🔊'},
@@ -1529,6 +1530,29 @@ const P = [
   {id:869,cat:'componentes',marca:'Redmi',code:'COMP-12399',name:'FPC Redmi Note 8',specs:'Note 8',price:'22,00',from:0,badge:'FPC',bc:'bgreen',stock:'ok',icon:'🔌'},
   {id:870,cat:'componentes',marca:'Motorola',code:'COMP-11018',name:'FPC Moto E20/E22/E40/G20/G10/G30/G22',specs:'E20 · E22 · E40 · G20 · G10 · G30 · G22',price:'24,00',from:0,badge:'FPC',bc:'bgreen',stock:'ok',icon:'🔌'},
   {id:871,cat:'componentes',marca:'Samsung',code:'COMP-11031',name:'FPC Samsung A04/A04S/A05',specs:'A04 · A04S · A05',price:'22,00',from:0,badge:'FPC',bc:'bgreen',stock:'ok',icon:'🔌'},
+  {id:900,cat:'componentes',marca:'Redmi',code:'BAT-15470',name:'Bateria Redmi Note 8/Note 8T/Redmi 7/Note 6',specs:'Note 8 · Note 8T · Redmi 7 · Note 6 · Anatel · Wefix',price:'',from:0,badge:'BATERIA',bc:'bb',stock:'ok',icon:'🔋'},
+  {id:901,cat:'componentes',marca:'Redmi',code:'BAT-15471',name:'Bateria Redmi Note 7/Note 7 Pro',specs:'Note 7 · Note 7 Pro · Anatel · Wefix',price:'',from:0,badge:'BATERIA',bc:'bb',stock:'ok',icon:'🔋'},
+  {id:902,cat:'componentes',marca:'Xiaomi',code:'BAT-15472',name:'Bateria Xiaomi Mi 9T Pro/K20 Pro',specs:'Mi 9T Pro · K20 Pro · Anatel · Wefix',price:'',from:0,badge:'BATERIA',bc:'bb',stock:'ok',icon:'🔋'},
+  {id:903,cat:'componentes',marca:'Samsung',code:'BAT-15473',name:'Bateria Samsung A21S/A12/A02S/A03S/A13/A04S/M12',specs:'A21S · A12 · A02S · A03S · A13 · A04S · M12 · Anatel · Wefix',price:'',from:0,badge:'BATERIA',bc:'bb',stock:'ok',icon:'🔋'},
+  {id:904,cat:'componentes',marca:'Samsung',code:'BAT-15474',name:'Bateria Samsung A24',specs:'A24 · Anatel · Wefix',price:'',from:0,badge:'BATERIA',bc:'bb',stock:'ok',icon:'🔋'},
+  {id:905,cat:'componentes',marca:'Samsung',code:'BAT-15475',name:'Bateria Samsung A31/A32/A22',specs:'A31 · A32 · A22 · Anatel · Wefix',price:'',from:0,badge:'BATERIA',bc:'bb',stock:'ok',icon:'🔋'},
+  {id:906,cat:'componentes',marca:'Samsung',code:'BAT-15476',name:'Bateria Samsung A325/A425/A72/M22/M32/MB2',specs:'A325 · A425 · A72 · M22 · M32 · MB2 · Anatel · Wefix',price:'',from:0,badge:'BATERIA',bc:'bb',stock:'ok',icon:'🔋'},
+  {id:907,cat:'componentes',marca:'Samsung',code:'BAT-15477',name:'Bateria Samsung A335/A535',specs:'A335 · A535 · Anatel · Wefix',price:'',from:0,badge:'BATERIA',bc:'bb',stock:'ok',icon:'🔋'},
+  {id:908,cat:'componentes',marca:'Samsung',code:'BAT-15478',name:'Bateria Samsung A545G/A345G/A255G/A355G',specs:'A545G · A345G · A255G · A355G · Anatel · Wefix',price:'',from:0,badge:'BATERIA',bc:'bb',stock:'ok',icon:'🔋'},
+  {id:909,cat:'componentes',marca:'Samsung',code:'BAT-15479',name:'Bateria Samsung A71/A715',specs:'A71 · A715 · Anatel · Wefix',price:'',from:0,badge:'BATERIA',bc:'bb',stock:'ok',icon:'🔋'},
+  {id:910,cat:'componentes',marca:'Samsung',code:'BAT-15480',name:'Bateria Samsung S20 FE/A52/A52S 5G',specs:'S20 FE · A52 · A52S 5G · Anatel · Wefix',price:'',from:0,badge:'BATERIA',bc:'bb',stock:'ok',icon:'🔋'},
+  {id:911,cat:'componentes',marca:'Samsung',code:'BAT-15481',name:'Bateria Samsung M525/A23/A235/M235/M35/M535/A735/F235/M13',specs:'M525 · A23 · A235 · M235 · M35 · M535 · A735 · F235 · M13 · Anatel · Wefix',price:'',from:0,badge:'BATERIA',bc:'bb',stock:'ok',icon:'🔋'},
+  {id:912,cat:'componentes',marca:'Samsung',code:'BAT-15482',name:'Bateria Samsung S22 Plus',specs:'S22 Plus · Anatel · Wefix',price:'',from:0,badge:'BATERIA',bc:'bb',stock:'ok',icon:'🔋'},
+  {id:913,cat:'componentes',marca:'Samsung',code:'BAT-15483',name:'Bateria Samsung S22 Ultra',specs:'S22 Ultra · Anatel · Wefix',price:'',from:0,badge:'BATERIA',bc:'bb',stock:'ok',icon:'🔋'},
+  {id:914,cat:'componentes',marca:'Samsung',code:'BAT-15484',name:'Bateria Samsung S23 Plus',specs:'S23 Plus · Anatel · Wefix',price:'',from:0,badge:'BATERIA',bc:'bb',stock:'ok',icon:'🔋'},
+  {id:915,cat:'componentes',marca:'Samsung',code:'BAT-15485',name:'Bateria Samsung S23 Ultra',specs:'S23 Ultra · Anatel · Wefix',price:'',from:0,badge:'BATERIA',bc:'bb',stock:'ok',icon:'🔋'},
+  {id:916,cat:'componentes',marca:'Samsung',code:'BAT-15486',name:'Bateria Samsung A02S/A03/A03S/A03 Core/A04/A04E/A04S',specs:'A02S · A03 · A03S · A03 Core · A04 · A04E · A04S · Anatel · Wefix',price:'',from:0,badge:'BATERIA',bc:'bb',stock:'ok',icon:'🔋'},
+  {id:917,cat:'componentes',marca:'Samsung',code:'BAT-15487',name:'Bateria Samsung A06 4G/A07 4G',specs:'A06 4G · A07 4G · Anatel · Wefix',price:'',from:0,badge:'BATERIA',bc:'bb',stock:'ok',icon:'🔋'},
+  {id:918,cat:'componentes',marca:'Motorola',code:'BAT-15488',name:'Bateria Moto G7 Power/G9 Play/G30/G10/G20/G31/G8 Power Lite',specs:'G7 Power · G9 Play · G30 · G10 · G20 · G31 · G8 Power Lite · Anatel · Wefix',price:'',from:0,badge:'BATERIA',bc:'bb',stock:'ok',icon:'🔋'},
+  {id:919,cat:'componentes',marca:'Motorola',code:'BAT-15489',name:'Bateria Moto G22/E32/E32S/E13/G13/G53',specs:'G22 · E32 · E32S · E13 · G13 · G53 · Anatel · Wefix',price:'',from:0,badge:'BATERIA',bc:'bb',stock:'ok',icon:'🔋'},
+  {id:920,cat:'componentes',marca:'Motorola',code:'BAT-15490',name:'Bateria Moto G23',specs:'G23 · Anatel · Wefix',price:'',from:0,badge:'BATERIA',bc:'bb',stock:'ok',icon:'🔋'},
+  {id:921,cat:'componentes',marca:'Outros',code:'BAT-15491',name:'Bateria G735',specs:'G735 · Anatel · Wefix',price:'',from:0,badge:'BATERIA',bc:'bb',stock:'ok',icon:'🔋'},
+  {id:922,cat:'componentes',marca:'Samsung',code:'BAT-15492',name:'Bateria Samsung A225/A04/A14/A226',specs:'A225 · A04 · A14 · A226 · Anatel · Wefix',price:'',from:0,badge:'BATERIA',bc:'bb',stock:'ok',icon:'🔋'},
   // Novos produtos com fotos
   {id:200,cat:'pecas',marca:'Samsung',code:'PC-SA-A02S',name:'Frontal Samsung A02S/A03/A03S',specs:'LCD + Touch · OEM · A02S · A03 · A03 Core · A03S',price:'180,00',from:0,badge:'SAMSUNG',bc:'bpecas',stock:'ok',icon:'🔩'},
   {id:201,cat:'pecas',marca:'Samsung',code:'PC-SA-A04',name:'Frontal Samsung A04/A04S/A04E',specs:'LCD + Touch · OEM · A04 · A04S · A04E',price:'180,00',from:0,badge:'SAMSUNG',bc:'bpecas',stock:'ok',icon:'🔩'},
