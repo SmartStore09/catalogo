@@ -910,6 +910,9 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--gold2);outline-offs
       <button class="brand-btn" onclick="filterTipo(this,'CAMPAINHA')">🔊 Campainha</button>
       <button class="brand-btn" onclick="filterTipo(this,'FPC')">🔌 FPC</button>
       <button class="brand-btn" onclick="filterTipo(this,'BATERIA')">🔋 Bateria</button>
+      <button class="brand-btn" onclick="filterTipo(this,'ARO')">⭕ Aro</button>
+      <button class="brand-btn" onclick="filterTipo(this,'BIOMETRIA')">🔘 Biometria</button>
+      <button class="brand-btn" onclick="filterTipo(this,'FLEX VOLUME')">🔊 Flex volume</button>
     </div>
     <div class="products-wrap"><div class="prod-cards" id="cards-componentes"></div></div>
   </div>
@@ -1497,6 +1500,7 @@ const P = [
   {id:121,cat:'pecas',marca:'Motorola',code:'PC-MT-G14',name:'Frontal Moto G14/G54',specs:'LCD + Touch · OEM',price:'180,00',from:0,badge:'MOTOROLA',bc:'bpecas',stock:'ok',icon:'🔩'},
   {id:122,cat:'pecas',marca:'Motorola',code:'PC-MT-E7',name:'Frontal Moto E7',specs:'LCD + Touch · OEM',price:'180,00',from:0,badge:'MOTOROLA',bc:'bpecas',stock:'ok',icon:'🔩'},
   {id:123,cat:'pecas',marca:'Motorola',code:'PC-MT-G9P',name:'Frontal Moto G9 Play',specs:'LCD + Touch + Aro · OEM',price:'180,00',from:0,badge:'MOTOROLA',bc:'bpecas',stock:'ok',icon:'🔩'},
+  {id:935,cat:'pecas',marca:'Motorola',code:'PC-MT-G71',name:'Frontal Moto G71',specs:'Super LED com aro · WK',price:'180,00',from:0,badge:'MOTOROLA',bc:'bpecas',stock:'ok',icon:'🔩'},
   {id:130,cat:'pecas',marca:'Redmi',code:'PC-RD-N8',name:'Frontal Redmi Note 8',specs:'LCD IPS + Touch · OEM',price:'180,00',from:0,badge:'REDMI',bc:'bpecas',stock:'ok',icon:'🔩'},
   {id:131,cat:'pecas',marca:'Redmi',code:'PC-RD-N10',name:'Frontal Redmi Note 10/11S',specs:'AMOLED + Touch · OEM',price:'180,00',from:0,badge:'REDMI',bc:'bpecas',stock:'ok',icon:'🔩'},
   {id:132,cat:'pecas',marca:'Redmi',code:'PC-RD-12',name:'Frontal Redmi 12',specs:'LCD + Touch + Aro · OEM',price:'180,00',from:0,badge:'REDMI',bc:'bpecas',stock:'ok',icon:'🔩'},
@@ -1690,6 +1694,11 @@ const P = [
   {id:920,cat:'componentes',marca:'Motorola',code:'BAT-15490',name:'Bateria Moto G23',specs:'G23 · Anatel · Wefix',price:'',from:0,badge:'BATERIA',bc:'bb',stock:'ok',icon:'🔋'},
   {id:921,cat:'componentes',marca:'Outros',code:'BAT-15491',name:'Bateria G735',specs:'G735 · Anatel · Wefix',price:'',from:0,badge:'BATERIA',bc:'bb',stock:'ok',icon:'🔋'},
   {id:922,cat:'componentes',marca:'Samsung',code:'BAT-15492',name:'Bateria Samsung A225/A04/A14/A226',specs:'A225 · A04 · A14 · A226 · Anatel · Wefix',price:'',from:0,badge:'BATERIA',bc:'bb',stock:'ok',icon:'🔋'},
+  {id:930,cat:'componentes',marca:'Samsung',code:'COMP-4556',name:'Botão Carcaça Samsung A30/A20/A50/A70',specs:'A30 · A20 · A50 · A70',price:'22,00',from:0,badge:'BOTÃO',bc:'bedu',stock:'ok',icon:'🔘'},
+  {id:931,cat:'componentes',marca:'Samsung',code:'COMP-4627',name:'Flex Power Samsung A20/A30/A30S/A50/A50S',specs:'A20 · A30 · A30S · A50 · A50S',price:'22,00',from:0,badge:'FLEX POWER',bc:'bgreen',stock:'ok',icon:'🔌'},
+  {id:932,cat:'componentes',marca:'Samsung',code:'COMP-6435',name:'Flex Volume Samsung A12/M12/A32 5G/M51/M23/A13',specs:'A12 · M12 · A32 5G · M51 · M23 · A13',price:'22,00',from:0,badge:'FLEX VOLUME',bc:'bgreen',stock:'ok',icon:'🔌'},
+  {id:933,cat:'componentes',marca:'Redmi',code:'COMP-8104',name:'Aro Redmi Note 11 4G',specs:'Note 11 4G · Cores sob consulta',price:'50,00',from:0,badge:'ARO',bc:'by',stock:'ok',icon:'🔲'},
+  {id:934,cat:'componentes',marca:'Samsung',code:'COMP-12152',name:'Biometria Samsung A12/A13 4G/A14/A04S/M13/M12',specs:'A12 · A13 4G · A14 4G · A14 5G · A04S · M13 · M12 · Original · Botão digital',price:'35,00',from:0,badge:'BIOMETRIA',bc:'bb',stock:'ok',icon:'🔘'},
   // Novos produtos com fotos
   {id:200,cat:'pecas',marca:'Samsung',code:'PC-SA-A02S',name:'Frontal Samsung A02S/A03/A03S',specs:'LCD + Touch · OEM · A02S · A03 · A03 Core · A03S',price:'180,00',from:0,badge:'SAMSUNG',bc:'bpecas',stock:'ok',icon:'🔩'},
   {id:201,cat:'pecas',marca:'Samsung',code:'PC-SA-A04',name:'Frontal Samsung A04/A04S/A04E',specs:'LCD + Touch · OEM · A04 · A04S · A04E',price:'180,00',from:0,badge:'SAMSUNG',bc:'bpecas',stock:'ok',icon:'🔩'},
